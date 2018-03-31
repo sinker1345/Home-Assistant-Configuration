@@ -1,0 +1,235 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret lat
+  longitude: !secret long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret time_zone
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+  api_password: !secret dns_pass
+  base_url: !secret url
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+logger:
+  default: debug
+  logs:
+    homeassistant.components.http.ban: warning
+
+# Roomba tracker
+vacuum:
+  - platform: roomba
+    host: 192.168.1.215
+    name: Bob
+    username: !secret vac_user
+    password: !secret vac_pass
+
+device_tracker:
+
+# Unifi WAP Device Tracker
+  - platform: unifi_direct
+    host: 192.168.1.31
+    username: !secret unifi_user
+    password: !secret unifi
+
+# Owntracks Device Tracker
+  - platform: owntracks
+    max_gps_accuracy: 200
+    waypoints: true
+    waypoint_whitelist:
+      - tommy
+
+#Bluetooth Tracker
+  - platform: bluetooth_tracker
+
+#  - platform: bluetooth_le_tracker
+
+# Text to speech
+tts:
+  - platform: google
+
+# Zwave Tracker
+zwave:
+    usb_path: /dev/zwave
+    network_key: !secret zwave_net_key
+
+# Zigbee Tracker
+zha:
+    usb_path: /dev/zigbee
+    database_path: /home/homeassistant/.homeassistant/zigbee.db
+
+# MySQL Database
+recorder:
+  db_url: !secret db_url_password
+  purge_interval: 14
+  purge_keep_days: 7
+
+# MQTT Component
+mqtt:
+  broker: 192.168.1.22
+  username: !secret mqtt_user 
+  password: !secret mqtt_password
+
+# Google Push Notifications
+notify:
+  - name: google_push
+    platform: html5
+    gcm_api_key: !secret gcm_api
+    gcm_sender_id: !secret gcm_sender
+
+# Google Assistant Configuration
+google_assistant:
+  project_id: !secret google_project_id
+  client_id: !secret google_client_id
+  access_token: !secret google_access_token
+
+# IFTTT Component
+ifttt:
+  key: !secret ifttt_key
+
+# Media Players Component
+media_player:
+  - platform: kodi
+    host: 192.168.1.174
+    name: Living Room TV
+    port: 8080
+
+  - platform: kodi
+    host: 192.168.1.205
+    name: Garage TV
+    port: 8080
+
+  - platform: plex
+
+# Google Component
+google:
+  client_id: !secret client_id
+  client_secret: !secret client_secret
+
+# ISS component
+binary_sensor:
+  - platform: iss
+
+# Show ISS space station on google maps
+camera:
+  - platform: generic
+    name: ISS
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.binary_sensor.iss.attributes.lat }},{{ states.binary_sensor.iss.attributes.long }}&zoom=5&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.binary_sensor.iss.attributes.lat }},{{ states.binary_sensor.iss.attributes.long }}
+    limit_refetch_to_url_change: true
+
+# DuckDNS Component
+duckdns:
+  domain: !secret duck_dns_url
+  access_token: !secret duck_dns_token
+
+# Dominos Component
+dominos:
+  country_code: us
+  first_name: !secret first_name
+  last_name: !secret last_name
+  email: !secret email
+  phone: !secret phone_number
+  address: !secret address
+  show_menu: 1
+
+panel_custom:
+# Dominos Panel in Front End
+  - name: dominos
+    sidebar_title: Dominos
+    sidebar_icon: mdi:pizza
+    url_path: dominos
+
+panel_iframe:
+  nodered:
+    title: 'Node-Red'
+    icon: 'mdi:shuffle-variant'
+    url: 'http://192.168.1.22:1880/'
+
+input_select:
+# Input Select for extended people status
+  jessica_status_dropdown:
+    name: Jessica
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+
+  tommy_status_dropdown:
+    name: Tommy
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
+
+zone:
+#  - name: Jessica Work
+#    latitude: !secret jessica_work_lat
+#    longitude: !secret jessica_work_long
+#    radius: 200
+#    icon: mdi:worker
+
+  - name: Tommy Work
+    latitude: !secret tommy_work_lat
+    longitude: !secret tommy_work_long
+    radius: 500
+    icon: mdi:worker
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensor/
+

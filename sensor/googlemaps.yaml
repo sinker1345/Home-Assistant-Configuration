@@ -1,0 +1,4 @@
+  - platform: google_travel_time
+    api_key: !secret google_maps_api_key
+    origin: device_tracker.tommy_nexus_6p
+    destination: zone.tommy_work
