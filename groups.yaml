@@ -66,6 +66,13 @@
       - group.living_room_sensors
       - media_player.living_room_tv
 
+  garage:
+    name: Garage
+    view: yes
+    entities:
+      - media_player.garage_chromecast
+      - media_player.garage_tv
+
   hass_status:
     name: Home Assistant Status
     entities:
