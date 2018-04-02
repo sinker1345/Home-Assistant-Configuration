@@ -62,7 +62,7 @@ map:
 sun:
 
 logger:
-  default: debug
+  default: warning
   logs:
     homeassistant.components.http.ban: warning
 

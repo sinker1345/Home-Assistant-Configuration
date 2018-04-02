@@ -1,4 +1,34 @@
 ---
+
+  Jessica: device_tracker.galaxy_note8, device_tracker.galaxynote8, device_tracker.tommy_galaxy_8
+
+  Tommy: device_tracker.b4f7a1e3c6fa, device_tracker.pixel_2_xl, device_tracker.tommy_nexus_6p
+
+  people_status:
+    name: People Status
+    entities:
+      - sensor.tommy_status
+      - sensor.jessica_status
+
+  living_room_sensors:
+    name: Sensors
+    entities:
+      - sensor.living_room_light_level
+      - sensor.living_room_humidity
+      - sensor.living_room_temperature
+
+  hass_status:
+    name: Home Assistant Status
+    entities:
+      - sensor.memory_free
+      - sensor.memory_use_percent
+      - sensor.processor_use
+      - sensor.disk_use_percent_home
+      - sensor.network_in
+      - sensor.network_out
+      - sensor.last_boot
+      - sensor.since_last_boot
+
   weather_overview:
     name: Weather overview
     entities:
@@ -26,18 +56,23 @@
       - sensor.pws_weather_4d
       - sensor.pws_weather_4n
 
-# Weather Tab
-  weather_tab:
-    name: weather
+#Garage Tab
+  garage:
+    name: Garage
     view: yes
     entities:
-      - group.daily_forecast
-      - group.weather_overview
+      - media_player.garage_chromecast
+      - media_player.garage_tv
 
-  Jessica: device_tracker.galaxy_note8, device_tracker.galaxynote8, device_tracker.tommy_galaxy_8
+#Living Room Tab
+  Living_Room:
+    name: Living Room
+    view: yes
+    entities:
+      - group.living_room_sensors
+      - media_player.living_room_tv
 
-  Tommy: device_tracker.b4f7a1e3c6fa, device_tracker.pixel_2_xl, device_tracker.tommy_nexus_6p
-
+#People Tab
   People:
     name: People
     view: yes
@@ -46,41 +81,10 @@
       - group.tommy
       - group.people_status
 
-  people_status:
-    name: People Status
-    entities:
-      - sensor.tommy_status
-      - sensor.jessica_status
-
-  living_room_sensors:
-    name: Sensors
-    entities:
-      - sensor.living_room_light_level
-      - sensor.living_room_humidity
-      - sensor.living_room_temperature
-
-  Living_Room:
-    name: Living Room
+# Weather Tab
+  weather_tab:
+    name: weather
     view: yes
     entities:
-      - group.living_room_sensors
-      - media_player.living_room_tv
-
-  garage:
-    name: Garage
-    view: yes
-    entities:
-      - media_player.garage_chromecast
-      - media_player.garage_tv
-
-  hass_status:
-    name: Home Assistant Status
-    entities:
-      - sensor.memory_free
-      - sensor.memory_use_percent
-      - sensor.processor_use
-      - sensor.disk_use_percent_home
-      - sensor.network_in
-      - sensor.network_out
-      - sensor.last_boot
-      - sensor.since_last_boot
+      - group.daily_forecast
+      - group.weather_overview
