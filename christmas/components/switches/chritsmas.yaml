@@ -1,0 +1,10 @@
+switch:
+   #Outside Christmas lights switch
+#  - platform: mqtt
+#    name: "Christmas Oustide Lights"
+#    command_topic: "cmnd/sonoff1/power"
+#    state_topic: "stat/sonoff1/POWER"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    reatin: true

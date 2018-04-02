@@ -1,0 +1,201 @@
+
+  - alias: 'Wx Alert Notification'
+    trigger:
+      platform: state
+      entity_id: sensor.pws_alerts
+    action:
+      service: script.notifyonwxalert
+
+  - alias: TTS and Notify Weather Alert
+    trigger:
+      platform: state
+      entity_id: sensor.pws_alerts
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{states.sensor.pws_alerts.state | int > 0}}'
+          ## Added a time condition because I don't want a non-emergency alert waking me up
+        - condition: time
+          after: '07:00:00'
+          before: '22:00:00'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "NWS: {{ states.sensor.pws_alerts.attributes.Description }}"
+          target: ["Tommy_Pixel_2XL", "Tommy_Chrome"]
+          data:
+           image: !secret weather_image
+           url: !secret weather_image
+      ## Do other things! Flash lights or if your TV is on, use Harmony to change 
+      ## channels to your preferred news station!
+      
+  - alias: Mark person as just arrived
+    trigger:
+      - platform: state
+        entity_id: group.tommy
+        from: 'not_home'
+        to: 'home'
+      - platform: state
+        entity_id: group.jessica
+        from: 'not_home'
+        to: 'home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'group.tommy' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: >
+            {% if trigger.entity_id == 'group.tommy' %}
+              {% if states.input_select.tommy_status_dropdown.state == 'Just Left' %}
+                Home
+              {% else %}
+                Just Arrived
+              {% endif %}
+            {% else %}
+              {% if states.input_select.jessica_status_dropdown.state == 'Just Left' %}
+                Home
+              {% else %}
+                Just Arrived
+              {% endif %}
+            {% endif %}
+
+  - alias: Mark person as home
+    trigger:
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        to: 'Just Arrived'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        to: 'Just Arrived'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        from: 'Just Left'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        from: 'Just Left'
+        to: 'Just Arrived'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Home
+
+  - alias: Mark person as just left
+    trigger:
+      - platform: state
+        entity_id: group.tommy
+        from: 'home'
+        to: 'not_home'
+      - platform: state
+        entity_id: group.jessica
+        from: 'home'
+        to: 'not_home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'group.tommy' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Just Left
+
+  - alias: Mark person as away
+    trigger:
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        to: 'Just Left'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        to: 'Just Left'
+        for:
+          minutes: 10
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Away
+
+  - alias: Mark person as extended away
+    trigger:
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        to: 'Away'
+        for:
+          hours: 24
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        to: 'Away'
+        for:
+          hours: 24
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Extended Away
+
+  - alias: Test Z Wave at 2:30am
+    trigger:
+      platform: time
+      at: '2:30:00'
+    action:
+      service: zwave.test_network
+
+  - alias: Heal Z Wave at 3:32am
+    trigger:
+      platform: time
+      at: '3:32:00'
+    action:
+      service: zwave.heal_network
+
+  - alias: Is Lexi on Xbox
+    trigger:
+     - platform: template
+       value_template: "{{ is_state('sensor.taylex15', 'Online') }}"
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "Lexi has signed on to XBox"
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone"]
+          data:
+           tag: 'Lexi Signed on to Xbox'
+
+  - alias: Is Lexi off Xbox
+    trigger:
+     - platform: template
+       value_template: "{{ is_state('sensor.taylex15', 'Offline') }}"
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "Lexi has signed off of XBox"
+          target: ["Tommy_Pixel_2XL","Jessica_Phone"]
+          data:
+           tag: 'Lexi Signed off of Xbox'
