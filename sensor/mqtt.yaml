@@ -18,3 +18,10 @@
     name: "Living Room Temperature"
     unit_of_measurement: "°F"
     value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for multisensor living room
+  - platform: mqtt
+    state_topic: "livingroom/sensornode1"
+    name: "Living Room Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'

@@ -66,6 +66,7 @@ logger:
   logs:
     homeassistant.components.http.ban: warning
 
+
 # Roomba tracker
 vacuum:
   - platform: roomba
