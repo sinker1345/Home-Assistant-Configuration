@@ -114,6 +114,31 @@ recorder:
   db_url: !secret db_url_password
   purge_interval: 14
   purge_keep_days: 7
+  exclude:
+    domains:
+      - automation
+      - updater
+      - time
+      - calendar
+      - group
+      - script
+      - sun
+    entities:
+      - binary_sensor.iss
+      - binary_sensor.workday_sensor
+      - camera.iss
+      - input_select.jessica_status_dropdown
+      - input_select.tommy_status_dropdown
+      - sensor.pws_alerts
+      - sensor.pws_weather_1d
+      - sensor.pws_weather_1n
+      - sensor.pws_weather_2d
+      - sensor.pws_weather_2n
+      - sensor.pws_weather_3d
+      - sensor.pws_weather_3n
+      - sensor.pws_weather_4d
+      - sensor.pws_weather_4n
+      - sensor.time
 
 # MQTT Component
 mqtt:
@@ -160,6 +185,10 @@ google:
 # ISS component
 binary_sensor:
   - platform: iss
+
+  - platform: workday
+    country: US
+    workdays: [ mon, tue, wed, thu, fri ]
 
 # Show ISS space station on google maps
 camera:

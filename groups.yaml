@@ -1,15 +1,19 @@
 ---
 
+#Jessica Device Tracker Group
   Jessica: device_tracker.galaxy_note8, device_tracker.galaxynote8, device_tracker.tommy_galaxy_8
 
+# Tommy Device Tracker Group
   Tommy: device_tracker.b4f7a1e3c6fa, device_tracker.pixel_2_xl, device_tracker.tommy_nexus_6p
 
+#People Status Group
   people_status:
     name: People Status
     entities:
       - sensor.tommy_status
       - sensor.jessica_status
 
+#Living Room Sensors Group
   living_room_sensors:
     name: Sensors
     entities:
@@ -17,7 +21,29 @@
       - sensor.living_room_humidity
       - sensor.living_room_temperature
       - sensor.living_room_feels_like
+      - sensor.living_room_motion
 
+#Kitchen Sensors Group
+  kitchen_sensors:
+    name: Sensors
+    entities:
+      - sensor.kitchen_light_level
+      - sensor.kitchen_humidity
+      - sensor.kitchen_temperature
+      - sensor.kitchen_feels_like
+      - sensor.kitchen_motion
+
+#Dining Room Sensors Group
+  dining_room_sensors:
+    name: Sensors
+    entities:
+#      - sensor.dining_room_light_level
+      - sensor.dining_room_humidity
+      - sensor.dining_room_temperature
+      - sensor.dining_room_feels_like
+      - sensor.dining_room_motion
+
+# HASS Status Group
   hass_status:
     name: Home Assistant Status
     entities:
@@ -30,6 +56,7 @@
       - sensor.last_boot
       - sensor.since_last_boot
 
+# Weather Overview Group
   weather_overview:
     name: Weather overview
     entities:
@@ -45,6 +72,7 @@
       - sensor.pws_wind_1d_mph
       - sensor.pws_alerts
 
+#Daily Forcast Group
   daily_forecast:
     name: Daily Forecast
     entities:
@@ -57,6 +85,13 @@
       - sensor.pws_weather_4d
       - sensor.pws_weather_4n
 
+#Dining Room Tab
+  dining_room:
+    name: Dining Room
+    view: yes
+    entities:
+      - group.dining_room_sensors
+
 #Garage Tab
   garage:
     name: Garage
@@ -64,6 +99,13 @@
     entities:
       - media_player.garage_chromecast
       - media_player.garage_tv
+
+#Kitchen Group
+  Kitchen:
+    name: Kitchen
+    view: yes
+    entities:
+      - group.kitchen_sensors
 
 #Living Room Tab
   Living_Room:
