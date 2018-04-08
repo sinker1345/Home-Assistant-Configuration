@@ -19,5 +19,9 @@
           {% if is_state('sensor.htpc_idle', 'Idle') and is_state('media_player.living_room_tv', 'Idle') %}
             Idle
           {% else %}
-            In Use
+            {% if is_state('sensor.media_player.living_room_tv', 'Off') %}
+              Off
+            {% else %}
+              In Use
+            {% endif %}
           {% endif %}

@@ -41,7 +41,7 @@
     friendly_name: TV Lights
 
   sensor.glances:
-    friendly_name: HTPC Idle
+    friendly_name: HTPC
     icon: mdi:monitor
 
   sensor.htpc_idle:
