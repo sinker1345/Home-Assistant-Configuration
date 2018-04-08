@@ -36,3 +36,13 @@
 
   sensor.dining_room_humidity:
     icon: mdi:water-percent
+
+  light.lightpack:
+    friendly_name: TV Lights
+
+  binary_sensor.tv_idle:
+    friendly_name: HTPC Idle
+    icon: mdi:monitor
+
+  sensor.htpc_idle:
+    hidden: true

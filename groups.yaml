@@ -15,17 +15,24 @@
 
 #Living Room Sensors Group
   living_room_sensors:
-    name: Sensors
+    name: Living Room Sensors
     entities:
       - sensor.living_room_light_level
       - sensor.living_room_humidity
       - sensor.living_room_temperature
       - sensor.living_room_feels_like
       - sensor.living_room_motion
+      - binary_sensor.tv_idle
+
+#Living Room Lights
+  living_room_lights:
+    name: Living Room Lights
+    entities:
+      - light.lightpack
 
 #Kitchen Sensors Group
   kitchen_sensors:
-    name: Sensors
+    name: Kitchen Sensors
     entities:
       - sensor.kitchen_light_level
       - sensor.kitchen_humidity
@@ -35,7 +42,7 @@
 
 #Dining Room Sensors Group
   dining_room_sensors:
-    name: Sensors
+    name: Dining Room Sensors
     entities:
 #      - sensor.dining_room_light_level
       - sensor.dining_room_humidity
@@ -114,6 +121,7 @@
     entities:
       - group.living_room_sensors
       - media_player.living_room_tv
+      - group.living_room_lights
 
 #People Tab
   People:

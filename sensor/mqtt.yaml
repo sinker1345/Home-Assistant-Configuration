@@ -99,3 +99,9 @@
     name: "Dining Room Humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
+
+#sensor for detecting if HTPC is idle
+  - platform: mqtt
+    state_topic: "eventghost/htpc"
+    name: "HTPC idle"
+    value_template: '{{ value_json.activity }}'
