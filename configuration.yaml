@@ -190,13 +190,6 @@ binary_sensor:
     country: US
     workdays: [ mon, tue, wed, thu, fri ]
 
-  - platform: template
-    sensors:
-      tv_idle:
-        value_template: >-
-          {{ is_state('sensor.htpc_idle', 'Idle')
-             and is_state('media_player.living_room_tv', 'Idle') }}
-
 # Show ISS space station on google maps
 camera:
   - platform: generic

@@ -22,7 +22,7 @@
       - sensor.living_room_temperature
       - sensor.living_room_feels_like
       - sensor.living_room_motion
-      - binary_sensor.tv_idle
+      - sensor.glances
 
 #Living Room Lights
   living_room_lights:

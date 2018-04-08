@@ -40,7 +40,7 @@
   light.lightpack:
     friendly_name: TV Lights
 
-  binary_sensor.tv_idle:
+  sensor.glances:
     friendly_name: HTPC Idle
     icon: mdi:monitor
 
