@@ -25,10 +25,10 @@
       - sensor.glances
 
 #Living Room Lights
-  living_room_lights:
-    name: Living Room Lights
+  living_room_tv_lights:
+    name: Living Room TV Lights
     entities:
-      - light.lightpack
+      - switch.tv_lights_power
 
 #Kitchen Sensors Group
   kitchen_sensors:
@@ -121,7 +121,7 @@
     entities:
       - group.living_room_sensors
       - media_player.living_room_tv
-      - group.living_room_lights
+      - group.living_room_tv_lights
 
 #People Tab
   People:

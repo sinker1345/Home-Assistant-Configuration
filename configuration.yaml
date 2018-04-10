@@ -258,11 +258,16 @@ zone:
     radius: 500
     icon: mdi:worker
 
-light:
-  - platform: lightpack
-    host: 192.168.1.174
-    port: 3636
-    api_key: !secret lightpack_api
+switch:
+   #TV Backlight power
+  - platform: mqtt
+    name: "TV Lights Power"
+    command_topic: "cmnd/tvlights/power"
+    state_topic: "stat/tvlights/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
 
 group: !include groups.yaml
 automation: !include automations.yaml

@@ -199,3 +199,16 @@
           target: ["Tommy_Pixel_2XL","Jessica_Phone"]
           data:
            tag: 'Lexi Signed off of Xbox'
+
+  - alias: Match TV Lights to HTPC State
+    trigger:
+     - platform: state
+       entity_id: sensor.glances
+    action:
+      - service_template: >-
+          {% if trigger.to_state.state == "Idle" or trigger.to_state.state == "In Use"%}
+            homeassistant.turn_on
+          {% else %}
+            homeassistant.turn_off
+          {% endif %}
+        entity_id: switch.tv_lights_power

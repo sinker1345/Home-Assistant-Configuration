@@ -3,4 +3,4 @@
     origin: device_tracker.tommy_nexus_6p
     destination: zone.tommy_work
     options:
-      arrival_time: '14:30:00'
+      arrival_time: '06:30:00'
