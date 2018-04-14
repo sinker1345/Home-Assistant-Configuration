@@ -23,7 +23,7 @@
       - service: notify.google_push
         data_template:
           message: "NWS: {{ states.sensor.pws_alerts.attributes.Description }}"
-          target: ["Tommy_Pixel_2XL", "Tommy_Chrome"]
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
           data:
            image: !secret weather_image
            url: !secret weather_image
@@ -178,8 +178,10 @@
 
   - alias: Is Lexi on Xbox
     trigger:
-     - platform: template
-       value_template: "{{ is_state('sensor.taylex15', 'Online') }}"
+     - platform: state
+       entity_id: sensor.taylex15
+       from: 'Offline'
+       to: 'Online'
     action:
       - service: notify.google_push
         data_template:
@@ -190,13 +192,15 @@
 
   - alias: Is Lexi off Xbox
     trigger:
-     - platform: template
-       value_template: "{{ is_state('sensor.taylex15', 'Offline') }}"
+     - platform: state
+       entity_id: sensor.taylex15
+       from: 'Online'
+       to: 'Offline'
     action:
       - service: notify.google_push
         data_template:
           message: "Lexi has signed off of XBox"
-          target: ["Tommy_Pixel_2XL","Jessica_Phone"]
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone"]
           data:
            tag: 'Lexi Signed off of Xbox'
 

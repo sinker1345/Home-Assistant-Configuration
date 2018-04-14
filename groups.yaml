@@ -44,7 +44,7 @@
   dining_room_sensors:
     name: Dining Room Sensors
     entities:
-#      - sensor.dining_room_light_level
+      - sensor.dining_room_light_level
       - sensor.dining_room_humidity
       - sensor.dining_room_temperature
       - sensor.dining_room_feels_like

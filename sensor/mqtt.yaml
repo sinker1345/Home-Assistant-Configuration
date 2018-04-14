@@ -87,11 +87,11 @@
     value_template: '{{ value_json.temperature | round(1) }}'
 
 # Sensor for multisensor Dining Room
-#  - platform: mqtt
-#    state_topic: "dining_room/sensornode1"
-#    name: "Dining Room Level"
-#    unit_of_measurement: "LUX"
-#    value_template: '{{ value_json.ldr }}'
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Light Level"
+    unit_of_measurement: "LUX"
+    value_template: '{{ value_json.ldr }}'
 
 # Sensor for multisensor Dining Room
   - platform: mqtt
