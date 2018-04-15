@@ -23,3 +23,59 @@
           {% else %}
             In Use
           {% endif %}
+
+#averageing temperature for downstairs sensors
+  - platform: template
+    sensors:
+      downstairs_feels_like:
+        value_template: >-
+          {{ ((float(states.sensor.kitchen_feels_like.state) + 
+               float(states.sensor.living_room_feels_like.state) +
+               float(states.sensor.dining_room_feels_like.state)) / 3) | round(1)
+          }}
+        unit_of_measurement: '°F'
+
+  - platform: template
+    sensors:
+      downstairs_temperature:
+        value_template: >-
+          {{ ((float(states.sensor.kitchen_temperature.state) + 
+               float(states.sensor.living_room_temperature.state) +
+               float(states.sensor.dining_room_temperature.state)) / 3) | round(1)
+          }}
+        unit_of_measurement: '°F'
+
+  - platform: template
+    sensors:
+      downstairs_humidity:
+        value_template: >-
+          {{ ((float(states.sensor.kitchen_humidity.state) + 
+               float(states.sensor.living_room_humidity.state) +
+               float(states.sensor.dining_room_humidity.state)) / 3) | round(1)
+          }}
+        unit_of_measurement: '%'
+
+  - platform: template
+    sensors:
+      downstairs_light_level:
+        value_template: >-
+          {{ ((float(states.sensor.kitchen_light_level.state) + 
+               float(states.sensor.living_room_light_level.state) +
+               float(states.sensor.dining_room_light_level.state)) / 3) | round(1)
+          }}
+        unit_of_measurement: 'LUX'
+
+  - platform: template
+    sensors:
+      downstairs_motion:
+        friendly_name: "Downstairs Motion"
+        value_template: >-
+          {% if is_state('sensor.dining_room_motion', 'motion detected') %}
+            Motion Detected
+          {% elif is_state('sensor.living_room_motion', 'motion detected') %}
+            Motion Detected
+          {% elif is_state('sensor.kitchen_motion', 'motion detected') %}
+            Motion Detected
+          {% else %}
+            Standby
+          {% endif %}

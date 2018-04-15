@@ -92,14 +92,32 @@
       - sensor.pws_weather_4d
       - sensor.pws_weather_4n
 
-#Dining Room Tab
+#Downstairs Group
+  downstairs_sensors:
+    name: Downstairs Sensors
+    entities:
+      - sensor.downstairs_light_level
+      - sensor.downstairs_humidity
+      - sensor.downstairs_temperature
+      - sensor.downstairs_feels_like
+      - sensor.downstairs_motion
+
+
+#Downstairs View
+  downstairs_view:
+    name: Downstairs
+    view: yes
+    entities:
+      - group.downstairs_sensors
+
+#Dining Room View
   dining_room:
     name: Dining Room
     view: yes
     entities:
       - group.dining_room_sensors
 
-#Garage Tab
+#Garage View
   garage:
     name: Garage
     view: yes
@@ -107,14 +125,14 @@
       - media_player.garage_chromecast
       - media_player.garage_tv
 
-#Kitchen Group
+#Kitchen View
   Kitchen:
     name: Kitchen
     view: yes
     entities:
       - group.kitchen_sensors
 
-#Living Room Tab
+#Living Room View
   Living_Room:
     name: Living Room
     view: yes
@@ -123,7 +141,7 @@
       - media_player.living_room_tv
       - group.living_room_tv_lights
 
-#People Tab
+#People View
   People:
     name: People
     view: yes
@@ -132,7 +150,7 @@
       - group.tommy
       - group.people_status
 
-# Weather Tab
+# Weather View
   weather_tab:
     name: weather
     view: yes
