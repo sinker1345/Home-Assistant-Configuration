@@ -74,3 +74,15 @@
   
   sensor.downstairs_light_level:
     friendly_name: Downstairs Light Level
+
+  variable.last_motion:
+    icon: mdi:walk
+
+  binary_sensor.kitchen_motion:
+    hidden: true
+
+  binary_sensor.dining_room_motion:
+    hidden: true
+
+  binary_sensor.living_room_motion:
+    hidden: true

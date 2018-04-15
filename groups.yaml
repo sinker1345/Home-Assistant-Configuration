@@ -101,7 +101,8 @@
       - sensor.downstairs_temperature
       - sensor.downstairs_feels_like
       - sensor.downstairs_motion
-
+      - variable.last_motion
+      - sensor.glances
 
 #Downstairs View
   downstairs_view:
@@ -109,6 +110,10 @@
     view: yes
     entities:
       - group.downstairs_sensors
+      - media_player.living_room_tv
+      - media_player.garage_chromecast
+      - media_player.garage_tv
+      - group.living_room_tv_lights
 
 #Dining Room View
   dining_room:

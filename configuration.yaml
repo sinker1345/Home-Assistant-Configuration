@@ -182,14 +182,6 @@ google:
   client_id: !secret client_id
   client_secret: !secret client_secret
 
-# ISS component
-binary_sensor:
-  - platform: iss
-
-  - platform: workday
-    country: US
-    workdays: [ mon, tue, wed, thu, fri ]
-
 # Show ISS space station on google maps
 camera:
   - platform: generic
@@ -269,8 +261,18 @@ switch:
     payload_off: "OFF"
     retain: true
 
+variable:  
+  last_motion:
+    name: Last Room Motion Downstairs
+    value: 'Unknown'
+    restore: true
+    attributes:
+      icon: mdi:map-marker
+      name: "Last Motion"
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor/
+binary_sensor: !include_dir_merge_list binary_sensor/
 
