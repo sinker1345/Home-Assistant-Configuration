@@ -17,11 +17,11 @@
   living_room_sensors:
     name: Living Room Sensors
     entities:
-      - sensor.living_room_light_level
-      - sensor.living_room_humidity
-      - sensor.living_room_temperature
-      - sensor.living_room_feels_like
-      - sensor.living_room_motion
+      - sensor.living_room_light_level_combo
+      - sensor.living_room_humidity_combo
+      - sensor.living_room_temperature_combo
+      - sensor.living_room_feels_like_combo
+      - sensor.living_room_motion_combo
       - sensor.glances
 
 #Living Room Lights
@@ -114,6 +114,7 @@
       - media_player.garage_chromecast
       - media_player.garage_tv
       - group.living_room_tv_lights
+      - vacuum.bob
 
 #Dining Room View
   dining_room:

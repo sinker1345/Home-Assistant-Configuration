@@ -28,9 +28,6 @@
   sensor.jessica_status:
     entity_picture: /local/jessica.jpg
 
-  sensor.living_room_humidity:
-    icon: mdi:water-percent
-
   sensor.kitchen_humidity:
     icon: mdi:water-percent
 
@@ -64,8 +61,20 @@
     icon: mdi:walk
 
   sensor.living_room_motion:
-    icon: mdi:walk
+    hidden: true
   
+  sensor.living_room_temperature:
+    hidden: true
+  
+  sensor.living_room_humidity:
+    hidden: true
+  
+  sensor.living_room_light_level:
+    hidden: true
+  
+  sensor.living_room_feels_like:
+    hidden: true
+
   sensor.dining_room_motion:
     icon: mdi:walk
 
@@ -86,3 +95,35 @@
 
   binary_sensor.living_room_motion:
     hidden: true
+
+  sensor.living_room_2_feels_like:
+    hidden: true
+  
+  sensor.living_room_2_temperature:
+    hidden: true
+  
+  sensor.living_room_2_humidity:
+    hidden: true
+  
+  sensor.living_room_2_motion:
+    hidden: true
+  
+  sensor.living_room_2_light_level:
+    hidden: true
+  
+  sensor.living_room_humidity_combo:
+    icon: mdi:water-percent
+    friendly_name: Living Room Humidity
+  
+  sensor.living_room_temperature_combo:
+    friendly_name: Living Room Temperature
+  
+  sensor.living_room_feels_like_combo:
+    friendly_name: Living Room Feels Like
+  
+  sensor.living_room_light_level_combo:
+    friendly_name: Living Room Light Level
+  
+  sensor.living_room_motion_combo:
+    friendly_name: Living Room Motion
+    icon: mdi:walk

@@ -16,7 +16,7 @@
         friendly_name: 'Living Room Motion'
         device_class: motion
         value_template: >-
-          {%  if is_state("sensor.living_room_motion", "motion detected") %}
+          {%  if is_state("sensor.living_room_motion_combo", "motion detected") %}
           True
           {% else %}
           False
