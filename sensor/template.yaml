@@ -79,7 +79,7 @@
       downstairs_feels_like:
         value_template: >-
           {{ ((float(states.sensor.kitchen_feels_like.state) + 
-               float(states.sensor.living_room_feels_like_combo.state) +
+               float(states.sensor.living_room_feels_like_combo.state) + 
                float(states.sensor.dining_room_feels_like.state)) / 3) | round(1)
           }}
         unit_of_measurement: '°F'
@@ -89,7 +89,7 @@
       downstairs_temperature:
         value_template: >-
           {{ ((float(states.sensor.kitchen_temperature.state) + 
-               float(states.sensor.living_room_temperature_combo.state) +
+               float(states.sensor.living_room_temperature_combo.state) + 
                float(states.sensor.dining_room_temperature.state)) / 3) | round(1)
           }}
         unit_of_measurement: '°F'
@@ -99,7 +99,7 @@
       downstairs_humidity:
         value_template: >-
           {{ ((float(states.sensor.kitchen_humidity.state) + 
-               float(states.sensor.living_room_humidity_combo.state) +
+               float(states.sensor.living_room_humidity_combo.state) + 
                float(states.sensor.dining_room_humidity.state)) / 3) | round(1)
           }}
         unit_of_measurement: '%'
@@ -109,7 +109,7 @@
       downstairs_light_level:
         value_template: >-
           {{ ((float(states.sensor.kitchen_light_level.state) + 
-               float(states.sensor.living_room_light_level_combo.state) +
+               float(states.sensor.living_room_light_level_combo.state) + 
                float(states.sensor.dining_room_light_level.state)) / 3) | round(1)
           }}
         unit_of_measurement: 'LUX'

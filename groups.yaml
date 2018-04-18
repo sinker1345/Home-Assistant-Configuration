@@ -122,6 +122,7 @@
     view: yes
     entities:
       - group.dining_room_sensors
+      - vacuum.bob
 
 #Garage View
   garage:
