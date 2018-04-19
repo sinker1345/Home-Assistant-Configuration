@@ -90,6 +90,10 @@ device_tracker:
 
 #  - platform: bluetooth_le_tracker
 
+  - platform: google_maps
+    username: !secret google_maps_user
+    password: !secret google_maps_password
+
 # Text to speech
 tts:
   - platform: google
