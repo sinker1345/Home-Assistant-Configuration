@@ -1,6 +1,6 @@
   - platform: google_travel_time
     api_key: !secret google_maps_api_key
-    origin: device_tracker.tommy_nexus_6p
+    origin: device_tracker.google_maps_105472855536836656633
     destination: zone.tommy_work
     options:
       arrival_time: '06:30:00'
