@@ -79,17 +79,18 @@ device_tracker:
     password: !secret unifi
 
 # Owntracks Device Tracker
-  - platform: owntracks
-    max_gps_accuracy: 200
-    waypoints: true
-    waypoint_whitelist:
-      - tommy
+#  - platform: owntracks
+#    max_gps_accuracy: 200
+#    waypoints: true
+#    waypoint_whitelist:
+#      - tommy
 
 #Bluetooth Tracker
   - platform: bluetooth_tracker
 
 #  - platform: bluetooth_le_tracker
 
+# Google Maps Tracker
   - platform: google_maps
     username: !secret google_maps_user
     password: !secret google_maps_password
