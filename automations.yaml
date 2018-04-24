@@ -235,3 +235,45 @@
               }
         data_template:
           value: "{{ trigger.to_state.attributes.friendly_name }}"
+
+  - alias: 'Trash Day'
+    trigger:
+      - platform: state
+        entity_id: calendar.main
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{states.calendar.main.attributes.message == 'Trash Day'}}"
+        - condition: template
+          value_template: "{{states.calendar.main.attributes.offset_reached == true}}"
+        - condition: time
+          after: '00:30:00'
+          before: '00:30:02'
+    action:
+     - service: notify.google_push
+       data_template:
+         message: "Take out the Trash"
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+
+  - alias: 'Recycling Day'
+    trigger:
+      - platform: state
+        entity_id: calendar.main
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{states.calendar.main.attributes.message == 'Recycling Day'}}"
+        - condition: template
+          value_template: "{{states.calendar.main.attributes.offset_reached == true}}"
+        - condition: time
+          after: '00:30:00'
+          before: '00:30:02'
+    action:
+     - service: notify.google_push
+       data_template:
+         message: "Take out the Recycling"
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome"]

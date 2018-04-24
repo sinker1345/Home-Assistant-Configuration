@@ -1,32 +1,12 @@
-media_player.nexus_10:
-  name:
-  platform: plex
-  unique_id: da0c28aaeb465844-com-plexapp-android
-media_player.plex_web_chrome:
-  name:
-  platform: plex
-  unique_id: 1kmxx5vea5qtvppelpnyzc64
-media_player.plex_web_chrome_2:
-  name:
-  platform: plex
-  unique_id: x1ygi4uc5pne9hiobjnolzlj
-media_player.plex_web_chrome_3:
-  name:
-  platform: plex
-  unique_id: ya2i44dufentggc572p1ru1j
-media_player.garage_chromecast:
-  name:
-  platform: cast
-  unique_id: c6a7a98a-0b0b-2240-9b8c-8d9fb2fd90ad
-media_player.plex_web_chrome_4:
+media_player.chrome:
   name:
   platform: plex
   unique_id: mhsgewc26xblckvkqqr4tb72
-media_player.plex_web_chrome_5:
-  name:
-  platform: plex
-  unique_id: prws9tsdtb8jc6yrp1qicknk
 media_player.pixel_2_xl:
   name:
   platform: plex
   unique_id: 7cd8ebbc81d8d735-com-plexapp-android
+media_player.garage_chromecast:
+  name:
+  platform: cast
+  unique_id: c6a7a98a-0b0b-2240-9b8c-8d9fb2fd90ad
