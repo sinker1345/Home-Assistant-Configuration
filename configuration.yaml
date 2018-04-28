@@ -271,18 +271,18 @@ variable:
       icon: mdi:map-marker
       name: "Last Motion"
 
-#cover:
-#  - platform: mqtt  ##if you only have one door you can delete this second entry
-#    name: "single"
-#    state_topic: "sensor/garage/state1"
-#    command_topic: "sensor/garage/action1"
-#    payload_open: "OPEN"
-#    payload_close: "OPEN"
-#    payload_stop: "OPEN"
-#    state_open: "open"
-#    state_closed: "closed"
-#    optomistic: false
-#    retain: false
+cover:
+  - platform: mqtt  ##if you only have one door you can delete this second entry
+    name: "single"
+    state_topic: "sensor/garage/state1"
+    command_topic: "sensor/garage/action1"
+    payload_open: "OPEN"
+    payload_close: "OPEN"
+    payload_stop: "OPEN"
+    state_open: "open"
+    state_closed: "closed"
+    optomistic: false
+    retain: false
 
 group: !include groups.yaml
 automation: !include automations.yaml
