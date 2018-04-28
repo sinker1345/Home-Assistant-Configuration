@@ -127,3 +127,7 @@
   sensor.living_room_motion_combo:
     friendly_name: Living Room Motion
     icon: mdi:walk
+
+#  cover.single: ##if you only have one door you can delete this second entry
+#    device_class: garage
+#    friendly_name: Garage Door #change this to whatever you want the door called in your HA UI "wife's door", "my side", etc.

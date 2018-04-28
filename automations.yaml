@@ -1,4 +1,6 @@
 
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
   - alias: 'Wx Alert Notification'
     trigger:
       platform: state
@@ -238,19 +240,16 @@
 
   - alias: 'Trash Day'
     trigger:
-      - platform: state
-        entity_id: calendar.main
-        to: 'on'
+      - platform: time
+        at: '00:30:00'
     condition:
       condition: and
       conditions:
         - condition: template
           value_template: "{{states.calendar.main.attributes.message == 'Trash Day'}}"
-        - condition: template
-          value_template: "{{states.calendar.main.attributes.offset_reached == true}}"
-        - condition: time
-          after: '00:30:00'
-          before: '00:30:02'
+        - condition: state
+          entity_id: calendar.main
+          state: 'on'
     action:
      - service: notify.google_push
        data_template:
@@ -259,19 +258,16 @@
 
   - alias: 'Recycling Day'
     trigger:
-      - platform: state
-        entity_id: calendar.main
-        to: 'on'
+      - platform: time
+        at: '00:30:00'
     condition:
       condition: and
       conditions:
         - condition: template
           value_template: "{{states.calendar.main.attributes.message == 'Recycling Day'}}"
-        - condition: template
-          value_template: "{{states.calendar.main.attributes.offset_reached == true}}"
-        - condition: time
-          after: '00:30:00'
-          before: '00:30:02'
+        - condition: state
+          entity_id: calendar.main
+          state: 'on'
     action:
      - service: notify.google_push
        data_template:
