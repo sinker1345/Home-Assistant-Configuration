@@ -1,6 +1,7 @@
 
 # This (trigger) has to happen, while condition(s) are true, to do stuff (action)
 
+# start script to format weather alerts
   - alias: 'Wx Alert Notification'
     trigger:
       platform: state
@@ -8,6 +9,7 @@
     action:
       service: script.notifyonwxalert
 
+# Send Weather Alert
   - alias: TTS and Notify Weather Alert
     trigger:
       platform: state
@@ -31,7 +33,8 @@
            url: !secret weather_image
       ## Do other things! Flash lights or if your TV is on, use Harmony to change 
       ## channels to your preferred news station!
-      
+
+# Mark a person as Just Arrived
   - alias: Mark person as just arrived
     trigger:
       - platform: state
@@ -66,6 +69,7 @@
               {% endif %}
             {% endif %}
 
+# Mark a person as Home
   - alias: Mark person as home
     trigger:
       - platform: state
@@ -97,6 +101,7 @@
             {% endif %}
           option: Home
 
+# Mark a person as Just Left
   - alias: Mark person as just left
     trigger:
       - platform: state
@@ -118,6 +123,7 @@
             {% endif %}
           option: Just Left
 
+# Mark a person as Away
   - alias: Mark person as away
     trigger:
       - platform: state
@@ -141,6 +147,7 @@
             {% endif %}
           option: Away
 
+# Mark a person as Extended Away
   - alias: Mark person as extended away
     trigger:
       - platform: state
@@ -164,6 +171,7 @@
             {% endif %}
           option: Extended Away
 
+#Test Z Wave Network
   - alias: Test Z Wave at 2:30am
     trigger:
       platform: time
@@ -171,6 +179,7 @@
     action:
       service: zwave.test_network
 
+# Heal Z Wave Network
   - alias: Heal Z Wave at 3:32am
     trigger:
       platform: time
@@ -178,6 +187,7 @@
     action:
       service: zwave.heal_network
 
+# Check if Lexi is On XBox
   - alias: Is Lexi on Xbox
     trigger:
      - platform: state
@@ -192,6 +202,7 @@
           data:
            tag: 'Lexi Signed on to Xbox'
 
+# Check if Lexi Signed Off XBox
   - alias: Is Lexi off Xbox
     trigger:
      - platform: state
@@ -206,6 +217,7 @@
           data:
            tag: 'Lexi Signed off of Xbox'
 
+# Check for Idle status on HTPC
   - alias: Match TV Lights to HTPC State
     trigger:
      - platform: state
@@ -238,6 +250,7 @@
         data_template:
           value: "{{ trigger.to_state.attributes.friendly_name }}"
 
+# Take Out Trash
   - alias: 'Trash Day'
     trigger:
       - platform: time
@@ -256,6 +269,7 @@
          message: "Take out the Trash"
          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
 
+# Take Out Recycling
   - alias: 'Recycling Day'
     trigger:
       - platform: time

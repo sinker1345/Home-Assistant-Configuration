@@ -19,6 +19,7 @@ homeassistant:
 # Enables the frontend
 frontend:
   themes: !include_dir_merge_named themes
+
 # Enables configuration UI
 config:
 
@@ -78,17 +79,8 @@ device_tracker:
     username: !secret unifi_user
     password: !secret unifi
 
-# Owntracks Device Tracker
-#  - platform: owntracks
-#    max_gps_accuracy: 200
-#    waypoints: true
-#    waypoint_whitelist:
-#      - tommy
-
 #Bluetooth Tracker
   - platform: bluetooth_tracker
-
-#  - platform: bluetooth_le_tracker
 
 # Google Maps Tracker
   - platform: google_maps
@@ -212,6 +204,7 @@ panel_custom:
     sidebar_icon: mdi:pizza
     url_path: dominos
 
+# Node-Red Panel
 panel_iframe:
   nodered:
     title: 'Node-Red'
@@ -239,12 +232,14 @@ input_select:
       - Extended Away
 
 zone:
+# Jessica Work Zone
 #  - name: Jessica Work
 #    latitude: !secret jessica_work_lat
 #    longitude: !secret jessica_work_long
 #    radius: 200
 #    icon: mdi:worker
 
+# Tommy Work Zone
   - name: Tommy Work
     latitude: !secret tommy_work_lat
     longitude: !secret tommy_work_long
@@ -262,7 +257,8 @@ switch:
     payload_off: "OFF"
     retain: true
 
-variable:  
+variable:
+# Last Motion Variable
   last_motion:
     name: Last Room Motion Downstairs
     value: 'Unknown'
