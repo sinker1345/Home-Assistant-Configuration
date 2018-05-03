@@ -7,6 +7,8 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 - 2 Aeotec Z-Wave repeaters
 - 4 BRUH Multisensors (parts listed on BRUH automation youtube channel)
 - 1 Sonoff wifi switch (flashed with Tasmota)
+- 1 Chromecast Audio
+- 1 Bluetooth Speaker connected to Chromecast Audio
 
 ## Software In use.
 - Mosquitto MQTT Server
