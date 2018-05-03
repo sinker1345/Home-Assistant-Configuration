@@ -261,6 +261,15 @@ switch:
     payload_off: "OFF"
     retain: true
 
+#Dummy MQTT switch to disable morning routine after running once
+  - platform: mqtt
+    name: "Morning Alert"
+    state_topic: 'boolean/morning_alert'
+    command_topic: 'boolean/morning_alert'
+    payload_on: 'on'
+    payload_off: 'off'
+    retain: true
+
 variable:
 # Last Motion Variable
   last_motion:

@@ -311,3 +311,41 @@
       - service: frontend.set_theme
         data:
           name: default
+
+#Speak Morning greeting
+  - alias: 'Activate Morning Routine'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.kitchen_light_level
+        above: '600'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          before: '09:00:00'
+          after: '05:00:00'
+        - condition: state
+          entity_id: switch.morning_alert
+          state: 'off'
+        - condition: state
+          entity_id: sensor.kitchen_motion
+          state: 'motion detected'
+    action:
+      - service: script.morning_greeting
+      - service: switch.turn_on
+        entity_id: switch.morning_alert
+
+#Reset morning greeting dummy switch
+  - alias: 'Reset Morning Routine Switch'
+    trigger:
+      platform: time
+      at: '01:00:30'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.morning_alert
+          state: 'off'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.morning_alert
