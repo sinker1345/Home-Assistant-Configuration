@@ -1,0 +1,7 @@
+  - platform: darksky
+    api_key: !secret dark_sky
+    monitored_conditions:
+      - summary
+      - temperature
+      - hourly_summary
+      - temperature_max

@@ -81,6 +81,8 @@ device_tracker:
 
 #Bluetooth Tracker
   - platform: bluetooth_tracker
+    new_device_defaults:
+      track_new_devices: false
 
 # Google Maps Tracker
   - platform: google_maps
@@ -174,6 +176,8 @@ media_player:
     port: 8080
 
   - platform: plex
+
+  - platform: cast
 
 # Google Component
 google:

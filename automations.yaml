@@ -287,3 +287,27 @@
        data_template:
          message: "Take out the Recycling"
          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+
+# Set Dark Theme at Sunset
+  - alias: 'Darker Theme At Sunset'
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      - service: frontend.set_theme
+        data:
+          name: night
+
+# Set light Theme at sunrise
+  - alias: 'Lighter Theme At Sunrise'
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunrise
+    action:
+      - service: frontend.set_theme
+        data:
+          name: default

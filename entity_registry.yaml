@@ -10,3 +10,11 @@ media_player.garage_chromecast:
   name:
   platform: cast
   unique_id: c6a7a98a-0b0b-2240-9b8c-8d9fb2fd90ad
+media_player.kitchen_speaker:
+  name:
+  platform: cast
+  unique_id: feaa6434-21a4-4695-6c41-0e356d424074
+media_player.firefox:
+  name:
+  platform: plex
+  unique_id: 3275h8q6bpoijyd4kcmllfsn
