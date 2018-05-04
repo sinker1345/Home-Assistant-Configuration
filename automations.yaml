@@ -315,9 +315,10 @@
 #Speak Morning greeting
   - alias: 'Activate Morning Routine'
     trigger:
-      - platform: numeric_state
-        entity_id: sensor.kitchen_light_level
-        above: '600'
+      - platform: state
+        entity_id: sensor.kitchen_motion
+        from: 'standby'
+        to: 'motion detected'
     condition:
       condition: and
       conditions:
@@ -327,10 +328,18 @@
         - condition: state
           entity_id: switch.morning_alert
           state: 'off'
-        - condition: state
-          entity_id: sensor.kitchen_motion
-          state: 'motion detected'
+        - condition: numeric_state
+          entity_id: sensor.kitchen_light_level
+          above: 600
     action:
+      - service: media_player.turn_on
+        data_template:
+          entity_id: media_player.kitchen_speaker
+      - delay: '00:00:10'
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.kitchen_speaker
+          volume_level: 0.25
       - service: script.morning_greeting
       - service: switch.turn_on
         entity_id: switch.morning_alert
@@ -345,7 +354,7 @@
       conditions:
         - condition: state
           entity_id: switch.morning_alert
-          state: 'off'
+          state: 'on'
     action:
       - service: switch.turn_off
         entity_id: switch.morning_alert
