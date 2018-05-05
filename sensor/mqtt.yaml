@@ -145,3 +145,37 @@
     state_topic: "eventghost/htpc"
     name: "HTPC idle"
     value_template: '{{ value_json.activity }}'
+
+#sensor for Garage Feels Like
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for Garage Temperature
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for Garage Light Level
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Light Level"
+    unit_of_measurement: "LUX"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for Garage Humidity
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+#sensor for Garage Motion
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Motion"
+    value_template: '{{ value_json.motion }}'

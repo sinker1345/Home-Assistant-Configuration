@@ -13,6 +13,16 @@
       - sensor.tommy_status
       - sensor.jessica_status
 
+#Garage Sensor Groupp
+  garage_sensors:
+    name: Garage Sensors
+    entities:
+      - sensor.garage_light_level
+      - sensor.garage_humidity
+      - sensor.garage_temperature
+      - sensor.garage_feels_like
+      - sensor.garage_motion
+
 #Living Room Sensors Group
   living_room_sensors:
     name: Living Room Sensors
@@ -132,6 +142,7 @@
     entities:
       - media_player.garage_chromecast
       - media_player.garage_tv
+      - group.garage_sensors
 
 #Kitchen View
   Kitchen:
