@@ -1,0 +1,138 @@
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
+# Mark a person as Just Arrived
+  - alias: Mark person as just arrived
+    trigger:
+      - platform: state
+        entity_id: group.tommy
+        from: 'not_home'
+        to: 'home'
+      - platform: state
+        entity_id: group.jessica
+        from: 'not_home'
+        to: 'home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'group.tommy' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: >
+            {% if trigger.entity_id == 'group.tommy' %}
+              {% if states.input_select.tommy_status_dropdown.state == 'Just Left' %}
+                Home
+              {% else %}
+                Just Arrived
+              {% endif %}
+            {% else %}
+              {% if states.input_select.jessica_status_dropdown.state == 'Just Left' %}
+                Home
+              {% else %}
+                Just Arrived
+              {% endif %}
+            {% endif %}
+
+# Mark a person as Home
+  - alias: Mark person as home
+    trigger:
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        to: 'Just Arrived'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        to: 'Just Arrived'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        from: 'Just Left'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        from: 'Just Left'
+        to: 'Just Arrived'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Home
+
+# Mark a person as Just Left
+  - alias: Mark person as just left
+    trigger:
+      - platform: state
+        entity_id: group.tommy
+        from: 'home'
+        to: 'not_home'
+      - platform: state
+        entity_id: group.jessica
+        from: 'home'
+        to: 'not_home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'group.tommy' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Just Left
+
+# Mark a person as Away
+  - alias: Mark person as away
+    trigger:
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        to: 'Just Left'
+        for:
+          minutes: 10
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        to: 'Just Left'
+        for:
+          minutes: 10
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Away
+
+# Mark a person as Extended Away
+  - alias: Mark person as extended away
+    trigger:
+      - platform: state
+        entity_id: input_select.tommy_status_dropdown
+        to: 'Away'
+        for:
+          hours: 24
+      - platform: state
+        entity_id: input_select.jessica_status_dropdown
+        to: 'Away'
+        for:
+          hours: 24
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: >
+            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
+              input_select.tommy_status_dropdown
+            {% else %}
+              input_select.jessica_status_dropdown
+            {% endif %}
+          option: Extended Away

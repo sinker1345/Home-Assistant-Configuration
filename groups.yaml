@@ -120,6 +120,7 @@
     view: yes
     entities:
       - group.downstairs_sensors
+      - group.garage_sensors
       - media_player.living_room_tv
       - media_player.garage_chromecast
       - media_player.garage_tv

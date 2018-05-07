@@ -1,0 +1,34 @@
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
+# start script to format weather alerts
+  - alias: 'Wx Alert Notification'
+    trigger:
+      platform: state
+      entity_id: sensor.pws_alerts
+    action:
+      service: script.notifyonwxalert
+
+# Send Weather Alert
+  - alias: TTS and Notify Weather Alert
+    trigger:
+      platform: state
+      entity_id: sensor.pws_alerts
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{states.sensor.pws_alerts.state | int > 0}}'
+          ## Added a time condition because I don't want a non-emergency alert waking me up
+        - condition: time
+          after: '07:00:00'
+          before: '22:00:00'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "NWS: {{ states.sensor.pws_alerts.attributes.Description }}"
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+          data:
+           image: !secret weather_image
+           url: !secret weather_image
+      ## Do other things! Flash lights or if your TV is on, use Harmony to change 
+      ## channels to your preferred news station!

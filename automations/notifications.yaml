@@ -1,0 +1,69 @@
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
+# Check if Lexi is On XBox
+  - alias: Is Lexi on Xbox
+    trigger:
+     - platform: state
+       entity_id: sensor.taylex15
+       from: 'Offline'
+       to: 'Online'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "Lexi has signed on to XBox"
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone"]
+          data:
+           tag: 'Lexi Signed on to Xbox'
+
+# Check if Lexi Signed Off XBox
+  - alias: Is Lexi off Xbox
+    trigger:
+     - platform: state
+       entity_id: sensor.taylex15
+       from: 'Online'
+       to: 'Offline'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "Lexi has signed off of XBox"
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone"]
+          data:
+           tag: 'Lexi Signed off of Xbox'
+
+# Take Out Trash
+  - alias: 'Trash Day'
+    trigger:
+      - platform: time
+        at: '00:30:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{states.calendar.main.attributes.message == 'Trash Day'}}"
+        - condition: state
+          entity_id: calendar.main
+          state: 'on'
+    action:
+     - service: notify.google_push
+       data_template:
+         message: "Take out the Trash"
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+
+# Take Out Recycling
+  - alias: 'Recycling Day'
+    trigger:
+      - platform: time
+        at: '00:30:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{states.calendar.main.attributes.message == 'Recycling Day'}}"
+        - condition: state
+          entity_id: calendar.main
+          state: 'on'
+    action:
+     - service: notify.google_push
+       data_template:
+         message: "Take out the Recycling"
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome"]

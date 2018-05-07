@@ -1,0 +1,17 @@
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
+#Test Z Wave Network
+  - alias: Test Z Wave at 2:30am
+    trigger:
+      platform: time
+      at: '2:30:00'
+    action:
+      service: zwave.test_network
+
+# Heal Z Wave Network
+  - alias: Heal Z Wave at 3:32am
+    trigger:
+      platform: time
+      at: '3:32:00'
+    action:
+      service: zwave.heal_network

@@ -44,6 +44,6 @@
               you have a calendar event today. It is {{states.calendar.main.attributes.message}},
             {% endif %}
             {% if states.calendar.holidays_in_united_states.state == 'on' %}
-              Today is a holiday, it is {{states.calendar.holidays_in_united_states.attributes.message }},
+              Today is a holiday, it is {{states.calendar.holidays_in_united_states.attributes.message}},
             {% endif %}
             Have a Great Day!

@@ -1,0 +1,25 @@
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
+# Set Dark Theme at Sunset
+  - alias: 'Darker Theme At Sunset'
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      - service: frontend.set_theme
+        data:
+          name: night
+
+# Set light Theme at sunrise
+  - alias: 'Lighter Theme At Sunrise'
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunrise
+    action:
+      - service: frontend.set_theme
+        data:
+          name: default

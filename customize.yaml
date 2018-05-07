@@ -128,6 +128,9 @@
     friendly_name: Living Room Motion
     icon: mdi:walk
 
+  sensor.garage_humidity:
+    icon: mdi:water-percent
+
   sensor.dark_sky_daily_high_temperature:
     hidden: true
 
@@ -139,6 +142,9 @@
 
   sensor.dark_sky_temperature:
     hidden: true
+
+  sensor.garage_motion:
+    icon: mdi:walk
 
 #  cover.single: ##if you only have one door you can delete this second entry
 #    device_class: garage
