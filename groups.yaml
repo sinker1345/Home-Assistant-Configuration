@@ -144,6 +144,7 @@
       - media_player.garage_chromecast
       - media_player.garage_tv
       - group.garage_sensors
+      - cover.single
 
 #Kitchen View
   Kitchen:
