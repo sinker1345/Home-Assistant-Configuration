@@ -126,6 +126,7 @@
       - media_player.garage_tv
       - media_player.kitchen_speaker
       - group.living_room_tv_lights
+      - cover.garage_door
       - vacuum.bob
 
 #Dining Room View
@@ -144,7 +145,7 @@
       - media_player.garage_chromecast
       - media_player.garage_tv
       - group.garage_sensors
-      - cover.single
+      - cover.garage_door
 
 #Kitchen View
   Kitchen:

@@ -1,0 +1,26 @@
+  - alias: "Close Garage Door on Weekday"
+    trigger:
+      - platform: time
+        at: '22:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+        - condition: state
+          entity_id: media_player.garage_tv
+          state: 'idle'
+        - condition: state
+          entity_id: media_player.garage_chromecast
+          state: 'off'
+        - condition: numeric_state
+          entity_id: sensor.garage_light_level
+          below: 50
+        - condition: state
+          entity_id: cover.garage_door
+          state: 'open'
+    action:
+      - service: cover.close_cover
+        data:
+          entity_id: cover.garage_door

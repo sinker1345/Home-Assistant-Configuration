@@ -18,3 +18,7 @@ media_player.firefox:
   name:
   platform: plex
   unique_id: 3275h8q6bpoijyd4kcmllfsn
+media_player.firefox_2:
+  name:
+  platform: plex
+  unique_id: zhi2jy6wl3c6s9pavffy368e
