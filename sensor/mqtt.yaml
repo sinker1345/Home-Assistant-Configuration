@@ -9,7 +9,7 @@
   - platform: mqtt
     state_topic: "livingroom/sensornode1"
     name: "Living Room Light Level"
-    unit_of_measurement: "LUX"
+    unit_of_measurement: "lx"
     value_template: '{{ value_json.ldr }}'
 
 # Sensor for multisensor living room
@@ -56,7 +56,7 @@
   - platform: mqtt
     state_topic: "kitchen/sensornode1"
     name: "Kitchen Light Level"
-    unit_of_measurement: "LUX"
+    unit_of_measurement: "lx"
     value_template: '{{ value_json.ldr }}'
 
 # Sensor for multisensor kitchen
@@ -90,7 +90,7 @@
   - platform: mqtt
     state_topic: "dining_room/sensornode1"
     name: "Dining Room Light Level"
-    unit_of_measurement: "LUX"
+    unit_of_measurement: "lx"
     value_template: '{{ value_json.ldr }}'
 
 # Sensor for multisensor Dining Room
@@ -124,7 +124,7 @@
   - platform: mqtt
     state_topic: "living_room/sensornode2"
     name: "Living Room 2 Light Level"
-    unit_of_measurement: "LUX"
+    unit_of_measurement: "lx"
     value_template: '{{ value_json.ldr }}'
 
 # Sensor for multisensor Living Room (2)
@@ -164,7 +164,7 @@
   - platform: mqtt
     state_topic: "garage/sensornode1"
     name: "Garage Light Level"
-    unit_of_measurement: "LUX"
+    unit_of_measurement: "lx"
     value_template: '{{ value_json.ldr }}'
 
 # Sensor for Garage Humidity
