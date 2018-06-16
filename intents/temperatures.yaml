@@ -1,0 +1,3 @@
+  Temperature:
+    speech:
+      text: The temperature downstairs is {{ states('sensor.downstairs_temperature') }} degrees

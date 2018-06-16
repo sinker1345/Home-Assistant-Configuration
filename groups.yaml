@@ -13,6 +13,16 @@
       - sensor.tommy_status
       - sensor.jessica_status
 
+#Master Bedroom Sensors Group
+  master_bedroom_sensors_group:
+    name: Master Bedroom Sensors
+    entities:
+      - sensor.master_bed_room_light_level
+      - sensor.master_bed_room_humidity
+      - sensor.master_bed_room_temperature
+      - sensor.master_bed_room_feels_like
+      - sensor.master_bed_room_motion
+
 #Garage Sensor Groupp
   garage_sensors:
     name: Garage Sensors
@@ -129,6 +139,14 @@
       - cover.garage_door
       - vacuum.bob
 
+#Upstairs View
+  upstairs_view:
+    name: Upstairs
+    view: yes
+    entities:
+      - switch.master_bedroom_fan
+      - group.master_bedroom_sensors_group
+
 #Dining Room View
   dining_room:
     name: Dining Room
@@ -163,6 +181,14 @@
       - group.living_room_sensors
       - media_player.living_room_tv
       - group.living_room_tv_lights
+
+#Master Bedroom View
+  master_bedroom:
+    name: Master Bedroom
+    view: yes
+    entities:
+      - switch.master_bedroom_fan
+      - group.master_bedroom_sensors_group
 
 #People View
   People:

@@ -106,3 +106,7 @@ zwave.upstairs_range_extender:
   name:
   platform: zwave
   unique_id: node-4
+media_player.chrome_2:
+  name:
+  platform: plex
+  unique_id: afda6e8iueorsva7cycaxfl1

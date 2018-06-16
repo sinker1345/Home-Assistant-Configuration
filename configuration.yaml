@@ -23,6 +23,14 @@ frontend:
 # Enables configuration UI
 config:
 
+# Enables Homeassistant Cloud Component
+cloud:
+
+#enables dialogflow for responsive tts/assistant
+#dialogflow:
+
+#intent_script: !include_dir_merge_list intents/
+
 http:
   # Secrets are defined in the file secrets.yaml
   # api_password: !secret http_password
@@ -156,10 +164,10 @@ notify:
     gcm_sender_id: !secret gcm_sender
 
 # Google Assistant Configuration
-google_assistant:
-  project_id: !secret google_project_id
-  client_id: !secret google_client_id
-  access_token: !secret google_access_token
+#google_assistant:
+#  project_id: !secret google_project_id
+#  client_id: !secret google_client_id
+#  access_token: !secret google_access_token
 
 # IFTTT Component
 ifttt:
@@ -263,6 +271,14 @@ switch:
     payload_off: "OFF"
     retain: true
 
+  - platform: mqtt
+    name: "Master Bedroom Fan"
+    command_topic: "cmnd/master_bedroom/power"
+    state_topic: "stat/master_bedroom/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
 #Dummy MQTT switch to disable morning routine after running once
   - platform: mqtt
     name: "Morning Alert"
@@ -294,6 +310,15 @@ cover:
     state_closed: "closed"
     optomistic: false
     retain: false
+
+calendar:
+  - platform: todoist
+    token: !secret todoist_API
+    custom_projects:
+      - name: 'Due Today'
+        due_date_days: 0
+      - name: 'Due This Week'
+        due_date_days: 7
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/

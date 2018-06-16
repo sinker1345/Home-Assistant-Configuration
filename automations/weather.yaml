@@ -26,7 +26,7 @@
       - service: notify.google_push
         data_template:
           message: "NWS: {{ states.sensor.pws_alerts.attributes.Description }}"
-          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
           data:
            image: !secret weather_image
            url: !secret weather_image

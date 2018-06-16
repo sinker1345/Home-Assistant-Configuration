@@ -58,7 +58,7 @@
           {{ ((float(states.sensor.living_room_light_level.state) + 
                float(states.sensor.living_room_2_light_level.state)) / 2) | round(1)
           }}
-        unit_of_measurement: 'LUX'
+        unit_of_measurement: 'lx'
 
   - platform: template
     sensors:
@@ -112,7 +112,7 @@
                float(states.sensor.living_room_light_level_combo.state) + 
                float(states.sensor.dining_room_light_level.state)) / 3) | round(1)
           }}
-        unit_of_measurement: 'LUX'
+        unit_of_measurement: 'lx'
 
   - platform: template
     sensors:
