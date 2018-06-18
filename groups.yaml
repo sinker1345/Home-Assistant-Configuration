@@ -135,6 +135,8 @@
       - media_player.garage_chromecast
       - media_player.garage_tv
       - media_player.kitchen_speaker
+      - media_player.googlehome3446
+      - media_player.downstairs
       - group.living_room_tv_lights
       - cover.garage_door
       - vacuum.bob
@@ -181,6 +183,7 @@
       - group.living_room_sensors
       - media_player.living_room_tv
       - group.living_room_tv_lights
+      - media_player.googlehome3446
 
 #Master Bedroom View
   master_bedroom:

@@ -22,12 +22,12 @@
     action:
       - service: media_player.turn_on
         data_template:
-          entity_id: media_player.kitchen_speaker
+          entity_id: media_player.downstairs
       - delay: '00:00:10'
       - service: media_player.volume_set
         data_template:
-          entity_id: media_player.kitchen_speaker
-          volume_level: 0.25
+          entity_id: media_player.downstairs
+          volume_level: 0.40
       - service: script.morning_greeting
       - service: switch.turn_on
         entity_id: switch.morning_alert

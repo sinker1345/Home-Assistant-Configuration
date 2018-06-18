@@ -110,3 +110,11 @@ media_player.chrome_2:
   name:
   platform: plex
   unique_id: afda6e8iueorsva7cycaxfl1
+media_player.googlehome3446:
+  name:
+  platform: cast
+  unique_id: 2b82b390-ee9d-63b1-d5ab-977565d962df
+media_player.downstairs:
+  name:
+  platform: cast
+  unique_id: 4cc14a96-5757-408c-95fa-7192655cf633
