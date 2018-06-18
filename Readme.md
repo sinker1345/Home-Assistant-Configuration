@@ -5,12 +5,14 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 ## My current hardware use in my home automation setup are listed below.
 
 - 2 Aeotec Z-Wave repeaters
-- 4 BRUH Multisensors (parts listed on BRUH automation youtube channel)
+- 5 BRUH Multisensors (parts listed on BRUH automation youtube channel)
 - 1 Sonoff wifi switch (flashed with Tasmota)
+- 1 Sonoff S20 socket
 - 1 Chromecast Audio
+- 1 Google Home Mini
 - 1 Bluetooth Speaker connected to Chromecast Audio
 
 ## Software In use.
 - Mosquitto MQTT Server
 - EventGhost
-- Node-Red (not currently utilized)
+- Node-Red
