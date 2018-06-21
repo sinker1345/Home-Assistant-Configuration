@@ -1,82 +1,37 @@
 # This (trigger) has to happen, while condition(s) are true, to do stuff (action)
 
-#  - alias: "Turn on Bedroom fan on Weekday"
-#    trigger:
-#      - platform: time
-#        at: '20:00:00'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: binary_sensor.workday_sensor
-#          state: 'on'
-#        - condition: state
-#          entity_id: switch.master_bedroom_fan
-#          state: 'off'
-#    action:
-#      - service: switch.turn_on
-#        data:
-#          entity_id: switch.master_bedroom_fan
+  - alias: "Turn on Bedroom fan"
+    trigger:
+      - platform: state
+        entity_id: sensor.master_bed_room_motion
+        from: 'standby'
+        to: 'motion detected'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '20:00:00'
+        - condition: state
+          entity_id: switch.master_bedroom_fan
+          state: 'off'
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.master_bedroom_fan
 
-#  - alias: "Turn off Bedroom fan on Weekday"
-#    trigger:
-#      - platform: time
-#        at: '05:45:00'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: binary_sensor.workday_sensor
-#          state: 'on'
-#        - condition: state
-#          entity_id: switch.master_bedroom_fan
-#          state: 'on'
-#    action:
-#      - service: switch.turn_off
-#        data:
-#          entity_id: switch.master_bedroom_fan
-
-#  - alias: "Turn on Bedroom fan on Weekend"
-#    trigger:
-#      - platform: state
-#        entity_id: sensor.master_bed_room_motion
-#        from: 'standby'
-#        to: 'motion detected'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: binary_sensor.workday_sensor
-#          state: 'off'
-#        - condition: state
-#          entity_id: switch.master_bedroom_fan
-#          state: 'off'
-#        - condition: time
-#          after: '20:00:00'
-#    action:
-#      - service: switch.turn_on
-#        data:
-#          entity_id: switch.master_bedroom_fan
-
-#  - alias: "Turn off Bedroom fan on Weekend"
-#    trigger:
-#      - platform: state
-#        entity_id: sensor.master_bed_room_motion
-#        from: 'standby'
-#        to: 'motion detected'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: state
-#          entity_id: binary_sensor.workday_sensor
-#          state: 'off'
-#        - condition: state
-#          entity_id: switch.master_bedroom_fan
-#          state: 'on'
-#        - condition: time
-#          before: '10:45:00'
-#          after: '05:45:00'
-#    action:
-#      - service: switch.turn_off
-#        data:
-#          entity_id: switch.master_bedroom_fan
+  - alias: "Turn off Bedroom fan"
+    trigger:
+      - platform: state
+        entity_id: switch.morning_alert
+        from: 'off'
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.master_bedroom_fan
+          state: 'on'
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.master_bedroom_fan

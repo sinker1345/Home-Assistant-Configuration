@@ -118,3 +118,7 @@ media_player.downstairs:
   name:
   platform: cast
   unique_id: 4cc14a96-5757-408c-95fa-7192655cf633
+media_player.chrome_3:
+  name:
+  platform: plex
+  unique_id: 1kmxx5vea5qtvppelpnyzc64

@@ -20,7 +20,7 @@
     sequence:
       - service: tts.google_say
         data_template:
-          entity_id: media_player.kitchen_speaker
+          entity_id: media_player.downstairs
           message: >
             {% if now().strftime("%H")|int < 12 %}
               Good Morning. 
@@ -47,3 +47,23 @@
               Today is a holiday, it is {{states.calendar.holidays_in_united_states.attributes.message}},
             {% endif %}
             Have a Great Day!
+
+
+  download_movie:
+    alias: download_movie
+    sequence:
+    - service: shell_command.download_movie
+      data_template:
+        movie: '{{ movie }}'
+  search_movie:
+    alias: search_movie
+    sequence:
+    - service: shell_command.search_movie
+      data_template:
+        movie: '{{ movie }}'
+  download_option:
+    alias: download_option
+    sequence:
+    - service: shell_command.download_option
+      data_template:
+        option: '{{ option }}'

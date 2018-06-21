@@ -152,3 +152,10 @@
 
   sensor.dark_sky_daytime_high_temperature:
     hidden: true
+
+  sensor.master_bed_room_motion:
+    friendly_name: Living Room Motion
+    icon: mdi:walk
+
+  sensor.master_bed_room_humidity:
+    icon: mdi:water-percent
