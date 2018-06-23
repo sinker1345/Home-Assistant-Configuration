@@ -21,10 +21,8 @@
 
   - alias: "Turn off Bedroom fan"
     trigger:
-      - platform: state
-        entity_id: switch.morning_alert
-        from: 'off'
-        to: 'on'
+      - platform: time
+        at: '08:00:00'
     condition:
       condition: and
       conditions:

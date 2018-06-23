@@ -6,12 +6,18 @@
 # Tommy Device Tracker Group
   Tommy: device_tracker.pixel_2_xl, device_tracker.b4f7a1e3c6fa, device_tracker.google_maps_105472855536836656633
 
+#Lexi Device Tracker Group
+  Lexi:
+    entities:
+      - device_tracker.5c77762568a1
+
 #People Status Group
   people_status:
     name: People Status
     entities:
       - sensor.tommy_status
       - sensor.jessica_status
+      - sensor.lexi_status
 
 #Master Bedroom Sensors Group
   master_bedroom_sensors_group:
@@ -201,6 +207,7 @@
       - group.jessica
       - group.tommy
       - group.people_status
+      - group.lexi
 
 # Weather View
   weather_tab:

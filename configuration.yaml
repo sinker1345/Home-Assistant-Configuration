@@ -245,6 +245,14 @@ input_select:
       - Away
       - Extended Away
 
+  lexi_status_dropdown:
+    name: Lexi
+    options:
+      - Home
+      - Just Arrived
+      - Just Left
+      - Away
+      - Extended Away
 zone:
 # Jessica Work Zone
 #  - name: Jessica Work

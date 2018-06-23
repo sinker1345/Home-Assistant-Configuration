@@ -25,6 +25,9 @@
   sensor.tommy_status:
     entity_picture: /local/tommy.jpg
 
+  sensor.lexi_status:
+    entity_picture: /local/lexi.jpg
+
   sensor.jessica_status:
     entity_picture: /local/jessica.jpg
 
@@ -154,8 +157,12 @@
     hidden: true
 
   sensor.master_bed_room_motion:
-    friendly_name: Living Room Motion
+    friendly_name: Master Bed Room Motion
     icon: mdi:walk
 
   sensor.master_bed_room_humidity:
     icon: mdi:water-percent
+
+  device_tracker.5c77762568a1:
+    entity_picture: /local/lexi.jpg
+    friendly_name: Lexi WiFi
