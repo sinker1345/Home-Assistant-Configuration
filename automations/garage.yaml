@@ -5,12 +5,12 @@
     condition:
       condition: and
       conditions:
-        - condition: state
-          entity_id: binary_sensor.workday_sensor
-          state: 'on'
-        - condition: state
-          entity_id: media_player.garage_tv
-          state: 'idle'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
         - condition: state
           entity_id: media_player.garage_chromecast
           state: 'off'
@@ -32,12 +32,11 @@
     condition:
       condition: and
       conditions:
-        - condition: state
-          entity_id: binary_sensor.workday_sensor
-          state: 'off'
-        - condition: state
-          entity_id: media_player.garage_tv
-          state: 'idle'
+        - condition: time
+          weekday:
+            - fri
+            - sun
+            - sat
         - condition: state
           entity_id: media_player.garage_chromecast
           state: 'off'

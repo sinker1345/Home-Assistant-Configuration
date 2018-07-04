@@ -166,3 +166,15 @@
   device_tracker.5c77762568a1:
     entity_picture: /local/lexi.jpg
     friendly_name: Lexi WiFi
+
+  sensor.octoprint_target_bed_temp:
+    hidden: true
+
+  sensor.octoprint_target_tool0_temp:
+    hidden: true
+
+  sensor.octoprint_actual_bed_temp:
+    hidden: true
+
+  sensor.octoprint_actual_tool0_temp:
+    hidden: true

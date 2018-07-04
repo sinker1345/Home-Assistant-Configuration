@@ -11,7 +11,6 @@
       condition: and
       conditions:
         - condition: time
-          before: '09:00:00'
           after: '05:00:00'
         - condition: state
           entity_id: switch.morning_alert
@@ -19,12 +18,18 @@
     action:
       - service: media_player.turn_on
         data_template:
+          entity_id: media_player.kitchen_speaker
+      - service: media_player.turn_on
+        data_template:
+          entity_id: media_player.googlehome3446
+      - service: media_player.turn_on
+        data_template:
           entity_id: media_player.downstairs
-      - delay: '00:00:10'
+      - delay: '00:00:03'
       - service: media_player.volume_set
         data_template:
           entity_id: media_player.downstairs
-          volume_level: 0.40
+          volume_level: 0.50
       - service: script.morning_greeting
       - service: switch.turn_on
         entity_id: switch.morning_alert

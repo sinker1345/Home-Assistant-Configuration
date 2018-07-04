@@ -89,6 +89,17 @@
       - sensor.last_boot
       - sensor.since_last_boot
 
+  octoprint:
+    name: 3D Printer Status
+    entities:
+      - sensor.octoprint_current_state
+      - sensor.octoprint_job_percentage
+      - sensor.hotend_temp
+      - sensor.hotend_target
+      - sensor.bed_temp
+      - sensor.bed_target
+      - camera.octo_print_camera
+
 # Weather Overview Group
   weather_overview:
     name: Weather overview
@@ -139,13 +150,13 @@
       - group.garage_sensors
       - media_player.living_room_tv
       - media_player.garage_chromecast
-      - media_player.garage_tv
       - media_player.kitchen_speaker
       - media_player.googlehome3446
       - media_player.downstairs
       - group.living_room_tv_lights
       - cover.garage_door
       - vacuum.bob
+      - group.octoprint
 
 #Upstairs View
   upstairs_view:
@@ -169,9 +180,9 @@
     view: yes
     entities:
       - media_player.garage_chromecast
-      - media_player.garage_tv
       - group.garage_sensors
       - cover.garage_door
+      - group.octoprint
 
 #Kitchen View
   Kitchen:

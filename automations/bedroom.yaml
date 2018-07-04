@@ -19,7 +19,7 @@
         data:
           entity_id: switch.master_bedroom_fan
 
-  - alias: "Turn off Bedroom fan"
+  - alias: "Turn off Bedroom fan Weekday"
     trigger:
       - platform: time
         at: '08:00:00'
@@ -29,6 +29,32 @@
         - condition: state
           entity_id: switch.master_bedroom_fan
           state: 'on'
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+            - fri
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.master_bedroom_fan
+
+  - alias: "Turn off Bedroom fan Weekend"
+    trigger:
+      - platform: time
+        at: '10:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.master_bedroom_fan
+          state: 'on'
+        - condition: time
+          weekday:
+            - sun
+            - sat
     action:
       - service: switch.turn_off
         data:

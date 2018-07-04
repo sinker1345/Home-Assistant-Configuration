@@ -16,3 +16,4 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 - Mosquitto MQTT Server
 - EventGhost
 - Node-Red
+- OctoPi integration
