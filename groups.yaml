@@ -99,6 +99,7 @@
       - sensor.bed_temp
       - sensor.bed_target
       - camera.octo_print_camera
+      - switch.3d_printer_power
 
 # Weather Overview Group
   weather_overview:

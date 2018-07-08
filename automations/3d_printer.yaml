@@ -1,0 +1,10 @@
+# This (trigger) has to happen, while condition(s) are true, to do stuff (action)
+
+  - alias: "Connect OctoPi to Printer"
+    trigger:
+      platform: state
+      entity_id: switch.3d_printer_power
+      from: 'off'
+      to: 'on'
+    action:
+      service: rest_command.octopi_connect

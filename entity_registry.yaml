@@ -158,3 +158,8 @@ media_player.chrome_4:
   name:
   platform: plex
   unique_id: prws9tsdtb8jc6yrp1qicknk
+media_player.chrome_5:
+  config_entry_id:
+  name:
+  platform: plex
+  unique_id: cwaod36p2zlggulboc1dsk4x

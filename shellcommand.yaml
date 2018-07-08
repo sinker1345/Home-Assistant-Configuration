@@ -1,3 +1,4 @@
   download_movie: bash /home/homeassistant/.homeassistant/shellscripts/download.sh "{{movie}}" 0
   search_movie: bash /home/homeassistant/.homeassistant/shellscripts/download.sh "{{movie}}" 1
   download_option: bash /home/homeassistant/.homeassistant/shellscripts/download.sh "{{option}}" 2
+  restart_ha: sudo /bin/systemctl restart home-assistant@homeassistant.service

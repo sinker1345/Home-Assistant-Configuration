@@ -30,6 +30,17 @@ cloud:
 #dialogflow:
 
 #intent_script: !include_dir_merge_list intents/
+rest_command:
+  octopi_connect:
+    url: 'http://192.168.1.34/api/connection'
+    method: post
+    headers: 
+      X-Api-Key: !secret octoprint_api
+    content_type: 'application/json'
+    payload: >-
+      {
+        "command": "connect"
+      }
 
 http:
   # Secrets are defined in the file secrets.yaml
@@ -37,6 +48,10 @@ http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
   api_password: !secret dns_pass
+  use_x_forwarded_for: True
+  trusted_proxies:
+    - 127.0.0.1
+    - 192.168.1.1
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -254,6 +269,7 @@ input_select:
       - Just Left
       - Away
       - Extended Away
+
 zone:
 # Jessica Work Zone
 #  - name: Jessica Work
@@ -284,6 +300,15 @@ switch:
     name: "Master Bedroom Fan"
     command_topic: "cmnd/master_bedroom/power"
     state_topic: "stat/master_bedroom/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  - platform: mqtt
+    name: "3D Printer Power"
+    command_topic: "cmnd/3dprinter/power"
+    state_topic: "stat/3dprinter/POWER"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"

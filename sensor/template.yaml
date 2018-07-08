@@ -138,16 +138,12 @@
       hotend_temp:
         friendly_name: 'Hotend Actual Temp'
         value_template: '{{ ((states.sensor.octoprint_actual_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-        unit_of_measurement: "°C"
       bed_temp:
         friendly_name: "Bed Actual Temp"
         value_template: '{{ ((states.sensor.octoprint_actual_bed_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-        unit_of_measurement: "°C"
       hotend_target:
         friendly_name: 'Hotend Target Temp'
         value_template: '{{ ((states.sensor.octoprint_target_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-        unit_of_measurement: "°C"
       bed_target:
         friendly_name: "Bed Target Temp"
         value_template: '{{ ((states.sensor.octoprint_target_bed_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-        unit_of_measurement: "°C"
