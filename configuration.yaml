@@ -26,11 +26,8 @@ config:
 # Enables Homeassistant Cloud Component
 cloud:
 
-#enables dialogflow for responsive tts/assistant
-#dialogflow:
-
-#intent_script: !include_dir_merge_list intents/
 rest_command:
+#Connecto Octopi to Printer
   octopi_connect:
     url: 'http://192.168.1.34/api/connection'
     method: post
@@ -80,6 +77,7 @@ map:
 # Track the sun
 sun:
 
+# Logger Setup
 logger:
   default: warning
   logs:
@@ -95,6 +93,7 @@ vacuum:
     username: !secret vac_user
     password: !secret vac_pass
 
+# Device Tracker Component
 device_tracker:
 
 # Unifi WAP Device Tracker
@@ -107,8 +106,6 @@ device_tracker:
   - platform: bluetooth_tracker
     new_device_defaults:
       track_new_devices: false
-
-#  - platform: bluetooth_le_tracker
 
 # Google Maps Tracker
   - platform: google_maps
@@ -179,12 +176,6 @@ notify:
     gcm_api_key: !secret gcm_api
     gcm_sender_id: !secret gcm_sender
 
-# Google Assistant Configuration
-#google_assistant:
-#  project_id: !secret google_project_id
-#  client_id: !secret google_client_id
-#  access_token: !secret google_access_token
-
 # IFTTT Component
 ifttt:
   key: !secret ifttt_key
@@ -196,11 +187,13 @@ media_player:
     name: Living Room TV
     port: 8080
 
+#Octoprint Component
 octoprint:
   host: 192.168.1.34
   api_key: !secret octoprint_api
   bed: true
   number_of_tools: 1
+
 # Google Component
 google:
   client_id: !secret client_id
@@ -242,7 +235,7 @@ panel_iframe:
     url: 'http://192.168.1.22:1880/'
 
 input_select:
-# Input Select for extended people status
+# Input Select for Jessica
   jessica_status_dropdown:
     name: Jessica
     options:
@@ -252,6 +245,7 @@ input_select:
       - Away
       - Extended Away
 
+#Input Select for Tommy
   tommy_status_dropdown:
     name: Tommy
     options:
@@ -261,6 +255,7 @@ input_select:
       - Away
       - Extended Away
 
+#Input Select from Lexi
   lexi_status_dropdown:
     name: Lexi
     options:
@@ -286,7 +281,7 @@ zone:
     icon: mdi:worker
 
 switch:
-   #TV Backlight power
+#TV Backlight power
   - platform: mqtt
     name: "TV Lights Power"
     command_topic: "cmnd/tvlights/power"
@@ -296,6 +291,7 @@ switch:
     payload_off: "OFF"
     retain: true
 
+#Master Bedroom Fan Switch
   - platform: mqtt
     name: "Master Bedroom Fan"
     command_topic: "cmnd/master_bedroom/power"
@@ -305,6 +301,7 @@ switch:
     payload_off: "OFF"
     retain: true
 
+#3D Printer Power
   - platform: mqtt
     name: "3D Printer Power"
     command_topic: "cmnd/3dprinter/power"
@@ -313,6 +310,7 @@ switch:
     payload_on: "ON"
     payload_off: "OFF"
     retain: true
+
 #Dummy MQTT switch to disable morning routine after running once
   - platform: mqtt
     name: "Morning Alert"
@@ -333,6 +331,7 @@ variable:
       name: "Last Motion"
 
 cover:
+#Garage Door Cover
   - platform: mqtt
     name: "garage_door"
     state_topic: "sensor/garage/state1"
@@ -346,6 +345,7 @@ cover:
     retain: false
 
 calendar:
+#Todoist Calendar
   - platform: todoist
     token: !secret todoist_API
     custom_projects:

@@ -67,3 +67,31 @@
        data_template:
          message: "Take out the Recycling"
          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+
+# 3D Printer Job 50% Complete
+  - alias: 3D Printer Job 50% Complete
+    trigger:
+     - platform: numeric_state
+       entity_id: sensor.octoprint_job_percentage
+       above: 50
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "3D Print job is 50% complete!"
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+          data:
+           tag: '3D print job is 50% complete!'
+
+# 3D Printer Job Completed
+  - alias: 3D Printer Job Complete
+    trigger:
+     - platform: numeric_state
+       entity_id: sensor.octoprint_job_percentage
+       above: 99.9
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "3D Print job is complete!"
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+          data:
+           tag: '3D print job is complete!'

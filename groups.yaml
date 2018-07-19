@@ -89,6 +89,7 @@
       - sensor.last_boot
       - sensor.since_last_boot
 
+# 3D Printer Group
   octoprint:
     name: 3D Printer Status
     entities:

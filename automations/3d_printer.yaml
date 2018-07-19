@@ -7,4 +7,22 @@
       from: 'off'
       to: 'on'
     action:
-      service: rest_command.octopi_connect
+      - delay: '00:00:45'
+      - service: rest_command.octopi_connect
+
+  - alias: '3D Printer is left on'
+    trigger:
+    - platform: state
+      entity_id: sensor.octoprint_current_state
+      to: 'unavailable'
+      for:
+        minutes: 15
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.3d_printer_power
+          state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.3d_printer_power

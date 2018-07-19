@@ -1,3 +1,4 @@
+#Wunderground Weather Alert Notification
   notifyonwxalert:
     sequence:
         ## Dismiss any current alert so the UI isn't filled 
@@ -16,6 +17,7 @@
           message: '{{ states.sensor.pws_alerts.attributes.Message }}'
           title: '{{ states.sensor.pws_alerts.attributes.Description }}'
 
+#Construct Morning Greeting
   morning_greeting:
     sequence:
       - service: tts.google_say
@@ -48,19 +50,23 @@
             {% endif %}
             Have a Great Day!
 
-
+#Download Movie Script
   download_movie:
     alias: download_movie
     sequence:
     - service: shell_command.download_movie
       data_template:
         movie: '{{ movie }}'
+
+#Search Movie Option
   search_movie:
     alias: search_movie
     sequence:
     - service: shell_command.search_movie
       data_template:
         movie: '{{ movie }}'
+
+#Download Option Script
   download_option:
     alias: download_option
     sequence:
