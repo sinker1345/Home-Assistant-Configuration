@@ -16,31 +16,31 @@
         from: 'not_home'
         to: 'home'
     action:
-      - service: input_select.select_option
+      - service: variable.set_variable
         data_template:
-          entity_id: >
+          variable: >
             {% if trigger.entity_id == 'group.tommy' %}
-              input_select.tommy_status_dropdown
+              tommy_status
             {% elif trigger.entity_id == 'group.jessica' %}
-              input_select.jessica_status_dropdown
+              jessica_status
             {% else %}
-              input_select.lexi_status_dropdown
+              lexi_status
             {% endif %}
-          option: >
+          value: >
             {% if trigger.entity_id == 'group.tommy' %}
-              {% if states.input_select.tommy_status_dropdown.state == 'Just Left' %}
+              {% if states.sensor.tommy_status.state == 'Just Left' %}
                 Home
               {% else %}
                 Just Arrived
               {% endif %}
             {% elif trigger.entity_id == 'group.jessica' %}
-              {% if states.input_select.jessica_status_dropdown.state == 'Just Left' %}
+              {% if states.sensor.jessica_status.state == 'Just Left' %}
                 Home
               {% else %}
                 Just Arrived
               {% endif %}
             {% else %}
-              {% if states.input_select.lexi_status_dropdown.state == 'Just Left' %}
+              {% if states.sensor.lexi_status.state == 'Just Left' %}
                 Home
               {% else %}
                 Just Arrived
@@ -51,50 +51,50 @@
   - alias: Mark person as home
     trigger:
       - platform: state
-        entity_id: input_select.tommy_status_dropdown
+        entity_id: sensor.tommy_status
         to: 'Just Arrived'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.jessica_status_dropdown
+        entity_id: sensor.jessica_status
         to: 'Just Arrived'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.tommy_status_dropdown
+        entity_id: sensor.tommy_status
         from: 'Just Left'
         to: 'Just Arrived'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.jessica_status_dropdown
+        entity_id: sensor.jessica_status
         from: 'Just Left'
         to: 'Just Arrived'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.lexi_status_dropdown
+        entity_id: sensor.lexi_status
         to: 'Just Arrived'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.lexi_status_dropdown
+        entity_id: sensor.lexi_status
         from: 'Just Left'
         to: 'Just Arrived'
         for:
           minutes: 10
     action:
-      - service: input_select.select_option
+      - service: variable.set_variable
         data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
-              input_select.tommy_status_dropdown
-            {% elif trigger.entity_id == 'input_select.jessica_status_dropdown' %}
-              input_select.jessica_status_dropdown
+          variable: >
+            {% if trigger.entity_id == 'sensor.tommy_status' %}
+              tommy_status
+            {% elif trigger.entity_id == 'sensor.jessica_status' %}
+              jessica_status
             {% else %}
-              input_select.lexi_status_dropdown
+              lexi_status
             {% endif %}
-          option: Home
+          value: Home
 
 # Mark a person as Just Left
   - alias: Mark person as just left
@@ -112,76 +112,76 @@
         from: 'home'
         to: 'not_home'
     action:
-      - service: input_select.select_option
+      - service: variable.set_variable
         data_template:
-          entity_id: >
+          variable: >
             {% if trigger.entity_id == 'group.tommy' %}
-              input_select.tommy_status_dropdown
+              tommy_status
             {% elif trigger.entity_id == 'group.jessica' %}
-              input_select.jessica_status_dropdown
+              jessica_status
             {% else %}
-              input_select.lexi_status_dropdown
+              lexi_status
             {% endif %}
-          option: Just Left
+          value: Just Left
 
 # Mark a person as Away
   - alias: Mark person as away
     trigger:
       - platform: state
-        entity_id: input_select.tommy_status_dropdown
+        entity_id: sensor.tommy_status
         to: 'Just Left'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.jessica_status_dropdown
+        entity_id: sensor.jessica_status
         to: 'Just Left'
         for:
           minutes: 10
       - platform: state
-        entity_id: input_select.lexi_status_dropdown
+        entity_id: sensor.lexi_status
         to: 'Just Left'
         for:
           minutes: 10
     action:
-      - service: input_select.select_option
+      - service: variable.set_variable
         data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
-              input_select.tommy_status_dropdown
-            {% elif trigger.entity_id == 'input_select.jessica_status_dropdown' %}
-              input_select.jessica_status_dropdown
+          variable: >
+            {% if trigger.entity_id == 'sensor.tommy_status' %}
+              tommy_status
+            {% elif trigger.entity_id == 'sensor.jessica_status' %}
+              jessica_status
             {% else %}
-              input_select.lexi_status_dropdown
+              lexi_status
             {% endif %}
-          option: Away
+          value: Away
 
 # Mark a person as Extended Away
   - alias: Mark person as extended away
     trigger:
       - platform: state
-        entity_id: input_select.tommy_status_dropdown
+        entity_id: sensor.tommy_status
         to: 'Away'
         for:
           hours: 24
       - platform: state
-        entity_id: input_select.jessica_status_dropdown
+        entity_id: sensor.jessica_status
         to: 'Away'
         for:
           hours: 24
       - platform: state
-        entity_id: input_select.lexi_status_dropdown
+        entity_id: sensor.lexi_status
         to: 'Away'
         for:
           hours: 24
     action:
-      - service: input_select.select_option
+      - service: variable.set_variable
         data_template:
-          entity_id: >
-            {% if trigger.entity_id == 'input_select.tommy_status_dropdown' %}
-              input_select.tommy_status_dropdown
-            {% elif trigger.entity_id == 'input_select.jessica_status_dropdown' %}
-              input_select.jessica_status_dropdown
+          variable: >
+            {% if trigger.entity_id == 'sensor.tommy_status' %}
+              tommy_status
+            {% elif trigger.entity_id == 'sensor.jessica_status' %}
+              jessica_status
             {% else %}
-              input_select.lexi_status_dropdown
+              lexi_status
             {% endif %}
-          option: Extended Away
+          value: Extended Away

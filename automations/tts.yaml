@@ -4,7 +4,7 @@
   - alias: 'Activate Morning Routine'
     trigger:
       - platform: state
-        entity_id: sensor.kitchen_motion
+        entity_id: sensor.living_room_motion_combo
         from: 'standby'
         to: 'motion detected'
     condition:

@@ -2,16 +2,16 @@
   - platform: template
     sensors: 
       tommy_status:
-        value_template: '{{ states.input_select.tommy_status_dropdown.state }}'
+        value_template: '{{ states.variable.tommy_status.state }}'
         friendly_name: 'Tommy'
 
 
       jessica_status:
-        value_template: '{{ states.input_select.jessica_status_dropdown.state }}'
+        value_template: '{{ states.variable.jessica_status.state }}'
         friendly_name: 'Jessica'
 
       lexi_status:
-        value_template: '{{ states.input_select.lexi_status_dropdown.state }}'
+        value_template: '{{ states.variable.lexi_status.state }}'
         friendly_name: 'Lexi'
 
 #Template sensor checks eventghost (via MQTT) and Kodi to determine if HTPC is in use

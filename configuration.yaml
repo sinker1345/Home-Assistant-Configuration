@@ -234,37 +234,6 @@ panel_iframe:
     icon: 'mdi:shuffle-variant'
     url: 'http://192.168.1.22:1880/'
 
-input_select:
-# Input Select for Jessica
-  jessica_status_dropdown:
-    name: Jessica
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-
-#Input Select for Tommy
-  tommy_status_dropdown:
-    name: Tommy
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-
-#Input Select from Lexi
-  lexi_status_dropdown:
-    name: Lexi
-    options:
-      - Home
-      - Just Arrived
-      - Just Left
-      - Away
-      - Extended Away
-
 zone:
 # Jessica Work Zone
 #  - name: Jessica Work
@@ -329,6 +298,30 @@ variable:
     attributes:
       icon: mdi:map-marker
       name: "Last Motion"
+
+  tommy_status:
+    name: tommy status
+    value: 'Unknown'
+    restore: true
+    attributes:
+      icon: mdi:map-marker
+      name: "tommy status"
+
+  jessica_status:
+    name: jessica status
+    value: 'Unknown'
+    restore: true
+    attributes:
+      icon: mdi:map-marker
+      name: "jessica status"
+
+  lexi_status:
+    name: lexi status
+    value: 'Unknown'
+    restore: true
+    attributes:
+      icon: mdi:map-marker
+      name: "lexi status"
 
 cover:
 #Garage Door Cover
