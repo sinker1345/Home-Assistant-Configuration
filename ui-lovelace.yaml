@@ -19,6 +19,7 @@ views:
           - sensor.lexi_status
         state_filter:
           - 'Home'
+          - 'Just Arrived'
         card:
           type: glance
           title: People that are home
@@ -30,6 +31,8 @@ views:
           - sensor.lexi_status
         state_filter:
           - 'Away'
+          - 'Just Left'
+          - 'Extended Away'
         show_empty: false
         card:
           type: glance

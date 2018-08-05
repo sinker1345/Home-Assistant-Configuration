@@ -178,3 +178,12 @@
 
   sensor.octoprint_actual_tool0_temp:
     hidden: true
+
+  variable.jessica_status:
+    hidden: true
+
+  variable.lexi_status:
+    hidden: true
+
+  variable.tommy_status:
+    hidden: true

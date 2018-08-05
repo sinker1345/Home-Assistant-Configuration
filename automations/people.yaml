@@ -47,6 +47,7 @@
               {% endif %}
             {% endif %}
 
+
 # Mark a person as Home
   - alias: Mark person as home
     trigger:
@@ -96,6 +97,7 @@
             {% endif %}
           value: Home
 
+
 # Mark a person as Just Left
   - alias: Mark person as just left
     trigger:
@@ -123,6 +125,7 @@
               lexi_status
             {% endif %}
           value: Just Left
+
 
 # Mark a person as Away
   - alias: Mark person as away
@@ -155,6 +158,7 @@
             {% endif %}
           value: Away
 
+
 # Mark a person as Extended Away
   - alias: Mark person as extended away
     trigger:
@@ -185,3 +189,38 @@
               lexi_status
             {% endif %}
           value: Extended Away
+
+  - alias: update people on restart
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - delay:
+          seconds: 30
+      - service: variable.set_variable
+        data:
+          variable: tommy_status
+          value_template: >
+            {% if states.group.tommy.state == "home" %} 
+              Home
+            {% else %}
+              Away
+            {% endif %}
+      - service: variable.set_variable
+        data:
+          variable: jessica_status
+          value_template: >
+            {% if states.group.jessica.state == "home" %} 
+              Home
+            {% else %}
+              Away
+            {% endif %}
+      - service: variable.set_variable
+        data:
+          variable: lexi_status
+          value_template: >
+            {% if states.group.lexi.state == "home" %} 
+              Home
+            {% else %}
+              Away
+            {% endif %}

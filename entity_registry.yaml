@@ -9,12 +9,12 @@ media_player.pixel_2_xl:
   platform: plex
   unique_id: 7cd8ebbc81d8d735-com-plexapp-android
 media_player.garage_chromecast:
-  config_entry_id:
+  config_entry_id: cfb378ad85e14afc980261b79a208d19
   name:
   platform: cast
   unique_id: c6a7a98a-0b0b-2240-9b8c-8d9fb2fd90ad
 media_player.kitchen_speaker:
-  config_entry_id:
+  config_entry_id: cfb378ad85e14afc980261b79a208d19
   name:
   platform: cast
   unique_id: feaa6434-21a4-4695-6c41-0e356d424074
@@ -139,12 +139,12 @@ media_player.chrome_2:
   platform: plex
   unique_id: afda6e8iueorsva7cycaxfl1
 media_player.googlehome3446:
-  config_entry_id:
+  config_entry_id: cfb378ad85e14afc980261b79a208d19
   name:
   platform: cast
   unique_id: 2b82b390-ee9d-63b1-d5ab-977565d962df
 media_player.downstairs:
-  config_entry_id:
+  config_entry_id: cfb378ad85e14afc980261b79a208d19
   name:
   platform: cast
   unique_id: 4cc14a96-5757-408c-95fa-7192655cf633
@@ -163,3 +163,8 @@ media_player.chrome_5:
   name:
   platform: plex
   unique_id: cwaod36p2zlggulboc1dsk4x
+media_player.chrome_6:
+  config_entry_id:
+  name:
+  platform: plex
+  unique_id: 4wkqj610emf6lh2dj4ausxnj

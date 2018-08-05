@@ -254,7 +254,7 @@ switch:
   - platform: mqtt
     name: "TV Lights Power"
     command_topic: "cmnd/tvlights/power"
-    state_topic: "stat/tvlights/POWER"
+    state_topic: "stat/tvlights/POWER1"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -301,7 +301,6 @@ variable:
 
   tommy_status:
     name: tommy status
-    value: 'Unknown'
     restore: true
     attributes:
       icon: mdi:map-marker
@@ -309,7 +308,6 @@ variable:
 
   jessica_status:
     name: jessica status
-    value: 'Unknown'
     restore: true
     attributes:
       icon: mdi:map-marker
@@ -317,7 +315,6 @@ variable:
 
   lexi_status:
     name: lexi status
-    value: 'Unknown'
     restore: true
     attributes:
       icon: mdi:map-marker
