@@ -112,6 +112,11 @@ device_tracker:
     username: !secret google_maps_user
     password: !secret google_maps_password
 
+  - platform: nmap_tracker
+    hosts: !secret network
+    exclude:
+     - !secret hass_ip
+    interval_seconds: 30
 # Text to speech
 tts:
   - platform: google

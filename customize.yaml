@@ -187,3 +187,117 @@
 
   variable.tommy_status:
     hidden: true
+
+  device_tracker.802aa83e3d97:
+    hidden: true
+
+  device_tracker.couchpotatohome:
+    hidden: true
+
+  device_tracker.freenashome:
+    hidden: true
+
+  device_tracker.obitalkhome:
+    hidden: true
+
+  device_tracker.ombihome:
+    hidden: true
+
+  device_tracker.owncloudhome:
+    hidden: true
+
+  device_tracker.pfsensehome:
+    hidden: true
+
+  device_tracker.plexhome:
+    hidden: true
+
+  device_tracker.proxmoxhome:
+    hidden: true
+
+  device_tracker.sabnzbdhome:
+    hidden: true
+
+  device_tracker.sonarrhome:
+    hidden: true
+
+  device_tracker.torrenthome:
+    hidden: true
+
+  device_tracker.tvheadendhome:
+    hidden: true
+
+  device_tracker.unifiaphome:
+    hidden: true
+
+  device_tracker.unifihome:
+    hidden: true
+
+  device_tracker.xboxonehome:
+    hidden: true
+
+  device_tracker.7ced8d8a9fbe:
+    hidden: true
+
+  device_tracker.0403d6daf0ae:
+    hidden: true
+
+  device_tracker.280dfcf53162:
+    hidden: true
+
+  sensor.guestap:
+    icon: mdi:desktop-classic
+
+  sensor.radarr:
+    icon: mdi:desktop-classic
+
+  sensor.freenas:
+    icon: mdi:desktop-classic
+
+  sensor.obitalk:
+    icon: mdi:desktop-classic
+
+  sensor.ombi:
+    icon: mdi:desktop-classic
+
+  sensor.owncloud:
+    icon: mdi:desktop-classic
+
+  sensor.pfsense:
+    icon: mdi:desktop-classic
+
+  sensor.plexserver:
+    icon: mdi:desktop-classic
+
+  sensor.proxmox:
+    icon: mdi:desktop-classic
+
+  sensor.sabnzbd:
+    icon: mdi:desktop-classic
+
+  sensor.sonarr:
+    icon: mdi:desktop-classic
+
+  sensor.tvheadend:
+    icon: mdi:desktop-classic
+
+  sensor.torrent:
+    icon: mdi:desktop-classic
+
+  sensor.unifiap:
+    icon: mdi:desktop-classic
+
+  sensor.unificontroller:
+    icon: mdi:desktop-classic
+
+  sensor.xboxone:
+    icon: mdi:xbox
+
+  sensor.xbox360:
+    icon: mdi:xbox
+
+  sensor.switch:
+    icon: mdi:nintendo-switch
+
+  sensor.ps3:
+    icon: mdi:playstation

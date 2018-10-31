@@ -50,6 +50,15 @@
       - sensor.living_room_motion_combo
       - sensor.glances
 
+# Gaming Systems Group
+  gaming_systems:
+    name: Gaming Systems
+    entities:
+      - sensor.xboxone
+      - sensor.xbox360
+      - sensor.ps3
+      - sensor.switch
+
 #Living Room Lights
   living_room_tv_lights:
     name: Living Room TV Lights
@@ -103,6 +112,25 @@
       - sensor.server_ups_nominal_real_power
       - sensor.server_ups_selftest_result
 
+# Services up/down Group
+  network_hidden:
+    name: Network
+    entities:
+      - sensor.guestap
+      - sensor.radarr
+      - sensor.freenas
+      - sensor.obitalk
+      - sensor.ombi
+      - sensor.owncloud
+      - sensor.pfsense
+      - sensor.plexserver
+      - sensor.proxmox
+      - sensor.sabnzbd
+      - sensor.sonarr
+      - sensor.tvheadend
+      - sensor.torrent
+      - sensor.unifiap
+      - sensor.unificontroller
 
 # 3D Printer Group
   octoprint:
@@ -161,7 +189,7 @@
       - variable.last_motion
       - sensor.glances
 
-#Downstairs View
+#Common Area View
   common_area_view:
     name: Common Areas
     view: yes
@@ -177,6 +205,7 @@
 #      - cover.garage_door
       - vacuum.bob
       - group.octoprint
+      - group.gaming_systems
 
 #Upstairs View
   bedrooms_view:
@@ -221,6 +250,7 @@
       - media_player.living_room_tv
       - group.living_room_tv_lights
       - media_player.googlehome3446
+      - group.gaming_systems
 
 #Master Bedroom View
   master_bedroom:
