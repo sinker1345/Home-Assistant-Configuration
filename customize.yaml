@@ -47,20 +47,20 @@
   sensor.htpc_idle:
     hidden: true
 
-  sensor.downstairs_feels_like:
-    friendly_name: Downstairs Feels Like
+  sensor.common_area_feels_like:
+    friendly_name: Common Area Feels Like
 
   sensor.max_sensor:
     hidden: true
 
-  sensor.downstairs_temperature:
-    friendly_name: Downstairs Temperature
+  sensor.common_area_temperature:
+    friendly_name: Common Area Temperature
 
-  sensor.downstairs_humidity:
-    friendly_name: Downstairs Humidity
+  sensor.common_area_humidity:
+    friendly_name: Common Area Humidity
     icon: mdi:water-percent
 
-  sensor.downstairs_motion:
+  sensor.common_area_motion:
     icon: mdi:walk
 
   sensor.living_room_motion:
@@ -84,8 +84,8 @@
   sensor.kitchen_motion:
     icon: mdi:walk
   
-  sensor.downstairs_light_level:
-    friendly_name: Downstairs Light Level
+  sensor.common_area_light_level:
+    friendly_name: Common Area Light Level
 
   variable.last_motion:
     icon: mdi:walk
@@ -149,9 +149,9 @@
   sensor.garage_motion:
     icon: mdi:walk
 
-  cover.garage_door:
-    device_class: garage
-    friendly_name: Garage Door
+#  cover.garage_door:
+#    device_class: garage
+#    friendly_name: Garage Door
 
   sensor.dark_sky_daytime_high_temperature:
     hidden: true
