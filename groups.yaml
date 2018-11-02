@@ -116,21 +116,40 @@
   network_hidden:
     name: Network
     entities:
-      - sensor.guestap
-      - sensor.radarr
+      - sensor.pfsense
       - sensor.freenas
+      - sensor.proxmox
+      - sensor.guestap
+      - sensor.unifiap
       - sensor.obitalk
       - sensor.ombi
       - sensor.owncloud
-      - sensor.pfsense
       - sensor.plexserver
-      - sensor.proxmox
+      - sensor.radarr
       - sensor.sabnzbd
       - sensor.sonarr
-      - sensor.tvheadend
       - sensor.torrent
-      - sensor.unifiap
+      - sensor.tvheadend
       - sensor.unificontroller
+
+# Weblink Group
+  links:
+    name: Links
+    entities:
+      - weblink.router
+      - weblink.nas_file_server
+      - weblink.application_server
+      - weblink.obitalk_phone_service
+      - weblink.octoprint
+      - weblink.ombi
+      - weblink.own_cloud
+      - weblink.plex
+      - weblink.radarr
+      - weblink.sabnzbd
+      - weblink.sonarr
+      - weblink.transmission
+      - weblink.tvheadend
+      - weblink.unifi_controller_wireless_controller
 
 # 3D Printer Group
   octoprint:

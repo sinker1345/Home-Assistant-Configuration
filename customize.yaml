@@ -246,49 +246,49 @@
     hidden: true
 
   sensor.guestap:
-    icon: mdi:desktop-classic
+    icon: mdi:router-wireless
 
   sensor.radarr:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.freenas:
-    icon: mdi:desktop-classic
+    icon: mdi:server-network
 
   sensor.obitalk:
-    icon: mdi:desktop-classic
+    icon: mdi:server-network
 
   sensor.ombi:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.owncloud:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.pfsense:
-    icon: mdi:desktop-classic
+    icon: mdi:router-wireless
 
   sensor.plexserver:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.proxmox:
-    icon: mdi:desktop-classic
+    icon: mdi:server-network
 
   sensor.sabnzbd:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.sonarr:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.tvheadend:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.torrent:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.unifiap:
-    icon: mdi:desktop-classic
+    icon: mdi:router-wireless
 
   sensor.unificontroller:
-    icon: mdi:desktop-classic
+    icon: mdi:server
 
   sensor.xboxone:
     icon: mdi:xbox

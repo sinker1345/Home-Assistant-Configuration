@@ -9,13 +9,13 @@
           notification_id: "wxalert"
         ## Create a new persistant notification in the UI for a new alert
       - service_template: >
-          {% if states.sensor.pws_alerts.attributes.Message %}
+          {% if states.sensor.pws_alerts_2.attributes.Message %}
           persistent_notification.create
           {% endif %}
         data_template:
           notification_id: "wxalert"
-          message: '{{ states.sensor.pws_alerts.attributes.Message }}'
-          title: '{{ states.sensor.pws_alerts.attributes.Description }}'
+          message: '{{ states.sensor.pws_alerts_2.attributes.Message }}'
+          title: '{{ states.sensor.pws_alerts_2.attributes.Description }}'
 
 #Construct Morning Greeting
   morning_greeting:

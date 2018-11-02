@@ -112,11 +112,15 @@ device_tracker:
     username: !secret google_maps_user
     password: !secret google_maps_password
 
+# NMAP Tracker
   - platform: nmap_tracker
     hosts: !secret network
     exclude:
      - !secret hass_ip
-    interval_seconds: 30
+    scan_options: " --privileged -sP "
+    home_interval: 5
+    interval_seconds: 60
+
 # Text to speech
 tts:
   - platform: google
@@ -324,6 +328,51 @@ variable:
     attributes:
       icon: mdi:map-marker
       name: "lexi status"
+
+weblink:
+  entities:
+    - name: Router
+      url: !secret router_url
+      icon: mdi:router-wireless
+    - name: NAS (File Server)
+      url: !secret freenas_url
+      icon: mdi:server-network
+    - name: Application Server
+      url: !secret proxmox_url
+      icon: mdi:server-network
+    - name: Unifi Controller (Wireless Controller)
+      url: !secret unifi_controller_url
+      icon: mdi:server
+    - name: Plex
+      url: !secret plex_url
+      icon: mdi:server
+    - name: Ombi
+      url: !secret ombi_url
+      icon: mdi:server
+    - name: TvHeadend
+      url: !secret tvheadend_url
+      icon: mdi:server
+    - name: Own Cloud
+      url: !secret owncloud_url
+      icon: mdi:server
+    - name: Transmission
+      url: !secret transmission_url
+      icon: mdi:server
+    - name: SabNZBD
+      url: !secret sabnzbd_url
+      icon: mdi:server
+    - name: Sonarr
+      url: !secret sonarr_url
+      icon: mdi:server
+    - name: Radarr
+      url: !secret radarr_url
+      icon: mdi:server
+    - name: OctoPrint
+      url: !secret octoprint_url
+      icon: mdi:server
+    - name: Obitalk (Phone service)
+      url: !secret obitalk_url
+      icon: mdi:server
 
 #cover:
 #Garage Door Cover
