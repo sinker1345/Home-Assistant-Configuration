@@ -301,3 +301,33 @@
 
   sensor.ps3:
     icon: mdi:playstation
+
+  group.Lexi:
+    hidden: true
+
+  group.Jessica:
+    hidden: true
+
+  group.Tommy:
+    hidden: true
+
+  device_tracker.5c77762568a1:
+    hidden: true
+
+  device_tracker.galaxy_note8:
+    hidden: true
+
+  device_tracker.galaxynote8:
+    hidden: true
+
+  device_tracker.google_maps_104723974144441113874:
+    hidden: true
+
+  device_tracker.google_maps_105472855536836656633:
+    hidden: true
+
+  device_tracker.pixel_2_xl:
+    hidden: true
+
+  device_tracker.b4f7a1e3c6fa:
+    hidden: true
