@@ -331,3 +331,6 @@
 
   device_tracker.b4f7a1e3c6fa:
     hidden: true
+
+  sensor.ups:
+    friendly_name: UPS
