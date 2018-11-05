@@ -334,3 +334,9 @@
 
   sensor.ups:
     friendly_name: UPS
+
+  device_tracker.xboxone:
+    hidden: true
+
+  sensor.lexixboxone:
+    icon: mdi:xbox

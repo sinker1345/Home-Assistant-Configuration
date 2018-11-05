@@ -211,3 +211,6 @@
       ps3:
         friendly_name: 'Playstation 3'
         value_template: "{{ 'Online' if is_state('device_tracker.280dfcf53162', 'home' ) else 'Offline' }}"
+      lexixboxone:
+        friendly_name: 'Lexi Xbox One'
+        value_template: "{{ 'Online' if is_state('device_tracker.xboxone', 'home' ) else 'Offline' }}"

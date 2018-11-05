@@ -66,6 +66,7 @@
       - sensor.xbox360
       - sensor.ps3
       - sensor.switch
+      - sensor.lexixboxone
 
 #Living Room Lights
   living_room_tv_lights:
