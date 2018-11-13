@@ -1,7 +1,8 @@
 # This (trigger) has to happen, while condition(s) are true, to do stuff (action)
 
 # Check if Lexi is On XBox
-  - alias: Is Lexi on Xbox
+  - id: "123456123456789"
+    alias: Is Lexi on Xbox
     trigger:
      - platform: state
        entity_id: sensor.taylex15
@@ -16,7 +17,8 @@
            tag: 'Lexi Signed on to Xbox'
 
 # Check if Lexi Signed Off XBox
-  - alias: Is Lexi off Xbox
+  - id: "123456789456123"
+    alias: Is Lexi off Xbox
     trigger:
      - platform: state
        entity_id: sensor.taylex15
@@ -31,7 +33,8 @@
            tag: 'Lexi Signed off of Xbox'
 
 # Take Out Trash
-  - alias: 'Trash Day'
+  - id: "123456654984"
+    alias: 'Trash Day'
     trigger:
       - platform: time
         at: '00:30:00'
@@ -50,7 +53,8 @@
          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
 
 # Take Out Recycling
-  - alias: 'Recycling Day'
+  - id: "1234569874651689"
+    alias: 'Recycling Day'
     trigger:
       - platform: time
         at: '00:30:00'
@@ -69,7 +73,8 @@
          target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
 
 # 3D Printer Job 50% Complete
-  - alias: 3D Printer Job 50% Complete
+  - id: "12345665216546851"
+    alias: 3D Printer Job 50% Complete
     trigger:
      - platform: numeric_state
        entity_id: sensor.octoprint_job_percentage
@@ -83,7 +88,8 @@
            tag: '3D print job is 50% complete!'
 
 # 3D Printer Job Completed
-  - alias: 3D Printer Job Complete
+  - id: "123456654620685"
+    alias: 3D Printer Job Complete
     trigger:
      - platform: numeric_state
        entity_id: sensor.octoprint_job_percentage

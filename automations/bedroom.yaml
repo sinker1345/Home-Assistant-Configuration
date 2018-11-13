@@ -1,6 +1,7 @@
 # This (trigger) has to happen, while condition(s) are true, to do stuff (action)
 
-  - alias: "Turn on Bedroom fan"
+  - id: "1234560"
+    alias: "Turn on Bedroom fan"
     trigger:
       - platform: state
         entity_id: sensor.master_bed_room_motion
@@ -19,7 +20,8 @@
         data:
           entity_id: switch.master_bedroom_fan
 
-  - alias: "Turn off Bedroom fan Weekday"
+  - id: "12345600"
+    alias: "Turn off Bedroom fan Weekday"
     trigger:
       - platform: time
         at: '08:00:00'
@@ -41,7 +43,8 @@
         data:
           entity_id: switch.master_bedroom_fan
 
-  - alias: "Turn off Bedroom fan Weekend"
+  - id: "123456000"
+    alias: "Turn off Bedroom fan Weekend"
     trigger:
       - platform: time
         at: '09:00:00'

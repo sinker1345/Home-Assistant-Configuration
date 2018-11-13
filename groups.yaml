@@ -3,8 +3,8 @@
 #Jessica Device Tracker Group
   Jessica:
     entities:
-      - device_tracker.galaxy_note8
-      - device_tracker.galaxynote8
+      - device_tracker.galaxy_note9
+      - device_tracker.galaxynote9
       - device_tracker.google_maps_104723974144441113874
 
 # Tommy Device Tracker Group

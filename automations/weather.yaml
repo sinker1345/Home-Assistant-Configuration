@@ -25,7 +25,14 @@
     action:
       - service: notify.google_push
         data_template:
-          message: "NWS: {{ states.sensor.pws_alerts_2.attributes.Description }}"
+          message: >-
+            {% if state_attr('sensor.pws_alerts_2', 'Description') %}
+             "{{ state_attr('sensor.pws_alerts_2', 'Description') }}"
+            {% elif state_attr('sensor.pws_alerts_2', 'Description_TOR') %}
+             "{{ state_attr('sensor.pws_alerts_2', 'Description_TOR') }}"
+            {% elif state_attr('sensor.pws_alerts_2', 'Description_TOW') %}
+             "{{ state_attr('sensor.pws_alerts_2', 'Description_TOW') }}"
+            {% endif %}
           target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
           data:
            image: !secret weather_image

@@ -10,13 +10,15 @@
     friendly_name: Tommy Bluetooth
     entity_picture: /local/tommy.jpg
 
-  device_tracker.galaxy_note8:
+  device_tracker.galaxy_note9:
     friendly_name: Jessica Bluetooth
     entity_picture: /local/jessica.jpg
+    hidden: true
 
-  device_tracker.galaxynote8:
+  device_tracker.galaxynote9:
     friendly_name: Jessica WiFi
     entity_picture: /local/jessica.jpg
+    hidden: true
 
   device_tracker.tommy_galaxy_8:
     friendly_name: Jessica OwnTracks
@@ -166,6 +168,7 @@
   device_tracker.5c77762568a1:
     entity_picture: /local/lexi.jpg
     friendly_name: Lexi WiFi
+    hidden: true
 
   sensor.octoprint_target_bed_temp:
     hidden: true
@@ -309,15 +312,6 @@
     hidden: true
 
   group.Tommy:
-    hidden: true
-
-  device_tracker.5c77762568a1:
-    hidden: true
-
-  device_tracker.galaxy_note8:
-    hidden: true
-
-  device_tracker.galaxynote8:
     hidden: true
 
   device_tracker.google_maps_104723974144441113874:

@@ -1,7 +1,8 @@
 # This (trigger) has to happen, while condition(s) are true, to do stuff (action)
 
 # Check for Idle status on HTPC
-  - alias: Match TV Lights to HTPC State
+  - id: "1234560101"
+    alias: Match TV Lights to HTPC State
     trigger:
      - platform: state
        entity_id: sensor.glances
@@ -15,7 +16,8 @@
         entity_id: switch.tv_lights_power
 
 # Update Last Motion variable
-  - alias: "Update Last Motion"
+  - id: "12345601010101"
+    alias: "Update Last Motion"
     trigger:
       - platform: state
         entity_id:  binary_sensor.living_room_motion, binary_sensor.dining_room_motion, binary_sensor.kitchen_motion
@@ -34,7 +36,8 @@
           value: "{{ trigger.to_state.attributes.friendly_name }}"
 
 #Reset morning greeting dummy switch
-  - alias: 'Reset Morning Routine Switch'
+  - id: "010101123456"
+    alias: 'Reset Morning Routine Switch'
     trigger:
       platform: time
       at: '01:00:30'

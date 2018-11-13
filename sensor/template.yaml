@@ -189,7 +189,7 @@
         value_template: "{{ 'Online' if is_state('device_tracker.sonarrhome', 'home') else 'Offline' }}"
       tvheadend:
         friendly_name: 'TV Head End'
-        value_template: "{{ 'Online' if is_state('device_tracker.tvheadend', 'home') else 'Offline' }}"
+        value_template: "{{ 'Online' if is_state('device_tracker.tvheadendhome', 'home') else 'Offline' }}"
       torrent:
         friendly_name: 'Transmission'
         value_template: "{{ 'Online' if is_state('device_tracker.torrenthome', 'home') else 'Offline' }}"
