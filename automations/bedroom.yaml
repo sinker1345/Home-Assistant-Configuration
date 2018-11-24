@@ -15,6 +15,9 @@
         - condition: state
           entity_id: switch.master_bedroom_fan
           state: 'off'
+        - condition: template
+          value_template: "{% if states.sensor.master_bed_room_temperature.state | float >= 50 %} true {% endif %}"
+          
     action:
       - service: switch.turn_on
         data:
@@ -24,7 +27,7 @@
     alias: "Turn off Bedroom fan Weekday"
     trigger:
       - platform: time
-        at: '08:00:00'
+        at: '07:00:00'
     condition:
       condition: and
       conditions:

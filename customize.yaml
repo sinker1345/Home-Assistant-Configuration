@@ -29,6 +29,7 @@
 
   sensor.lexi_status:
     entity_picture: /local/lexi.jpg
+    hidden: true
 
   sensor.jessica_status:
     entity_picture: /local/jessica.jpg
@@ -334,3 +335,6 @@
 
   sensor.lexixboxone:
     icon: mdi:xbox
+
+  sensor.dark_sky_precip_probability:
+    hidden: true

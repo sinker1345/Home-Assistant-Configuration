@@ -15,9 +15,9 @@
       - device_tracker.google_maps_105472855536836656633
 
 #Lexi Device Tracker Group
-  Lexi:
-    entities:
-      - device_tracker.5c77762568a1
+#  Lexi:
+#    entities:
+#      - device_tracker.5c77762568a1
 
 #People Status Group
   people_status:
@@ -25,7 +25,7 @@
     entities:
       - sensor.tommy_status
       - sensor.jessica_status
-      - sensor.lexi_status
+#      - sensor.lexi_status
 
 #Master Bedroom Sensors Group
   master_bedroom_sensors_group:

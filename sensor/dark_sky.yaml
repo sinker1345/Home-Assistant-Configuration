@@ -5,3 +5,4 @@
       - temperature
       - hourly_summary
       - temperature_high
+      - precip_probability

@@ -101,3 +101,13 @@
           target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
           data:
            tag: '3D print job is complete!'
+
+  - alias: Lexi Brush Teeth
+    trigger:
+      - platform: time
+        at: '20:45:00'
+    action:
+      - service: tts.google_say
+        entity_id: media_player.downstairs
+        data:
+          message: 'Lexi, make sure to brush your teeth'
