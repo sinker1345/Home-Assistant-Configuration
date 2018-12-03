@@ -1,4 +1,4 @@
-
+#
   - alias: "Turn on Inflatable"
 #    initial_state: false
     trigger:
