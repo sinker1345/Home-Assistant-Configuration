@@ -1,5 +1,5 @@
 #
-  - alias: "Turn on Inflatable"
+  - alias: "Turn on Oustide Decorations"
 #    initial_state: false
     trigger:
       - platform: sun
@@ -14,8 +14,14 @@
       - service: switch.turn_on
         data:
           entity_id: switch.inflatables
+      - service: switch.turn_on
+        data:
+          entity_id: switch.seasonal_lights
+      - service: switch.turn_on
+        data:
+          entity_id: switch.christmas_outside_lights
 
-  - alias: "Turn off Inflatable"
+  - alias: "Turn off Outside Decorations"
 #    initial_state: false
     trigger:
       - platform: time
@@ -24,3 +30,51 @@
       - service: switch.turn_off
         data:
           entity_id: switch.inflatables
+      - service: switch.turn_on
+        data:
+          entity_id: switch.seasonal_lights
+      - service: switch.turn_on
+        data:
+          entity_id: switch.christmas_outside_lights
+
+  - alias: "Turn on Christmas Tree"
+#    initial_state: false
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-02:00:00'
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.christmas_tree_lights
+
+  - alias: "Turn off Christmas Tree"
+#    initial_state: false
+    trigger:
+      - platform: time
+        at: '23:00:00'
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.christmas_tree_lights
+
+
+  - alias: 'Christmas Eve'
+    trigger:
+      platform: template
+      value_template: '{{ now().date() | string == "2017-12-23" }}'
+    action:
+    - service: automation.turn_off
+      entity_id: automation.turn_off_outside_decorations
+    - service: automation.turn_off
+      entity_id: automation.turn_off_christmas_tree
+
+  - alias: 'After Christmas'
+    trigger:
+      platform: template
+      value_template: '{{ now().date() | string == "2017-12-25" }}'
+    action:
+    - service: automation.turn_on
+      entity_id: automation.turn_off_outside_decorations
+    - service: automation.turn_on
+      entity_id: automation.turn_off_christmas_tree
