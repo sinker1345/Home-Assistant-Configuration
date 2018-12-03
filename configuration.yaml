@@ -275,7 +275,7 @@ zone:
 switch:
 #Outside Christmas lights switch
   - platform: mqtt
-    name: "Christmas Oustide Lights"
+    name: "Christmas Outside Lights"
     command_topic: "cmnd/sonoff1/power"
     state_topic: "stat/sonoff1/POWER"
     qos: 1

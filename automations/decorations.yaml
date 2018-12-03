@@ -30,10 +30,10 @@
       - service: switch.turn_off
         data:
           entity_id: switch.inflatables
-      - service: switch.turn_on
+      - service: switch.turn_off
         data:
           entity_id: switch.seasonal_lights
-      - service: switch.turn_on
+      - service: switch.turn_off
         data:
           entity_id: switch.christmas_outside_lights
 
