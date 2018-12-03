@@ -338,4 +338,6 @@
 
   sensor.dark_sky_precip_probability:
     hidden: true
-#
+
+  sensor.dining_room_motion_2:
+    hidden: true
