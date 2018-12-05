@@ -22,8 +22,7 @@
 #          state: 'open'
 #    action:
 #      - service: cover.close_cover
-#        data:
-#          entity_id: cover.garage_door
+#        entity_id: cover.garage_door
 
 #  - alias: "Close Garage Door on Weekend"
 #    trigger:
@@ -48,5 +47,4 @@
 #          state: 'open'
 #    action:
 #      - service: cover.close_cover
-#        data:
-#          entity_id: cover.garage_door
+#        entity_id: cover.garage_door
