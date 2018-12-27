@@ -153,8 +153,6 @@ recorder:
       - weblink
       - variable
     entities:
-      - input_select.jessica_status_dropdown
-      - input_select.tommy_status_dropdown
       - sensor.time
       - sensor.ups
       - sensor.pws_wind_mph_2
@@ -322,6 +320,10 @@ switch:
     payload_off: 'off'
     retain: true
 
+light:
+  - platform: tplink
+    host: 192.168.1.219
+
 variable:
 # Last Motion Variable
   last_motion:
@@ -421,6 +423,16 @@ calendar:
         due_date_days: 0
       - name: 'Due This Week'
         due_date_days: 7
+
+#input select
+input_select:
+  which_holiday:
+    name: Which Holiday Decorations are Put Up
+    options:
+      - None
+      - Christmas
+      - Halloween
+      - Thanksgiving
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/

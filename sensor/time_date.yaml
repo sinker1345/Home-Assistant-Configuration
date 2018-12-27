@@ -1,2 +1,52 @@
 # Time/Date component
   - platform: time_date
+  
+  - platform: template
+    sensors:
+      day:
+        value_template: >-
+          {% if now().weekday() == 0 %}
+            Monday 
+          {% elif now().weekday() == 1 %}
+            Tuesday
+          {% elif now().weekday() == 2 %}
+            Wensday
+          {% elif now().weekday() == 3 %}
+            Thursday
+          {% elif now().weekday() == 4 %}
+            Friday
+          {% elif now().weekday() == 5 %}
+            Saturday
+          {% elif now().weekday() == 6 %}
+            Sunday
+          {% endif %}
+
+  - platform: template
+    sensors:
+      month:
+        value_template: >-
+          {% if now().month == 1 %}
+            January
+          {% elif now().month == 2 %}
+            Febuary
+          {% elif now().month == 3 %}
+            March
+          {% elif now().month == 4 %}
+            April
+          {% elif now().month == 5 %}
+            May
+          {% elif now().month == 6 %}
+            June
+          {% elif now().month == 7 %}
+            July
+          {% elif now().month == 8 %}
+            August 
+          {% elif now().month == 9 %}
+            September
+          {% elif now().month == 10 %}
+            October
+          {% elif now().month == 11 %}
+            November
+          {% elif now().month == 12 %}
+            December
+          {% endif %}

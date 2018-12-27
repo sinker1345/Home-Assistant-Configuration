@@ -217,31 +217,62 @@
       - variable.last_motion
       - sensor.glances
 
+#All switches/Lights View
+  default_view:
+    name: Switches/Lights
+    view: yes
+    entities:
+      - switch.3d_printer_power
+      - switch.christmas_outside_lights
+      - switch.christmas_tree_lights
+      - switch.inflatables
+      - switch.master_bedroom_fan
+      - switch.morning_alert
+      - switch.seasonal_lights
+      - switch.tv_lights_power
+      - light.bar_light
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
+
 #Common Area View
   common_area_view:
     name: Common Areas
     view: yes
     entities:
       - group.common_area_sensors
-      - group.garage_sensors
       - media_player.living_room_tv
-      - media_player.garage_chromecast
       - media_player.kitchen_speaker
       - media_player.googlehome3446
       - media_player.downstairs
       - group.living_room_tv_lights
-#      - cover.garage_door
       - vacuum.bob
-      - group.octoprint
       - group.gaming_systems
+      - sensor.ups
+      - sensor.plex
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
-#Upstairs View
+#Bedrooms View
   bedrooms_view:
     name: Bedrooms
     view: yes
     entities:
       - switch.master_bedroom_fan
       - group.master_bedroom_sensors_group
+      - media_player.master_bath
+      - media_player.roku_guest_bedroom
+      - sensor.lexixboxone
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
 #Dining Room View
   dining_room:
@@ -249,7 +280,11 @@
     view: yes
     entities:
       - group.dining_room_sensors
-      - vacuum.bob
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
 #Garage View
   garage:
@@ -260,6 +295,11 @@
       - group.garage_sensors
 #      - cover.garage_door
       - group.octoprint
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
 #Kitchen View
   Kitchen:
@@ -268,6 +308,12 @@
     entities:
       - group.kitchen_sensors
       - media_player.kitchen_speaker
+      - light.bar_light
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
 #Living Room View
   Living_Room:
@@ -279,6 +325,13 @@
       - group.living_room_tv_lights
       - media_player.googlehome3446
       - group.gaming_systems
+      - light.bar_light
+      - sensor.plex
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
 #Master Bedroom View
   master_bedroom:
@@ -287,16 +340,51 @@
     entities:
       - switch.master_bedroom_fan
       - group.master_bedroom_sensors_group
+      - media_player.master_bath
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
+  
+#Guest Bedroom (MIL) View
+  guest_bedroom:
+    name: Guest Bedroom
+    view: yes
+    entities:
+      - media_player.roku_guest_bedroom
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
+
+#Front Office View
+  front_office:
+    name: Front Office
+    view: yes
+    entities:
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
 
 #People View
   People:
     name: People
     view: yes
     entities:
-      - group.jessica
-      - group.tommy
       - group.people_status
-      - group.lexi
+      - sensor.taylex15
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
+      - sensor.google_travel_time__driving
+      - binary_sensor.iss
+      - binary_sensor.workday_sensor
 
 # Weather View
   weather_tab:
@@ -305,3 +393,107 @@
     entities:
       - group.daily_forecast
       - group.weather_overview
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss
+
+#Settings View
+  settings_view:
+    name: Settings
+    view: yes
+    entities:
+      - input_select.which_holiday
+
+#Status View
+  status:
+    name: Status
+    view: yes
+    entities:
+      - group.hass_status
+      - group.links
+      - group.network_hidden
+      - group.ups_group
+      - zwave.sigma_designs_uzb_zwave_usb_adapter
+      - zwave.living_room_range_extender
+      - zwave.kitchen_range_extender
+      - zwave.honeywell_unknown_type5052_id3033
+      - zwave.ge_14284_outdoor_smart_switch_2
+      - zwave.ge_14284_outdoor_smart_switch
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - sensor.speedtest_download
+      - sensor.speedtest_ping
+      - sensor.speedtest_upload
+      - binary_sensor.iss
+      - calendar.due_this_week
+      - calendar.due_today
+      - calendar.errands
+      - calendar.holidays_in_united_states
+      - calendar.inbox
+      - calendar.main
+      - calendar.movies_to_watch
+      - calendar.personal
+      - calendar.shopping
+      - calendar.work
+
+#Automations View
+  automations:
+    name: Automations/Scripts
+    view: yes
+    entities:
+      - automation.3d_printer_is_left_on
+      - automation.3d_printer_job_50_complete
+      - automation.3d_printer_job_complete
+      - automation.activate_morning_routine
+      - automation.after_christmas
+      - automation.christmas_eve
+      - automation.connect_octopi_to_printer
+      - automation.darker_theme_at_sunset
+      - automation.downstairs_unavailable
+      - automation.heal_z_wave_at_332am
+      - automation.is_lexi_off_xbox
+      - automation.is_lexi_on_xbox
+      - automation.lexi_brush_teeth
+      - automation.lighter_theme_at_sunrise
+      - automation.mark_person_as_away
+      - automation.mark_person_as_extended_away
+      - automation.mark_person_as_home
+      - automation.mark_person_as_just_arrived
+      - automation.mark_person_as_just_left
+      - automation.match_tv_lights_to_htpc_state
+      - automation.recycling_day
+      - automation.reset_morning_routine_switch
+      - automation.test_z_wave_at_230am
+      - automation.trash_day
+      - automation.tts_and_notify_weather_alert
+      - automation.turn_off_bedroom_fan_weekday
+      - automation.turn_off_bedroom_fan_weekend
+      - automation.turn_off_christmas_tree
+      - automation.turn_off_outside_decorations_christmas
+      - automation.turn_off_outside_decorations_thanksgiving
+      - automation.turn_off_outside_decorations_halloween
+      - automation.turn_on_bedroom_fan
+      - automation.turn_on_christmas_tree
+      - automation.turn_on_oustide_decorations_christmas
+      - automation.turn_on_oustide_decorations_thanksgiving
+      - automation.turn_on_oustide_decorations_halloween
+      - automation.update_last_motion
+      - automation.update_people_on_restart
+      - automation.wx_alert_notification
+      - automation.update_dowdom_sensors
+      - automation.holiday_select_automation_turn_off
+      - automation.holiday_select_automation_turn_on
+      - script.download_movie
+      - script.download_option
+      - script.morning_greeting
+      - script.notifyonwxalert
+      - script.search_movie
+      - sensor.time
+      - sensor.month
+      - sensor.day
+      - sun.sun
+      - binary_sensor.iss

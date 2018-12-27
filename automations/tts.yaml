@@ -39,6 +39,7 @@
       - service: script.morning_greeting
       - service: switch.turn_on
         entity_id: switch.morning_alert
+      - delay: '00:00:55'
       - service: media_player.turn_off
         entity_id: media_player.googlehome3446
       - service: media_player.turn_off
