@@ -320,6 +320,22 @@ switch:
     payload_off: 'off'
     retain: true
 
+#Flux Component for Lights
+  - platform: flux
+    lights:
+      - light.bar_light
+    name: Fluxer
+    start_time: '7:00'
+    stop_time: '23:00'
+    start_colortemp: 9000
+    sunset_colortemp: 3000
+    stop_colortemp: 2500
+    brightness: 200
+    disable_brightness_adjust: True
+    mode: mired
+    transition: 3
+    interval: 60
+    
 light:
   - platform: tplink
     host: 192.168.1.219

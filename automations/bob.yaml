@@ -1,0 +1,63 @@
+# turn on Bob
+  - alias: "Turn on Bob"
+    trigger:
+    - platform: time
+      at: '01:00:00'
+    - platform: webhook
+      webhook_id: turnonbob
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.day
+          state: 'Monday'
+        - condition: state
+          entity_id: sensor.day
+          state: 'Wednesday'
+        - condition: state
+          entity_id: sensor.day
+          state: 'Friday'
+        - condition: state
+          entity_id: sensor.day
+          state: 'Saturday'
+        - condition: state
+          entity_id: sensor.day
+          state: 'Sunday'
+    action:
+      - service: vacuum.turn_on
+        entity_id: vacuum.bob
+
+  - alias: "Send Bob Home"
+    trigger:
+    - platform: time
+      at: '05:00:00'
+    - platform: webhook
+      webhook_id: turnoffbob
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: vacuum.bob
+          state: 'on'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: sensor.day
+              state: 'Monday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Wednesday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Friday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Saturday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Sunday'
+
+    action:
+      - service: vacuum.return_to_base
+        entity_id: vacuum.bob
+          

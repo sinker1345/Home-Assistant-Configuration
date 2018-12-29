@@ -248,8 +248,6 @@
         entity_id: switch.inflatables
       - service: switch.turn_off
         entity_id: switch.seasonal_lights
-      - service: switch.turn_off
-        entity_id: switch.christmas_outside_lights
 
   - alias: "Turn off Outside Decorations Thanksgiving"
 #    initial_state: false
@@ -345,3 +343,20 @@
       entity_id: automation.turn_off_outside_decorations
     - service: automation.turn_on
       entity_id: automation.turn_off_christmas_tree
+
+  - alias: "turn on Back Porch Lights"
+    trigger: 
+      - platform: sun
+        event: sunset
+        offset: '-02:00:00'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.christmas_outside_lights
+
+  - alias: "turn off Back Porch Lights"
+    trigger: 
+      - platform: time
+        at: '22:00:00'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.christmas_outside_lights

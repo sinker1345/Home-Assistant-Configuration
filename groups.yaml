@@ -230,6 +230,7 @@
       - switch.morning_alert
       - switch.seasonal_lights
       - switch.tv_lights_power
+      - switch.fluxer
       - light.bar_light
       - sensor.time
       - sensor.month
@@ -487,6 +488,13 @@
       - automation.update_dowdom_sensors
       - automation.holiday_select_automation_turn_off
       - automation.holiday_select_automation_turn_on
+      - automation.turn_on_back_porch_lights
+      - automation.turn_off_back_porch_lights
+      - automation.flux_switch_on_at_startup
+      - automation.turn_on_bar_light_with_morning_automation
+      - automation.turn_off_bar_light_at_night
+      - automation.turn_on_bob
+      - automation.send_bob_home
       - script.download_movie
       - script.download_option
       - script.morning_greeting
