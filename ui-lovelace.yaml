@@ -521,46 +521,46 @@ views:
         entities:
           - type: weblink
             name: Router
-            url: 'https://pfsense.home:4443/'
+            url: !secret router_url
           - type: weblink
             name: Proxmox
-            url: 'https://192.168.1.11:8006/#v1:0:=node%2Fproxmox:4:39:::::2'
+            url: !secret proxmox_url
           - type: weblink
             name: Unifi Controller
-            url: 'https://192.168.1.21:8443/manage/account/login?redirect=%2Fmanage%2Fsite%2Fdefault%2Fdevices%2F1%2F50%2Fuap'
+            url: !secret unifi_controller_url
           - type: weblink
             name: FreeNAS
-            url: 'http://192.168.1.10/account/login/?next=/'
+            url: !secret freenas_url
           - type: weblink
             name: Plex
-            url: 'http://192.168.1.18:32400/web/index.html#'
+            url: !secret plex_url
           - type: weblink
             name: Ombi
-            url: 'http://192.168.1.16:5000/search'
+            url: !secret ombi_url
           - type: weblink
             name: TVHeadend
-            url: 'http://192.168.1.15:9981/extjs.html'
+            url: !secret tvheadend_url
           - type: weblink
             name: Own Cloud
-            url: 'https://owncloud.bell-family.cc/index.php/apps/files/'
+            url: !secret owncloud_url
           - type: weblink
             name: Transmission
-            url: 'https://192.168.1.20:12322/transmission/web/'
+            url: !secret transmission_url
           - type: weblink
             name: SabNZBD
-            url: ' http://192.168.1.12:8080/sabnzbd/'
+            url: !secret sabnzbd_url
           - type: weblink
             name: Sonarr
-            url: 'http://192.168.1.13:8989/'
+            url: !secret sonarr_url
           - type: weblink
             name: Radarr
-            url: 'http://192.168.1.14:7878/'
+            url: !secret radarr_url
           - type: weblink
             name: OctoPrint
-            url: 'https://octopi.local/'
+            url: !secret octoprint_url
           - type: weblink
             name: ObiTalk
-            url: 'http://192.168.1.33/'          
+            url: !secret obitalk_url         
   - title: Settings
     cards:
       - type: entities
