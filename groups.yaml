@@ -102,10 +102,7 @@
       - sensor.memory_use_percent
       - sensor.processor_use
       - sensor.disk_use_percent_home
-      - sensor.network_in
-      - sensor.network_out
       - sensor.last_boot
-      - sensor.since_last_boot
 
 # UPS NUT Group
   ups_group:

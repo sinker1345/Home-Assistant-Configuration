@@ -1,0 +1,4 @@
+    cards:
+      - type: light
+        entity: light.bar_light
+        name: Bar Light

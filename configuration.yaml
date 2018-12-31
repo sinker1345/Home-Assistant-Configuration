@@ -25,6 +25,13 @@ config:
 
 # Enables Homeassistant Cloud Component
 cloud:
+  google_actions:
+    filter:
+      exclude_domains:
+        - group
+        - sensor
+lovelace:
+  mode: yaml
 
 rest_command:
 #Connecto Octopi to Printer
@@ -49,6 +56,9 @@ http:
   trusted_proxies:
     - 127.0.0.1
     - 192.168.1.1
+  trusted_networks:
+    - 127.0.0.1
+    - 192.168.1.0/24
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -450,6 +460,10 @@ input_select:
       - Halloween
       - Thanksgiving
 
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky
+
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
 script: !include scripts.yaml
@@ -458,3 +472,10 @@ binary_sensor: !include_dir_merge_list binary_sensor/
 shell_command: !include shellcommand.yaml
 
 #
+custom_updater:
+  track:
+     - cards
+     - components
+     - python_scripts
+  card_urls:
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
