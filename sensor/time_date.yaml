@@ -50,3 +50,9 @@
           {% elif now().month == 12 %}
             December
           {% endif %}
+
+  - platform: template
+    sensors:
+      year:
+        value_template: >-
+          {{ now().year }}

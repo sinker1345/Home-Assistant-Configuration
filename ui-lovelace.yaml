@@ -2,16 +2,19 @@ title: House
 resources:
   - url: /local/mini-media-player-bundle.js?v=0.9.8
     type: module
-  - url: /local/tracker-card.js?v=0
+  - url: /local/tracker-card.js?v=0.1.5
     type: js
   - url: /local/dark-sky-weather-card.js?v=0
     type: js
 views:
+#Switches/Lights View
   - title: Switches/Lights
+    id: 0
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -36,11 +39,14 @@ views:
         show_header_toggle: false
         entities:
           - light.bar_light
+#Common Area View
   - title: Common Areas
+    id: 1
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
       - sensor.plex
@@ -91,31 +97,54 @@ views:
             icon: mdi:speaker-wireless
             artwork_border: true
             show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
           - type: custom:mini-media-player
             entity: media_player.kitchen_speaker
             icon: mdi:speaker-wireless
             artwork_border: true
             show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
           - type: custom:mini-media-player
             entity: media_player.googlehome3446
             icon: mdi:speaker-wireless
             artwork_border: true
             show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
           - type: custom:mini-media-player
             entity: media_player.living_room_tv
             icon: mdi:television-box
             artwork_border: true
             show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
           - type: custom:mini-media-player
             entity: media_player.chrome_3
             icon: mdi:television-box
             artwork_border: true
             show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
+#Bedroom View
   - title: Bedrooms
+    id: 2
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
       - sensor.taylex15
@@ -139,16 +168,27 @@ views:
         icon: mdi:speaker-wireless
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
       - type: custom:mini-media-player
         entity: media_player.roku_guest_bedroom
         icon: mdi:television-box
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
+#Dining Room View
   - title: Dining Room
+    id: 3
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -161,11 +201,14 @@ views:
           - sensor.dining_room_humidity
           - sensor.dining_room_light_level
           - sensor.dining_room_motion_2
+#Garage View
   - title: Garage
+    id: 4
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -198,16 +241,34 @@ views:
         show_header_toggle: false
         entities:
           - switch.3d_printer_power
-      - type: custom:mini-media-player
-        entity: media_player.garage_chromecast
-        icon: mdi:television-box
-        artwork_border: true
-        show_source: true
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-media-player
+            entity: media_player.garage_tv
+            icon: mdi:television-box
+            artwork_border: true
+            show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
+          - type: custom:mini-media-player
+            entity: media_player.garage_chromecast
+            icon: mdi:television-box
+            artwork_border: true
+            show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
+#Kitchen View
   - title: Kitchen
+    id: 5
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -225,6 +286,10 @@ views:
         icon: mdi:speaker-wireless
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
       - type: light
         entity: light.bar_light
         name: Bar Light
@@ -233,11 +298,14 @@ views:
         show_header_toggle: false
         entities:
           - light.bar_light
+#Living Room View
   - title: Living Room
+    id: 6
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
       - sensor.plex
@@ -274,21 +342,37 @@ views:
           - sensor.ps3
           - sensor.switch
           - sensor.lexixboxone
+      - type: entities
+        title: Vacuum
+        show_header_toggle: false
+        entities:
+          - vacuum.bob
       - type: custom:mini-media-player
         entity: media_player.googlehome3446
         icon: mdi:speaker-wireless
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
       - type: custom:mini-media-player
         entity: media_player.living_room_tv
         icon: mdi:television-box
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
+#Master Bedroom View
   - title: Master Bedroom
+    id: 7
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -311,11 +395,18 @@ views:
         icon: mdi:speaker-wireless
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
+#Guest Bedroom View
   - title: Guest Bedroom
+    id: 8
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -324,14 +415,23 @@ views:
         icon: mdi:television-box
         artwork_border: true
         show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
+#Front Office View
   - title: Front Office
+    id: 9
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
+#People View
   - title: People
+    id: 10
     badges:
       - sensor.time
       - sensor.day
@@ -365,15 +465,27 @@ views:
         card: 
           type: glance
           title: People That Are Away
+#Weather View
   - title: Weather
-    cards:
-      - type: weather-forecast
-        entity: weather.dark_sky
-  - title: Automations/Scripts
+    id: 11
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
+      - sun.sun
+      - binary_sensor.iss
+    cards:
+      - type: weather-forecast
+        entity: weather.dark_sky
+#Automations/Scripts View
+  - title: Automations/Scripts
+    id: 12
+    badges:
+      - sensor.time
+      - sensor.day
+      - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
     cards:
@@ -439,11 +551,14 @@ views:
           - script.morning_greeting
           - script.notifyonwxalert
           - script.search_movie
+#Status View
   - title: Status
+    id: 13
     badges:
       - sensor.time
       - sensor.day
       - sensor.month
+      - sensor.year
       - sun.sun
       - binary_sensor.iss
       - sensor.speedtest_download
@@ -560,8 +675,17 @@ views:
             url: !secret octoprint_url
           - type: weblink
             name: ObiTalk
-            url: !secret obitalk_url         
+            url: !secret obitalk_url
+#Settings View
   - title: Settings
+    id: 14
+    badges:
+      - sensor.time
+      - sensor.day
+      - sensor.month
+      - sensor.year
+      - sun.sun
+      - binary_sensor.iss
     cards:
       - type: entities
         title: Which Decorations Are Put Up

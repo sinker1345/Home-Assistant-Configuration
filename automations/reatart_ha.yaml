@@ -19,6 +19,8 @@
         entity_id: sensor.day
       - service: homeassistant.update_entity
         entity_id: sensor.month
+      - service: homeassistant.update_entity
+        entity_id: sensor.year
 
   - alias: 'FLUX Switch on at Startup'
     trigger:
