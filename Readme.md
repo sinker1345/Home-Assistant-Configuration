@@ -24,3 +24,17 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 ## Pictures
 
 ![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_1.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_2.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_3.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_4.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_5.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_6.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_7.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_8.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_9.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_10.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_11.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_12.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_13.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_14.png)
+![Default](https://raw.githubusercontent.com/sinker1345/Home-Assistant-Configuration/master/readme_pictures/Home_Assistant_page_15.png)
