@@ -93,6 +93,15 @@ views:
       - type: vertical-stack
         cards:
           - type: custom:mini-media-player
+            entity: media_player.whole_house
+            icon: mdi:speaker-wireless
+            artwork_border: true
+            show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
+          - type: custom:mini-media-player
             entity: media_player.downstairs
             icon: mdi:speaker-wireless
             artwork_border: true
@@ -452,7 +461,7 @@ views:
           - Just Arrived
         card: 
           type: glance
-          title: People at home
+          title: People At home
       - type: entity-filter
         show_empty: false
         entities:
@@ -464,7 +473,7 @@ views:
           - Just Left
         card: 
           type: glance
-          title: People That Are Away
+          title: People Not At Home
 #Weather View
   - title: Weather
     id: 11
@@ -507,13 +516,18 @@ views:
         entities:
           - entity: sensor.dark_sky_precip_probability_0
             name: Today
+            icon: mdi:weather-rainy
           - entity: sensor.dark_sky_precip_probability_1
             name: Tomorow
+            icon: mdi:weather-rainy
       - type: entities
         title: Nearest Storm Distance
         show_header_toggle: false
         entities:
           - sensor.dark_sky_nearest_storm_distance
+      - type: iframe
+        url: 'https://embed.windy.com/embed2.html?lat=30.548&lon=-87.163&zoom=9&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=30.670&detailLon=-87.179&metricWind=default&metricTemp=default&radarRange=-1'
+        aspect_ratio: 75%
 #Automations/Scripts View
   - title: Automations/Scripts
     id: 12

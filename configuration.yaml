@@ -30,6 +30,9 @@ cloud:
       exclude_domains:
         - group
         - sensor
+        - vacuum
+        - script
+
 lovelace:
   mode: yaml
 
@@ -94,6 +97,13 @@ logger:
     homeassistant.components.http.ban: warning
     urllib3.connectionpool: error
 
+custom_updater:
+  track:
+     - cards
+     - components
+     - python_scripts
+  card_urls:
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
 
 # Roomba tracker
 vacuum:
@@ -425,12 +435,3 @@ script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor/
 binary_sensor: !include_dir_merge_list binary_sensor/
 shell_command: !include shellcommand.yaml
-
-#
-custom_updater:
-  track:
-     - cards
-     - components
-     - python_scripts
-  card_urls:
-    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json

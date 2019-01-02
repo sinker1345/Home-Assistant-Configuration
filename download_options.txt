@@ -1,0 +1,1 @@
+[{"title": "Dark Phoenix", "qualityProfileId": 4, "titleSlug": "dark-phoenix-320288", "images": [{"coverType": "poster", "url": "http://image.tmdb.org/t/p/original/b8PZgPqbsIJrz9FlPKHvYQWmGMt.jpg"}], "tmdbId": 320288, "rootFolderPath": "/mnt/data/Movies/", "monitored": true, "minimumAvailability": "released", "year": 2019, "cast": "Sophie Turner and James McAvoy"}]

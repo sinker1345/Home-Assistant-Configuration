@@ -4,6 +4,7 @@
   - platform: template
     sensors:
       day:
+        friendly_name: Day
         value_template: >-
           {% if now().weekday() == 0 %}
             Monday 
@@ -24,6 +25,7 @@
   - platform: template
     sensors:
       month:
+        friendly_name: Month
         value_template: >-
           {% if now().month == 1 %}
             January
@@ -54,5 +56,6 @@
   - platform: template
     sensors:
       year:
+        friendly_name: Year
         value_template: >-
           {{ now().year }}

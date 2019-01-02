@@ -1,0 +1,8 @@
+- id: '1546458310616'
+  alias: New Automation
+  trigger:
+  - platform: webhook
+    webhook_id: IFTTT Movie Test
+  condition: []
+  action:
+  - service: script.download_movie
