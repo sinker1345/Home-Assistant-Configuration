@@ -9,11 +9,18 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 - 1 Sonoff wifi switch (flashed with Tasmota)
 - 1 Sonoff S20 socket
 - 1 Chromecast Audio
-- 1 Google Home Mini
+- 2 Google Home Mini
 - 1 Bluetooth Speaker connected to Chromecast Audio
+- 2 GE Z-Wave Plus Smart Lighting & Appliance Control Outdoor Module
+- 1 Honeywell Z-Wave Plus Smart On/Off Light and Appliance Switch, Dual Outlet Plug-In
+- 1 TP-Link KB130 Bulb
+- 1 Z-wave/Zigbee controller GoControl (CECOMINOD016164 HUSBZB-1 USB Hub)
 
 ## Software In use.
 - Mosquitto MQTT Server
 - EventGhost
 - Node-Red
-- OctoPi integration
+
+## Pictures
+
+![Alt text](readme pictures/Home Assistant page 1?raw=true "Title")
