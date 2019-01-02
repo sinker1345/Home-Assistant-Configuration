@@ -4,7 +4,7 @@ resources:
     type: module
   - url: /local/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/dark-sky-weather-card.js?v=0
+  - url: /local/custom_ui/dark-sky-weather-card.js
     type: js
 views:
 #Switches/Lights View
@@ -159,7 +159,7 @@ views:
           - sensor.master_bed_room_light_level
           - sensor.master_bed_room_motion
       - type: entities
-        title: Master Bedroom Sensors
+        title: Master Bedroom Switch
         show_header_toggle: false
         entities:
           - switch.master_bedroom_fan
@@ -386,7 +386,7 @@ views:
           - sensor.master_bed_room_light_level
           - sensor.master_bed_room_motion
       - type: entities
-        title: Master Bedroom Sensors
+        title: Master Bedroom Switch
         show_header_toggle: false
         entities:
           - switch.master_bedroom_fan
@@ -476,8 +476,44 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
-      - type: weather-forecast
-        entity: weather.dark_sky
+      - type: custom:dark-sky-weather-card
+        entity_sun: sun.sun
+        entity_daily_summary: sensor.dark_sky_daily_summary
+        entity_current_conditions: sensor.dark_sky_icon  
+        entity_humidity: sensor.dark_sky_humidity
+        entity_pressure: sensor.dark_sky_pressure
+        entity_temperature: sensor.dark_sky_temperature
+        entity_visibility: sensor.dark_sky_visibility
+        entity_wind_bearing: sensor.dark_sky_wind_bearing
+        entity_wind_speed: sensor.dark_sky_wind_speed
+        entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
+        entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
+        entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
+        entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
+        entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
+        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_1
+        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_2
+        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_3
+        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_4
+        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_5
+        entity_forecast_icon_1: sensor.dark_sky_icon_1
+        entity_forecast_icon_2: sensor.dark_sky_icon_2
+        entity_forecast_icon_3: sensor.dark_sky_icon_3
+        entity_forecast_icon_4: sensor.dark_sky_icon_4
+        entity_forecast_icon_5: sensor.dark_sky_icon_5
+      - type: entities
+        title: Rain Forecast
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dark_sky_precip_probability_0
+            name: Today
+          - entity: sensor.dark_sky_precip_probability_1
+            name: Tomorow
+      - type: entities
+        title: Nearest Storm Distance
+        show_header_toggle: false
+        entities:
+          - sensor.dark_sky_nearest_storm_distance
 #Automations/Scripts View
   - title: Automations/Scripts
     id: 12
@@ -521,7 +557,6 @@ views:
           - automation.send_bob_home
           - automation.test_z_wave_at_230am
           - automation.trash_day
-          - automation.tts_and_notify_weather_alert
           - automation.turn_off_back_porch_lights
           - automation.turn_off_bar_light_at_night
           - automation.turn_off_bedroom_fan_weekday
@@ -541,7 +576,13 @@ views:
           - automation.update_dowdom_sensors
           - automation.update_last_motion
           - automation.update_people_on_restart
-          - automation.wx_alert_notification
+          - automation.ifttt
+          - automation.nws_weather_alert_pop_up_control
+          - automation.nws_notification_weather_alert
+          - automation.nws_announcement_weather_alert
+          - automation.nws_announcement_weather_alert_2
+          - automation.nws_announcement_weather_alert_for_mbr
+          - automation.nws_announcement_weather_alert_2_for_mbr
       - type: entities
         title: Scripts
         show_header_toggle: false
@@ -549,7 +590,7 @@ views:
           - script.download_movie
           - script.download_option
           - script.morning_greeting
-          - script.notifyonwxalert
+          - script.nws_popup_on_wx_alert
           - script.search_movie
 #Status View
   - title: Status

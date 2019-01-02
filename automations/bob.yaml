@@ -3,8 +3,6 @@
     trigger:
     - platform: time
       at: '01:00:00'
-    - platform: webhook
-      webhook_id: turnonbob
     condition:
       condition: or
       conditions:
@@ -31,8 +29,6 @@
     trigger:
     - platform: time
       at: '05:00:00'
-    - platform: webhook
-      webhook_id: turnoffbob
     condition:
       condition: and
       conditions:
@@ -60,4 +56,14 @@
     action:
       - service: vacuum.return_to_base
         entity_id: vacuum.bob
-          
+ 
+  - alias: "IFTTT" 
+    trigger:
+      platform: event
+      event_type: ifttt_webhook_received
+      event_data:
+        action: call_service
+    action:
+      service_template: '{{ trigger.event.data.service }}'
+      data_template:
+        entity_id: '{{ trigger.event.data.entity_id }}'
