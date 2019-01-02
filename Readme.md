@@ -24,4 +24,4 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 ## Pictures
 
 ![Alt text]
-(readme pictures/Home Assistant page 1?raw=true "Title")
+(https://github.com/sinker1345/Home-Assistant-Configuration/tree/master/readme%20pictures/Home%20Assistant%20page%201?raw=true "Title")
