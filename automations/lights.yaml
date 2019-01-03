@@ -34,3 +34,60 @@
     action:
       - service: light.turn_off
         entity_id: light.bar_light
+
+  - alias: 'turn on bar light When people arrive home after dark'
+    trigger:
+    - platform: state
+      entity_id: sensor.jessica_status
+      from: 'Away'
+      to: 'Just Arrived'
+    - platform: state
+      entity_id: sensor.tommy_status
+      from: 'Away'
+      to: 'Just Arrived'
+    - platform: state
+      entity_id: sensor.jessica_status
+      from: 'Extended Away'
+      to: 'Just Arrived'
+    - platform: state
+      entity_id: sensor.tommy_status
+      from: 'Extended Away'
+      to: 'Just Arrived'
+    condition:
+      condition: and
+      conditions:
+        - condition: sun
+          after: sunset
+        - condition: state
+          entity_id: light.bar_light
+          state: 'off'
+    action:
+      - service: light.turn_on
+        entity_id: light.bar_light
+
+  - alias: 'turn of bar light When people leave'
+    trigger:
+    - platform: state
+      entity_id: sensor.jessica_status
+      from: 'Just Left'
+      to: 'Away'
+    - platform: state
+      entity_id: sensor.tommy_status
+      from: 'Just Left'
+      to: 'Away'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: light.bar_light
+          state: 'on'
+        - condition: state
+          entity_id: sensor.jessica_status
+          state: 'Away'
+        - condition: state
+          entity_id: sensor.tommy_status
+          state: 'Away'
+    action:
+      - service: light.turn_off
+        entity_id: light.bar_light
+

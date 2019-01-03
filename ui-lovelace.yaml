@@ -591,6 +591,8 @@ views:
           - automation.update_last_motion
           - automation.update_people_on_restart
           - automation.ifttt
+          - automation.turn_on_bar_light_when_people_arrive_home_after_dark
+          - automation.turn_of_bar_light_when_people_leave
           - automation.nws_weather_alert_pop_up_control
           - automation.nws_notification_weather_alert
           - automation.nws_announcement_weather_alert
