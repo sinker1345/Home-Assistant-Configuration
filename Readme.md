@@ -15,6 +15,8 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 - 1 Honeywell Z-Wave Plus Smart On/Off Light and Appliance Switch, Dual Outlet Plug-In
 - 1 TP-Link KB130 Bulb
 - 1 Z-wave/Zigbee controller GoControl (CECOMINOD016164 HUSBZB-1 USB Hub)
+- 2 Roku Devices
+- 1 Chromecast
 
 ## Software In use.
 - Mosquitto MQTT Server

@@ -34,8 +34,6 @@ views:
           - switch.morning_alert
           - switch.seasonal_lights
           - switch.tv_lights_power
-      - type: entities
-        title: Bar Light Adjustment
         show_header_toggle: false
         entities:
           - light.bar_light
@@ -56,21 +54,37 @@ views:
         title: Common Area Sensors
         show_header_toggle: false
         entities:
-          - sensor.common_area_temperature
-          - sensor.common_area_feels_like
-          - sensor.common_area_humidity
-          - sensor.common_area_light_level
-          - sensor.common_area_motion
-          - variable.last_motion
-          - sensor.glances
+          - entity: sensor.common_area_temperature
+            name: Common Area Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.common_area_feels_like
+            name: Common Area Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.common_area_humidity
+            name: Common Area Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.common_area_light_level
+            name: Common Area Light Level
+            secondary_info: last-changed
+            icon: mdi:eye
+          - entity: sensor.common_area_motion
+            name: Common Area Motion
+            icon: mdi:walk
+            secondary_info: last-changed
+          - entity: variable.last_motion
+            name: Last Room Motion Common Areas
+            icon: mdi:walk
+            secondary_info: last-changed
+          - entity: sensor.glances
+            name: HTPC
+            icon: mdi:monitor
+            secondary_info: last-changed
       - type: light
         entity: light.bar_light
         name: Bar Light
-      - type: entities
-        title: Bar Light Adjustment
-        show_header_toggle: false
-        entities:
-          - light.bar_light
       - type: entities
         title: TV Lights Power
         show_header_toggle: false
@@ -162,11 +176,26 @@ views:
         title: Master Bedroom Sensors
         show_header_toggle: false
         entities:
-          - sensor.master_bed_room_temperature
-          - sensor.master_bed_room_feels_like
-          - sensor.master_bed_room_humidity
-          - sensor.master_bed_room_light_level
-          - sensor.master_bed_room_motion
+          - entity: sensor.master_bed_room_temperature
+            name: Master Bedroom Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_feels_like
+            name: Master Bedroom Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_humidity
+            name: Master Bedroom Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_light_level
+            name: Master Bedroom Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_motion
+            name: Master Bedroom Motion
+            icon: mdi:walk
+            secondary_info: last-changed
       - type: entities
         title: Master Bedroom Switch
         show_header_toggle: false
@@ -205,11 +234,26 @@ views:
         title: Dining Room Sensors
         show_header_toggle: false
         entities:
-          - sensor.dining_room_temperature
-          - sensor.dining_room_feels_like
-          - sensor.dining_room_humidity
-          - sensor.dining_room_light_level
-          - sensor.dining_room_motion_2
+          - entity: sensor.dining_room_temperature
+            name: Dining Room Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.dining_room_feels_like
+            name: Dining Room Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.dining_room_humidity
+            name: Dining Room Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.dining_room_light_level
+            name: Dining Room Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: sensor.dining_room_motion_2
+            name: Dining Room Motion
+            icon: mdi:walk
+            secondary_info: last-changed
 #Garage View
   - title: Garage
     id: 4
@@ -225,11 +269,26 @@ views:
         title: Garage Sensors
         show_header_toggle: false
         entities:
-          - sensor.garage_temperature
-          - sensor.garage_feels_like
-          - sensor.garage_humidity
-          - sensor.garage_light_level
-          - sensor.garage_motion
+          - entity: sensor.garage_temperature
+            name: Garage Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.garage_feels_like
+            name: Garage Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.garage_humidity
+            name: Garage Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.garage_light_level
+            name: Garage Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: sensor.garage_motion
+            name: Garage Motion
+            icon: mdi:walk
+            secondary_info: last-changed
       - type: entities
         title: 3D Printer Status
         show_header_toggle: false
@@ -285,11 +344,26 @@ views:
         title: Kitchen Sensors
         show_header_toggle: false
         entities:
-          - sensor.kitchen_temperature
-          - sensor.kitchen_feels_like
-          - sensor.kitchen_humidity
-          - sensor.kitchen_light_level
-          - sensor.kitchen_motion
+          - entity: sensor.kitchen_temperature
+            name: Kitchen Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.kitchen_feels_like
+            name: Kitchen Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.kitchen_humidity
+            name: Kitchen Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.kitchen_light_level
+            name: Kitchen Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: sensor.kitchen_motion
+            name: Kitchen Motion
+            icon: mdi:walk
+            secondary_info: last-changed
       - type: custom:mini-media-player
         entity: media_player.kitchen_speaker
         icon: mdi:speaker-wireless
@@ -302,11 +376,6 @@ views:
       - type: light
         entity: light.bar_light
         name: Bar Light
-      - type: entities
-        title: Bar Light Adjustment
-        show_header_toggle: false
-        entities:
-          - light.bar_light
 #Living Room View
   - title: Living Room
     id: 6
@@ -323,20 +392,33 @@ views:
         entity: light.bar_light
         name: Bar Light
       - type: entities
-        title: Bar Light Adjustment
-        show_header_toggle: false
-        entities:
-          - light.bar_light
-      - type: entities
         title: Living Room Sensors
         show_header_toggle: false
         entities:
-          - sensor.living_room_temperature_combo
-          - sensor.living_room_feels_like_combo
-          - sensor.living_room_humidity_combo
-          - sensor.living_room_light_level_combo
-          - sensor.living_room_motion_combo
-          - sensor.glances
+          - entity: sensor.living_room_temperature_combo
+            name: Living Room Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.living_room_feels_like_combo
+            name: Living Room Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.living_room_humidity_combo
+            name: Living Room Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.living_room_light_level_combo
+            name: Living Room Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: sensor.living_room_motion_combo
+            name: Living Room Motion
+            icon: mdi:walk
+            secondary_info: last-changed
+          - entity: sensor.glances
+            name: HTPC
+            icon: mdi:monitor
+            secondary_info: last-changed
       - type: entities
         title: TV Lights Power
         show_header_toggle: false
@@ -389,11 +471,26 @@ views:
         title: Master Bedroom Sensors
         show_header_toggle: false
         entities:
-          - sensor.master_bed_room_temperature
-          - sensor.master_bed_room_feels_like
-          - sensor.master_bed_room_humidity
-          - sensor.master_bed_room_light_level
-          - sensor.master_bed_room_motion
+          - entity: sensor.master_bed_room_temperature
+            name: Master Bedroom Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_feels_like
+            name: Master Bedroom Feels Like Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_humidity
+            name: Master Bedroom Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_light_level
+            name: Master Bedroom Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: sensor.master_bed_room_motion
+            name: Master Bedroom Motion
+            icon: mdi:walk
+            secondary_info: last-changed
       - type: entities
         title: Master Bedroom Switch
         show_header_toggle: false
@@ -592,7 +689,7 @@ views:
           - automation.update_people_on_restart
           - automation.ifttt
           - automation.turn_on_bar_light_when_people_arrive_home_after_dark
-          - automation.turn_of_bar_light_when_people_leave
+          - automation.turn_off_bar_light_when_people_leave
           - automation.nws_weather_alert_pop_up_control
           - automation.nws_notification_weather_alert
           - automation.nws_announcement_weather_alert

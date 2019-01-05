@@ -16,7 +16,7 @@
       entity_id: sensor.common_area_motion
       to: 'Standby'
       for:
-        minutes: 59
+        minutes: 30
     condition:
       condition: and
       conditions:
@@ -65,7 +65,7 @@
       - service: light.turn_on
         entity_id: light.bar_light
 
-  - alias: 'turn of bar light When people leave'
+  - alias: 'turn off bar light When people leave'
     trigger:
     - platform: state
       entity_id: sensor.jessica_status
