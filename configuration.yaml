@@ -425,6 +425,12 @@ input_select:
       - Halloween
       - Thanksgiving
 
+  bedroom_fan_automation:
+    name: Should Bedroom Fan Automatically Turn On
+    options:
+      - 'Yes'
+      - 'No'
+
 weather:
   - platform: darksky
     api_key: !secret dark_sky
