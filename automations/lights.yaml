@@ -20,9 +20,9 @@
     condition:
       condition: and
       conditions:
-        - condition: state
-          entity_id: switch.master_bedroom_fan
-          state: 'on'
+        - condition: time
+          after: '21:30:00'
+          before: '05:30:00'
         - condition: or
           conditions:
             - condition: state
@@ -33,6 +33,29 @@
               state: home
     action:
       - service: light.turn_off
+        entity_id: light.bar_light
+
+  - alias: 'turn on bar light at night'
+    trigger:
+    - platform: state
+      entity_id: sensor.common_area_motion
+      to: 'Motion Detected'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '21:30:00'
+          before: '05:30:00'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: group.jessica
+              state: home
+            - condition: state
+              entity_id: group.tommy
+              state: home
+    action:
+      - service: light.turn_on
         entity_id: light.bar_light
 
   - alias: 'turn on bar light When people arrive home after dark'

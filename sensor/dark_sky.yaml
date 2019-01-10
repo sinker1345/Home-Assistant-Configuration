@@ -31,11 +31,13 @@
       - daily_summary
       - pressure
       - visibility
+      - cloud_cover
     update_interval:
       minutes: 5
 
   - platform: rest
     resource: https://api.weather.gov/alerts/active/count
+    timeout: 30
     name: NWS Alert Count Raw
     value_template: >
       {% if value_json is defined and value_json.zones.FLZ203 is defined %}
@@ -48,7 +50,7 @@
     headers:
       User-Agent: Homeassistant
       Accept: application/ld+json
-    scan_interval: 60
+    scan_interval: 120
     
   - platform: template
     sensors:
@@ -65,6 +67,7 @@
   - platform: rest
     resource: https://api.weather.gov/alerts/active?zone=FLZ203,FLC113
     name: NWS Alert Event Raw
+    timeout: 30
     value_template: >
       {% if value_json.features[0] is defined %}
         {{ value_json['features'][0]['properties'].event }}
@@ -76,7 +79,7 @@
     headers:
       User-Agent: Homeassistant
       Accept: application/geo+json
-    scan_interval: 60
+    scan_interval: 120
 
   - platform: template
     sensors:

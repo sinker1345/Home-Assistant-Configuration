@@ -605,6 +605,12 @@ views:
         entity_forecast_icon_4: sensor.dark_sky_icon_4
         entity_forecast_icon_5: sensor.dark_sky_icon_5
       - type: entities
+        title: Low Today
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dark_sky_overnight_low_temperature_0
+            name: Low Temperature Today
+      - type: entities
         title: Rain Forecast
         show_header_toggle: false
         entities:
@@ -618,7 +624,14 @@ views:
         title: Nearest Storm Distance
         show_header_toggle: false
         entities:
-          - sensor.dark_sky_nearest_storm_distance
+          - entity: sensor.dark_sky_nearest_storm_distance
+            name: Nearest Storm Distance
+      - type: entities
+        title: Cloud Cover
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dark_sky_cloud_coverage
+            name: Cloud Cover
       - type: iframe
         url: 'https://embed.windy.com/embed2.html?lat=30.548&lon=-87.163&zoom=9&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=30.670&detailLon=-87.179&metricWind=default&metricTemp=default&radarRange=-1'
         aspect_ratio: 75%
@@ -758,6 +771,8 @@ views:
           - entity: automation.turn_on_bedroom_fan
             secondary_info: last-changed
           - entity: automation.turn_on_bob
+            secondary_info: last-changed
+          - entity: automation.turn_on_bar_light_at_night
             secondary_info: last-changed
       - type: entities
         title: Misc
