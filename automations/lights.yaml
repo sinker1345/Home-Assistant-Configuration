@@ -37,9 +37,9 @@
 
   - alias: 'turn on bar light at night'
     trigger:
-    - platform: state
-      entity_id: sensor.common_area_motion
-      to: 'Motion Detected'
+      - platform: state
+        entity_id: sensor.common_area_motion
+        to: 'Motion Detected'
     condition:
       condition: and
       conditions:
@@ -60,22 +60,22 @@
 
   - alias: 'turn on bar light When people arrive home after dark'
     trigger:
-    - platform: state
-      entity_id: sensor.jessica_status
-      from: 'Away'
-      to: 'Just Arrived'
-    - platform: state
-      entity_id: sensor.tommy_status
-      from: 'Away'
-      to: 'Just Arrived'
-    - platform: state
-      entity_id: sensor.jessica_status
-      from: 'Extended Away'
-      to: 'Just Arrived'
-    - platform: state
-      entity_id: sensor.tommy_status
-      from: 'Extended Away'
-      to: 'Just Arrived'
+      - platform: state
+        entity_id: sensor.jessica_status
+        from: 'Away'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Away'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: sensor.jessica_status
+        from: 'Extended Away'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Extended Away'
+        to: 'Just Arrived'
     condition:
       condition: and
       conditions:
@@ -90,14 +90,14 @@
 
   - alias: 'turn off bar light When people leave'
     trigger:
-    - platform: state
-      entity_id: sensor.jessica_status
-      from: 'Just Left'
-      to: 'Away'
-    - platform: state
-      entity_id: sensor.tommy_status
-      from: 'Just Left'
-      to: 'Away'
+      - platform: state
+        entity_id: sensor.jessica_status
+        from: 'Just Left'
+        to: 'Away'
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Just Left'
+        to: 'Away'
     condition:
       condition: and
       conditions:

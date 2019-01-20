@@ -1,0 +1,24 @@
+  
+  - alias: Guest Mode On
+    trigger:
+      - platform: state
+        entity_id: switch.guest_mode
+        from: 'off'
+        to: 'on'
+    action:
+      - service: automation.turn_off
+        entity_id: automation.morning_announcment
+      - service: automation.turn_off
+        entity_id: automation.turn_on_bob
+      
+  - alias: Guest Mode Off
+    trigger:
+      - platform: state
+        entity_id: switch.guest_mode
+        from: 'on'
+        to: 'off'
+    action:
+      - service: automation.turn_on
+        entity_id: automation.morning_announcment
+      - service: automation.turn_on
+        entity_id: automation.turn_on_bob

@@ -21,6 +21,11 @@ views:
       - type: light
         entity: light.bar_light
         name: Bar Light
+      - type: entity-button
+        icon: mdi:account-group
+        entity: switch.guest_mode
+        tap_action:
+          action: toggle
       - type: entities
         title: Switches
         show_header_toggle: false
@@ -34,6 +39,7 @@ views:
           - switch.morning_alert
           - switch.seasonal_lights
           - switch.tv_lights_power
+          - switch.coffee_pot
 #Common Area View
   - title: Common Areas
     id: 1
@@ -167,7 +173,6 @@ views:
       - sensor.year
       - sun.sun
       - binary_sensor.iss
-      - sensor.taylex15
     cards:
       - type: entities
         title: Master Bedroom Sensors
@@ -309,15 +314,6 @@ views:
       - type: vertical-stack
         cards:
           - type: custom:mini-media-player
-            entity: media_player.garage_tv
-            icon: mdi:television-box
-            artwork_border: true
-            show_source: true
-            artwork: cover
-            hide_volume: true
-            show_progress: true
-            power_color: true
-          - type: custom:mini-media-player
             entity: media_player.garage_chromecast
             icon: mdi:television-box
             artwork_border: true
@@ -361,6 +357,13 @@ views:
             name: Kitchen Motion
             icon: mdi:walk
             secondary_info: last-changed
+      - type: entities
+        title: Switches
+        show_header_toggle: false
+        entities:
+          - entity: switch.coffee_pot
+            name: Coffee Pot
+            icon: mdi:kettle
       - type: custom:mini-media-player
         entity: media_player.kitchen_speaker
         icon: mdi:speaker-wireless
@@ -542,8 +545,7 @@ views:
       - sun.sun
       - binary_sensor.iss
       - binary_sensor.workday_sensor
-      - sensor.google_travel_time__driving
-      - sensor.taylex15
+      - sensor.google_travel_time_driving
     cards:
       - type: entity-filter
         show_empty: false
@@ -605,9 +607,11 @@ views:
         entity_forecast_icon_4: sensor.dark_sky_icon_4
         entity_forecast_icon_5: sensor.dark_sky_icon_5
       - type: entities
-        title: Low Today
+        title: "Today's Low and High"
         show_header_toggle: false
         entities:
+          - entity: sensor.dark_sky_daytime_high_temperature_0
+            name: High Temperature Today
           - entity: sensor.dark_sky_overnight_low_temperature_0
             name: Low Temperature Today
       - type: entities
@@ -647,89 +651,77 @@ views:
       - binary_sensor.iss
     cards:
       - type: entities
-        title: 3D Printer
+        title: Living Room
         show_header_toggle: false
         entities:
+          - entity: automation.turn_on_bob
+            secondary_info: last-changed
+          - entity: automation.send_bob_home
+            secondary_info: last-changed
+          - entity: automation.match_tv_lights_to_htpc_state
+            secondary_info: last-changed
+          - entity: automation.turn_on_bar_light_with_morning_automation
+            secondary_info: last-changed
+          - entity: automation.turn_on_bar_light_when_people_arrive_home_after_dark
+            secondary_info: last-changed
+          - entity: automation.turn_off_bar_light_when_people_leave
+            secondary_info: last-changed
+          - entity: automation.turn_on_bar_light_at_night
+            secondary_info: last-changed
+          - entity: automation.turn_off_bar_light_at_night
+            secondary_info: last-changed
+          - entity: automation.morning_routine_switch
+            secondary_info: last-changed
+          - entity: automation.reset_morning_routine_switch
+            secondary_info: last-changed
+          - entity: automation.turn_off_back_porch_lights
+            secondary_info: last-changed
+          - entity: automation.turn_on_back_porch_lights
+            secondary_info: last-changed
+      - type: entities
+        title: Kitchen
+        show_header_toggle: false
+        entities:
+          - entity: automation.start_coffee_pot
+            secondary_info: last-changed
+          - entity: automation.stop_coffe_pot
+            secondary_info: last-changed
+      - type: entities
+        title: Bedrooms
+        show_header_toggle: false
+        entities:
+          - entity: automation.turn_on_bedroom_fan
+            secondary_info: last-changed
+          - entity: automation.turn_off_bedroom_fan_weekday
+            secondary_info: last-changed
+          - entity: automation.turn_off_bedroom_fan_weekend
+            secondary_info: last-changed
+      - type: entities
+        title: Garage
+        show_header_toggle: false
+        entities:
+          - entity: automation.connect_octopi_to_printer
+            secondary_info: last-changed
           - entity: automation.3d_printer_is_left_on
             secondary_info: last-changed
           - entity: automation.3d_printer_job_50_complete
             secondary_info: last-changed
           - entity: automation.3d_printer_job_complete
             secondary_info: last-changed
-          - entity: automation.connect_octopi_to_printer
-            secondary_info: last-changed
       - type: entities
-        title: Holiday
+        title: Media Players
         show_header_toggle: false
         entities:
-          - entity: automation.after_christmas
+          - entity: automation.morning_announcment
             secondary_info: last-changed
-          - entity: automation.christmas_eve
-            secondary_info: last-changed
-          - entity: automation.turn_on_christmas_tree
-            secondary_info: last-changed
-          - entity: automation.turn_on_oustide_decorations_christmas
-            secondary_info: last-changed
-          - entity: automation.turn_on_oustide_decorations_halloween
-            secondary_info: last-changed
-          - entity: automation.turn_on_oustide_decorations_thanksgiving
-            secondary_info: last-changed
-          - entity: automation.holiday_select_automation_turn_off
-            secondary_info: last-changed
-          - entity: automation.holiday_select_automation_turn_on
-            secondary_info: last-changed
-          - entity: automation.turn_off_outside_decorations_christmas
-            secondary_info: last-changed
-          - entity: automation.turn_off_outside_decorations_halloween
-            secondary_info: last-changed
-          - entity: automation.turn_off_outside_decorations_thanksgiving
-            secondary_info: last-changed
-          - entity: automation.turn_off_christmas_tree
-            secondary_info: last-changed
-      - type: entities
-        title: On Startup/Restart
-        show_header_toggle: false
-        entities:
-          - entity: automation.flux_switch_on_at_startup
+          - entity: automation.lexi_brush_teeth
             secondary_info: last-changed
           - entity: automation.downstairs_unavailable
             secondary_info: last-changed
-          - entity: automation.update_dowdom_sensors
-            secondary_info: last-changed
-          - entity: automation.update_people_on_restart
-            secondary_info: last-changed
-          - entity: automation.update_last_motion
-            secondary_info: last-changed
       - type: entities
-        title: People
+        title: Weather
         show_header_toggle: false
         entities:
-          - entity: automation.is_lexi_off_xbox
-            secondary_info: last-changed
-          - entity: automation.is_lexi_on_xbox
-            secondary_info: last-changed
-          - entity: automation.mark_person_as_away
-            secondary_info: last-changed
-          - entity: automation.mark_person_as_extended_away
-            secondary_info: last-changed
-          - entity: automation.mark_person_as_home
-            secondary_info: last-changed
-          - entity: automation.mark_person_as_just_arrived
-            secondary_info: last-changed
-          - entity: automation.mark_person_as_just_left
-            secondary_info: last-changed
-      - type: entities
-        title: TTS/Notification
-        show_header_toggle: false
-        entities:
-          - entity: automation.lexi_brush_teeth
-            secondary_info: last-changed
-          - entity: automation.heal_z_wave_at_332am
-            secondary_info: last-changed
-          - entity: automation.trash_day
-            secondary_info: last-changed
-          - entity: automation.recycling_day
-            secondary_info: last-changed
           - entity: automation.nws_weather_alert_pop_up_control
             secondary_info: last-changed
           - entity: automation.nws_notification_weather_alert
@@ -743,50 +735,90 @@ views:
           - entity: automation.nws_announcement_weather_alert_2_for_mbr
             secondary_info: last-changed
       - type: entities
-        title: Timed Automations
+        title: People
         show_header_toggle: false
         entities:
+          - entity: automation.mark_person_as_away
+            secondary_info: last-changed
+          - entity: automation.mark_person_as_extended_away
+            secondary_info: last-changed
+          - entity: automation.mark_person_as_home
+            secondary_info: last-changed
+          - entity: automation.mark_person_as_just_arrived
+            secondary_info: last-changed
+          - entity: automation.mark_person_as_just_left
+            secondary_info: last-changed
+          - entity: automation.guest_mode_on
+            secondary_info: last-changed
+          - entity: automation.guest_mode_off
+            secondary_info: last-changed
+      - type: entities
+        title: Holiday
+        show_header_toggle: false
+        entities:
+          - entity: automation.holiday_select_automation_turn_off
+            secondary_info: last-changed
+          - entity: automation.holiday_select_automation_turn_on
+            secondary_info: last-changed
+          - entity: automation.after_christmas
+            secondary_info: last-changed
+          - entity: automation.christmas_eve
+            secondary_info: last-changed
+          - entity: automation.turn_on_christmas_tree
+            secondary_info: last-changed
+          - entity: automation.turn_on_oustide_decorations_christmas
+            secondary_info: last-changed
+          - entity: automation.turn_on_oustide_decorations_halloween
+            secondary_info: last-changed
+          - entity: automation.turn_on_oustide_decorations_thanksgiving
+            secondary_info: last-changed
+          - entity: automation.turn_off_outside_decorations_christmas
+            secondary_info: last-changed
+          - entity: automation.turn_off_outside_decorations_halloween
+            secondary_info: last-changed
+          - entity: automation.turn_off_outside_decorations_thanksgiving
+            secondary_info: last-changed
+          - entity: automation.turn_off_christmas_tree
+            secondary_info: last-changed
+      - type: entities
+        title: Notifications
+        show_header_toggle: false
+        entities:
+          - entity: automation.is_lexi_off_xbox
+            secondary_info: last-changed
+          - entity: automation.is_lexi_on_xbox
+            secondary_info: last-changed
+          - entity: automation.trash_day
+            secondary_info: last-changed
+          - entity: automation.recycling_day
+            secondary_info: last-changed
+          - entity: automation.coffee_pot_setup_reminder
+            secondary_info: last-changed
+      - type: entities
+        title: Homeassistant
+        show_header_toggle: false
+        entities:
+          - entity: automation.flux_switch_on_at_startup
+            secondary_info: last-changed
+          - entity: automation.update_dow_dom_sensors
+            secondary_info: last-changed
+          - entity: automation.update_people_on_restart
+            secondary_info: last-changed
+          - entity: automation.update_last_motion
+            secondary_info: last-changed
           - entity: automation.darker_theme_at_sunset
             secondary_info: last-changed
           - entity: automation.lighter_theme_at_sunrise
             secondary_info: last-changed
-          - entity: automation.send_bob_home
+          - entity: automation.test_z_wave_at_2_30am
             secondary_info: last-changed
-          - entity: automation.turn_off_back_porch_lights
-            secondary_info: last-changed
-          - entity: automation.turn_off_bar_light_at_night
-            secondary_info: last-changed
-          - entity: automation.turn_off_bedroom_fan_weekday
-            secondary_info: last-changed
-          - entity: automation.turn_off_bedroom_fan_weekend
-            secondary_info: last-changed
-          - entity: automation.reset_morning_routine_switch
-            secondary_info: last-changed
-          - entity: automation.test_z_wave_at_230am
-            secondary_info: last-changed
-          - entity: automation.turn_on_back_porch_lights
-            secondary_info: last-changed
-          - entity: automation.turn_on_bar_light_with_morning_automation
-            secondary_info: last-changed
-          - entity: automation.turn_on_bedroom_fan
-            secondary_info: last-changed
-          - entity: automation.turn_on_bob
-            secondary_info: last-changed
-          - entity: automation.turn_on_bar_light_at_night
-            secondary_info: last-changed
-      - type: entities
-        title: Misc
-        show_header_toggle: false
-        entities:
-          - entity: automation.match_tv_lights_to_htpc_state
+          - entity: automation.heal_z_wave_at_3_32am
             secondary_info: last-changed
           - entity: automation.ifttt
             secondary_info: last-changed
-          - entity: automation.turn_on_bar_light_when_people_arrive_home_after_dark
+          - entity: automation.coffee_pot_button_1_clicked
             secondary_info: last-changed
-          - entity: automation.turn_off_bar_light_when_people_leave
-            secondary_info: last-changed
-          - entity: automation.activate_morning_routine
+          - entity: automation.coffee_pot_button_2_clicked
             secondary_info: last-changed
       - type: entities
         title: Scripts
@@ -832,7 +864,7 @@ views:
           - sensor.server_ups_load
           - sensor.server_ups_nominal_real_power
           - sensor.server_ups_output_voltage
-          - sensor.server_ups_selftest_result
+          - sensor.server_ups_self_test_result
       - type: entities
         title: Calendars
         show_header_toggle: false
@@ -943,6 +975,11 @@ views:
         show_header_toggle: false
         entities:
           - input_select.bedroom_fan_automation
+      - type: entities
+        title: Is the coffee pot setup
+        show_header_toggle: false
+        entities:
+          - input_select.is_coffee_pot_setup
       - type: custom:tracker-card
         title: Custom Card Updates
         trackers:

@@ -340,6 +340,26 @@ switch:
     payload_off: 'off'
     retain: true
 
+  - platform: mqtt
+    name: "Guest Mode"
+    state_topic: 'boolean/guest_mode'
+    command_topic: 'boolean/guest_mode'
+    payload_on: 'on'
+    payload_off: 'off'
+    retain: true
+
+  - platform: mqtt
+    name: "Coffee Pot"
+    state_topic: "coffeepot/switch"
+    command_topic: "coffeepot/switch"
+    payload_on: "ON"
+    payload_off: "OFF"
+    state_on: "ON"
+    state_off: "OFF"
+    optimistic: false
+    qos: 0
+    retain: false
+    
 #Flux Component for Lights
   - platform: flux
     lights:
@@ -347,7 +367,7 @@ switch:
     name: Fluxer
     start_time: '7:00'
     stop_time: '23:00'
-    start_colortemp: 9000
+    start_colortemp: 5000
     sunset_colortemp: 3000
     stop_colortemp: 2500
     brightness: 200
@@ -355,7 +375,7 @@ switch:
     mode: mired
     transition: 3
     interval: 60
-    
+   
 light:
   - platform: tplink
     host: 192.168.1.219
@@ -427,6 +447,12 @@ input_select:
 
   bedroom_fan_automation:
     name: Should Bedroom Fan Automatically Turn On
+    options:
+      - 'Yes'
+      - 'No'
+
+  is_coffee_pot_setup:
+    name: Is the Coffee Pot Setup
     options:
       - 'Yes'
       - 'No'

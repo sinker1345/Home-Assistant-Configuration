@@ -1,7 +1,7 @@
 # This (trigger) has to happen, while condition(s) are true, to do stuff (action)
 
 #Speak Morning greeting
-  - alias: 'Activate Morning Routine'
+  - alias: 'Morning Announcment'
     trigger:
       - platform: state
         entity_id: sensor.living_room_motion_combo
@@ -37,8 +37,6 @@
           volume_level: 0.50
       - delay: '00:00:03'
       - service: script.morning_greeting
-      - service: switch.turn_on
-        entity_id: switch.morning_alert
       - delay: '00:00:55'
       - service: media_player.turn_off
         entity_id: media_player.googlehome3446
@@ -46,3 +44,21 @@
         entity_id: media_player.downstairs
       - service: media_player.turn_off
         entity_id: media_player.kitchen_speaker
+
+  - alias: Morning Routine Switch
+    trigger:
+      - platform: state
+        entity_id: sensor.living_room_motion_combo
+        from: 'standby'
+        to: 'motion detected'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '05:00:00'
+        - condition: state
+          entity_id: switch.morning_alert
+          state: 'off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.morning_alert

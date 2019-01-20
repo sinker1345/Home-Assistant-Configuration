@@ -1,0 +1,38 @@
+
+  - alias: start coffee pot
+    trigger:
+      - platform: state
+        entity_id: switch.morning_alert
+        from: 'off'
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.is_coffee_pot_setup
+          state: 'Yes'
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.coffee_pot
+
+  - alias: stop coffe pot
+    trigger:
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Just Left'
+        to: 'Away'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.coffee_pot
+          state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.coffee_pot
+      - service: automation.turn_off
+        entity_id: automation.start_coffee_pot
+

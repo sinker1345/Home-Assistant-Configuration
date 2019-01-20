@@ -5,14 +5,14 @@
     alias: Is Lexi on Xbox
     trigger:
      - platform: state
-       entity_id: sensor.taylex15
+       entity_id: sensor.lexixboxone
        from: 'Offline'
        to: 'Online'
     action:
       - service: notify.google_push
         data_template:
           message: "Lexi has signed on to XBox"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone"]
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_linux", "mpu_chrome"]
           data:
            tag: 'Lexi Signed on to Xbox'
 
@@ -21,14 +21,14 @@
     alias: Is Lexi off Xbox
     trigger:
      - platform: state
-       entity_id: sensor.taylex15
+       entity_id: sensor.lexixboxone
        from: 'Online'
        to: 'Offline'
     action:
       - service: notify.google_push
         data_template:
           message: "Lexi has signed off of XBox"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone"]
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_linux", "mpu_chrome"]
           data:
            tag: 'Lexi Signed off of Xbox'
 
@@ -50,7 +50,7 @@
      - service: notify.google_push
        data_template:
          message: "Take out the Trash"
-         target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
 
 # Take Out Recycling
   - id: "1234569874651689"
@@ -70,7 +70,7 @@
      - service: notify.google_push
        data_template:
          message: "Take out the Recycling"
-         target: ["Tommy_Pixel_2XL", "MPU_Chrome"]
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
 
 # 3D Printer Job 50% Complete
   - id: "12345665216546851"
@@ -136,3 +136,45 @@
       - service: media_player.turn_off
         data_template:
           entity_id: media_player.downstairs
+
+  - alias: coffee pot setup reminder
+    trigger:
+      - platform: time
+        at: '20:00:00'
+    action:
+      service: notify.google_push
+      data:
+        message: "Did you set up the coffee pot?"
+        target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
+        data:
+          actions:
+            - action: "button1"
+              title: "Yes"
+            - action: "button2"
+              title: "No"
+
+  - alias: Coffee Pot Button 1 Clicked
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: button1
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.is_coffee_pot_setup
+          option: 'Yes'
+      - service: automation.turn_on
+        entity_id: automation.start_coffee_pot
+
+  - alias: Coffee Pot Button 2 clicked
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: button2
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.is_coffee_pot_setup
+          option: 'No'
