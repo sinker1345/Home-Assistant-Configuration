@@ -6,10 +6,13 @@ resources:
     type: js
   - url: /local/custom_ui/dark-sky-weather-card.js
     type: js
+  - url: /local/button-card.js
+    type: module
 views:
 #Switches/Lights View
   - title: Switches/Lights
     id: 0
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -18,14 +21,17 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+    # Bar Light
       - type: light
         entity: light.bar_light
         name: Bar Light
-      - type: entity-button
-        icon: mdi:account-group
+    #Guest Mode (Button_card)
+      - type: "custom:button-card"
         entity: switch.guest_mode
-        tap_action:
-          action: toggle
+        name: Guest Mode
+        icon: mdi:account-group
+        color: rgb(255, 215, 0)
+    #Switches
       - type: entities
         title: Switches
         show_header_toggle: false
@@ -43,6 +49,7 @@ views:
 #Common Area View
   - title: Common Areas
     id: 1
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -53,6 +60,7 @@ views:
       - sensor.plex
       - sensor.ups
     cards:
+      #Comon Area Sensors
       - type: entities
         title: Common Area Sensors
         show_header_toggle: false
@@ -85,14 +93,17 @@ views:
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
+      #Bar Light
       - type: light
         entity: light.bar_light
         name: Bar Light
+      #TV Lights Power
       - type: entities
         title: TV Lights Power
         show_header_toggle: false
         entities:
           - switch.tv_lights_power
+      #Gaming Systems
       - type: entities
         title: Gaming Systems
         show_header_toggle: false
@@ -102,11 +113,13 @@ views:
           - sensor.ps3
           - sensor.switch
           - sensor.lexixboxone
+      #Vacuum
       - type: entities
         title: Vacuum
         show_header_toggle: false
         entities:
           - vacuum.bob
+      #Media Players (Mini Media Player Card)
       - type: vertical-stack
         cards:
           - type: custom:mini-media-player
@@ -166,6 +179,7 @@ views:
 #Bedroom View
   - title: Bedrooms
     id: 2
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -174,6 +188,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Sensors
       - type: entities
         title: Master Bedroom Sensors
         show_header_toggle: false
@@ -198,11 +213,13 @@ views:
             name: Master Bedroom Motion
             icon: mdi:walk
             secondary_info: last-changed
+      #Master Bedroom Fan Switch
       - type: entities
-        title: Master Bedroom Switch
+        title: Master Bedroom Fan Switch
         show_header_toggle: false
         entities:
           - switch.master_bedroom_fan
+      #Media Players
       - type: custom:mini-media-player
         entity: media_player.master_bath
         icon: mdi:speaker-wireless
@@ -224,6 +241,7 @@ views:
 #Dining Room View
   - title: Dining Room
     id: 3
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -232,6 +250,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Sensors
       - type: entities
         title: Dining Room Sensors
         show_header_toggle: false
@@ -259,6 +278,7 @@ views:
 #Garage View
   - title: Garage
     id: 4
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -267,6 +287,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Sensors
       - type: entities
         title: Garage Sensors
         show_header_toggle: false
@@ -291,6 +312,7 @@ views:
             name: Garage Motion
             icon: mdi:walk
             secondary_info: last-changed
+      #3D Printer info
       - type: entities
         title: 3D Printer Status
         show_header_toggle: false
@@ -306,11 +328,13 @@ views:
           - sensor.octoprint_time_elapsed
           - sensor.octoprint_time_remaining
           - camera.octo_print_camera
+      #3D Printer Switch
       - type: entities
         title: 3D Printer Power
         show_header_toggle: false
         entities:
           - switch.3d_printer_power
+      #Media Players
       - type: vertical-stack
         cards:
           - type: custom:mini-media-player
@@ -325,6 +349,7 @@ views:
 #Kitchen View
   - title: Kitchen
     id: 5
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -333,6 +358,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Sensors
       - type: entities
         title: Kitchen Sensors
         show_header_toggle: false
@@ -357,6 +383,7 @@ views:
             name: Kitchen Motion
             icon: mdi:walk
             secondary_info: last-changed
+      #Switches
       - type: entities
         title: Switches
         show_header_toggle: false
@@ -364,6 +391,7 @@ views:
           - entity: switch.coffee_pot
             name: Coffee Pot
             icon: mdi:kettle
+      #Media Players
       - type: custom:mini-media-player
         entity: media_player.kitchen_speaker
         icon: mdi:speaker-wireless
@@ -379,6 +407,7 @@ views:
 #Living Room View
   - title: Living Room
     id: 6
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -388,9 +417,11 @@ views:
       - binary_sensor.iss
       - sensor.plex
     cards:
+      #Lights
       - type: light
         entity: light.bar_light
         name: Bar Light
+      #Sensors
       - type: entities
         title: Living Room Sensors
         show_header_toggle: false
@@ -419,11 +450,13 @@ views:
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
+      #TV Lights Power
       - type: entities
         title: TV Lights Power
         show_header_toggle: false
         entities:
           - switch.tv_lights_power
+      #Gaming Systems
       - type: entities
         title: Gaming Systems
         show_header_toggle: false
@@ -433,11 +466,13 @@ views:
           - sensor.ps3
           - sensor.switch
           - sensor.lexixboxone
+      #Vaccum
       - type: entities
         title: Vacuum
         show_header_toggle: false
         entities:
           - vacuum.bob
+      #Media Players
       - type: custom:mini-media-player
         entity: media_player.googlehome3446
         icon: mdi:speaker-wireless
@@ -459,6 +494,7 @@ views:
 #Master Bedroom View
   - title: Master Bedroom
     id: 7
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -467,6 +503,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Sensors
       - type: entities
         title: Master Bedroom Sensors
         show_header_toggle: false
@@ -491,11 +528,13 @@ views:
             name: Master Bedroom Motion
             icon: mdi:walk
             secondary_info: last-changed
+      #Master Bedroom Fan Switch
       - type: entities
-        title: Master Bedroom Switch
+        title: Master Bedroom Fan Switch
         show_header_toggle: false
         entities:
           - switch.master_bedroom_fan
+      #Media Players
       - type: custom:mini-media-player
         entity: media_player.master_bath
         icon: mdi:speaker-wireless
@@ -508,6 +547,7 @@ views:
 #Guest Bedroom View
   - title: Guest Bedroom
     id: 8
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -516,6 +556,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Media Players
       - type: custom:mini-media-player
         entity: media_player.roku_guest_bedroom
         icon: mdi:television-box
@@ -528,6 +569,7 @@ views:
 #Front Office View
   - title: Front Office
     id: 9
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -538,6 +580,7 @@ views:
 #People View
   - title: People
     id: 10
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -547,6 +590,7 @@ views:
       - binary_sensor.workday_sensor
       - sensor.google_travel_time_driving
     cards:
+      #People at Home Glance Card
       - type: entity-filter
         show_empty: false
         entities:
@@ -558,6 +602,7 @@ views:
         card: 
           type: glance
           title: People At home
+      #People Away Glance Card
       - type: entity-filter
         show_empty: false
         entities:
@@ -573,6 +618,7 @@ views:
 #Weather View
   - title: Weather
     id: 11
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -581,6 +627,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Dark Sky Weather Card
       - type: custom:dark-sky-weather-card
         entity_sun: sun.sun
         entity_daily_summary: sensor.dark_sky_daily_summary
@@ -606,6 +653,7 @@ views:
         entity_forecast_icon_3: sensor.dark_sky_icon_3
         entity_forecast_icon_4: sensor.dark_sky_icon_4
         entity_forecast_icon_5: sensor.dark_sky_icon_5
+      #Low and High Temp
       - type: entities
         title: "Today's Low and High"
         show_header_toggle: false
@@ -614,6 +662,7 @@ views:
             name: High Temperature Today
           - entity: sensor.dark_sky_overnight_low_temperature_0
             name: Low Temperature Today
+      #Rain Forecast
       - type: entities
         title: Rain Forecast
         show_header_toggle: false
@@ -624,24 +673,28 @@ views:
           - entity: sensor.dark_sky_precip_probability_1
             name: Tomorow
             icon: mdi:weather-rainy
-      - type: entities
-        title: Nearest Storm Distance
-        show_header_toggle: false
-        entities:
-          - entity: sensor.dark_sky_nearest_storm_distance
-            name: Nearest Storm Distance
+      #Cloud Cover
       - type: entities
         title: Cloud Cover
         show_header_toggle: false
         entities:
           - entity: sensor.dark_sky_cloud_coverage
             name: Cloud Cover
+      #Nearest Storm Distance
+      - type: entities
+        title: Nearest Storm Distance
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dark_sky_nearest_storm_distance
+            name: Nearest Storm Distance
+      #Weather Map
       - type: iframe
         url: 'https://embed.windy.com/embed2.html?lat=30.548&lon=-87.163&zoom=9&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=30.670&detailLon=-87.179&metricWind=default&metricTemp=default&radarRange=-1'
         aspect_ratio: 75%
 #Automations/Scripts View
   - title: Automations/Scripts
     id: 12
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -650,6 +703,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Living Room Automations
       - type: entities
         title: Living Room
         show_header_toggle: false
@@ -678,6 +732,7 @@ views:
             secondary_info: last-changed
           - entity: automation.turn_on_back_porch_lights
             secondary_info: last-changed
+      #Kitchen Automations
       - type: entities
         title: Kitchen
         show_header_toggle: false
@@ -686,6 +741,7 @@ views:
             secondary_info: last-changed
           - entity: automation.stop_coffe_pot
             secondary_info: last-changed
+      #Bedroom Automations
       - type: entities
         title: Bedrooms
         show_header_toggle: false
@@ -696,6 +752,7 @@ views:
             secondary_info: last-changed
           - entity: automation.turn_off_bedroom_fan_weekend
             secondary_info: last-changed
+      #Garage Automations
       - type: entities
         title: Garage
         show_header_toggle: false
@@ -708,6 +765,7 @@ views:
             secondary_info: last-changed
           - entity: automation.3d_printer_job_complete
             secondary_info: last-changed
+      #Media Player Automations
       - type: entities
         title: Media Players
         show_header_toggle: false
@@ -716,8 +774,7 @@ views:
             secondary_info: last-changed
           - entity: automation.lexi_brush_teeth
             secondary_info: last-changed
-          - entity: automation.downstairs_unavailable
-            secondary_info: last-changed
+      #Weather Automations
       - type: entities
         title: Weather
         show_header_toggle: false
@@ -734,6 +791,7 @@ views:
             secondary_info: last-changed
           - entity: automation.nws_announcement_weather_alert_2_for_mbr
             secondary_info: last-changed
+      #People Automations
       - type: entities
         title: People
         show_header_toggle: false
@@ -752,6 +810,7 @@ views:
             secondary_info: last-changed
           - entity: automation.guest_mode_off
             secondary_info: last-changed
+      #Holiday Automations
       - type: entities
         title: Holiday
         show_header_toggle: false
@@ -780,6 +839,7 @@ views:
             secondary_info: last-changed
           - entity: automation.turn_off_christmas_tree
             secondary_info: last-changed
+      #Notification Automations
       - type: entities
         title: Notifications
         show_header_toggle: false
@@ -794,6 +854,7 @@ views:
             secondary_info: last-changed
           - entity: automation.coffee_pot_setup_reminder
             secondary_info: last-changed
+      #Homeassistant Automations
       - type: entities
         title: Homeassistant
         show_header_toggle: false
@@ -820,6 +881,9 @@ views:
             secondary_info: last-changed
           - entity: automation.coffee_pot_button_2_clicked
             secondary_info: last-changed
+          - entity: automation.downstairs_unavailable
+            secondary_info: last-changed
+      #Scripts
       - type: entities
         title: Scripts
         show_header_toggle: false
@@ -832,6 +896,7 @@ views:
 #Status View
   - title: Status
     id: 13
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -843,6 +908,7 @@ views:
       - sensor.speedtest_ping
       - sensor.speedtest_upload
     cards:
+      #Homeassistant Tatus
       - type: entities
         title: Home Assistant Status
         show_header_toggle: false
@@ -852,6 +918,7 @@ views:
           - sensor.processor_use
           - sensor.disk_use_percent_home
           - sensor.last_boot
+      #UPS Status
       - type: entities
         title: Server UPS Status
         show_header_toggle: false
@@ -865,6 +932,7 @@ views:
           - sensor.server_ups_nominal_real_power
           - sensor.server_ups_output_voltage
           - sensor.server_ups_self_test_result
+      #Calendars
       - type: entities
         title: Calendars
         show_header_toggle: false
@@ -879,6 +947,7 @@ views:
           - calendar.personal
           - calendar.shopping
           - calendar.work
+      #Z-Wave Network
       - type: entities
         title: Z-Wave
         show_header_toggle: false
@@ -889,6 +958,7 @@ views:
           - zwave.kitchen_range_extender
           - zwave.living_room_range_extender
           - zwave.sigma_designs_uzb_zwave_usb_adapter
+      #Network Status
       - type: entities
         title: Network
         show_header_toggle: false
@@ -908,6 +978,7 @@ views:
           - sensor.torrent
           - sensor.tvheadend
           - sensor.unificontroller
+      #Weblinks
       - type: entities
         title: Weblinks
         show_header_toggle: false
@@ -957,6 +1028,7 @@ views:
 #Settings View
   - title: Settings
     id: 14
+    #Badges
     badges:
       - sensor.time
       - sensor.day
@@ -965,21 +1037,25 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Decorations Input Select
       - type: entities
         title: Which Decorations Are Put Up
         show_header_toggle: false
         entities:
           - input_select.which_holiday
+      #Bedroom Fan Input Select
       - type: entities
         title: Should the bedroom Fan Automatically Turn On
         show_header_toggle: false
         entities:
           - input_select.bedroom_fan_automation
+      #Coffee Pot Automation Input Select
       - type: entities
         title: Is the coffee pot setup
         show_header_toggle: false
         entities:
           - input_select.is_coffee_pot_setup
+      #Custom Tracker Card
       - type: custom:tracker-card
         title: Custom Card Updates
         trackers:
