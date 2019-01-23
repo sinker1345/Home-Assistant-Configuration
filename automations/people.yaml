@@ -189,38 +189,3 @@
               lexi_status
             {% endif %}
           value: Extended Away
-
-  - alias: update people on restart
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      - delay:
-          seconds: 30
-      - service: variable.set_variable
-        data:
-          variable: tommy_status
-          value_template: >
-            {% if states.group.tommy.state == "home" %} 
-              Home
-            {% else %}
-              Away
-            {% endif %}
-      - service: variable.set_variable
-        data:
-          variable: jessica_status
-          value_template: >
-            {% if states.group.jessica.state == "home" %} 
-              Home
-            {% else %}
-              Away
-            {% endif %}
-      - service: variable.set_variable
-        data:
-          variable: lexi_status
-          value_template: >
-            {% if states.group.lexi.state == "home" %} 
-              Home
-            {% else %}
-              Away
-            {% endif %}

@@ -1,12 +1,12 @@
 title: House
 resources:
-  - url: /local/mini-media-player-bundle.js?v=0.9.8
+  - url: /local/custom_ui/mini-media-player-bundle.js?v=0.9.8
     type: module
-  - url: /local/tracker-card.js?v=0.1.5
+  - url: /local/custom_ui/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/custom_ui/dark-sky-weather-card.js
-    type: js
-  - url: /local/button-card.js
+  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.7.1
+    type: module
+  - url: /local/custom_ui/button-card.js?v=0.0.5
     type: module
 views:
 #Switches/Lights View
@@ -231,6 +231,15 @@ views:
         power_color: true
       - type: custom:mini-media-player
         entity: media_player.roku_guest_bedroom
+        icon: mdi:television-box
+        artwork_border: true
+        show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
+      - type: custom:mini-media-player
+        entity: media_player.office_tv
         icon: mdi:television-box
         artwork_border: true
         show_source: true
@@ -577,6 +586,16 @@ views:
       - sensor.year
       - sun.sun
       - binary_sensor.iss
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.office_tv
+        icon: mdi:television-box
+        artwork_border: true
+        show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
 #People View
   - title: People
     id: 10
@@ -653,6 +672,15 @@ views:
         entity_forecast_icon_3: sensor.dark_sky_icon_3
         entity_forecast_icon_4: sensor.dark_sky_icon_4
         entity_forecast_icon_5: sensor.dark_sky_icon_5
+        entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0
+        entity_apparent_temp: sensor.dark_sky_apparent_temperature
+        entity_pop: sensor.dark_sky_precip_probability_0
+        entity_pop_1: sensor.dark_sky_precip_probability_1
+        entity_pop_2: sensor.dark_sky_precip_probability_2
+        entity_pop_3: sensor.dark_sky_precip_probability_3
+        entity_pop_4: sensor.dark_sky_precip_probability_4
+        entity_pop_5: sensor.dark_sky_precip_probability_5
+        entity_current_text: sensor.dark_sky_current_text
       #Low and High Temp
       - type: entities
         title: "Today's Low and High"

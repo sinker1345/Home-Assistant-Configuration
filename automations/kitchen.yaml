@@ -1,0 +1,102 @@
+  - alias: coffee pot setup reminder
+    trigger:
+      - platform: time
+        at: '20:00:00'
+    action:
+      service: notify.google_push
+      data:
+        message: "Did you set up the coffee pot?"
+        target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
+        data:
+          actions:
+            - action: "button1"
+              title: "Yes"
+            - action: "button2"
+              title: "No"
+
+  - alias: Coffee Pot Button 1 Clicked
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: button1
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.is_coffee_pot_setup
+          option: 'Yes'
+      - service: automation.turn_on
+        entity_id: automation.start_coffee_pot
+
+  - alias: Coffee Pot Button 2 clicked
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: button2
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.is_coffee_pot_setup
+          option: 'No'
+
+  - alias: start coffee pot
+    trigger:
+      - platform: state
+        entity_id: switch.morning_alert
+        from: 'off'
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.is_coffee_pot_setup
+          state: 'Yes'
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.coffee_pot
+
+  - alias: stop coffe pot
+    trigger:
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Just Left'
+        to: 'Away'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.coffee_pot
+          state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.coffee_pot
+      - service: automation.turn_off
+        entity_id: automation.start_coffee_pot
+
+# Set Dark Theme at Sunset
+  - alias: 'Darker Theme At Sunset'
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      - service: frontend.set_theme
+        data:
+          name: night
+
+# Set light Theme at sunrise
+  - alias: 'Lighter Theme At Sunrise'
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunrise
+    action:
+      - service: frontend.set_theme
+        data:
+          name: default

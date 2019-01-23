@@ -10,6 +10,8 @@
         entity_id: automation.morning_announcment
       - service: automation.turn_off
         entity_id: automation.turn_on_bob
+      - service: automation.turn_off
+        entity_id: automation.lexi_brush_teeth
       
   - alias: Guest Mode Off
     trigger:
@@ -22,3 +24,5 @@
         entity_id: automation.morning_announcment
       - service: automation.turn_on
         entity_id: automation.turn_on_bob
+      - service: automation.turn_on
+        entity_id: automation.lexi_brush_teeth

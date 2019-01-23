@@ -48,3 +48,62 @@
 #    action:
 #      - service: cover.close_cover
 #        entity_id: cover.garage_door
+
+  - id: "123456"
+    alias: "Connect OctoPi to Printer"
+    trigger:
+      platform: state
+      entity_id: switch.3d_printer_power
+      from: 'off'
+      to: 'on'
+    action:
+      - delay: '00:00:45'
+      - service: rest_command.octopi_connect
+
+  - id: "0123789"
+    alias: '3D Printer is left on'
+    trigger:
+    - platform: state
+      entity_id: sensor.octoprint_current_state
+      to: 'unavailable'
+      for:
+        minutes: 15
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.3d_printer_power
+          state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.3d_printer_power
+
+# 3D Printer Job 50% Complete
+  - id: "12345665216546851"
+    alias: 3D Printer Job 50% Complete
+    trigger:
+     - platform: numeric_state
+       entity_id: sensor.octoprint_job_percentage
+       above: 50
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "3D Print job is 50% complete!"
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+          data:
+           tag: '3D print job is 50% complete!'
+
+# 3D Printer Job Completed
+  - id: "123456654620685"
+    alias: 3D Printer Job Complete
+    trigger:
+     - platform: numeric_state
+       entity_id: sensor.octoprint_job_percentage
+       above: 99.9
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "3D Print job is complete!"
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+          data:
+           tag: '3D print job is complete!'

@@ -16,7 +16,7 @@
       entity_id: sensor.common_area_motion
       to: 'Standby'
       for:
-        minutes: 30
+        minutes: 15
     condition:
       condition: and
       conditions:

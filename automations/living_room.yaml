@@ -52,18 +52,39 @@
             - condition: state
               entity_id: sensor.day
               state: 'Sunday'
-
     action:
       - service: vacuum.return_to_base
         entity_id: vacuum.bob
- 
-  - alias: "IFTTT" 
+
+# Check for Idle status on HTPC
+  - id: "1234560101"
+    alias: Match TV Lights to HTPC State
     trigger:
-      platform: event
-      event_type: ifttt_webhook_received
-      event_data:
-        action: call_service
+     - platform: state
+       entity_id: sensor.glances
     action:
-      service_template: '{{ trigger.event.data.service }}'
-      data_template:
-        entity_id: '{{ trigger.event.data.entity_id }}'
+      - service_template: >-
+          {% if trigger.to_state.state == "Idle" or trigger.to_state.state == "In Use"%}
+            homeassistant.turn_on
+          {% else %}
+            homeassistant.turn_off
+          {% endif %}
+        entity_id: switch.tv_lights_power
+
+  - alias: Morning Routine Switch
+    trigger:
+      - platform: state
+        entity_id: sensor.living_room_motion_combo
+        from: 'standby'
+        to: 'motion detected'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          after: '05:00:00'
+        - condition: state
+          entity_id: switch.morning_alert
+          state: 'off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.morning_alert
