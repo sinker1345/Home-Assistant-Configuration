@@ -4,7 +4,7 @@ resources:
     type: module
   - url: /local/custom_ui/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.7.1
+  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.8.1
     type: module
   - url: /local/custom_ui/button-card.js?v=0.0.5
     type: module
@@ -681,6 +681,22 @@ views:
         entity_pop_4: sensor.dark_sky_precip_probability_4
         entity_pop_5: sensor.dark_sky_precip_probability_5
         entity_current_text: sensor.dark_sky_current_text
+        locale: en
+        static_icons: false
+        #tooltip_bg_color: 'rgb( 75,155,239)'
+        #tooltip_border_color: orange
+        #tooltip_border_width: 3
+        #tooltip_caret_size: 10
+        #tooltip_fg_color: '#fff'
+        #tooltip_left_offset: -12
+        #tooltip_width: 100
+        #tooltips: true
+        old_daily_format: false
+        time_format: locale
+        show_beaufort: false
+        show_separator: true
+        temp_top_margin: -25px
+        separator_top_margin: 6em
       #Low and High Temp
       - type: entities
         title: "Today's Low and High"
@@ -690,17 +706,6 @@ views:
             name: High Temperature Today
           - entity: sensor.dark_sky_overnight_low_temperature_0
             name: Low Temperature Today
-      #Rain Forecast
-      - type: entities
-        title: Rain Forecast
-        show_header_toggle: false
-        entities:
-          - entity: sensor.dark_sky_precip_probability_0
-            name: Today
-            icon: mdi:weather-rainy
-          - entity: sensor.dark_sky_precip_probability_1
-            name: Tomorow
-            icon: mdi:weather-rainy
       #Cloud Cover
       - type: entities
         title: Cloud Cover

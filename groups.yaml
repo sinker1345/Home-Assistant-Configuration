@@ -380,7 +380,7 @@
       - sensor.day
       - sun.sun
       - binary_sensor.iss
-      - sensor.google_travel_time__driving
+      - sensor.google_travel_time_driving
       - binary_sensor.iss
       - binary_sensor.workday_sensor
 
