@@ -52,6 +52,7 @@
                          {% elif is_state("sensor.dark_sky_icon","lightning") %} Lightning
                          {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Thunderstorm
                          {% endif %}'
+
   - platform: rest
     resource: https://api.weather.gov/alerts/active/count
     timeout: 30

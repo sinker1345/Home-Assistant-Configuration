@@ -56,7 +56,7 @@
     sequence:
     - service: tts.google_say
       data_template:
-        entity_id: media_player.downstairs
+        entity_id: media_player.common_area
         message: >-
           {% if now().strftime("%H")|int < 12 %}
             Good Morning. 

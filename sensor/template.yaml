@@ -214,3 +214,18 @@
       lexixboxone:
         friendly_name: 'Lexi Xbox One'
         value_template: "{{ 'Online' if is_state('device_tracker.xboxone', 'home' ) else 'Offline' }}"
+      garage_door_template:
+        value_template: >-
+          {% if is_state('sensor.garage_door', 'open') %}
+            Open
+          {% else %}
+            Closed
+          {% endif %}
+        icon_template: >-
+          {% if is_state('sensor.garage_door', 'open') %}
+            mdi:garage-open
+          {% else %}
+            mdi:garage
+          {% endif %}
+
+

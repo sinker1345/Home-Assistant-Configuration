@@ -50,7 +50,7 @@
       - service: tts.google_say
         data_template:
           entity_id: 
-            - media_player.downstairs
+            - media_player.common_area
           message: "Attention!,,,Attention!,,,The National Weather Service has issued a 
         {{ states.sensor.nws_alert_event_filtered.state }} for your area. 
         It expires at {{ as_timestamp(state_attr('sensor.nws_alert_event_raw', 'features')[0].properties.expires)| timestamp_custom('%-I:%M %p on %-m-%-d-%Y') }}."
@@ -58,7 +58,7 @@
       - service: tts.google_say
         data_template:
           entity_id: 
-            - media_player.downstairs
+            - media_player.common_area
           message: "Attention!,,,Attention!,,,The National Weather Service has issued a 
         {{ states.sensor.nws_alert_event_filtered.state }} for your area. 
         It expires at {{ as_timestamp(state_attr('sensor.nws_alert_event_raw', 'features')[0].properties.expires)| timestamp_custom('%-I:%M %p on %-m-%-d-%Y') }}."
@@ -87,7 +87,7 @@
       - service: tts.google_say
         data_template:
           entity_id: 
-            - media_player.downstairs
+            - media_player.common_area
           message: "Attention!,,,Attention!,,,A second severe weather alert has been issued. The National Weather Service has issued a 
         {{ states.sensor.nws_alert_event_2.state }} for your area. 
         It expires at {{ as_timestamp(state_attr('sensor.nws_alert_event_raw', 'features')[1].properties.expires)| timestamp_custom('%-I:%M %p on %-m-%-d-%Y') }}."
@@ -95,7 +95,7 @@
       - service: tts.google_say
         data_template:
           entity_id: 
-            - media_player.downstairs
+            - media_player.common_area
           message: "Attention!,,,Attention!,,,A second severe weather alert has been issued. The National Weather Service has issued a 
         {{ states.sensor.nws_alert_event_2.state }} for your area. 
         It expires at {{ as_timestamp(state_attr('sensor.nws_alert_event_raw', 'features')[1].properties.expires)| timestamp_custom('%-I:%M %p on %-m-%-d-%Y') }}."

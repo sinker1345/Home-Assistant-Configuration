@@ -4,7 +4,7 @@ resources:
     type: module
   - url: /local/custom_ui/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.8.1
+  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.8.2
     type: module
   - url: /local/custom_ui/button-card.js?v=0.0.5
     type: module
@@ -132,7 +132,7 @@ views:
             show_progress: true
             power_color: true
           - type: custom:mini-media-player
-            entity: media_player.downstairs
+            entity: media_player.common_area
             icon: mdi:speaker-wireless
             artwork_border: true
             show_source: true
@@ -321,6 +321,8 @@ views:
             name: Garage Motion
             icon: mdi:walk
             secondary_info: last-changed
+          - entity: sensor.garage_door_template
+            name: Garage Door Status
       #3D Printer info
       - type: entities
         title: 3D Printer Status
@@ -648,33 +650,39 @@ views:
     cards:
       #Dark Sky Weather Card
       - type: custom:dark-sky-weather-card
-        entity_sun: sun.sun
-        entity_daily_summary: sensor.dark_sky_daily_summary
-        entity_current_conditions: sensor.dark_sky_icon  
-        entity_humidity: sensor.dark_sky_humidity
-        entity_pressure: sensor.dark_sky_pressure
+        entity_current_conditions: sensor.dark_sky_icon
         entity_temperature: sensor.dark_sky_temperature
-        entity_visibility: sensor.dark_sky_visibility
-        entity_wind_bearing: sensor.dark_sky_wind_bearing
-        entity_wind_speed: sensor.dark_sky_wind_speed
         entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
         entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
         entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
         entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
         entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
-        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_1
-        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_2
-        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_3
-        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_4
-        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_5
         entity_forecast_icon_1: sensor.dark_sky_icon_1
         entity_forecast_icon_2: sensor.dark_sky_icon_2
         entity_forecast_icon_3: sensor.dark_sky_icon_3
         entity_forecast_icon_4: sensor.dark_sky_icon_4
         entity_forecast_icon_5: sensor.dark_sky_icon_5
+        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
+        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
+        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
+        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
+        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
+        entity_summary_1: sensor.dark_sky_summary_1
+        entity_summary_2: sensor.dark_sky_summary_2
+        entity_summary_3: sensor.dark_sky_summary_3
+        entity_summary_4: sensor.dark_sky_summary_4
+        entity_summary_5: sensor.dark_sky_summary_5
+        entity_sun: sun.sun
+        entity_visibility: sensor.dark_sky_visibility
         entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0
+        entity_wind_bearing: sensor.dark_sky_wind_bearing
+        entity_wind_speed: sensor.dark_sky_wind_speed
+        entity_humidity: sensor.dark_sky_humidity
+        entity_pressure: sensor.dark_sky_pressure
         entity_apparent_temp: sensor.dark_sky_apparent_temperature
-        entity_pop: sensor.dark_sky_precip_probability_0
+        entity_daily_summary: sensor.dark_sky_daily_summary
+        entity_pop: sensor.dark_sky_precip_probability
+        entity_pop_intensity: sensor.dark_sky_precip_intensity
         entity_pop_1: sensor.dark_sky_precip_probability_1
         entity_pop_2: sensor.dark_sky_precip_probability_2
         entity_pop_3: sensor.dark_sky_precip_probability_3
@@ -683,20 +691,32 @@ views:
         entity_current_text: sensor.dark_sky_current_text
         locale: en
         static_icons: false
-        #tooltip_bg_color: 'rgb( 75,155,239)'
-        #tooltip_border_color: orange
-        #tooltip_border_width: 3
-        #tooltip_caret_size: 10
-        #tooltip_fg_color: '#fff'
-        #tooltip_left_offset: -12
-        #tooltip_width: 100
-        #tooltips: true
+        tooltips: true
+        tooltip_bg_color: 'rgb( 75,155,239)'
+        tooltip_border_color: orange
+        tooltip_border_width: 3
+        tooltip_caret_size: 10
+        tooltip_fg_color: '#fff'
+        tooltip_left_offset: -12
+        tooltip_width: 100
         old_daily_format: false
         time_format: locale
         show_beaufort: false
         show_separator: true
-        temp_top_margin: -25px
-        separator_top_margin: 6em
+        temp_top_margin: -20px
+        temp_font_weight: 300
+        temp_font_size: 4em
+        temp_right_pos: 0.7em
+        temp_uom_top_margin: -14px
+        temp_uom_right_margin: 0px
+        apparent_top_margin: 45px
+        apparent_right_pos: 1em
+        apparent_right_margin: 1em
+        current_text_top_margin: -4px
+        current_text_left_pos: 7em
+        current_text_font_size: 1.2em
+        large_icon_top_margin: -3.5em
+        large_icon_left_position: 0em
       #Low and High Temp
       - type: entities
         title: "Today's Low and High"
@@ -797,6 +817,10 @@ views:
           - entity: automation.3d_printer_job_50_complete
             secondary_info: last-changed
           - entity: automation.3d_printer_job_complete
+            secondary_info: last-changed
+          - entity: automation.close_garage_door_on_weekday
+            secondary_info: last-changed
+          - entity: automation.close_garage_door_on_weekend
             secondary_info: last-changed
       #Media Player Automations
       - type: entities
@@ -914,7 +938,7 @@ views:
             secondary_info: last-changed
           - entity: automation.coffee_pot_button_2_clicked
             secondary_info: last-changed
-          - entity: automation.downstairs_unavailable
+          - entity: automation.google_media_players_unavailable
             secondary_info: last-changed
       #Scripts
       - type: entities
@@ -1072,21 +1096,11 @@ views:
     cards:
       #Decorations Input Select
       - type: entities
-        title: Which Decorations Are Put Up
+        title: Homeassistant Settings
         show_header_toggle: false
         entities:
           - input_select.which_holiday
-      #Bedroom Fan Input Select
-      - type: entities
-        title: Should the bedroom Fan Automatically Turn On
-        show_header_toggle: false
-        entities:
           - input_select.bedroom_fan_automation
-      #Coffee Pot Automation Input Select
-      - type: entities
-        title: Is the coffee pot setup
-        show_header_toggle: false
-        entities:
           - input_select.is_coffee_pot_setup
       #Custom Tracker Card
       - type: custom:tracker-card

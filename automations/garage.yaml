@@ -1,53 +1,57 @@
-#  - alias: "Close Garage Door on Weekday"
-#    trigger:
-#      - platform: time
-#        at: '22:00:00'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: time
-#          weekday:
-#            - mon
-#            - tue
-#            - wed
-#            - thu
-#        - condition: state
-#          entity_id: media_player.garage_chromecast
-#          state: 'off'
-#        - condition: numeric_state
-#          entity_id: sensor.garage_light_level
-#          below: 50
-#        - condition: state
-#          entity_id: cover.garage_door
-#          state: 'open'
-#    action:
-#      - service: cover.close_cover
-#        entity_id: cover.garage_door
+  - alias: "Close Garage Door on Weekday"
+    trigger:
+      - platform: time
+        at: '22:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          weekday:
+            - mon
+            - tue
+            - wed
+            - thu
+        - condition: state
+          entity_id: media_player.garage_chromecast
+          state: 'off'
+        - condition: numeric_state
+          entity_id: sensor.garage_light_level
+          below: 50
+        - condition: state
+          entity_id: sensor.garage_door
+          state: 'open'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "The Garage Door is Open"
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_chrome"]
 
-#  - alias: "Close Garage Door on Weekend"
-#    trigger:
-#      - platform: time
-#        at: '01:00:00'
-#    condition:
-#      condition: and
-#      conditions:
-#        - condition: time
-#          weekday:
-#            - fri
-#            - sun
-#            - sat
-#        - condition: state
-#          entity_id: media_player.garage_chromecast
-#          state: 'off'
-#        - condition: numeric_state
-#          entity_id: sensor.garage_light_level
-#          below: 50
-#        - condition: state
-#          entity_id: cover.garage_door
-#          state: 'open'
-#    action:
-#      - service: cover.close_cover
-#        entity_id: cover.garage_door
+  - alias: "Close Garage Door on Weekend"
+    trigger:
+      - platform: time
+        at: '00:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: time
+          weekday:
+            - fri
+            - sun
+            - sat
+        - condition: state
+          entity_id: media_player.garage_chromecast
+          state: 'off'
+        - condition: numeric_state
+          entity_id: sensor.garage_light_level
+          below: 50
+        - condition: state
+          entity_id: sensor.garage_door
+          state: 'open'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "The Garage Door is Open"
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_chrome"]
 
   - id: "123456"
     alias: "Connect OctoPi to Printer"

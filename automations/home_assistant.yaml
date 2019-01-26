@@ -49,10 +49,10 @@
               Away
             {% endif %}
 
-  - alias: 'Downstairs Unavailable'
+  - alias: 'Google Media Players Unavailable'
     trigger:
     - platform: state
-      entity_id: media_player.downstairs
+      entity_id: media_player.common_area
       to: 'unavailable'
       for:
         minutes: 15

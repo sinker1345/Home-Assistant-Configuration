@@ -33,12 +33,13 @@ cloud:
         - sensor
         - vacuum
         - script
-
+#lovelace config mode
 lovelace:
   mode: yaml
 
+#rest command
 rest_command:
-#Connecto Octopi to Printer
+  #Connecto Octopi to Printer
   octopi_connect:
     url: 'http://192.168.1.34/api/connection'
     method: post
@@ -50,6 +51,7 @@ rest_command:
         "command": "connect"
       }
 
+#http Component
 http:
   # Secrets are defined in the file secrets.yaml
   # api_password: !secret http_password
@@ -98,6 +100,7 @@ logger:
     homeassistant.components.http.ban: warning
     urllib3.connectionpool: error
 
+#custom_updater device for custom components
 custom_updater:
   track:
      - cards
@@ -264,8 +267,9 @@ dominos:
   address: !secret address
   show_menu: 1
 
+#custom Panel
 panel_custom:
-# Dominos Panel in Front End
+  # Dominos Panel in Front End
   - name: dominos
     sidebar_title: Dominos
     sidebar_icon: mdi:pizza
@@ -278,6 +282,7 @@ panel_iframe:
     icon: 'mdi:shuffle-variant'
     url: 'http://192.168.1.22:1880/'
 
+#Zones
 zone:
 # Jessica Work Zone
 #  - name: Jessica Work
@@ -293,8 +298,9 @@ zone:
     radius: 1000
     icon: mdi:worker
 
+#Switch
 switch:
-#Outside Christmas lights switch
+  #Outside Christmas lights switch
   - platform: mqtt
     name: "Christmas Outside Lights"
     command_topic: "cmnd/sonoff1/power"
@@ -304,7 +310,7 @@ switch:
     payload_off: "OFF"
     reatin: true
 
-#TV Backlight power
+  #TV Backlight power
   - platform: mqtt
     name: "TV Lights Power"
     command_topic: "cmnd/tvlights/power"
@@ -314,7 +320,7 @@ switch:
     payload_off: "OFF"
     retain: true
 
-#Master Bedroom Fan Switch
+  #Master Bedroom Fan Switch
   - platform: mqtt
     name: "Master Bedroom Fan"
     command_topic: "cmnd/master_bedroom/power"
@@ -324,7 +330,7 @@ switch:
     payload_off: "OFF"
     retain: true
 
-#3D Printer Power
+  #3D Printer Power
   - platform: mqtt
     name: "3D Printer Power"
     command_topic: "cmnd/3dprinter/power"
@@ -334,7 +340,7 @@ switch:
     payload_off: "OFF"
     retain: true
 
-#Dummy MQTT switch to disable morning routine after running once
+  #Dummy MQTT switch to disable morning routine after running once
   - platform: mqtt
     name: "Morning Alert"
     state_topic: 'boolean/morning_alert'
@@ -343,6 +349,7 @@ switch:
     payload_off: 'off'
     retain: true
 
+  #Guest Mode Switch
   - platform: mqtt
     name: "Guest Mode"
     state_topic: 'boolean/guest_mode'
@@ -351,6 +358,7 @@ switch:
     payload_off: 'off'
     retain: true
 
+  #Coffee Pot Switch
   - platform: mqtt
     name: "Coffee Pot"
     state_topic: "coffeepot/switch"
@@ -363,7 +371,7 @@ switch:
     qos: 0
     retain: false
     
-#Flux Component for Lights
+  #Flux Component for Lights
   - platform: flux
     lights:
       - light.bar_light
@@ -378,13 +386,15 @@ switch:
     mode: mired
     transition: 3
     interval: 60
-   
+ 
+#Light Component
 light:
   - platform: tplink
     host: 192.168.1.219
 
+#Custom Variable Component
 variable:
-# Last Motion Variable
+  # Last Motion Variable
   last_motion:
     name: Last Room Motion Common Area
     value: 'Unknown'
@@ -393,6 +403,7 @@ variable:
       icon: mdi:map-marker
       name: "Last Motion"
 
+  #tommy status variable
   tommy_status:
     name: tommy status
     restore: true
@@ -400,6 +411,7 @@ variable:
       icon: mdi:map-marker
       name: "tommy status"
 
+  #jessica status variable
   jessica_status:
     name: jessica status
     restore: true
@@ -407,6 +419,7 @@ variable:
       icon: mdi:map-marker
       name: "jessica status"
 
+  #lexi status variable
   lexi_status:
     name: lexi status
     restore: true
@@ -415,7 +428,7 @@ variable:
       name: "lexi status"
 
 #cover:
-#Garage Door Cover
+   #Garage Door Cover
 #  - platform: mqtt
 #    name: "garage_door"
 #    state_topic: "sensor/garage/state1"
@@ -428,8 +441,9 @@ variable:
 #    optomistic: false
 #    retain: false
 
+#calendar Component
 calendar:
-#Todoist Calendar
+  #Todoist Calendar
   - platform: todoist
     token: !secret todoist_API
     custom_projects:
@@ -460,10 +474,12 @@ input_select:
       - 'Yes'
       - 'No'
 
+#Weather component
 weather:
   - platform: darksky
     api_key: !secret dark_sky
 
+#includes
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
 script: !include scripts.yaml

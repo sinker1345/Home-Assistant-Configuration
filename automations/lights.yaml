@@ -57,6 +57,8 @@
     action:
       - service: light.turn_on
         entity_id: light.bar_light
+        data:
+          brightness_pct: 10
 
   - alias: 'turn on bar light When people arrive home after dark'
     trigger:

@@ -1,0 +1,3 @@
+  - platform: mqtt
+    name: "Garage Door"
+    state_topic: "sensor/garage/state1"
