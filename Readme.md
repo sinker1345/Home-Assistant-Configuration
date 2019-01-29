@@ -7,7 +7,7 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 - 2 Aeotec Z-Wave repeaters
 - 5 BRUH Multisensors (parts listed on BRUH automation youtube channel)
 - 1 Sonoff wifi switch (flashed with Tasmota)
-- 1 Sonoff S20 socket
+- 1 Sonoff S20 socket (flashed with Tasmota)
 - 1 Chromecast Audio
 - 2 Google Home Mini
 - 1 Bluetooth Speaker connected to Chromecast Audio
@@ -17,6 +17,7 @@ I currently run Home Assistant on a whitebox server running Proxmox. I am runnin
 - 1 Z-wave/Zigbee controller GoControl (CECOMINOD016164 HUSBZB-1 USB Hub)
 - 2 Roku Devices
 - 1 Chromecast
+- 2 D1 Mini (with relay Hat), 1 used fopr coffee maker and 1 used for garage sensor (relay hat not operational)
 
 ## Software In use.
 - Mosquitto MQTT Server

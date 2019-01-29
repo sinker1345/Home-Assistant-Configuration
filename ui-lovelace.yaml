@@ -4,10 +4,12 @@ resources:
     type: module
   - url: /local/custom_ui/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.8.2
+  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.8.3
     type: module
   - url: /local/custom_ui/button-card.js?v=0.0.5
     type: module
+  - url: /local/custom_ui/slider-entity-row.js
+    type: js
 views:
 #Switches/Lights View
   - title: Switches/Lights
@@ -22,9 +24,12 @@ views:
       - binary_sensor.iss
     cards:
     # Bar Light
-      - type: light
-        entity: light.bar_light
-        name: Bar Light
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.bar_light
     #Guest Mode (Button_card)
       - type: "custom:button-card"
         entity: switch.guest_mode
@@ -36,16 +41,23 @@ views:
         title: Switches
         show_header_toggle: false
         entities:
-          - switch.3d_printer_power
-          - switch.christmas_outside_lights
-          - switch.christmas_tree_lights
+          - entity: switch.christmas_outside_lights
+            icon: mdi:track-light
+          - entity: switch.christmas_tree_lights
+            icon: mdi:pine-tree
+          - entity: switch.inflatables
+            icon: mdi:pine-tree
           - switch.fluxer
-          - switch.inflatables
-          - switch.master_bedroom_fan
-          - switch.morning_alert
-          - switch.seasonal_lights
-          - switch.tv_lights_power
-          - switch.coffee_pot
+          - entity: switch.master_bedroom_fan
+            icon: mdi:fan
+          - entity: switch.morning_alert
+            icon: mdi:coffee
+          - entity: switch.seasonal_lights
+            icon: mdi:track-light
+          - entity: switch.tv_lights_power
+            icon: mdi:television-classic
+          - entity: switch.coffee_pot
+            icon: mdi:kettle
 #Common Area View
   - title: Common Areas
     id: 1
@@ -94,15 +106,19 @@ views:
             icon: mdi:monitor
             secondary_info: last-changed
       #Bar Light
-      - type: light
-        entity: light.bar_light
-        name: Bar Light
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.bar_light
       #TV Lights Power
       - type: entities
         title: TV Lights Power
         show_header_toggle: false
         entities:
-          - switch.tv_lights_power
+          - entity: switch.tv_lights_power
+            icon: mdi:television-classic
       #Gaming Systems
       - type: entities
         title: Gaming Systems
@@ -218,7 +234,8 @@ views:
         title: Master Bedroom Fan Switch
         show_header_toggle: false
         entities:
-          - switch.master_bedroom_fan
+          - entity: switch.master_bedroom_fan
+            icon: mdi:fan
       #Media Players
       - type: custom:mini-media-player
         entity: media_player.master_bath
@@ -344,7 +361,8 @@ views:
         title: 3D Printer Power
         show_header_toggle: false
         entities:
-          - switch.3d_printer_power
+          - entity: switch.3d_printer_power
+            icon: mdi:printer-3d
       #Media Players
       - type: vertical-stack
         cards:
@@ -412,9 +430,13 @@ views:
         hide_volume: true
         show_progress: true
         power_color: true
-      - type: light
-        entity: light.bar_light
-        name: Bar Light
+      #Bar Light
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.bar_light
 #Living Room View
   - title: Living Room
     id: 6
@@ -429,9 +451,12 @@ views:
       - sensor.plex
     cards:
       #Lights
-      - type: light
-        entity: light.bar_light
-        name: Bar Light
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.bar_light
       #Sensors
       - type: entities
         title: Living Room Sensors
@@ -466,7 +491,8 @@ views:
         title: TV Lights Power
         show_header_toggle: false
         entities:
-          - switch.tv_lights_power
+          - entity: switch.tv_lights_power
+            icon: mdi:television-classic
       #Gaming Systems
       - type: entities
         title: Gaming Systems
@@ -544,7 +570,8 @@ views:
         title: Master Bedroom Fan Switch
         show_header_toggle: false
         entities:
-          - switch.master_bedroom_fan
+          - entity: switch.master_bedroom_fan
+            icon: mdi:fan
       #Media Players
       - type: custom:mini-media-player
         entity: media_player.master_bath
@@ -742,7 +769,7 @@ views:
             name: Nearest Storm Distance
       #Weather Map
       - type: iframe
-        url: 'https://embed.windy.com/embed2.html?lat=30.548&lon=-87.163&zoom=9&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=30.670&detailLon=-87.179&metricWind=default&metricTemp=default&radarRange=-1'
+        url: 'https://embed.windy.com/embed2.html?lat=30.546&lon=-87.171&zoom=9&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=30.388&detailLon=-86.795&metricWind=mph&metricTemp=%C2%B0F&radarRange=-1'
         aspect_ratio: 75%
 #Automations/Scripts View
   - title: Automations/Scripts
@@ -1094,7 +1121,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
-      #Decorations Input Select
+      #DVarious Settings Input Select
       - type: entities
         title: Homeassistant Settings
         show_header_toggle: false

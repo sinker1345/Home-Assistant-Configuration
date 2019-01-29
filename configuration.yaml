@@ -122,23 +122,23 @@ vacuum:
 # Device Tracker Component
 device_tracker:
 
-# Unifi WAP Device Tracker
+  # Unifi WAP Device Tracker
   - platform: unifi_direct
     host: 192.168.1.31
     username: !secret unifi_user
     password: !secret unifi
 
-#Bluetooth Tracker
+  #Bluetooth Tracker
   - platform: bluetooth_tracker
     new_device_defaults:
       track_new_devices: false
 
-# Google Maps Tracker
+  # Google Maps Tracker
   - platform: google_maps
     username: !secret google_maps_user
     password: !secret google_maps_password
 
-# NMAP Tracker
+  # NMAP Tracker
   - platform: nmap_tracker
     hosts: !secret network
     exclude:
