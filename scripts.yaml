@@ -70,12 +70,12 @@
             with a high of {{states.sensor.dark_sky_daytime_high_temperature_0.state|round}} degrees 
             and a {{states.sensor.dark_sky_precip_probability.state}} percent chance of rain, 
           {% if now().strftime("%H")|int < 9 and now().strftime("%w")|int > 0 and now().strftime("%w")|int < 6 %}
-            The current drive to Work in traffic is {{states.sensor.google_travel_time__driving.attributes.duration_in_traffic}}, 
+            The current drive to Work in traffic is {{states.sensor.google_travel_time_driving.attributes.duration_in_traffic}}, 
           {% endif %}
           {% if states.calendar.main.state == 'on' and states.calendar.main.attributes.message == 'Trash Day' %}
-            Don't forget to take out the trash,
+            It is trash day today,
           {% elif states.calendar.main.state == 'on' and states.calendar.main.attributes.message == 'Recycling Day' %}
-            Don't forget to take out the recycling,
+            please take out the recycling, recycling day is today,
           {% elif states.calendar.main.state == 'on' %}
             you have a calendar event today. It is {{states.calendar.main.attributes.message}},
           {% endif %}

@@ -2,10 +2,6 @@
     friendly_name: UniFi WiFi
     entity_picture: /local/tommy.jpg
 
-  device_tracker.samsunggalaxys7:
-    friendly_name: UniFi WiFi
-    entity_picture: /local/jessica.jpg
-
   device_tracker.nexus_6p:
     friendly_name: Tommy Bluetooth
     entity_picture: /local/tommy.jpg
@@ -19,10 +15,6 @@
     friendly_name: Jessica WiFi
     entity_picture: /local/jessica.jpg
     hidden: true
-
-  device_tracker.tommy_galaxy_8:
-    friendly_name: Jessica OwnTracks
-    entity_picture: /local/jessica.jpg
 
   sensor.tommy_status:
     entity_picture: /local/tommy.jpg
@@ -66,21 +58,6 @@
   sensor.common_area_motion:
     icon: mdi:walk
 
-  sensor.living_room_motion:
-    hidden: true
-  
-  sensor.living_room_temperature:
-    hidden: true
-  
-  sensor.living_room_humidity:
-    hidden: true
-  
-  sensor.living_room_light_level:
-    hidden: true
-  
-  sensor.living_room_feels_like:
-    hidden: true
-
   sensor.dining_room_motion:
     icon: mdi:walk
 
@@ -92,30 +69,6 @@
 
   variable.last_motion:
     icon: mdi:walk
-
-  binary_sensor.kitchen_motion:
-    hidden: true
-
-  binary_sensor.dining_room_motion:
-    hidden: true
-
-  binary_sensor.living_room_motion:
-    hidden: true
-
-  sensor.living_room_2_feels_like:
-    hidden: true
-  
-  sensor.living_room_2_temperature:
-    hidden: true
-  
-  sensor.living_room_2_humidity:
-    hidden: true
-  
-  sensor.living_room_2_motion:
-    hidden: true
-  
-  sensor.living_room_2_light_level:
-    hidden: true
   
   sensor.living_room_humidity_combo:
     icon: mdi:water-percent
@@ -137,27 +90,12 @@
   sensor.garage_humidity:
     icon: mdi:water-percent
 
-  sensor.dark_sky_daily_high_temperature:
-    hidden: true
-
-  sensor.dark_sky_hourly_summary:
-    hidden: true
-
-  sensor.dark_sky_summary:
-    hidden: true
-
-  sensor.dark_sky_temperature:
-    hidden: true
-
   sensor.garage_motion:
     icon: mdi:walk
 
 #  cover.garage_door:
 #    device_class: garage
 #    friendly_name: Garage Door
-
-  sensor.dark_sky_daytime_high_temperature:
-    hidden: true
 
   sensor.master_bed_room_motion:
     friendly_name: Master Bed Room Motion
@@ -169,84 +107,6 @@
   device_tracker.5c77762568a1:
     entity_picture: /local/lexi.jpg
     friendly_name: Lexi WiFi
-    hidden: true
-
-  sensor.octoprint_target_bed_temp:
-    hidden: true
-
-  sensor.octoprint_target_tool0_temp:
-    hidden: true
-
-  sensor.octoprint_actual_bed_temp:
-    hidden: true
-
-  sensor.octoprint_actual_tool0_temp:
-    hidden: true
-
-  variable.jessica_status:
-    hidden: true
-
-  variable.lexi_status:
-    hidden: true
-
-  variable.tommy_status:
-    hidden: true
-
-  device_tracker.802aa83e3d97:
-    hidden: true
-
-  device_tracker.couchpotatohome:
-    hidden: true
-
-  device_tracker.freenashome:
-    hidden: true
-
-  device_tracker.obitalkhome:
-    hidden: true
-
-  device_tracker.ombihome:
-    hidden: true
-
-  device_tracker.owncloudhome:
-    hidden: true
-
-  device_tracker.pfsensehome:
-    hidden: true
-
-  device_tracker.plexhome:
-    hidden: true
-
-  device_tracker.proxmoxhome:
-    hidden: true
-
-  device_tracker.sabnzbdhome:
-    hidden: true
-
-  device_tracker.sonarrhome:
-    hidden: true
-
-  device_tracker.torrenthome:
-    hidden: true
-
-  device_tracker.tvheadendhome:
-    hidden: true
-
-  device_tracker.unifiaphome:
-    hidden: true
-
-  device_tracker.unifihome:
-    hidden: true
-
-  device_tracker.xboxonehome:
-    hidden: true
-
-  device_tracker.7ced8d8a9fbe:
-    hidden: true
-
-  device_tracker.0403d6daf0ae:
-    hidden: true
-
-  device_tracker.280dfcf53162:
     hidden: true
 
   sensor.guestap:
@@ -306,41 +166,8 @@
   sensor.ps3:
     icon: mdi:playstation
 
-  group.Lexi:
-    hidden: true
-
-  group.Jessica:
-    hidden: true
-
-  group.Tommy:
-    hidden: true
-
-  device_tracker.google_maps_104723974144441113874:
-    hidden: true
-
-  device_tracker.google_maps_105472855536836656633:
-    hidden: true
-
-  device_tracker.pixel_2_xl:
-    hidden: true
-
-  device_tracker.b4f7a1e3c6fa:
-    hidden: true
-
   sensor.ups:
     friendly_name: UPS
 
-  device_tracker.xboxone:
-    hidden: true
-
   sensor.lexixboxone:
     icon: mdi:xbox
-
-  sensor.dark_sky_precip_probability:
-    hidden: true
-
-  sensor.dining_room_motion_2:
-    hidden: true
-  
-  device_tracker.googlehome_2:
-    hidden: true
