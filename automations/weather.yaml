@@ -2,18 +2,18 @@
 
   - alias: 'NWS Weather Alert Pop Up Control'
     trigger:
-      platform: state
-      entity_id: sensor.nws_alert_count_filtered
+      - platform: state
+        entity_id: sensor.nws_alert_count_filtered
     condition:
       - condition: template  
         value_template: '{{states.sensor.nws_alert_count_filtered.state | int > 0}}'
     action:
-      service: script.nws_popup_on_wx_alert
+      - service: script.nws_popup_on_wx_alert
     
   - alias: NWS Notification Weather Alert
     trigger:
-      platform: state
-      entity_id: sensor.nws_alert_count_filtered
+      - platform: state
+        entity_id: sensor.nws_alert_count_filtered
     condition:
       - condition: template
         value_template: '{{states.sensor.nws_alert_count_filtered.state | int > 0}}'

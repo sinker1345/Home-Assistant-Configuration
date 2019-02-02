@@ -1,8 +1,8 @@
 # turn on Bob
   - alias: "Turn on Bob"
     trigger:
-    - platform: time
-      at: '01:00:00'
+      - platform: time
+        at: '01:00:00'
     condition:
       condition: or
       conditions:
@@ -27,8 +27,8 @@
 
   - alias: "Send Bob Home"
     trigger:
-    - platform: time
-      at: '05:00:00'
+      - platform: time
+        at: '05:00:00'
     condition:
       condition: and
       conditions:
@@ -60,8 +60,8 @@
   - id: "1234560101"
     alias: Match TV Lights to HTPC State
     trigger:
-     - platform: state
-       entity_id: sensor.glances
+      - platform: state
+        entity_id: sensor.glances
     action:
       - service_template: >-
           {% if trigger.to_state.state == "Idle" or trigger.to_state.state == "In Use"%}

@@ -11,7 +11,7 @@
           {% elif now().weekday() == 1 %}
             Tuesday
           {% elif now().weekday() == 2 %}
-            Wensday
+            Wednesday
           {% elif now().weekday() == 3 %}
             Thursday
           {% elif now().weekday() == 4 %}

@@ -3,16 +3,16 @@
       - platform: time
         at: '20:00:00'
     action:
-      service: notify.google_push
-      data:
-        message: "Did you set up the coffee pot?"
-        target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
+      - service: notify.google_push
         data:
-          actions:
-            - action: "button1"
-              title: "Yes"
-            - action: "button2"
-              title: "No"
+          message: "Did you set up the coffee pot?"
+          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+          data:
+            actions:
+              - action: "button1"
+                title: "Yes"
+              - action: "button2"
+                title: "No"
 
   - alias: Coffee Pot Button 1 Clicked
     trigger:

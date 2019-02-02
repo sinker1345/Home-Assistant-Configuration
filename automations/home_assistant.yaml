@@ -2,8 +2,8 @@
   - id: "010101123456"
     alias: 'Reset Morning Routine Switch'
     trigger:
-      platform: time
-      at: '01:00:30'
+      - platform: time
+        at: '01:00:30'
     condition:
       condition: and
       conditions:
@@ -51,25 +51,25 @@
 
   - alias: 'Google Media Players Unavailable'
     trigger:
-    - platform: state
-      entity_id: media_player.common_area
-      to: 'unavailable'
-      for:
-        minutes: 15
-    - platform: state
-      entity_id: media_player.whole_house
-      to: 'unavailable'
-      for:
-        minutes: 15
+      - platform: state
+        entity_id: media_player.common_area
+        to: 'unavailable'
+        for:
+          minutes: 15
+      - platform: state
+        entity_id: media_player.whole_house
+        to: 'unavailable'
+        for:
+          minutes: 15
     action:
       - service: shell_command.restart_ha
       
   - alias: 'Update DOW/DOM Sensors'
     trigger:
-    - platform: homeassistant
-      event: start
-    - platform: time
-      at: "00:00:30"
+      - platform: homeassistant
+        event: start
+      - platform: time
+        at: "00:00:30"
     action:
       - service: homeassistant.update_entity
         entity_id: sensor.day
@@ -80,8 +80,8 @@
 
   - alias: 'FLUX Switch on at Startup'
     trigger:
-    - platform: homeassistant
-      event: start
+      - platform: homeassistant
+        event: start
     action:
       - service: switch.turn_on
         entity_id: switch.fluxer
@@ -89,26 +89,26 @@
 #Test Z Wave Network
   - alias: Test Z Wave at 2:30am
     trigger:
-      platform: time
-      at: '2:30:00'
+      - platform: time
+        at: '2:30:00'
     action:
-      service: zwave.test_network
+      - service: zwave.test_network
 
 # Heal Z Wave Network
   - alias: Heal Z Wave at 3:32am
     trigger:
-      platform: time
-      at: '3:32:00'
+      - platform: time
+        at: '3:32:00'
     action:
-      service: zwave.heal_network
+      - service: zwave.heal_network
 
 # Set Dark Theme at Sunset
   - alias: 'Darker Theme At Sunset'
     initial_state: true
     hide_entity: false
     trigger:
-      platform: sun
-      event: sunset
+      - platform: sun
+        event: sunset
     action:
       - service: frontend.set_theme
         data:
@@ -119,8 +119,8 @@
     initial_state: true
     hide_entity: false
     trigger:
-      platform: sun
-      event: sunrise
+      - platform: sun
+        event: sunrise
     action:
       - service: frontend.set_theme
         data:

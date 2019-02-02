@@ -3,7 +3,7 @@
     state_topic: "livingroom/sensornode1"
     name: "Living Room Humidity"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+    value_template: '{{ value_json.humidity | round(0) }}'
 
 # Sensor for multisensor living room
   - platform: mqtt
@@ -17,14 +17,14 @@
     state_topic: "livingroom/sensornode1"
     name: "Living Room Temperature"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
+    value_template: '{{ value_json.temperature | round(0) }}'
 
 # Sensor for multisensor living room
   - platform: mqtt
     state_topic: "livingroom/sensornode1"
     name: "Living Room Feels Like"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
+    value_template: '{{ value_json.heatIndex | round(0) }}'
 
 # Sensor for multisensor living room
   - platform: mqtt
@@ -43,14 +43,14 @@
     state_topic: "kitchen/sensornode1"
     name: "Kitchen Feels Like"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
+    value_template: '{{ value_json.heatIndex | round(0) }}'
 
 # Sensor for multisensor kitchen
   - platform: mqtt
     state_topic: "kitchen/sensornode1"
     name: "Kitchen Temperature"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
+    value_template: '{{ value_json.temperature | round(0) }}'
 
 # Sensor for multisensor kitchen
   - platform: mqtt
@@ -64,7 +64,7 @@
     state_topic: "kitchen/sensornode1"
     name: "Kitchen Humidity"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+    value_template: '{{ value_json.humidity | round(0) }}'
 
 #sensor for multisensor Dining Room
   - platform: mqtt
@@ -77,14 +77,14 @@
     state_topic: "dining_room/sensornode1"
     name: "Dining Room Feels Like"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
+    value_template: '{{ value_json.heatIndex | round(0) }}'
 
 # Sensor for multisensor Dining Room
   - platform: mqtt
     state_topic: "dining_room/sensornode1"
     name: "Dining Room Temperature"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
+    value_template: '{{ value_json.temperature | round(0) }}'
 
 # Sensor for multisensor Dining Room
   - platform: mqtt
@@ -98,7 +98,7 @@
     state_topic: "dining_room/sensornode1"
     name: "Dining Room Humidity"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+    value_template: '{{ value_json.humidity | round(0) }}'
 
 #sensor for multisensor Dining Room
   - platform: mqtt
@@ -111,14 +111,14 @@
     state_topic: "living_room/sensornode2"
     name: "Living Room 2 Feels Like"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
+    value_template: '{{ value_json.heatIndex | round(0) }}'
 
 # Sensor for multisensor Living Room (2)
   - platform: mqtt
     state_topic: "living_room/sensornode2"
     name: "Living Room 2 Temperature"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
+    value_template: '{{ value_json.temperature | round(0) }}'
 
 # Sensor for multisensor Living Room (2)
   - platform: mqtt
@@ -132,7 +132,7 @@
     state_topic: "living_room/sensornode2"
     name: "Living Room 2 Humidity"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+    value_template: '{{ value_json.humidity | round(0) }}'
 
 #sensor for multisensor Living Room (2)
   - platform: mqtt
@@ -151,14 +151,14 @@
     state_topic: "garage/sensornode1"
     name: "Garage Feels Like"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
+    value_template: '{{ value_json.heatIndex | round(0) }}'
 
 # Sensor for Garage Temperature
   - platform: mqtt
     state_topic: "garage/sensornode1"
     name: "Garage Temperature"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
+    value_template: '{{ value_json.temperature | round(0) }}'
 
 # Sensor for Garage Light Level
   - platform: mqtt
@@ -172,7 +172,7 @@
     state_topic: "garage/sensornode1"
     name: "Garage Humidity"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+    value_template: '{{ value_json.humidity | round(0) }}'
 
 #sensor for Garage Motion
   - platform: mqtt
@@ -185,7 +185,7 @@
     state_topic: "bruh/master_bedroom"
     name: "Master Bed Room Humidity"
     unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+    value_template: '{{ value_json.humidity | round(0) }}'
 
 # Sensor for multisensor Master Bedroom room
   - platform: mqtt
@@ -199,14 +199,14 @@
     state_topic: "bruh/master_bedroom"
     name: "Master Bed Room Temperature"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
+    value_template: '{{ value_json.temperature | round(0) }}'
 
 # Sensor for multisensor master bedroom room
   - platform: mqtt
     state_topic: "bruh/master_bedroom"
     name: "Master Bed Room Feels Like"
     unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
+    value_template: '{{ value_json.heatIndex | round(0) }}'
 
 # Sensor for multisensor master bedroom room
   - platform: mqtt

@@ -30,42 +30,6 @@
 
   - platform: template
     sensors:
-      living_room_feels_like_combo:
-        value_template: >-
-          {{ ((float(states.sensor.living_room_feels_like.state) + 
-               float(states.sensor.living_room_2_feels_like.state)) / 2) | round(1)
-          }}
-        unit_of_measurement: '°F'
-
-  - platform: template
-    sensors:
-      living_room_temperature_combo:
-        value_template: >-
-          {{ ((float(states.sensor.living_room_temperature.state) + 
-               float(states.sensor.living_room_2_temperature.state)) / 2) | round(1)
-          }}
-        unit_of_measurement: '°F'
-
-  - platform: template
-    sensors:
-      living_room_humidity_combo:
-        value_template: >-
-          {{ ((float(states.sensor.living_room_humidity.state) + 
-               float(states.sensor.living_room_2_humidity.state)) / 2) | round(1)
-          }}
-        unit_of_measurement: '%'
-
-  - platform: template
-    sensors:
-      living_room_light_level_combo:
-        value_template: >-
-          {{ ((float(states.sensor.living_room_light_level.state) + 
-               float(states.sensor.living_room_2_light_level.state)) / 2) | round(1)
-          }}
-        unit_of_measurement: 'lx'
-
-  - platform: template
-    sensors:
       living_room_motion_combo:
         friendly_name: "Living Room Motion"
         value_template: >-
@@ -76,51 +40,6 @@
           {% else %}
             standby
           {% endif %}
-
-#averageing temperature for downstairs sensors
-  - platform: template
-    sensors:
-      common_area_feels_like:
-        friendly_name: "Common Area Feels Like"
-        value_template: >-
-          {{ ((float(states.sensor.kitchen_feels_like.state) + 
-               float(states.sensor.living_room_feels_like_combo.state) + 
-               float(states.sensor.dining_room_feels_like.state)) / 3) | round(1)
-          }}
-        unit_of_measurement: '°F'
-
-  - platform: template
-    sensors:
-      common_area_temperature:
-        friendly_name: "Common Area Temperature"
-        value_template: >-
-          {{ ((float(states.sensor.kitchen_temperature.state) + 
-               float(states.sensor.living_room_temperature_combo.state) + 
-               float(states.sensor.dining_room_temperature.state)) / 3) | round(1)
-          }}
-        unit_of_measurement: '°F'
-
-  - platform: template
-    sensors:
-      common_area_humidity:
-        friendly_name: "Common Area Humidity"
-        value_template: >-
-          {{ ((float(states.sensor.kitchen_humidity.state) + 
-               float(states.sensor.living_room_humidity_combo.state) + 
-               float(states.sensor.dining_room_humidity.state)) / 3) | round(1)
-          }}
-        unit_of_measurement: '%'
-
-  - platform: template
-    sensors:
-      common_area_light_level:
-        friendly_name: "Common Area Light Level"
-        value_template: >-
-          {{ ((float(states.sensor.kitchen_light_level.state) + 
-               float(states.sensor.living_room_light_level_combo.state) + 
-               float(states.sensor.dining_room_light_level.state)) / 3) | round(1)
-          }}
-        unit_of_measurement: 'lx'
 
   - platform: template
     sensors:
