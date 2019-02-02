@@ -1,0 +1,311 @@
+  - platform: min_max
+    name: 'Living Room Feels Like Combo'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_feels_like
+      - sensor.living_room_2_feels_like
+
+  - platform: min_max
+    name: 'Living Room Temperature Combo'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_temperature
+      - sensor.living_room_2_temperature
+
+  - platform: min_max
+    name: 'Living Room Humidity Combo'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_humidity
+      - sensor.living_room_2_humidity
+      
+  - platform: min_max
+    name: 'Living Room Light Level Combo'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_light_level
+      - sensor.living_room_2_light_level
+
+  - platform: min_max
+    name: 'Common Area Temperature'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_temperature_combo
+      - sensor.living_room_2_kitchen_temperature
+      - sensor.dining_room_temperature
+
+  - platform: min_max
+    name: 'Common Area Feels Like'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_feels_like_combo
+      - sensor.living_room_2_kitchen_feels_like
+      - sensor.dining_room_feels_like
+
+  - platform: min_max
+    name: 'Common Area Humidity'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_humidity_combo
+      - sensor.living_room_2_kitchen_humidity
+      - sensor.dining_room_humidity
+
+  - platform: min_max
+    name: 'Common Area Light Level'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.living_room_light_level_combo
+      - sensor.living_room_2_kitchen_light_level
+      - sensor.dining_room_light_level
+
+# Sensor for multisensor living room
+  - platform: mqtt
+    state_topic: "livingroom/sensornode1"
+    name: "Living Room Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+# Sensor for multisensor living room
+  - platform: mqtt
+    state_topic: "livingroom/sensornode1"
+    name: "Living Room Light Level"
+    unit_of_measurement: "lx"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for multisensor living room
+  - platform: mqtt
+    state_topic: "livingroom/sensornode1"
+    name: "Living Room Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for multisensor living room
+  - platform: mqtt
+    state_topic: "livingroom/sensornode1"
+    name: "Living Room Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for multisensor living room
+  - platform: mqtt
+    state_topic: "livingroom/sensornode1"
+    name: "Living Room Motion"
+    value_template: '{{ value_json.motion }}'
+
+#sensor for multisensor kitchen
+  - platform: mqtt
+    state_topic: "kitchen/sensornode1"
+    name: "Kitchen Motion"
+    value_template: '{{ value_json.motion }}'
+
+#sensor for multisensor kitchen
+  - platform: mqtt
+    state_topic: "kitchen/sensornode1"
+    name: "Kitchen Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for multisensor kitchen
+  - platform: mqtt
+    state_topic: "kitchen/sensornode1"
+    name: "Kitchen Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for multisensor kitchen
+  - platform: mqtt
+    state_topic: "kitchen/sensornode1"
+    name: "Kitchen Light Level"
+    unit_of_measurement: "lx"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for multisensor kitchen
+  - platform: mqtt
+    state_topic: "kitchen/sensornode1"
+    name: "Kitchen Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+#sensor for multisensor Dining Room
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Motion"
+    value_template: '{{ value_json.motion }}'
+
+#sensor for multisensor Dining Room
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for multisensor Dining Room
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for multisensor Dining Room
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Light Level"
+    unit_of_measurement: "lx"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for multisensor Dining Room
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+#sensor for multisensor Dining Room
+  - platform: mqtt
+    state_topic: "dining_room/sensornode1"
+    name: "Dining Room Motion"
+    value_template: '{{ value_json.motion }}'
+
+#sensor for multisensor Living Room (2)
+  - platform: mqtt
+    state_topic: "living_room/sensornode2"
+    name: "Living Room 2 Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for multisensor Living Room (2)
+  - platform: mqtt
+    state_topic: "living_room/sensornode2"
+    name: "Living Room 2 Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for multisensor Living Room (2)
+  - platform: mqtt
+    state_topic: "living_room/sensornode2"
+    name: "Living Room 2 Light Level"
+    unit_of_measurement: "lx"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for multisensor Living Room (2)
+  - platform: mqtt
+    state_topic: "living_room/sensornode2"
+    name: "Living Room 2 Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+#sensor for multisensor Living Room (2)
+  - platform: mqtt
+    state_topic: "living_room/sensornode2"
+    name: "Living Room 2 Motion"
+    value_template: '{{ value_json.motion }}'
+
+#sensor for detecting if HTPC is idle
+  - platform: mqtt
+    state_topic: "eventghost/htpc"
+    name: "HTPC idle"
+    value_template: '{{ value_json.activity }}'
+
+#sensor for Garage Feels Like
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for Garage Temperature
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for Garage Light Level
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Light Level"
+    unit_of_measurement: "lx"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for Garage Humidity
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+#sensor for Garage Motion
+  - platform: mqtt
+    state_topic: "garage/sensornode1"
+    name: "Garage Motion"
+    value_template: '{{ value_json.motion }}'
+
+# Sensor for multisensor master bedroom room
+  - platform: mqtt
+    state_topic: "bruh/master_bedroom"
+    name: "Master Bed Room Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+# Sensor for multisensor Master Bedroom room
+  - platform: mqtt
+    state_topic: "bruh/master_bedroom"
+    name: "Master Bed Room Light Level"
+    unit_of_measurement: "lx"
+    value_template: '{{ value_json.ldr }}'
+
+# Sensor for multisensor master bedroom room
+  - platform: mqtt
+    state_topic: "bruh/master_bedroom"
+    name: "Master Bed Room Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+# Sensor for multisensor master bedroom room
+  - platform: mqtt
+    state_topic: "bruh/master_bedroom"
+    name: "Master Bed Room Feels Like"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+# Sensor for multisensor master bedroom room
+  - platform: mqtt
+    state_topic: "bruh/master_bedroom"
+    name: "Master Bed Room Motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: template
+    sensors:
+      living_room_motion_combo:
+        friendly_name: "Living Room Motion"
+        value_template: >-
+          {% if is_state('sensor.living_room_motion', 'motion detected') %}
+            motion detected
+          {% elif is_state('sensor.living_room_2_motion', 'motion detected') %}
+            motion detected
+          {% else %}
+            standby
+          {% endif %}
+
+  - platform: template
+    sensors:
+      common_area_motion:
+        friendly_name: "Common Area Motion"
+        value_template: >-
+          {% if is_state('sensor.dining_room_motion', 'motion detected') %}
+            Motion Detected
+          {% elif is_state('sensor.living_room_motion_combo', 'motion detected') %}
+            Motion Detected
+          {% elif is_state('sensor.kitchen_motion', 'motion detected') %}
+            Motion Detected
+          {% else %}
+            Standby
+          {% endif %}

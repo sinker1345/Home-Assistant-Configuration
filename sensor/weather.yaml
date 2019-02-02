@@ -1,0 +1,133 @@
+  - platform: darksky
+    api_key: !secret dark_sky
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - hourly_summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+      - cloud_cover
+    update_interval:
+      minutes: 5
+
+  - platform: template
+    sensors:
+      dark_sky_current_text:
+        value_template: '{% if is_state("sensor.dark_sky_icon","clear-day") %} Clear 
+                         {% elif is_state("sensor.dark_sky_icon","clear-night") %} Clear 
+                         {% elif is_state("sensor.dark_sky_icon","rain") %} Rain
+                         {% elif is_state("sensor.dark_sky_icon","snow") %} Snowy
+                         {% elif is_state("sensor.dark_sky_icon","fog") %} Foggy
+                         {% elif is_state("sensor.dark_sky_icon","sleet") %} Sleet
+                         {% elif is_state("sensor.dark_sky_icon","wind") %} Windy
+                         {% elif is_state("sensor.dark_sky_icon","cloudy") %} Cloudy
+                         {% elif is_state("sensor.dark_sky_icon","partly-cloudy-day") %} Partly Cloudy
+                         {% elif is_state("sensor.dark_sky_icon","partly-cloudy-night") %} Partly Cloudy
+                         {% elif is_state("sensor.dark_sky_icon","hail") %} Hailing
+                         {% elif is_state("sensor.dark_sky_icon","lightning") %} Lightning
+                         {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Thunderstorm
+                         {% endif %}'
+
+  - platform: rest
+    resource: https://api.weather.gov/alerts/active/count
+    timeout: 30
+    name: NWS Alert Count Raw
+    value_template: >
+      {% if value_json is defined and value_json.zones.FLZ203 is defined %}
+        {{ value_json.zones.FLZ203 }}
+      {% elif value_json is defined and value_json.zones.FLC113 is defined %}
+        {{ value_json.zones.FLC113 }}
+      {% else %}
+        0
+      {% endif %}
+    headers:
+      User-Agent: Homeassistant
+      Accept: application/ld+json
+    scan_interval: 120
+    
+  - platform: template
+    sensors:
+      nws_alert_count_filtered:
+        friendly_name: NWS Alert Count
+        entity_id: sensor.nws_alert_count_raw
+        value_template: >
+          {% if is_state('sensor.nws_alert_count_raw', 'unavailable') or is_state('sensor.nws_alert_count_raw', 'unknown') %}
+            {{ states.sensor.nws_alert_count_filtered.state }}
+          {% else %}
+            {{ states.sensor.nws_alert_count_raw.state }}
+          {% endif %}
+
+  - platform: rest
+    resource: https://api.weather.gov/alerts/active?zone=FLZ203,FLC113
+    name: NWS Alert Event Raw
+    timeout: 30
+    value_template: >
+      {% if value_json.features[0] is defined %}
+        {{ value_json['features'][0]['properties'].event }}
+      {% else %}
+        None
+      {% endif %}
+    json_attributes:
+      - features
+    headers:
+      User-Agent: Homeassistant
+      Accept: application/geo+json
+    scan_interval: 120
+
+  - platform: template
+    sensors:
+      nws_alert_event_filtered:
+        friendly_name: NWS Alert Event
+        entity_id: sensor.nws_alert_event_raw
+        value_template: >
+          {% if is_state('sensor.nws_alert_event_raw', 'unavailable') or is_state('sensor.nws_alert_event_raw', 'unknown') %}
+            {{ states.sensor.nws_alert_event_filtered.state }}
+          {% else %}
+            {{ states.sensor.nws_alert_event_raw.state }}
+          {% endif %}
+
+  - platform: template
+    sensors:
+      nws_alert_event_2:
+        friendly_name: NWS Alert Event 2
+        entity_id: sensor.nws_alert_event_raw
+        value_template: >
+          {% if state_attr('sensor.nws_alert_event_raw', 'features')[1] is defined %}
+            {{ state_attr('sensor.nws_alert_event_raw', 'features')[1]['properties'].event }}
+          {% else %}
+            None
+          {% endif %}
+      nws_alert_event_3:
+        friendly_name: NWS Alert Event 3
+        entity_id: sensor.nws_alert_event_raw
+        value_template: >
+          {% if state_attr('sensor.nws_alert_event_raw', 'features')[2] is defined %}
+            {{ state_attr('sensor.nws_alert_event_raw', 'features')[2]['properties'].event }}
+          {% else %}
+            None
+          {% endif %}

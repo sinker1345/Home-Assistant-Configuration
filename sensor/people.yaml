@@ -1,0 +1,15 @@
+# Template Sensor for extended presence
+  - platform: template
+    sensors: 
+      tommy_status:
+        value_template: '{{ states.variable.tommy_status.state }}'
+        friendly_name: 'Tommy'
+
+
+      jessica_status:
+        value_template: '{{ states.variable.jessica_status.state }}'
+        friendly_name: 'Jessica'
+
+      lexi_status:
+        value_template: '{{ states.variable.lexi_status.state }}'
+        friendly_name: 'Lexi'

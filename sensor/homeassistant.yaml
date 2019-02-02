@@ -1,75 +1,37 @@
-# Template Sensor for extended presence
-  - platform: template
-    sensors: 
-      tommy_status:
-        value_template: '{{ states.variable.tommy_status.state }}'
-        friendly_name: 'Tommy'
+  - platform: plex
+    host: 192.168.1.18
 
+  - platform: nut
+    name: Server UPS
+    resources:
+      - ups.status.display
+      - ups.load
+      - ups.realpower.nominal
+      - input.voltage
+      - battery.runtime
+      - battery.charge
+      - output.voltage
+      - ups.test.result
+      - battery.voltage
 
-      jessica_status:
-        value_template: '{{ states.variable.jessica_status.state }}'
-        friendly_name: 'Jessica'
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
 
-      lexi_status:
-        value_template: '{{ states.variable.lexi_status.state }}'
-        friendly_name: 'Lexi'
-
-#Template sensor checks eventghost (via MQTT) and Kodi to determine if HTPC is in use
-  - platform: template
-    sensors:
-      glances:
-        friendly_name: "HTPC"
-        value_template: >-
-          {% if is_state('media_player.living_room_tv', 'off') %}
-            Off
-          {% elif is_state('sensor.htpc_idle', 'Idle') and is_state('media_player.living_room_tv', 'idle') %}
-            Idle
-          {% else %}
-            In Use
-          {% endif %}
-
-  - platform: template
-    sensors:
-      living_room_motion_combo:
-        friendly_name: "Living Room Motion"
-        value_template: >-
-          {% if is_state('sensor.living_room_motion', 'motion detected') %}
-            motion detected
-          {% elif is_state('sensor.living_room_2_motion', 'motion detected') %}
-            motion detected
-          {% else %}
-            standby
-          {% endif %}
-
-  - platform: template
-    sensors:
-      common_area_motion:
-        friendly_name: "Common Area Motion"
-        value_template: >-
-          {% if is_state('sensor.dining_room_motion', 'motion detected') %}
-            Motion Detected
-          {% elif is_state('sensor.living_room_motion_combo', 'motion detected') %}
-            Motion Detected
-          {% elif is_state('sensor.kitchen_motion', 'motion detected') %}
-            Motion Detected
-          {% else %}
-            Standby
-          {% endif %}
-
-  - platform: template
-    sensors:
-      hotend_temp:
-        friendly_name: 'Hotend Actual Temp'
-        value_template: '{{ ((states.sensor.octoprint_actual_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-      bed_temp:
-        friendly_name: "Bed Actual Temp"
-        value_template: '{{ ((states.sensor.octoprint_actual_bed_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-      hotend_target:
-        friendly_name: 'Hotend Target Temp'
-        value_template: '{{ ((states.sensor.octoprint_target_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-      bed_target:
-        friendly_name: "Bed Target Temp"
-        value_template: '{{ ((states.sensor.octoprint_target_bed_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
+# System Monitor Component
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: memory_use_percent
+      - type: processor_use
+#      - type: network_in
+#      - type: network_out
+      - type: last_boot
+#      - type: since_last_boot
 
   - platform: template
     sensors:
@@ -133,18 +95,76 @@
       lexixboxone:
         friendly_name: 'Lexi Xbox One'
         value_template: "{{ 'Online' if is_state('device_tracker.xboxone', 'home' ) else 'Offline' }}"
-      garage_door_template:
+
+# Time/Date component
+  - platform: time_date
+  
+  - platform: template
+    sensors:
+      day:
+        friendly_name: Day
         value_template: >-
-          {% if is_state('sensor.garage_door', 'open') %}
-            Open
-          {% else %}
-            Closed
-          {% endif %}
-        icon_template: >-
-          {% if is_state('sensor.garage_door', 'open') %}
-            mdi:garage-open
-          {% else %}
-            mdi:garage
+          {% if now().weekday() == 0 %}
+            Monday 
+          {% elif now().weekday() == 1 %}
+            Tuesday
+          {% elif now().weekday() == 2 %}
+            Wednesday
+          {% elif now().weekday() == 3 %}
+            Thursday
+          {% elif now().weekday() == 4 %}
+            Friday
+          {% elif now().weekday() == 5 %}
+            Saturday
+          {% elif now().weekday() == 6 %}
+            Sunday
           {% endif %}
 
+  - platform: template
+    sensors:
+      month:
+        friendly_name: Month
+        value_template: >-
+          {% if now().month == 1 %}
+            January
+          {% elif now().month == 2 %}
+            Febuary
+          {% elif now().month == 3 %}
+            March
+          {% elif now().month == 4 %}
+            April
+          {% elif now().month == 5 %}
+            May
+          {% elif now().month == 6 %}
+            June
+          {% elif now().month == 7 %}
+            July
+          {% elif now().month == 8 %}
+            August 
+          {% elif now().month == 9 %}
+            September
+          {% elif now().month == 10 %}
+            October
+          {% elif now().month == 11 %}
+            November
+          {% elif now().month == 12 %}
+            December
+          {% endif %}
 
+  - platform: template
+    sensors:
+      year:
+        friendly_name: Year
+        value_template: >-
+          {{ now().year }}
+
+  - platform: ups
+    username: !secret ups_username
+    password: !secret ups_pass
+
+# XBox Live Component
+#  - platform: xbox_live
+#    api_key: !secret xbox_api
+#    scan_interval: 60
+#    xuid:
+#      - !secret lexi_xbox
