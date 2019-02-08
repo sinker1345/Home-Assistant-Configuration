@@ -24,6 +24,8 @@ frontend:
 # Enables configuration UI
 config:
 
+shopping_list:
+
 # Enables Homeassistant Cloud Component
 cloud:
   google_actions:
@@ -33,6 +35,10 @@ cloud:
         - sensor
         - vacuum
         - script
+
+#system health check
+system_health:
+
 #lovelace config mode
 lovelace:
   mode: yaml
@@ -284,20 +290,27 @@ panel_iframe:
 
 #Zones
 zone:
-# Jessica Work Zone
+  # Jessica Work Zone
 #  - name: Jessica Work
 #    latitude: !secret jessica_work_lat
 #    longitude: !secret jessica_work_long
 #    radius: 200
 #    icon: mdi:worker
 
-# Tommy Work Zone
+  # Tommy Work Zone
   - name: Tommy Work
     latitude: !secret tommy_work_lat
     longitude: !secret tommy_work_long
     radius: 1000
     icon: mdi:worker
-
+    
+  #Win-Dixie for shopping list component
+  - name: Win-Dixie
+    latitude: !secret win_dixie_lat
+    longitude: !secret win_dixie_long
+    radius: 150
+    icon: mdi:cart
+    
 #Switch
 switch:
   #Outside Christmas lights switch
@@ -308,7 +321,7 @@ switch:
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
-    reatin: true
+    retain: true
 
   #TV Backlight power
   - platform: mqtt

@@ -12,7 +12,7 @@
       - service: notify.google_push
         data_template:
           message: "Lexi has signed on to XBox"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_linux", "mpu_chrome"]
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "MPU_Linux", "MPU_Chrome"]
           data:
            tag: 'Lexi Signed on to Xbox'
 
@@ -28,7 +28,7 @@
       - service: notify.google_push
         data_template:
           message: "Lexi has signed off of XBox"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_linux", "mpu_chrome"]
+          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "MPU_Linux", "MPU_Chrome"]
           data:
            tag: 'Lexi Signed off of Xbox'
 
@@ -50,7 +50,7 @@
      - service: notify.google_push
        data_template:
          message: "Take out the Trash"
-         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
 
 # Take Out Recycling
   - id: "1234569874651689"
@@ -70,4 +70,48 @@
      - service: notify.google_push
        data_template:
          message: "Take out the Recycling"
-         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "mpu_linux"]
+         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+
+  - alias: 'Shopping List'
+    trigger:
+      - platform: state
+        entity_id: device_tracker.google_maps_104723974144441113874
+        to: 'Win-Dixie'
+      - platform: state
+        entity_id: device_tracker.google_maps_105472855536836656633
+        to: 'Win-Dixie'
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "Would you like to view the shopping list?"
+          target: >-
+            {% if states.google_maps_104723974144441113874.state == 'Win-Dixie' %}
+              Jessica Phone
+            {% else %}
+              Tommy_Pixel_2XL
+            {% endif %}
+          data:
+            actions:
+              - action: "yes"
+                title: 'Yes'
+              - action: "no"
+                title: 'No'
+
+  - alias: 'View Shopping List'
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: "yes"
+    action:
+      - service: notify.google_push
+        data_template:
+          message: "Click this to view shopping list"
+          target: >-
+            {% if states.google_maps_104723974144441113874.state == 'Win-Dixie' %}
+              Jessica Phone
+            {% else %}
+              Tommy_Pixel_2XL
+            {% endif %}
+          data:
+            url: !secret hass_url

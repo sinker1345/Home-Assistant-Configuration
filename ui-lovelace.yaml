@@ -1,10 +1,10 @@
 title: House
 resources:
-  - url: /local/custom_ui/mini-media-player-bundle.js?v=0.9.8
+  - url: /local/custom_ui/mini-media-player-bundle.js?v=1.0.0
     type: module
-  - url: /local/custom_ui/tracker-card.js?v=0.2.0
+  - url: /local/custom_ui/tracker-card.js?v=0.3.0
     type: js
-  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.8.3
+  - url: /local/custom_ui/dark-sky-weather-card.js?v=0.9.3
     type: module
   - url: /local/custom_ui/button-card.js?v=0.0.5
     type: module
@@ -412,6 +412,9 @@ views:
             name: Kitchen Motion
             icon: mdi:walk
             secondary_info: last-changed
+      #Shopping List
+      - type: shopping-list
+        title: Shopping List
       #Switches
       - type: entities
         title: Switches
@@ -967,6 +970,10 @@ views:
             secondary_info: last-changed
           - entity: automation.google_media_players_unavailable
             secondary_info: last-changed
+          - entity: automation.shopping_list
+            secondary_info: last-changed
+          - entity: automation.view_shopping_list
+            secondary_info: last-changed
       #Scripts
       - type: entities
         title: Scripts
@@ -1121,7 +1128,7 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
-      #DVarious Settings Input Select
+      #Various Settings Input Select
       - type: entities
         title: Homeassistant Settings
         show_header_toggle: false
@@ -1135,5 +1142,17 @@ views:
         trackers:
           - sensor.custom_card_tracker
           - sensor.custom_component_tracker
-
-        
+    
+  - title:  
+    icon: mdi:thisfakereferencehidesthistab
+    id: 15
+    # Badges
+    badges:
+      - sensor.time
+      - sensor.day
+      - sensor.month
+      - sensor.year
+      - sun.sun
+    cards:
+      - type: shopping-list
+        title: Shopping List
