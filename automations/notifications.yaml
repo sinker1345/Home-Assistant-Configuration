@@ -85,7 +85,7 @@
         data_template:
           message: "Would you like to view the shopping list?"
           target: >-
-            {% if states.google_maps_104723974144441113874.state == 'Win-Dixie' %}
+            {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
               Jessica Phone
             {% else %}
               Tommy_Pixel_2XL
@@ -108,7 +108,7 @@
         data_template:
           message: "Click this to view shopping list"
           target: >-
-            {% if states.google_maps_104723974144441113874.state == 'Win-Dixie' %}
+            {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
               Jessica Phone
             {% else %}
               Tommy_Pixel_2XL

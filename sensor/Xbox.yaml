@@ -1,0 +1,6 @@
+# XBox Live Component
+  - platform: xbox_live
+    api_key: !secret xbox_api
+    scan_interval: 120
+    xuid:
+      - !secret lexi_xbox

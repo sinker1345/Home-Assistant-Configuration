@@ -26,6 +26,8 @@ config:
 
 shopping_list:
 
+circadian_lighting:
+
 # Enables Homeassistant Cloud Component
 cloud:
   google_actions:
@@ -124,6 +126,9 @@ vacuum:
     name: Bob
     username: !secret vac_user
     password: !secret vac_pass
+    map: true
+    map_dir: www/roomba
+    icon_dir: www/roomba/res
 
 # Device Tracker Component
 device_tracker:
@@ -133,6 +138,8 @@ device_tracker:
     host: 192.168.1.31
     username: !secret unifi_user
     password: !secret unifi
+    new_device_defaults:
+      track_new_devices: false
 
   #Bluetooth Tracker
   - platform: bluetooth_tracker
@@ -172,54 +179,86 @@ recorder:
   db_url: !secret db_url_password
   purge_interval: 14
   purge_keep_days: 7
-  exclude:
+  include:
     domains:
-      - automation
-      - updater
-      - time
-      - calendar
-      - group
-      - script
-      - sun
-      - binary_sensor
-      - weblink
-      - variable
+      - switch
+      - vacuum
+      - zwave
+      - media_player
     entities:
-      - sensor.time
-      - sensor.ups
-      - sensor.pws_wind_mph_2
-      - sensor.pws_wind_1d_mph_2
-      - sensor.pws_weather_4n_2
-      - sensor.pws_weather_4d_2
-      - sensor.pws_weather_3n_2
-      - sensor.pws_weather_3d_2
-      - sensor.pws_weather_2n_2
-      - sensor.pws_weather_2d_2
-      - sensor.pws_weather_1n_2
-      - sensor.pws_weather_1d_2
-      - sensor.pws_temp_low_record_f_2
-      - sensor.pws_temp_low_1d_f_2
-      - sensor.pws_temp_high_record_f_2
-      - sensor.pws_temp_high_1d_f_2
-      - sensor.pws_temp_f_2
-      - sensor.pws_precip_1d_in_2
-      - sensor.pws_precip_1d_2
-      - sensor.pws_alerts_2
-      - sensor.living_room_temperature
-      - sensor.living_room_motion
-      - sensor.living_room_light_level
-      - sensor.living_room_humidity
-      - sensor.living_room_feels_like
-      - sensor.living_room_2_temperature
-      - sensor.living_room_2_motion
-      - sensor.living_room_2_light_level
-      - sensor.living_room_2_humidity
-      - sensor.living_room_2_feels_like
+      - light.bar_light
+      - sensor.common_area_feels_like
+      - sensor.common_area_humidity
+      - sensor.common_area_light_level
+      - sensor.common_area_motion
+      - sensor.common_area_temperature
+      - sensor.dining_room_feels_like
+      - sensor.dining_room_humidity
+      - sensor.dining_room_light_level
       - sensor.dining_room_motion_2
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_summary
-      - sensor.dark_sky_precip_probability
-      - sensor.dark_sky_hourly_summary
+      - sensor.dining_room_temperature
+      - sensor.garage_door_template
+      - sensor.garage_feels_like
+      - sensor.garage_humidity
+      - sensor.garage_light_level
+      - sensor.garage_motion
+      - sensor.garage_temperature
+      - sensor.htpc_idle
+      - sensor.glances
+      - sensor.google_travel_time_driving
+      - sensor.jessica_status
+      - sensor.kitchen_feels_like
+      - sensor.kitchen_humidity
+      - sensor.kitchen_light_level
+      - sensor.kitchen_motion
+      - sensor.kitchen_temperature
+      - sensor.lexixboxone
+      - sensor.living_room_feels_like_combo
+      - sensor.living_room_humidity_combo
+      - sensor.living_room_light_level_combo
+      - sensor.living_room_motion_combo
+      - sensor.living_room_temperature_combo
+      - sensor.master_bed_room_feels_like
+      - sensor.master_bed_room_humidity
+      - sensor.master_bed_room_light_level
+      - sensor.master_bed_room_motion
+      - sensor.master_bed_room_temperature
+      - sensor.nws_alert_count_filtered
+      - sensor.ps3
+      - sensor.server_ups_battery_charge
+      - sensor.server_ups_battery_runtime
+      - sensor.server_ups_battery_voltage
+      - sensor.server_ups_input_voltage
+      - sensor.server_ups_load
+      - sensor.server_ups_nominal_real_power
+      - sensor.server_ups_output_voltage
+      - sensor.server_ups_self_test_result
+      - sensor.server_ups_status
+      - sensor.speedtest_download
+      - sensor.speedtest_ping
+      - sensor.speedtest_upload
+      - sensor.tommy_status
+      - sensor.xbox360
+      - sensor.xboxone
+      - sensor.taylex15
+      - person.tommy
+      - variable.last_motion
+
+#speedtest component
+speedtestdotnet:
+
+#person component
+person:
+
+#influxdb
+influxdb:
+  host: localhost
+  include:
+    domains:
+      - sensor
+      - media_player
+      - switch
+      - light
 
 # MQTT Component
 mqtt:
@@ -281,13 +320,21 @@ panel_custom:
     sidebar_icon: mdi:pizza
     url_path: dominos
 
-# Node-Red Panel
+#  Panel IFrame
 panel_iframe:
   nodered:
     title: 'Node-Red'
     icon: 'mdi:shuffle-variant'
     url: 'http://192.168.1.22:1880/'
-
+  grafana:
+    title: 'Grafana'
+    icon: mdi:chart-bar-stacked
+    url: 'http://192.168.1.22:3000'
+  roomba_clean:
+    title: 'Roomba Clean Map'
+    icon: mdi:robot-vacuum
+    url: 'http://192.168.1.22:8123/local/roomba/map_notext.png'
+    
 #Zones
 zone:
   # Jessica Work Zone
@@ -313,6 +360,11 @@ zone:
     
 #Switch
 switch:
+  #circadian_lighting custom component
+  - platform: circadian_lighting
+    lights_ct:
+      - light.bar_light
+
   #Outside Christmas lights switch
   - platform: mqtt
     name: "Christmas Outside Lights"
@@ -385,20 +437,20 @@ switch:
     retain: false
     
   #Flux Component for Lights
-  - platform: flux
-    lights:
-      - light.bar_light
-    name: Fluxer
-    start_time: '7:00'
-    stop_time: '23:00'
-    start_colortemp: 5000
-    sunset_colortemp: 3000
-    stop_colortemp: 2500
-    brightness: 200
-    disable_brightness_adjust: True
-    mode: mired
-    transition: 3
-    interval: 60
+#  - platform: flux
+#    lights:
+#      - light.bar_light
+#    name: Fluxer
+#    start_time: '7:00'
+#    stop_time: '23:00'
+#    start_colortemp: 5000
+#    sunset_colortemp: 3000
+#    stop_colortemp: 2500
+#    brightness: 200
+#    disable_brightness_adjust: True
+#    mode: mired
+#    transition: 3
+#    interval: 60
  
 #Light Component
 light:
@@ -491,6 +543,9 @@ input_select:
 weather:
   - platform: darksky
     api_key: !secret dark_sky
+
+#speedtest component
+#speedtestdotnet:
 
 #includes
 group: !include groups.yaml

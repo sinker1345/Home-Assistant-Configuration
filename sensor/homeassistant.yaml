@@ -1,6 +1,6 @@
   - platform: plex
     host: 192.168.1.18
-
+    
   - platform: nut
     name: Server UPS
     resources:
@@ -14,12 +14,6 @@
       - ups.test.result
       - battery.voltage
 
-  - platform: speedtest
-    monitored_conditions:
-      - ping
-      - download
-      - upload
-
 # System Monitor Component
   - platform: systemmonitor
     resources:
@@ -28,10 +22,7 @@
       - type: memory_free
       - type: memory_use_percent
       - type: processor_use
-#      - type: network_in
-#      - type: network_out
       - type: last_boot
-#      - type: since_last_boot
 
   - platform: template
     sensors:
@@ -161,10 +152,3 @@
   - platform: ups
     username: !secret ups_username
     password: !secret ups_pass
-
-# XBox Live Component
-#  - platform: xbox_live
-#    api_key: !secret xbox_api
-#    scan_interval: 60
-#    xuid:
-#      - !secret lexi_xbox

@@ -32,7 +32,7 @@
       - pressure
       - visibility
       - cloud_cover
-    update_interval:
+    scan_interval:
       minutes: 5
 
   - platform: template
@@ -52,10 +52,9 @@
                          {% elif is_state("sensor.dark_sky_icon","lightning") %} Lightning
                          {% elif is_state("sensor.dark_sky_icon","thunderstorm") %} Thunderstorm
                          {% endif %}'
-
+                         
   - platform: rest
     resource: https://api.weather.gov/alerts/active/count
-    timeout: 30
     name: NWS Alert Count Raw
     value_template: >
       {% if value_json is defined and value_json.zones.FLZ203 is defined %}
@@ -85,7 +84,6 @@
   - platform: rest
     resource: https://api.weather.gov/alerts/active?zone=FLZ203,FLC113
     name: NWS Alert Event Raw
-    timeout: 30
     value_template: >
       {% if value_json.features[0] is defined %}
         {{ value_json['features'][0]['properties'].event }}
