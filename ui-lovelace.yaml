@@ -6,7 +6,7 @@ resources:
     type: js
   - url: /customcards/custom_ui/dark-sky-weather-card.js
     type: module
-  - url: /customcards/custom_ui/button-card.js
+  - url: /customcards/github/custom-cards/button-card.js?track=true
     type: module
   - url: /customcards/custom_ui/slider-entity-row.js
     type: js
@@ -72,6 +72,7 @@ views:
       - sensor.plex
       - sensor.ups
       - person.tommy
+      - person.jessica
     cards:
       #Comon Area Sensors
       - type: entities
@@ -643,6 +644,7 @@ views:
       - sensor.google_travel_time_driving
       - sensor.taylex15
       - person.tommy
+      - person.jessica
     cards:
       #People at Home Glance Card
       - type: entity-filter
