@@ -61,6 +61,21 @@
         to: 'unavailable'
         for:
           minutes: 15
+      - platform: state
+        entity_id: media_player.googlehome3446
+        to: 'unavailable'
+        for:
+          minutes: 15
+      - platform: state
+        entity_id: media_player.kitchen_speaker
+        to: 'unavailable'
+        for:
+          minutes: 15
+      - platform: state
+        entity_id: media_player.master_bath
+        to: 'unavailable'
+        for:
+          minutes: 15
     action:
       - service: shell_command.restart_ha
       

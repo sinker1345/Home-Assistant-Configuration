@@ -12,7 +12,7 @@
       - service: notify.google_push
         data_template:
           message: "Lexi has signed on to XBox"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "MPU_Linux", "MPU_Chrome"]
+          target: ["Tommy_Pixel_2XL", "jessica_galaxy_note_9", "MPU_Linux", "MPU_Chrome"]
           data:
            tag: 'Lexi Signed on to Xbox'
 
@@ -28,7 +28,7 @@
       - service: notify.google_push
         data_template:
           message: "Lexi has signed off of XBox"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "MPU_Linux", "MPU_Chrome"]
+          target: ["Tommy_Pixel_2XL", "jessica_galaxy_note_9", "MPU_Linux", "MPU_Chrome"]
           data:
            tag: 'Lexi Signed off of Xbox'
 
@@ -86,7 +86,7 @@
           message: "Would you like to view the shopping list?"
           target: >-
             {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
-              Jessica Phone
+              jessica_galaxy_note_9
             {% else %}
               Tommy_Pixel_2XL
             {% endif %}
@@ -109,7 +109,7 @@
           message: "Click this to view shopping list"
           target: >-
             {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
-              Jessica Phone
+              jessica_galaxy_note_9
             {% else %}
               Tommy_Pixel_2XL
             {% endif %}

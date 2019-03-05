@@ -12,7 +12,8 @@ homeassistant:
   time_zone: !secret time_zone
   # Customization file
   customize: !include customize.yaml
-
+  
+  packages: !include_dir_named packages
 # Show links to resources in log and frontend
 #introduction:
 
@@ -359,7 +360,7 @@ zone:
     longitude: !secret win_dixie_long
     radius: 150
     icon: mdi:cart
-    
+
 #Switch
 switch:
   #circadian_lighting custom component

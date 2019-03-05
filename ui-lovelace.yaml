@@ -10,6 +10,8 @@ resources:
     type: module
   - url: /customcards/custom_ui/slider-entity-row.js
     type: js
+  - url: /customcards/custom_ui/entity-attributes-card.js
+    type: js
 views:
 #Switches/Lights View
   - title: Switches/Lights
@@ -683,6 +685,21 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      - type: conditional
+        conditions:
+          - entity: sensor.nws_alerts_are_active
+            state: 'on'
+          - entity: input_boolean.bool_9
+            state: 'on'
+        card:
+          type: entities
+          entities:
+            - input_boolean.bool_9
+            - type: custom:entity-attributes-card
+              entity: sensor.nws_alers
+              filter:
+                include:
+                  - sensor.nws_alerts.display_desc
       #Dark Sky Weather Card
       - type: custom:dark-sky-weather-card
         entity_current_conditions: sensor.dark_sky_icon
@@ -875,13 +892,11 @@ views:
             secondary_info: last-changed
           - entity: automation.nws_notification_weather_alert
             secondary_info: last-changed
-          - entity: automation.nws_announcement_weather_alert
+          - entity: automation.nws_announce_weather_alert
             secondary_info: last-changed
-          - entity: automation.nws_announcement_weather_alert_2
+          - entity: automation.nws_announce_weather_alert_for_mbr
             secondary_info: last-changed
-          - entity: automation.nws_announcement_weather_alert_for_mbr
-            secondary_info: last-changed
-          - entity: automation.nws_announcement_weather_alert_2_for_mbr
+          - entity: automation.nws_dismiss_persistent_notification
             secondary_info: last-changed
       #People Automations
       - type: entities
