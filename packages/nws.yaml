@@ -37,10 +37,12 @@ automation:
       - platform: homeassistant
         event: start
     condition:
-      - condition: template
-        value_template: '{{states.sensor.nws_alerts.state | int > 0}}'
-      - condition: template
-        value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{states.sensor.nws_alerts.state | int > 0}}'
+        - condition: template
+          value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
     action:
       service: script.nws_popup_on_wx_alert
       data_template:
@@ -78,14 +80,16 @@ automation:
       platform: state
       entity_id: sensor.nws_alerts
     condition:
-      - condition: template
-        value_template: '{{states.sensor.nws_alerts.state | int > 0}}'
-      - condition: template
-        value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{states.sensor.nws_alerts.state | int > 0}}'
+        - condition: template
+          value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
     action:
       - service: notify.google_push
         data_template:
-          message: >
+          title: >
             {% if states.sensor.nws_alerts.attributes.title.split(' - ')[0] is defined %}
               "NWS: {{ states.sensor.nws_alerts.attributes.title.split(' - ')[0] }}"
             {% elif states.sensor.nws_alerts.attributes.title.split(' - ')[1] is defined %}
@@ -99,10 +103,24 @@ automation:
             {% else %}
               "NWS: {{ states.sensor.nws_alerts.attributes.title.split(' - ')[5] }}"
             {% endif %}
+          message: >
+            {% if states.sensor.nws_alerts.attributes.title.split(' - ')[0] is defined %}
+              "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
+            {% elif states.sensor.nws_alerts.attributes.title.split(' - ')[1] is defined %}
+              "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
+            {% elif states.sensor.nws_alerts.attributes.title.split(' - ')[2] is defined %}
+              "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
+            {% elif states.sensor.nws_alerts.attributes.title.split(' - ')[3] is defined %}
+              "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
+            {% elif states.sensor.nws_alerts.attributes.title.split(' - ')[4] is defined %}
+              "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
+            {% else %}
+              "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
+            {% endif %}
           target: ["Tommy_Pixel_2XL","MPU_Linux", "MPU_Chrome"]
           data:
-           image: !secret weather_image
-           url: !secret weather_image
+            image: !secret weather_image
+            url: !secret weather_image
             
   - alias: NWS Announce Weather Alert
     initial_state: 'on'

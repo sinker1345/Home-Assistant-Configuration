@@ -365,6 +365,7 @@ zone:
 switch:
   #circadian_lighting custom component
   - platform: circadian_lighting
+    min_brightness: 5
     lights_ct:
       - light.bar_light
 
@@ -454,11 +455,6 @@ switch:
 #    mode: mired
 #    transition: 3
 #    interval: 60
- 
-#Light Component
-light:
-  - platform: tplink
-    host: 192.168.1.219
 
 #Custom Variable Component
 variable:
