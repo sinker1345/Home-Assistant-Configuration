@@ -14,6 +14,14 @@ homeassistant:
   customize: !include customize.yaml
   
   packages: !include_dir_named packages
+  
+  auth_providers:
+   - type: legacy_api_password
+     api_password: !secret dns_pass
+   - type: trusted_networks
+     trusted_networks:
+       - 127.0.0.1
+       - 192.168.1.0/24
 # Show links to resources in log and frontend
 #introduction:
 
@@ -25,6 +33,11 @@ frontend:
 # Enables configuration UI
 config:
 
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - 816032519
 default_config:
 
 shopping_list:
@@ -68,14 +81,10 @@ http:
   # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
-  api_password: !secret dns_pass
   use_x_forwarded_for: True
   trusted_proxies:
     - 127.0.0.1
     - 192.168.1.1
-  trusted_networks:
-    - 127.0.0.1
-    - 192.168.1.0/24
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -273,8 +282,9 @@ mqtt:
 notify:
   - name: google_push
     platform: html5
-    gcm_api_key: !secret gcm_api
-    gcm_sender_id: !secret gcm_sender
+    vapid_pub_key: !secret my_vapid_pub_key
+    vapid_prv_key: !secret my_vapid_prv_key
+    vapid_email: !secret my_vapid_email
 
 # IFTTT Component
 ifttt:

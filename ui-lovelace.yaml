@@ -632,6 +632,33 @@ views:
         hide_volume: true
         show_progress: true
         power_color: true
+#Back Porch View
+  - title: Back Porch
+    id: 9
+    #Badges
+    badges:
+      - sensor.time
+      - sensor.day
+      - sensor.month
+      - sensor.year
+      - sun.sun
+      - binary_sensor.iss
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.porch_speaker
+        icon: mdi:speaker-wireless
+        artwork_border: true
+        show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
+      - type: entities
+        title: Back Porch Christmas Lights
+        show_header_toggle: false
+        entities:
+          - entity: switch.christmas_outside_lights
+            icon: mdi:track-light
 #People View
   - title: People
     id: 10
@@ -704,29 +731,29 @@ views:
       - type: custom:dark-sky-weather-card
         entity_current_conditions: sensor.dark_sky_icon
         entity_temperature: sensor.dark_sky_temperature
-        entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
-        entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
-        entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
-        entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
-        entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
-        entity_forecast_icon_1: sensor.dark_sky_icon_1
-        entity_forecast_icon_2: sensor.dark_sky_icon_2
-        entity_forecast_icon_3: sensor.dark_sky_icon_3
-        entity_forecast_icon_4: sensor.dark_sky_icon_4
-        entity_forecast_icon_5: sensor.dark_sky_icon_5
-        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
-        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
-        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
-        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
-        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
-        entity_summary_1: sensor.dark_sky_summary_1
-        entity_summary_2: sensor.dark_sky_summary_2
-        entity_summary_3: sensor.dark_sky_summary_3
-        entity_summary_4: sensor.dark_sky_summary_4
-        entity_summary_5: sensor.dark_sky_summary_5
+        entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1d
+        entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2d
+        entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3d
+        entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4d
+        entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5d
+        entity_forecast_icon_1: sensor.dark_sky_icon_1d
+        entity_forecast_icon_2: sensor.dark_sky_icon_2d
+        entity_forecast_icon_3: sensor.dark_sky_icon_3d
+        entity_forecast_icon_4: sensor.dark_sky_icon_4d
+        entity_forecast_icon_5: sensor.dark_sky_icon_5d
+        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0d
+        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1d
+        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2d
+        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3d
+        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4d
+        entity_summary_1: sensor.dark_sky_summary_1d
+        entity_summary_2: sensor.dark_sky_summary_2d
+        entity_summary_3: sensor.dark_sky_summary_3d
+        entity_summary_4: sensor.dark_sky_summary_4d
+        entity_summary_5: sensor.dark_sky_summary_5d
         entity_sun: sun.sun
         entity_visibility: sensor.dark_sky_visibility
-        entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0
+        entity_daytime_high: sensor.dark_sky_daytime_high_temperature_0d
         entity_wind_bearing: sensor.dark_sky_wind_bearing
         entity_wind_speed: sensor.dark_sky_wind_speed
         entity_humidity: sensor.dark_sky_humidity
@@ -735,11 +762,11 @@ views:
         entity_daily_summary: sensor.dark_sky_daily_summary
         entity_pop: sensor.dark_sky_precip_probability
         entity_pop_intensity: sensor.dark_sky_precip_intensity
-        entity_pop_1: sensor.dark_sky_precip_probability_1
-        entity_pop_2: sensor.dark_sky_precip_probability_2
-        entity_pop_3: sensor.dark_sky_precip_probability_3
-        entity_pop_4: sensor.dark_sky_precip_probability_4
-        entity_pop_5: sensor.dark_sky_precip_probability_5
+        entity_pop_1: sensor.dark_sky_precip_probability_1d
+        entity_pop_2: sensor.dark_sky_precip_probability_2d
+        entity_pop_3: sensor.dark_sky_precip_probability_3d
+        entity_pop_4: sensor.dark_sky_precip_probability_4d
+        entity_pop_5: sensor.dark_sky_precip_probability_5d
         entity_current_text: sensor.dark_sky_current_text
         locale: en
         static_icons: false
@@ -774,9 +801,9 @@ views:
         title: "Today's Low and High"
         show_header_toggle: false
         entities:
-          - entity: sensor.dark_sky_daytime_high_temperature_0
+          - entity: sensor.dark_sky_daytime_high_temperature_0d
             name: High Temperature Today
-          - entity: sensor.dark_sky_overnight_low_temperature_0
+          - entity: sensor.dark_sky_overnight_low_temperature_0d
             name: Low Temperature Today
       #Cloud Cover
       - type: entities

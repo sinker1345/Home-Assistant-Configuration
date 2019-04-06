@@ -166,17 +166,17 @@
         entity_id: sensor.tommy_status
         to: 'Away'
         for:
-          hours: 24
+          hours: 23
       - platform: state
         entity_id: sensor.jessica_status
         to: 'Away'
         for:
-          hours: 24
+          hours: 23
       - platform: state
         entity_id: sensor.lexi_status
         to: 'Away'
         for:
-          hours: 24
+          hours: 23
     action:
       - service: variable.set_variable
         data_template:

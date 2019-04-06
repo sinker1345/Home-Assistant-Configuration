@@ -12,7 +12,7 @@
       - service: notify.google_push
         data_template:
           message: "Lexi has signed on to XBox"
-          target: ["Tommy_Pixel_2XL", "jessica_galaxy_note_9", "MPU_Linux", "MPU_Chrome"]
+          target: ["Tommy Phone", "Jessica Phone", "Tommy Computer"]
           data:
            tag: 'Lexi Signed on to Xbox'
 
@@ -28,7 +28,7 @@
       - service: notify.google_push
         data_template:
           message: "Lexi has signed off of XBox"
-          target: ["Tommy_Pixel_2XL", "jessica_galaxy_note_9", "MPU_Linux", "MPU_Chrome"]
+          target: ["Tommy Phone", "Jessica Phone", "Tommy Computer"]
           data:
            tag: 'Lexi Signed off of Xbox'
 
@@ -50,7 +50,7 @@
      - service: notify.google_push
        data_template:
          message: "Take out the Trash"
-         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+         target: ["Tommy Phone", "Tommy Computer"]
 
 # Take Out Recycling
   - id: "1234569874651689"
@@ -70,7 +70,7 @@
      - service: notify.google_push
        data_template:
          message: "Take out the Recycling"
-         target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+         target: ["Tommy Phone", "Tommy Computer"]
 
   - alias: 'Shopping List'
     trigger:
@@ -86,9 +86,9 @@
           message: "Would you like to view the shopping list?"
           target: >-
             {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
-              jessica_galaxy_note_9
+              Jessica Phone
             {% else %}
-              Tommy_Pixel_2XL
+              Tommy Phone
             {% endif %}
           data:
             actions:
@@ -109,9 +109,9 @@
           message: "Click this to view shopping list"
           target: >-
             {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
-              jessica_galaxy_note_9
+              Jessica Phone
             {% else %}
-              Tommy_Pixel_2XL
+              Tommy Phone
             {% endif %}
           data:
             url: !secret hass_url

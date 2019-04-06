@@ -6,7 +6,7 @@
       - service: notify.google_push
         data:
           message: "Did you set up the coffee pot?"
-          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
+          target: ["Tommy Phone", "Tommy Computer"]
           data:
             actions:
               - action: "button1"

@@ -117,7 +117,7 @@ automation:
             {% else %}
               "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
             {% endif %}
-          target: ["Tommy_Pixel_2XL","MPU_Linux", "MPU_Chrome"]
+          target: ["Tommy Phone", "Tommy Computer"]
           data:
             image: !secret weather_image
             url: !secret weather_image
