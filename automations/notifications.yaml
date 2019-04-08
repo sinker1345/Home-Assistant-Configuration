@@ -9,12 +9,12 @@
         from: 'Offline'
         to: 'Online'
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
           message: "Lexi has signed on to XBox"
-          target: ["Tommy Phone", "Jessica Phone", "Tommy Computer"]
-          data:
-           tag: 'Lexi Signed on to Xbox'
+          target: 
+            - 816032519 #Tommy
+            - 846016601 #Jessica
 
 # Check if Lexi Signed Off XBox
   - id: "123456789456123"
@@ -25,12 +25,12 @@
         from: 'Online'
         to: 'Offline'
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
           message: "Lexi has signed off of XBox"
-          target: ["Tommy Phone", "Jessica Phone", "Tommy Computer"]
-          data:
-           tag: 'Lexi Signed off of Xbox'
+          target: 
+            - 816032519 #Tommy
+            - 846016601 #Jessica
 
 # Take Out Trash
   - id: "123456654984"
@@ -47,10 +47,11 @@
           entity_id: calendar.main
           state: 'on'
     action:
-     - service: notify.google_push
+     - service: notify.telegram
        data_template:
          message: "Take out the Trash"
-         target: ["Tommy Phone", "Tommy Computer"]
+         target: 
+           - 816032519 #Tommy
 
 # Take Out Recycling
   - id: "1234569874651689"
@@ -67,11 +68,12 @@
           entity_id: calendar.main
           state: 'on'
     action:
-     - service: notify.google_push
+     - service: notify.telegram
        data_template:
          message: "Take out the Recycling"
-         target: ["Tommy Phone", "Tommy Computer"]
-
+         target: 
+           - 816032519 #Tommy
+         
   - alias: 'Shopping List'
     trigger:
       - platform: state
@@ -81,37 +83,59 @@
         entity_id: device_tracker.google_maps_105472855536836656633
         to: 'Win-Dixie'
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
           message: "Would you like to view the shopping list?"
           target: >-
             {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
-              Jessica Phone
+              846016601
             {% else %}
-              Tommy Phone
+              816032519
             {% endif %}
           data:
-            actions:
-              - action: "yes"
-                title: 'Yes'
-              - action: "no"
-                title: 'No'
+            inline_keyboard:
+              - 'Yes:/yes_shopping, No:/no_shopping'
 
   - alias: 'View Shopping List'
     trigger:
       - platform: event
-        event_type: html5_notification.clicked
+        event_type: telegram_callback
         event_data:
-          action: "yes"
+          data: "/yes_shopping"
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
-          message: "Click this to view shopping list"
+          message: !secret hass_url
           target: >-
             {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
-              Jessica Phone
+              846016601
             {% else %}
-              Tommy Phone
+              816032519
             {% endif %}
-          data:
-            url: !secret hass_url
+      - service: telegram_bot.edit_replymarkup
+        data_template:
+          message_id: '{{ trigger.event.data.message.message_id }}'
+          chat_id: '{{ trigger.event.data.user_id }}'
+          inline_keyboard: []   
+
+  - alias: 'No View Shopping List'
+    trigger:
+      - platform: event
+        event_type: telegram_callback
+        event_data:
+          data: "/no_shopping"
+    action:
+      - service: notify.telegram
+        data_template:
+          message: "Ok"
+          target: >-
+            {% if states.device_tracker.google_maps_104723974144441113874.state == 'Win-Dixie' %}
+              846016601
+            {% else %}
+              816032519
+            {% endif %}
+      - service: telegram_bot.edit_replymarkup
+        data_template:
+          message_id: '{{ trigger.event.data.message.message_id }}'
+          chat_id: '{{ trigger.event.data.user_id }}'
+          inline_keyboard: []   

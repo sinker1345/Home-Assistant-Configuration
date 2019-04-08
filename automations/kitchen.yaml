@@ -3,23 +3,21 @@
       - platform: time
         at: '20:00:00'
     action:
-      - service: notify.google_push
-        data:
-          message: "Did you set up the coffee pot?"
-          target: ["Tommy Phone", "Tommy Computer"]
+      - service: notify.telegram
+        data_template:
+          message: 'Did you set up the coffee pot?'
           data:
-            actions:
-              - action: "button1"
-                title: "Yes"
-              - action: "button2"
-                title: "No"
+            inline_keyboard:
+              - 'yes:/yes, no:/no'
+          target: 
+            - 816032519 #Tommy
 
   - alias: Coffee Pot Button 1 Clicked
     trigger:
       - platform: event
-        event_type: html5_notification.clicked
+        event_type: telegram_callback
         event_data:
-          action: button1
+          data: '/yes'
     action:
       - service: input_select.select_option
         data:
@@ -27,18 +25,38 @@
           option: 'Yes'
       - service: automation.turn_on
         entity_id: automation.start_coffee_pot
+      - service: notify.telegram
+        data_template:
+          message: 'Ok'
+          target: 
+            - 816032519 #Tommy
+      - service: telegram_bot.edit_replymarkup
+        data_template:
+          message_id: '{{ trigger.event.data.message.message_id }}'
+          chat_id: '{{ trigger.event.data.user_id }}'
+          inline_keyboard: []        
 
   - alias: Coffee Pot Button 2 clicked
     trigger:
       - platform: event
-        event_type: html5_notification.clicked
+        event_type: telegram_callback
         event_data:
-          action: button2
+          data: '/no'
     action:
       - service: input_select.select_option
         data:
           entity_id: input_select.is_coffee_pot_setup
           option: 'No'
+      - service: notify.telegram
+        data_template:
+          message: 'Ok'
+          target: 
+            - 816032519 #Tommy
+      - service: telegram_bot.edit_replymarkup
+        data_template:
+          message_id: '{{ trigger.event.data.message.message_id }}'
+          chat_id: '{{ trigger.event.data.user_id }}'
+          inline_keyboard: []   
 
   - alias: start coffee pot
     trigger:

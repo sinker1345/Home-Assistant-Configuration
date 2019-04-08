@@ -21,10 +21,11 @@
           entity_id: sensor.garage_door
           state: 'open'
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
           message: "The Garage Door is Open"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_chrome"]
+          target: 
+            - 816032519
 
   - alias: "Close Garage Door on Weekend"
     trigger:
@@ -48,10 +49,11 @@
           entity_id: sensor.garage_door
           state: 'open'
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
           message: "The Garage Door is Open"
-          target: ["Tommy_Pixel_2XL", "Jessica_Phone", "mpu_chrome"]
+          target: 
+            - 816032519
 
   - id: "123456"
     alias: "Connect OctoPi to Printer"
@@ -69,9 +71,9 @@
     trigger:
       - platform: state
         entity_id: sensor.octoprint_current_state
-        to: 'unavailable'
+        to: 'Operational'
         for:
-          minutes: 15
+          minutes: 45
     condition:
       condition: and
       conditions:
@@ -90,12 +92,11 @@
         entity_id: sensor.octoprint_job_percentage
         above: 50
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
-          message: "3D Print job is 50% complete!"
-          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
-          data:
-           tag: '3D print job is 50% complete!'
+          message: "3D print is 50% complete"
+          target: 
+            - 816032519
 
 # 3D Printer Job Completed
   - id: "123456654620685"
@@ -105,9 +106,8 @@
         entity_id: sensor.octoprint_job_percentage
         above: 99.9
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
-          message: "3D Print job is complete!"
-          target: ["Tommy_Pixel_2XL", "MPU_Chrome", "MPU_Linux"]
-          data:
-           tag: '3D print job is complete!'
+          message: "3D Print Complete"
+          target: 
+            - 816032519

@@ -87,7 +87,7 @@ automation:
         - condition: template
           value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
     action:
-      - service: notify.google_push
+      - service: notify.telegram
         data_template:
           title: >
             {% if states.sensor.nws_alerts.attributes.title.split(' - ')[0] is defined %}
@@ -117,10 +117,11 @@ automation:
             {% else %}
               "NWS: {{ states.sensor.nws_alerts.attributes.spoken_desc }}"
             {% endif %}
-          target: ["Tommy Phone", "Tommy Computer"]
-          data:
-            image: !secret weather_image
-            url: !secret weather_image
+          target:
+            - 816032519
+#         data:
+#           photo:
+#             url: !secret weather_image
             
   - alias: NWS Announce Weather Alert
     initial_state: 'on'

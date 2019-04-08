@@ -710,6 +710,7 @@ views:
       - sensor.month
       - sensor.year
       - sun.sun
+      - sensor.nws_alerts
       - binary_sensor.iss
     cards:
       - type: conditional

@@ -38,6 +38,8 @@ telegram_bot:
     api_key: !secret telegram_api_key
     allowed_chat_ids:
       - 816032519
+      - 846016601
+
 default_config:
 
 shopping_list:
@@ -255,6 +257,7 @@ recorder:
       - person.tommy
       - person.jessica
       - variable.last_motion
+      - sensor.plex
 
 #speedtest component
 speedtestdotnet:
@@ -286,6 +289,10 @@ notify:
     vapid_prv_key: !secret my_vapid_prv_key
     vapid_email: !secret my_vapid_email
 
+  - name: telegram
+    platform: telegram
+    chat_id: 816032519
+    
 # IFTTT Component
 ifttt:
   key: !secret ifttt_key
