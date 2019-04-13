@@ -88,3 +88,38 @@
     action:
       - service: switch.turn_on
         entity_id: switch.morning_alert
+
+  - alias: "Couch Sleeper"
+    trigger:
+      - platform: state
+        entity_id: switch.couch_sleeper
+        from: 'off'
+        to: 'on'
+    action:
+      - service: automation.turn_off
+        entity_id: automation.turn_on_bob
+      - service: automation.turn_off
+        entity_id: automation.turn_off_bar_light_at_night
+      - service: switch.turn_off
+        entity_id: switch.circadian_lighting_circadian_lighting
+      - delay: 00:00:10
+      - service: light.turn_on
+        data:
+          entity_id: light.bar_light
+          rgb_color: [255, 0, 0]
+          brightness: 38.25
+          transition: 30
+
+  - alias: "No Couch Sleeper"
+    trigger:
+      - platform: state
+        entity_id: switch.couch_sleeper
+        from: 'on'
+        to: 'off'
+    action:
+      - service: automation.turn_on
+        entity_id: automation.turn_on_bob
+      - service: automation.turn_on
+        entity_id: automation.turn_off_bar_light_at_night
+      - service: switch.turn_on
+        entity_id: switch.circadian_lighting_circadian_lighting

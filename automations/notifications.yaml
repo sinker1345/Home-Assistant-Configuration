@@ -73,7 +73,8 @@
          message: "Take out the Recycling"
          target: 
            - 816032519 #Tommy
-         
+
+# Shopping List
   - alias: 'Shopping List'
     trigger:
       - platform: state
@@ -96,6 +97,7 @@
             inline_keyboard:
               - 'Yes:/yes_shopping, No:/no_shopping'
 
+# View Shopping List
   - alias: 'View Shopping List'
     trigger:
       - platform: event
@@ -118,6 +120,7 @@
           chat_id: '{{ trigger.event.data.user_id }}'
           inline_keyboard: []   
 
+# No view shopping List
   - alias: 'No View Shopping List'
     trigger:
       - platform: event
@@ -138,4 +141,93 @@
         data_template:
           message_id: '{{ trigger.event.data.message.message_id }}'
           chat_id: '{{ trigger.event.data.user_id }}'
-          inline_keyboard: []   
+          inline_keyboard: []
+
+# Ask to run roomba
+  - alias: 'Run Roomba Guest Mode'
+    trigger:
+      - platform: state
+        entity_id: sensor.jessica_status
+        from: 'Just Left'
+        to: 'Away'
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Just Left'
+        to: 'Away'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.guest_mode
+          state: 'on'
+        - condition: state
+          entity_id: sensor.tommy_status
+          state: 'Away'
+        - condition: state
+          entity_id: sensor.jessica_status
+          state: 'Away'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: sensor.day
+              state: 'Monday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Wednesday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Friday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Saturday'
+            - condition: state
+              entity_id: sensor.day
+              state: 'Sunday'
+    action:
+      - service: notify.telegram
+        data_template:
+          target: >-
+            {% if trigger.entity_id == 'sensor.jessica_status' %}
+              846016601
+            {% else %}
+              816032519
+            {% endif %}
+          message: 'It looks like everyone is out of the house but you have guests. Should I turn on the roomba?'
+          inline_keyboard:
+            - 'Yes:/yes_roomba, No:/no_roomba'
+
+  - alias: 'Yes Run Roomba'
+    trigger:
+      - platform: event
+        event_type: telegram_callback
+        event_data:
+          data: "/yes_roomba"
+    action:
+      - service: notify.telegram
+        data_template:
+          message: "Ok, Turning on Bob. Bob is happy."
+          target: '{{ trigger.event.data.user_id }}'
+      - service: telegram_bot.edit_replymarkup
+        data_template:
+          message_id: '{{ trigger.event.data.message.message_id }}'
+          chat_id: '{{ trigger.event.data.user_id }}'
+          inline_keyboard: []
+      - service: vacuum.turn_on
+        entity_id: vacuum.bob
+
+  - alias: 'No Roomba'
+    trigger:
+      - platform: event
+        event_type: telegram_callback
+        event_data:
+          data: "/no_shopping"
+    action:
+      - service: notify.telegram
+        data_template:
+          message: "Ok, Bob is sad but he will deal with it."
+          target: '{{ trigger.event.data.user_id }}'
+      - service: telegram_bot.edit_replymarkup
+        data_template:
+          message_id: '{{ trigger.event.data.message.message_id }}'
+          chat_id: '{{ trigger.event.data.user_id }}'
+          inline_keyboard: []

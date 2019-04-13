@@ -10,6 +10,22 @@
         data:
           brightness_pct: 30
 
+  - alias: 'turn on circadian switch with morning automation'
+    trigger:
+      - platform: state
+        entity_id: switch.morning_alert
+        from: 'off'
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.circadian_lighting_circadian_lighting
+          state: 'off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.circadian_lighting_circadian_lighting
+
   - alias: 'turn off bar light at night'
     trigger:
       - platform: state
@@ -90,11 +106,16 @@
         - condition: state
           entity_id: light.bar_light
           state: 'off'
+        - condition: state
+          entity_id: switch.christmas_outside_lights
+          state: 'off'
     action:
       - service: light.turn_on
         entity_id: light.bar_light
         data:
           brightness_pct: 100
+      - service: switch.turn_on
+        entity_id: switch.christmas_outside_lights
 
   - alias: 'turn off bar light When people leave'
     trigger:
@@ -113,6 +134,9 @@
           entity_id: light.bar_light
           state: 'on'
         - condition: state
+          entity_id: switch.christmas_outside_lights
+          state: 'on'
+        - condition: state
           entity_id: sensor.jessica_status
           state: 'Away'
         - condition: state
@@ -121,6 +145,8 @@
     action:
       - service: light.turn_off
         entity_id: light.bar_light
+      - service: switch.turn_on
+        entity_id: switch.christmas_outside_lights
 
   - alias: "turn on Back Porch Lights"
     trigger: 

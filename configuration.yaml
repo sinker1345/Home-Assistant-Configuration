@@ -22,6 +22,7 @@ homeassistant:
      trusted_networks:
        - 127.0.0.1
        - 192.168.1.0/24
+   - type: homeassistant
 # Show links to resources in log and frontend
 #introduction:
 
@@ -440,6 +441,15 @@ switch:
     name: "Guest Mode"
     state_topic: 'boolean/guest_mode'
     command_topic: 'boolean/guest_mode'
+    payload_on: 'on'
+    payload_off: 'off'
+    retain: true
+
+  #Couch Sleeper Switch
+  - platform: mqtt
+    name: "Couch Sleeper"
+    state_topic: 'boolean/couch_sleeper'
+    command_topic: 'boolean/couch_sleeper'
     payload_on: 'on'
     payload_off: 'off'
     retain: true

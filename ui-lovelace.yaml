@@ -32,12 +32,21 @@ views:
         entities:
           - type: custom:slider-entity-row
             entity: light.bar_light
+    #Horizontal button stack        
+      - type: horizontal-stack
+        cards:        
     #Guest Mode (Button_card)
-      - type: "custom:button-card"
-        entity: switch.guest_mode
-        name: Guest Mode
-        icon: mdi:account-group
-        color: rgb(255, 215, 0)
+          - type: "custom:button-card"
+            entity: switch.guest_mode
+            name: Guest Mode
+            icon: mdi:account-group
+            color: rgb(255, 215, 0)
+    # Couch Sleeper
+          - type: "custom:button-card"
+            entity: switch.couch_sleeper
+            name: Couch Sleeper
+            icon: mdi:hotel
+            color: rgb(255, 215, 0)
     #Switches
       - type: entities
         title: Switches
@@ -713,21 +722,6 @@ views:
       - sensor.nws_alerts
       - binary_sensor.iss
     cards:
-      - type: conditional
-        conditions:
-          - entity: sensor.nws_alerts_are_active
-            state: 'on'
-          - entity: input_boolean.bool_9
-            state: 'on'
-        card:
-          type: entities
-          entities:
-            - input_boolean.bool_9
-            - type: custom:entity-attributes-card
-              entity: sensor.nws_alers
-              filter:
-                include:
-                  - sensor.nws_alerts.display_desc
       #Dark Sky Weather Card
       - type: custom:dark-sky-weather-card
         entity_current_conditions: sensor.dark_sky_icon
@@ -797,6 +791,22 @@ views:
         current_text_font_size: 1.2em
         large_icon_top_margin: -3.5em
         large_icon_left_position: 0em
+      #conditional card for NWS alerts
+      - type: conditional
+        conditions:
+          - entity: sensor.nws_alerts_are_active
+            state: 'on'
+          - entity: input_boolean.bool_9
+            state: 'on'
+        card:
+          type: entities
+          entities:
+            - input_boolean.bool_9
+            - type: custom:entity-attributes-card
+              entity: sensor.nws_alers
+              filter:
+                include:
+                  - sensor.nws_alerts.display_desc
       #Low and High Temp
       - type: entities
         title: "Today's Low and High"
@@ -845,6 +855,14 @@ views:
             secondary_info: last-changed
           - entity: automation.send_bob_home
             secondary_info: last-changed
+          - entity: automation.no_roomba
+            secondary_info: last-changed
+          - entity: automation.run_roomba_guest_mode
+            secondary_info: last-changed
+          - entity: automation.turn_on_circadian_switch_with_morning_automation
+            secondary_info: last-changed
+          - entity: automation.yes_run_roomba
+            secondary_info: last-changed
           - entity: automation.match_tv_lights_to_htpc_state
             secondary_info: last-changed
           - entity: automation.turn_on_bar_light_with_morning_automation
@@ -865,6 +883,10 @@ views:
             secondary_info: last-changed
           - entity: automation.turn_on_back_porch_lights
             secondary_info: last-changed
+          - entity: automation.couch_sleeper
+            secondary_info: last-changed
+          - entity: automation.no_couch_sleeper
+            secondary_info: last-changed
       #Kitchen Automations
       - type: entities
         title: Kitchen
@@ -873,6 +895,8 @@ views:
           - entity: automation.start_coffee_pot
             secondary_info: last-changed
           - entity: automation.stop_coffe_pot
+            secondary_info: last-changed
+          - entity: automation.no_view_shopping_list
             secondary_info: last-changed
       #Bedroom Automations
       - type: entities
