@@ -80,8 +80,11 @@
     condition:
       condition: and
       conditions:
-        - condition: time
-          after: '03:00:00'
+        - condition: template
+          value_template: >-
+            {%- if states.sensor.time.state >= states.input_select.wake_time.state -%}
+              true
+            {%- endif -%}
         - condition: state
           entity_id: switch.morning_alert
           state: 'off'

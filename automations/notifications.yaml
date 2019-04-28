@@ -220,7 +220,7 @@
       - platform: event
         event_type: telegram_callback
         event_data:
-          data: "/no_shopping"
+          data: "/no_roomba"
     action:
       - service: notify.telegram
         data_template:
@@ -231,3 +231,15 @@
           message_id: '{{ trigger.event.data.message.message_id }}'
           chat_id: '{{ trigger.event.data.user_id }}'
           inline_keyboard: []
+
+  - alias: 'Telegram bot to notify on boot'
+    trigger:
+    - event: start
+      platform: homeassistant
+    condition: []
+    action:
+    - service: notify.telegram
+      data:
+        message: "Home Assistant has Started"
+        target:
+          - 816032519

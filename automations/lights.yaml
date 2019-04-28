@@ -7,8 +7,6 @@
     action:
       - service: light.turn_on
         entity_id: light.bar_light
-        data:
-          brightness_pct: 30
 
   - alias: 'turn on circadian switch with morning automation'
     trigger:
@@ -77,8 +75,6 @@
     action:
       - service: light.turn_on
         entity_id: light.bar_light
-        data:
-          brightness_pct: 30
 
   - alias: 'turn on bar light When people arrive home after dark'
     trigger:
@@ -112,8 +108,6 @@
     action:
       - service: light.turn_on
         entity_id: light.bar_light
-        data:
-          brightness_pct: 100
       - service: switch.turn_on
         entity_id: switch.christmas_outside_lights
 
@@ -161,8 +155,11 @@
 
   - alias: "turn off Back Porch Lights"
     trigger: 
-      - platform: time
-        at: '22:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
+              true
+          {%- endif -%}
     action:
       - service: switch.turn_off
         entity_id: switch.christmas_outside_lights

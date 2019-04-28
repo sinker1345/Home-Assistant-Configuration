@@ -140,3 +140,59 @@
       - service: frontend.set_theme
         data:
           name: default
+
+#Set Wake time depending on week day
+  - alias: 'set wake time weekday'
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.workday_sensor
+        from: 'off'
+        to: 'on'
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.wake_time
+          option: "05:00"
+
+#Set Wake time depending on weekend
+  - alias: 'set wake time weekend'
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.workday_sensor
+        from: 'on'
+        to: 'off'
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.wake_time
+          option: "07:00"
+
+#Set Bed time depending on week day
+  - alias: 'set bed time weekday'
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.workday_sensor
+        from: 'off'
+        to: 'on'
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.bed_time
+          option: "22:00"
+
+#Set Bed time depending on weekend
+  - alias: 'set bed time weekend'
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.workday_sensor
+        from: 'on'
+        to: 'off'
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.bed_time
+          option: "23:30"

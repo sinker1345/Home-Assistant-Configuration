@@ -1046,6 +1046,16 @@ views:
             secondary_info: last-changed
           - entity: automation.view_shopping_list
             secondary_info: last-changed
+          - entity: automation.set_bed_time_weekday
+            secondary_info: last-changed
+          - entity: automation.set_bed_time_weekend
+            secondary_info: last-changed
+          - entity: automation.set_wake_time_weekday
+            secondary_info: last-changed
+          - entity: automation.set_wake_time_weekend
+            secondary_info: last-changed
+          - entity: automation.telegram_bot_to_notify_on_boot
+            secondary_info: last-changed
       #Scripts
       - type: entities
         title: Scripts
@@ -1208,6 +1218,8 @@ views:
           - input_select.which_holiday
           - input_select.bedroom_fan_automation
           - input_select.is_coffee_pot_setup
+          - input_select.wake_time
+          - input_select.bed_time
       #Custom Tracker Card
       - type: custom:tracker-card
         title: Custom Card Updates

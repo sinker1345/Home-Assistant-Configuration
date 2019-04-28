@@ -136,8 +136,12 @@ automation:
         - condition: template
           value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
         - condition: template
-          value_template: "{{ (('Severe' in states.sensor.nws_alerts.attributes.title) or ('Tornado' in states.sensor.nws_alerts.attributes.title)) and 'Warning' in states.sensor.nws_alerts.attributes.title }}"
+          value_template: "{{ (('Severe' in states.sensor.nws_alerts.attributes.title) or ('Tornado' in states.sensor.nws_alerts.attributes.title) and ('Warning' in states.sensor.nws_alerts.attributes.title)) or 'Tornado Watch' in states.sensor.nws_alerts.attributes.title}}"
     action:
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.common_area
+          volume_level: 0.8
       - service: tts.google_say
         data_template:
           entity_id: 
@@ -189,6 +193,10 @@ automation:
         - condition: template
           value_template: "{{ 'Tornado' in states.sensor.nws_alerts.attributes.title.split(' - ')[0] and 'Warning' in states.sensor.nws_alerts.attributes.title.split(' - ')[0] }}"
     action:
+      - service: media_player.volume_set
+        data_template:
+          entity_id: media_player.master_bath
+          volume_level: 0.8
       - service: tts.google_say
         data_template:
           entity_id: 
