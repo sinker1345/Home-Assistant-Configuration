@@ -128,9 +128,6 @@
           entity_id: light.bar_light
           state: 'on'
         - condition: state
-          entity_id: switch.christmas_outside_lights
-          state: 'on'
-        - condition: state
           entity_id: sensor.jessica_status
           state: 'Away'
         - condition: state
@@ -139,7 +136,7 @@
     action:
       - service: light.turn_off
         entity_id: light.bar_light
-      - service: switch.turn_on
+      - service: switch.turn_off
         entity_id: switch.christmas_outside_lights
 
   - alias: "turn on Back Porch Lights"

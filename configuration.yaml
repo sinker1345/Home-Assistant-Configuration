@@ -306,6 +306,10 @@ media_player:
     name: Living Room TV
     port: 8080
 
+  - platform: xboxone
+    device: !secret lexi_xboxone_device_id
+    name: Lexi Xbox One
+
 #Octoprint Component
 octoprint:
   host: 192.168.1.34

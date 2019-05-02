@@ -197,6 +197,15 @@ views:
             show_progress: true
             power_color: true
           - type: custom:mini-media-player
+            entity: media_player.lexi_xbox_one
+            icon: mdi:television-box
+            artwork_border: true
+            show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
+          - type: custom:mini-media-player
             entity: media_player.chrome_3
             icon: mdi:television-box
             artwork_border: true
@@ -934,6 +943,8 @@ views:
           - entity: automation.morning_announcment
             secondary_info: last-changed
           - entity: automation.lexi_brush_teeth
+            secondary_info: last-changed
+          - entity: automation.lexi_do_laps
             secondary_info: last-changed
       #Weather Automations
       - type: entities
