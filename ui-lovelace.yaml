@@ -137,11 +137,16 @@ views:
         title: Gaming Systems
         show_header_toggle: false
         entities:
-          - sensor.xbox360
-          - sensor.xboxone
-          - sensor.ps3
-          - sensor.switch
-          - sensor.lexixboxone
+          - entity: sensor.xbox360
+            icon: mdi:xbox
+          - entity: sensor.xboxone
+            icon: mdi:xbox
+          - entity: sensor.ps3
+            icon: mdi:playstation
+          - entity: sensor.switch
+            icon: mdi:nintendo-switch
+          - entity: sensor.lexixboxone
+            icon: mdi:xbox
       #Vacuum
       - type: entities
         title: Vacuum
@@ -197,7 +202,7 @@ views:
             show_progress: true
             power_color: true
           - type: custom:mini-media-player
-            entity: media_player.lexi_xbox_one
+            entity: media_player.chrome_3
             icon: mdi:television-box
             artwork_border: true
             show_source: true
@@ -206,8 +211,8 @@ views:
             show_progress: true
             power_color: true
           - type: custom:mini-media-player
-            entity: media_player.chrome_3
-            icon: mdi:television-box
+            entity: media_player.lexi_xbox_one
+            icon: mdi:xbox
             artwork_border: true
             show_source: true
             artwork: cover
@@ -523,11 +528,16 @@ views:
         title: Gaming Systems
         show_header_toggle: false
         entities:
-          - sensor.xbox360
-          - sensor.xboxone
-          - sensor.ps3
-          - sensor.switch
-          - sensor.lexixboxone
+          - entity: sensor.xbox360
+            icon: mdi:xbox
+          - entity: sensor.xboxone
+            icon: mdi:xbox
+          - entity: sensor.ps3
+            icon: mdi:playstation
+          - entity: sensor.switch
+            icon: mdi:nintendo-switch
+          - entity: sensor.lexixboxone
+            icon: mdi:xbox
       #Vaccum
       - type: entities
         title: Vacuum
@@ -677,6 +687,12 @@ views:
         entities:
           - entity: switch.christmas_outside_lights
             icon: mdi:track-light
+      - type: picture-entity
+        title: Back Porch Camera
+        entity: camera.back_porch
+        camera_image: camera.back_porch
+        camera_view: live
+        show_info: true
 #People View
   - title: People
     id: 10
@@ -1147,21 +1163,36 @@ views:
         title: Network
         show_header_toggle: false
         entities:
-          - sensor.pfsense
-          - sensor.freenas
-          - sensor.proxmox
-          - sensor.guestap
-          - sensor.unifiap
-          - sensor.obitalk
-          - sensor.ombi
-          - sensor.owncloud
-          - sensor.plexserver
-          - sensor.radarr
-          - sensor.sabnzbd
-          - sensor.sonarr
-          - sensor.torrent
-          - sensor.tvheadend
-          - sensor.unificontroller
+          - entity: sensor.pfsense
+            icon: mdi:server
+          - entity: sensor.freenas
+            icon: mdi:server
+          - entity: sensor.proxmox
+            icon: mdi:server
+          - entity: sensor.guestap
+            icon: mdi:router-wireless
+          - entity: sensor.unifiap
+            icon: mdi:router-wireless
+          - entity: sensor.obitalk
+            icon: mdi:server
+          - entity: sensor.ombi
+            icon: mdi:server
+          - entity: sensor.owncloud
+            icon: mdi:server
+          - entity: sensor.plexserver
+            icon: mdi:server
+          - entity: sensor.radarr
+            icon: mdi:server
+          - entity: sensor.sabnzbd
+            icon: mdi:server
+          - entity: sensor.sonarr
+            icon: mdi:server
+          - entity: sensor.torrent
+            icon: mdi:server
+          - entity: sensor.tvheadend
+            icon: mdi:server
+          - entity: sensor.unificontroller
+            icon: mdi:server
       #Weblinks
       - type: entities
         title: Weblinks
@@ -1170,45 +1201,59 @@ views:
           - type: weblink
             name: Router
             url: !secret router_url
+            icon: mdi:server
           - type: weblink
             name: Proxmox
             url: !secret proxmox_url
+            icon: mdi:server
           - type: weblink
             name: Unifi Controller
             url: !secret unifi_controller_url
+            icon: mdi:server
           - type: weblink
             name: FreeNAS
             url: !secret freenas_url
+            icon: mdi:server
           - type: weblink
             name: Plex
             url: !secret plex_url
+            icon: mdi:server
           - type: weblink
             name: Ombi
             url: !secret ombi_url
+            icon: mdi:server
           - type: weblink
             name: TVHeadend
             url: !secret tvheadend_url
+            icon: mdi:server
           - type: weblink
             name: Own Cloud
             url: !secret owncloud_url
+            icon: mdi:server
           - type: weblink
             name: Transmission
             url: !secret transmission_url
+            icon: mdi:server
           - type: weblink
             name: SabNZBD
             url: !secret sabnzbd_url
+            icon: mdi:server
           - type: weblink
             name: Sonarr
             url: !secret sonarr_url
+            icon: mdi:server
           - type: weblink
             name: Radarr
             url: !secret radarr_url
+            icon: mdi:server
           - type: weblink
             name: OctoPrint
             url: !secret octoprint_url
+            icon: mdi:server
           - type: weblink
             name: ObiTalk
             url: !secret obitalk_url
+            icon: mdi:server
 #Settings View
   - title: Settings
     id: 14
