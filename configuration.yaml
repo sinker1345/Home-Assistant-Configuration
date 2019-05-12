@@ -23,8 +23,6 @@ homeassistant:
        - 127.0.0.1
        - 192.168.1.0/24
    - type: homeassistant
-# Show links to resources in log and frontend
-#introduction:
 
 # Enables the frontend
 frontend:
@@ -332,7 +330,7 @@ camera:
     
   - platform: mjpeg
     name: Back Porch
-    mjpeg_url: http://192.168.1.229:8080/?action=stream
+    mjpeg_url: http://192.168.1.42:8080/?action=stream
 
 # Dominos Component
 dominos:
