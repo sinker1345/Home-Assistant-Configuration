@@ -16,13 +16,13 @@
             It is currently {{states.sensor.dark_sky_summary.state}} and {{states.sensor.dark_sky_temperature.state|round}} degrees in Milton, 
             Today will be {{states.sensor.dark_sky_hourly_summary.state|replace(".", "")}}, 
             with a high of {{states.sensor.dark_sky_daytime_high_temperature_0d.state|round}} degrees 
-            and a {{states.sensor.dark_sky_precip_probability_0d.state}} percent chance of rain, 
+            and a {{states.sensor.dark_sky_precip_probability_0d.state|round}} percent chance of rain, 
           {% if now().strftime("%H")|int < 9 and now().strftime("%w")|int > 0 and now().strftime("%w")|int < 6 %}
             The current drive to Work in traffic is {{states.sensor.google_travel_time_driving.attributes.duration_in_traffic}}, 
           {% endif %}
-          {% if states.calendar.main.state == 'on' and states.calendar.main.attributes.message == 'Trash Day' %}
+          {% if states.calendar.main.state == 'on' and states.calendar.chores.attributes.message == 'Trash Day' %}
             It is trash day today,
-          {% elif states.calendar.main.state == 'on' and states.calendar.main.attributes.message == 'Recycling Day' %}
+          {% elif states.calendar.main.state == 'on' and states.calendar.chores.attributes.message == 'Recycling Day' %}
             please take out the recycling, recycling day is today,
           {% elif states.calendar.main.state == 'on' %}
             you have a calendar event today. It is {{states.calendar.main.attributes.message}},

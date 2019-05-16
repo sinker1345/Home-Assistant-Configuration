@@ -12,6 +12,8 @@ resources:
     type: js
   - url: /customcards/custom_ui/entity-attributes-card.js
     type: js
+  - url: /customcards/custom_ui/atomic-calendar.js
+    type: module
 views:
 #Switches/Lights View
   - title: Switches/Lights
@@ -25,13 +27,25 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
-    # Bar Light
-      - type: entities
-        title: Lights
-        show_header_toggle: false
+    #Calendar
+      - type: "custom:atomic-calendar"
+        title: "Calendar"
         entities:
-          - type: custom:slider-entity-row
-            entity: light.bar_light
+          - entity: calendar.main
+          - entity: calendar.bills
+          - entity: calendar.chores
+        fullDayEventText: 'All day'
+        untilText: 'Until'
+        showColors: true
+        maxDaysToShow: 5
+        showLocation: true
+        showMonth: false
+        showCurrentEventLine: false
+        locationTextSize: 90
+        dimFinishedEvents: true
+        finishedEventOpacity: 0.6
+        finishedEventFilter: 'grayscale(100%)'
+        showProgressBar: true
     #Horizontal button stack        
       - type: horizontal-stack
         cards:        
@@ -47,6 +61,13 @@ views:
             name: Couch Sleeper
             icon: mdi:hotel
             color: rgb(255, 215, 0)
+    # Bar Light
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.bar_light
     #Switches
       - type: entities
         title: Switches
@@ -922,6 +943,8 @@ views:
           - entity: automation.stop_coffe_pot
             secondary_info: last-changed
           - entity: automation.no_view_shopping_list
+            secondary_info: last-changed
+          - entity: automation.coffee_pt_day
             secondary_info: last-changed
       #Bedroom Automations
       - type: entities

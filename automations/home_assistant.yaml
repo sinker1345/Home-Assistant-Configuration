@@ -196,3 +196,14 @@
         data:
           entity_id: input_select.bed_time
           option: "23:30"
+
+# Take Out Trash
+  - alias: 'Coffee PT Day'
+    trigger:
+      - platform: template
+        value_template: "{% if is_state_attr('calendar.main', 'message', 'Pt day') %}true{% endif %}"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.wake_time
+          option: "03:30"
