@@ -4,9 +4,9 @@
     alias: "Turn on Bedroom fan"
     trigger:
       - platform: state
-        entity_id: sensor.master_bed_room_motion
-        from: 'standby'
-        to: 'motion detected'
+        entity_id: binary_sensor.master_bedroom_motion
+        from: 'off'
+        to: 'on'
     condition:
       condition: and
       conditions:
@@ -16,7 +16,7 @@
           entity_id: switch.master_bedroom_fan
           state: 'off'
         - condition: template
-          value_template: "{% if states.sensor.master_bed_room_temperature.state | float >= 50 %} true {% endif %}"
+          value_template: "{% if states.sensor.master_bedroom_temperature.state | int >= 50 %} true {% endif %}"
         - condition: template 
           value_template: "{% if states.input_select.bedroom_fan_automation.state == 'Yes' %} true {% endif %}"          
     action:

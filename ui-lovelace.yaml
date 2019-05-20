@@ -14,18 +14,23 @@ resources:
     type: js
   - url: /customcards/custom_ui/atomic-calendar.js
     type: module
+  - url: /customcards/github/thomasloven/card-tools.js?track=true
+    type: js
+  - url: /customcards/custom_ui/auto-entities.js?track=true
+    type: js
 views:
-#Switches/Lights View
-  - title: Switches/Lights
+#Home View
+  - title: Home
     id: 0
     #Badges
     badges:
-      - sensor.time
+      - sun.sun
       - sensor.day
       - sensor.month
       - sensor.year
-      - sun.sun
-      - binary_sensor.iss
+      - sensor.time
+      - person.tommy
+      - person.jessica
     cards:
     #Calendar
       - type: "custom:atomic-calendar"
@@ -34,6 +39,9 @@ views:
           - entity: calendar.main
           - entity: calendar.bills
           - entity: calendar.chores
+          - entity: calendar.family
+          - entity: calendar.todoist
+          - entity: calendar.holidays_in_united_states
         fullDayEventText: 'All day'
         untilText: 'Until'
         showColors: true
@@ -61,35 +69,80 @@ views:
             name: Couch Sleeper
             icon: mdi:hotel
             color: rgb(255, 215, 0)
-    # Bar Light
+    #circadian_lighting (Button_card)
+          - type: "custom:button-card"
+            entity: switch.circadian_lighting_circadian_lighting
+            name: Auto Adjust Lights
+            icon: mdi:brightness-6
+            color: rgb(255, 215, 0)
+            styles:
+              card:
+                - font-size: 12px
+                - font-weight: bold
+    #Horizontal guage stack        
+      - type: horizontal-stack
+        cards: 
+        #Guage for House Temp
+          - type: gauge
+            entity: sensor.average_temp            
+            severity:
+              green: 50
+              yellow: 80
+              red: 90
+        #Guage for House Temp
+          - type: gauge
+            entity: sensor.average_humidity
+            severity:
+              green: 0
+              yellow: 51
+              red: 90
+    #Last Room Motion
       - type: entities
-        title: Lights
+        show_header_toggle: false
+        title: Last Room Motion
+        entities:
+          - entity: variable.last_motion
+            name: Last Room With Motion
+            icon: mdi:walk
+    #Switches/Lights that are on
+      - type: "custom:auto-entities"
+        card:
+          type: entities
+          title: "Lights and Switches that are on"
+        filter:
+          include:
+            - domain: light
+              state: 'on'
+            - domain: switch
+              state: 'on'
+          exclude:
+            - entity_id: switch.guest_mode
+            - entity_id: switch.couch_sleeper
+            - entity_id: switch.morning_alert    
+            - entity_id: switch.circadian_lighting_circadian_lighting
+    #Switches/Lights that are off
+      - type: "custom:auto-entities"
+        card:
+          type: entities
+          title: "Lights and Switches that are off"
+          show_header_toggle: false
+        filter:
+          include:
+            - domain: light
+              state: 'off'
+            - domain: switch
+              state: 'off'
+          exclude:
+            - entity_id: switch.guest_mode
+            - entity_id: switch.couch_sleeper
+            - entity_id: switch.morning_alert
+            - entity_id: switch.circadian_lighting_circadian_lighting
+    #Vaccum
+      - type: entities
+        title: Robot Vaccum Controls
         show_header_toggle: false
         entities:
-          - type: custom:slider-entity-row
-            entity: light.bar_light
-    #Switches
-      - type: entities
-        title: Switches
-        show_header_toggle: false
-        entities:
-          - entity: switch.christmas_outside_lights
-            icon: mdi:track-light
-          - entity: switch.christmas_tree_lights
-            icon: mdi:pine-tree
-          - entity: switch.inflatables
-            icon: mdi:pine-tree
-          - switch.circadian_lighting_circadian_lighting
-          - entity: switch.master_bedroom_fan
-            icon: mdi:fan
-          - entity: switch.morning_alert
-            icon: mdi:coffee
-          - entity: switch.seasonal_lights
-            icon: mdi:track-light
-          - entity: switch.tv_lights_power
-            icon: mdi:television-classic
-          - entity: switch.coffee_pot
-            icon: mdi:kettle
+          - entity: vacuum.bob
 #Common Area View
   - title: Common Areas
     id: 1
@@ -115,15 +168,11 @@ views:
             name: Common Area Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.common_area_feels_like
-            name: Common Area Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
           - entity: sensor.common_area_humidity
             name: Common Area Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.common_area_light_level
+          - entity: sensor.common_area_brightness
             name: Common Area Light Level
             secondary_info: last-changed
             icon: mdi:eye
@@ -257,23 +306,19 @@ views:
         title: Master Bedroom Sensors
         show_header_toggle: false
         entities:
-          - entity: sensor.master_bed_room_temperature
+          - entity: sensor.master_bedroom_temperature
             name: Master Bedroom Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.master_bed_room_feels_like
-            name: Master Bedroom Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
-          - entity: sensor.master_bed_room_humidity
+          - entity: sensor.master_bedroom_humidity
             name: Master Bedroom Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.master_bed_room_light_level
+          - entity: sensor.master_bedroom_brightness
             name: Master Bedroom Light Level
             icon: mdi:eye
             secondary_info: last-changed
-          - entity: sensor.master_bed_room_motion
+          - entity: binary_sensor.master_bedroom_motion
             name: Master Bedroom Motion
             icon: mdi:walk
             secondary_info: last-changed
@@ -333,19 +378,15 @@ views:
             name: Dining Room Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.dining_room_feels_like
-            name: Dining Room Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
           - entity: sensor.dining_room_humidity
             name: Dining Room Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.dining_room_light_level
+          - entity: sensor.dining_room_brightness
             name: Dining Room Light Level
             icon: mdi:eye
             secondary_info: last-changed
-          - entity: sensor.dining_room_motion_2
+          - entity: binary_sensor.dining_room_motion
             name: Dining Room Motion
             icon: mdi:walk
             secondary_info: last-changed
@@ -370,19 +411,15 @@ views:
             name: Garage Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.garage_feels_like
-            name: Garage Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
           - entity: sensor.garage_humidity
             name: Garage Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.garage_light_level
+          - entity: sensor.garage_brightness
             name: Garage Light Level
             icon: mdi:eye
             secondary_info: last-changed
-          - entity: sensor.garage_motion
+          - entity: binary_sensor.garage_motion
             name: Garage Motion
             icon: mdi:walk
             secondary_info: last-changed
@@ -444,19 +481,15 @@ views:
             name: Kitchen Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.kitchen_feels_like
-            name: Kitchen Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
           - entity: sensor.kitchen_humidity
             name: Kitchen Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.kitchen_light_level
+          - entity: sensor.kitchen_brightness
             name: Kitchen Light Level
             icon: mdi:eye
             secondary_info: last-changed
-          - entity: sensor.kitchen_motion
+          - entity: binary_sensor.kitchen_motion
             name: Kitchen Motion
             icon: mdi:walk
             secondary_info: last-changed
@@ -517,15 +550,11 @@ views:
             name: Living Room Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.living_room_feels_like_combo
-            name: Living Room Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
           - entity: sensor.living_room_humidity_combo
             name: Living Room Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.living_room_light_level_combo
+          - entity: sensor.living_room_brightness_combo
             name: Living Room Light Level
             icon: mdi:eye
             secondary_info: last-changed
@@ -536,6 +565,18 @@ views:
           - entity: sensor.glances
             name: HTPC
             icon: mdi:monitor
+            secondary_info: last-changed
+      - type: entities
+        title: Computer Room Sensors
+        show_header_toggle: false
+        entities:
+          - entity: sensor.computer_room_brightness
+            name: Computer Room Light Level
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: binary_sensor.computer_room_motion
+            name: Computer Room Motion
+            icon: mdi:walk
             secondary_info: last-changed
       #TV Lights Power
       - type: entities
@@ -601,23 +642,19 @@ views:
         title: Master Bedroom Sensors
         show_header_toggle: false
         entities:
-          - entity: sensor.master_bed_room_temperature
+          - entity: sensor.master_bedroom_temperature
             name: Master Bedroom Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
-          - entity: sensor.master_bed_room_feels_like
-            name: Master Bedroom Feels Like Temperature
-            icon: mdi:thermometer
-            secondary_info: last-changed
-          - entity: sensor.master_bed_room_humidity
+          - entity: sensor.master_bedroom_humidity
             name: Master Bedroom Humidity
             icon: mdi:water-percent
             secondary_info: last-changed
-          - entity: sensor.master_bed_room_light_level
+          - entity: sensor.master_bedroom_brightness
             name: Master Bedroom Light Level
             icon: mdi:eye
             secondary_info: last-changed
-          - entity: sensor.master_bed_room_motion
+          - entity: binary_sensor.master_bedroom_motion
             name: Master Bedroom Motion
             icon: mdi:walk
             secondary_info: last-changed
@@ -1170,6 +1207,9 @@ views:
           - calendar.personal
           - calendar.shopping
           - calendar.work
+          - calendar.contacts
+          - calendar.family
+          - calendar.todoist
       #Z-Wave Network
       - type: entities
         title: Z-Wave
@@ -1181,102 +1221,6 @@ views:
           - zwave.kitchen_range_extender
           - zwave.living_room_range_extender
           - zwave.sigma_designs_uzb_zwave_usb_adapter
-      #Network Status
-      - type: entities
-        title: Network
-        show_header_toggle: false
-        entities:
-          - entity: sensor.pfsense
-            icon: mdi:server
-          - entity: sensor.freenas
-            icon: mdi:server
-          - entity: sensor.proxmox
-            icon: mdi:server
-          - entity: sensor.guestap
-            icon: mdi:router-wireless
-          - entity: sensor.unifiap
-            icon: mdi:router-wireless
-          - entity: sensor.obitalk
-            icon: mdi:server
-          - entity: sensor.ombi
-            icon: mdi:server
-          - entity: sensor.owncloud
-            icon: mdi:server
-          - entity: sensor.plexserver
-            icon: mdi:server
-          - entity: sensor.radarr
-            icon: mdi:server
-          - entity: sensor.sabnzbd
-            icon: mdi:server
-          - entity: sensor.sonarr
-            icon: mdi:server
-          - entity: sensor.torrent
-            icon: mdi:server
-          - entity: sensor.tvheadend
-            icon: mdi:server
-          - entity: sensor.unificontroller
-            icon: mdi:server
-      #Weblinks
-      - type: entities
-        title: Weblinks
-        show_header_toggle: false
-        entities:
-          - type: weblink
-            name: Router
-            url: !secret router_url
-            icon: mdi:server
-          - type: weblink
-            name: Proxmox
-            url: !secret proxmox_url
-            icon: mdi:server
-          - type: weblink
-            name: Unifi Controller
-            url: !secret unifi_controller_url
-            icon: mdi:server
-          - type: weblink
-            name: FreeNAS
-            url: !secret freenas_url
-            icon: mdi:server
-          - type: weblink
-            name: Plex
-            url: !secret plex_url
-            icon: mdi:server
-          - type: weblink
-            name: Ombi
-            url: !secret ombi_url
-            icon: mdi:server
-          - type: weblink
-            name: TVHeadend
-            url: !secret tvheadend_url
-            icon: mdi:server
-          - type: weblink
-            name: Own Cloud
-            url: !secret owncloud_url
-            icon: mdi:server
-          - type: weblink
-            name: Transmission
-            url: !secret transmission_url
-            icon: mdi:server
-          - type: weblink
-            name: SabNZBD
-            url: !secret sabnzbd_url
-            icon: mdi:server
-          - type: weblink
-            name: Sonarr
-            url: !secret sonarr_url
-            icon: mdi:server
-          - type: weblink
-            name: Radarr
-            url: !secret radarr_url
-            icon: mdi:server
-          - type: weblink
-            name: OctoPrint
-            url: !secret octoprint_url
-            icon: mdi:server
-          - type: weblink
-            name: ObiTalk
-            url: !secret obitalk_url
-            icon: mdi:server
 #Settings View
   - title: Settings
     id: 14

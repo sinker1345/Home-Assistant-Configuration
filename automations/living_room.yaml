@@ -75,8 +75,8 @@
     trigger:
       - platform: state
         entity_id: sensor.living_room_motion_combo
-        from: 'standby'
-        to: 'motion detected'
+        from: 'Clear'
+        to: 'Detected'
     condition:
       condition: and
       conditions:

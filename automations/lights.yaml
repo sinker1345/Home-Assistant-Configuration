@@ -28,7 +28,7 @@
     trigger:
       - platform: state
         entity_id: sensor.common_area_motion
-        to: 'Standby'
+        to: 'Clear'
         for:
           minutes: 30
     condition:
@@ -54,7 +54,7 @@
     trigger:
       - platform: state
         entity_id: sensor.common_area_motion
-        to: 'Motion Detected'
+        to: 'Detected'
     condition:
       condition: and
       conditions:

@@ -8,6 +8,8 @@ CREDITS:
 - This module is based on media_player.firetv component, initially created by @happyleavesaoc
 - Original code: https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/media_player/firetv.py
 """
+DOMAIN = 'xbox_one'
+
 import logging
 import functools
 import requests

@@ -15,7 +15,7 @@
           entity_id: media_player.garage_chromecast
           state: 'off'
         - condition: numeric_state
-          entity_id: sensor.garage_light_level
+          entity_id: sensor.garage_brightness
           below: 50
         - condition: state
           entity_id: sensor.garage_door
@@ -43,7 +43,7 @@
           entity_id: media_player.garage_chromecast
           state: 'off'
         - condition: numeric_state
-          entity_id: sensor.garage_light_level
+          entity_id: sensor.garage_brightness
           below: 50
         - condition: state
           entity_id: sensor.garage_door

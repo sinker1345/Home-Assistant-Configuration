@@ -205,42 +205,37 @@ recorder:
       - media_player
     entities:
       - light.bar_light
-      - sensor.common_area_feels_like
       - sensor.common_area_humidity
-      - sensor.common_area_light_level
+      - sensor.common_area_brightness
       - sensor.common_area_motion
       - sensor.common_area_temperature
-      - sensor.dining_room_feels_like
       - sensor.dining_room_humidity
-      - sensor.dining_room_light_level
-      - sensor.dining_room_motion_2
+      - sensor.dining_room_brightness
+      - binary_sensor.dining_room_motion
       - sensor.dining_room_temperature
       - sensor.garage_door_template
-      - sensor.garage_feels_like
-      - sensor.garage_humidity
-      - sensor.garage_light_level
-      - sensor.garage_motion
-      - sensor.garage_temperature
+      - sensor.garage_humidity_2
+      - sensor.garage_brightness
+      - binary_sensor.garage_motion
+      - sensor.garage_temperature_2
       - sensor.htpc_idle
       - sensor.glances
       - sensor.google_travel_time_driving
       - sensor.jessica_status
       - sensor.kitchen_feels_like
       - sensor.kitchen_humidity
-      - sensor.kitchen_light_level
-      - sensor.kitchen_motion
+      - sensor.kitchen_brightness
+      - binary_sensor.kitchen_motion
       - sensor.kitchen_temperature
       - sensor.lexixboxone
-      - sensor.living_room_feels_like_combo
       - sensor.living_room_humidity_combo
-      - sensor.living_room_light_level_combo
+      - sensor.living_room_brightness_combo
       - sensor.living_room_motion_combo
       - sensor.living_room_temperature_combo
-      - sensor.master_bed_room_feels_like
-      - sensor.master_bed_room_humidity
-      - sensor.master_bed_room_light_level
-      - sensor.master_bed_room_motion
-      - sensor.master_bed_room_temperature
+      - sensor.master_bedroom_humidity
+      - sensor.master_bedroom_brightness
+      - binary_sensor.master_bedroom_motion
+      - sensor.master_bedroom_temperature
       - sensor.nws_alert_count_filtered
       - sensor.ps3
       - sensor.server_ups_battery_charge
@@ -263,6 +258,10 @@ recorder:
       - person.jessica
       - variable.last_motion
       - sensor.plex
+      - binary_sensor.computer_room_motion
+      - sensor.computer_room_brightness
+      - sensor.average_temp
+      - sensor.average_humidity
 
 #speedtest component
 speedtestdotnet:
