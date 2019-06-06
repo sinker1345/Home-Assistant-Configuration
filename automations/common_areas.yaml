@@ -3,7 +3,7 @@
     alias: "Update Last Motion"
     trigger:
       - platform: state
-        entity_id: binary_sensor.dining_room_motion, binary_sensor.kitchen_motion, binary_sensor.computer_room_motion 
+        entity_id: binary_sensor.dining_room_motion, binary_sensor.kitchen_motion 
         to: 'on'
       - platform: state
         entity_id: sensor.living_room_motion_combo

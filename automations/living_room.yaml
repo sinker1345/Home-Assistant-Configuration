@@ -2,7 +2,7 @@
   - alias: "Turn on Bob"
     trigger:
       - platform: time
-        at: '01:00:00'
+        at: '12:30:00'
     condition:
       condition: or
       conditions:
@@ -126,3 +126,23 @@
         entity_id: automation.turn_off_bar_light_at_night
       - service: switch.turn_on
         entity_id: switch.circadian_lighting_circadian_lighting
+
+  - alias: "Set A/C at Night"
+    trigger:
+      - platform: time
+        at: '20:00:00'
+    action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 75
+
+  - alias: "Set A/C During Day"
+    trigger:
+      - platform: time
+        at: '06:00:00'
+    action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 80

@@ -4,10 +4,10 @@
       - platform: time
         at: '20:45:00'
     action:
-      - service: media_player.turn_on
-        entity_id: media_player.kitchen_speaker
-      - service: media_player.turn_on
-        entity_id: media_player.googlehome3446
+#      - service: media_player.turn_on
+#        entity_id: media_player.kitchen_speaker
+#      - service: media_player.turn_on
+#        entity_id: media_player.googlehome3446
       - service: media_player.turn_on
         entity_id: media_player.common_area
       - delay: '00:00:03'
@@ -15,14 +15,14 @@
         data:
           entity_id: media_player.common_area
           volume_level: 0.50
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.kitchen_speaker
-          volume_level: 0.50
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.googlehome3446
-          volume_level: 0.50
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.kitchen_speaker
+#          volume_level: 0.50
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.googlehome3446
+#          volume_level: 0.50
       - delay: '00:00:03'
       - service: tts.google_say
         entity_id: media_player.common_area
@@ -45,10 +45,10 @@
           entity_id: sensor.day
           state: 'Saturday'
     action:
-      - service: media_player.turn_on
-        entity_id: media_player.kitchen_speaker
-      - service: media_player.turn_on
-        entity_id: media_player.googlehome3446
+#      - service: media_player.turn_on
+#        entity_id: media_player.kitchen_speaker
+#      - service: media_player.turn_on
+#        entity_id: media_player.googlehome3446
       - service: media_player.turn_on
         entity_id: media_player.common_area
       - delay: '00:00:03'
@@ -56,14 +56,14 @@
         data:
           entity_id: media_player.common_area
           volume_level: 0.50
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.kitchen_speaker
-          volume_level: 0.50
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.googlehome3446
-          volume_level: 0.50
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.kitchen_speaker
+#          volume_level: 0.50
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.googlehome3446
+#          volume_level: 0.50
       - delay: '00:00:03'
       - service: tts.google_say
         entity_id: media_player.common_area
@@ -94,10 +94,10 @@
           entity_id: switch.morning_alert
           state: 'off'
     action:
-      - service: media_player.turn_on
-        entity_id: media_player.kitchen_speaker
-      - service: media_player.turn_on
-        entity_id: media_player.googlehome3446
+#      - service: media_player.turn_on
+#        entity_id: media_player.kitchen_speaker
+#      - service: media_player.turn_on
+#        entity_id: media_player.googlehome3446
       - service: media_player.turn_on
         entity_id: media_player.common_area
       - delay: '00:00:03'
@@ -105,20 +105,20 @@
         data:
           entity_id: media_player.common_area
           volume_level: 0.50
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.kitchen_speaker
-          volume_level: 0.50
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.googlehome3446
-          volume_level: 0.50
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.kitchen_speaker
+#          volume_level: 0.50
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.googlehome3446
+#          volume_level: 0.50
       - delay: '00:00:03'
       - service: script.morning_greeting
       - delay: '00:00:55'
-      - service: media_player.turn_off
-        entity_id: media_player.googlehome3446
+#      - service: media_player.turn_off
+#        entity_id: media_player.googlehome3446
       - service: media_player.turn_off
         entity_id: media_player.common_area
-      - service: media_player.turn_off
-        entity_id: media_player.kitchen_speaker
+#      - service: media_player.turn_off
+#        entity_id: media_player.kitchen_speaker

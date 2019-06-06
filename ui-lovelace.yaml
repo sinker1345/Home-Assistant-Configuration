@@ -18,6 +18,8 @@ resources:
     type: js
   - url: /customcards/custom_ui/auto-entities.js?track=true
     type: js
+  - url: /customcards/custom_ui/dual-thermostat.js?track=true
+    type: js
 views:
 #Home View
   - title: Home
@@ -95,13 +97,25 @@ views:
             severity:
               green: 0
               yellow: 51
-              red: 90
+              red: 80
+       #Climate Control       
+      - type: custom:dual-thermostat
+        name: House A/C
+        entities:
+          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+            type: cool
+          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+            type: heat
+        fan_control: true
+        min_slider: 40
+        max_slider: 90
     #Last Room Motion
       - type: entities
         show_header_toggle: false
         title: Last Room Motion
         entities:
           - entity: variable.last_motion
+            secondary_info: last-changed
             name: Last Room With Motion
             icon: mdi:walk
     #Switches/Lights that are on
@@ -120,6 +134,16 @@ views:
             - entity_id: switch.couch_sleeper
             - entity_id: switch.morning_alert    
             - entity_id: switch.circadian_lighting_circadian_lighting
+    #Media Playersthat are on
+      - type: "custom:auto-entities"
+        card:
+          type: entities
+          title: "Media Players in use"
+          show_header_toggle: false
+        filter:
+          include:
+            - domain: media_player
+              state: 'playing'
     #Switches/Lights that are off
       - type: "custom:auto-entities"
         card:
@@ -180,14 +204,20 @@ views:
             name: Common Area Motion
             icon: mdi:walk
             secondary_info: last-changed
-          - entity: variable.last_motion
-            name: Last Room Motion Common Areas
-            icon: mdi:walk
-            secondary_info: last-changed
           - entity: sensor.glances
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
+      - type: custom:dual-thermostat
+        name: House A/C
+        entities:
+          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+            type: cool
+          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+            type: heat
+        fan_control: true
+        min_slider: 40
+        max_slider: 90
       #Bar Light
       - type: entities
         title: Lights
@@ -566,18 +596,16 @@ views:
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
-      - type: entities
-        title: Computer Room Sensors
-        show_header_toggle: false
+      - type: custom:dual-thermostat
+        name: House A/C
         entities:
-          - entity: sensor.computer_room_brightness
-            name: Computer Room Light Level
-            icon: mdi:eye
-            secondary_info: last-changed
-          - entity: binary_sensor.computer_room_motion
-            name: Computer Room Motion
-            icon: mdi:walk
-            secondary_info: last-changed
+          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+            type: cool
+          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+            type: heat
+        fan_control: true
+        min_slider: 40
+        max_slider: 90
       #TV Lights Power
       - type: entities
         title: TV Lights Power
@@ -709,6 +737,27 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      #Sensors
+      - type: entities
+        title: Front Office Sensors
+        show_header_toggle: false
+        entities:
+          - entity: sensor.front_room_temperature
+            name: Front Office Temperature
+            icon: mdi:thermometer
+            secondary_info: last-changed
+          - entity: sensor.front_room_humidity
+            name: Front office Humidity
+            icon: mdi:water-percent
+            secondary_info: last-changed
+          - entity: sensor.front_room_brightness
+            name: Front Office Brightness
+            icon: mdi:eye
+            secondary_info: last-changed
+          - entity: binary_sensor.front_room_motion
+            name: Front Office Motion
+            icon: mdi:walk
+            secondary_info: last-changed
       - type: custom:mini-media-player
         entity: media_player.office_tv
         icon: mdi:television-box
@@ -970,6 +1019,10 @@ views:
             secondary_info: last-changed
           - entity: automation.no_couch_sleeper
             secondary_info: last-changed
+          - entity: automation.set_a_c_at_night
+            secondary_info: last-changed
+          - entity: automation.set_a_c_during_day
+            secondary_info: last-changed
       #Kitchen Automations
       - type: entities
         title: Kitchen
@@ -1100,6 +1153,8 @@ views:
             secondary_info: last-changed
           - entity: automation.coffee_pot_setup_reminder
             secondary_info: last-changed
+          - entity: automation.alert_on_thermostat_low_battery
+            secondary_info: last-changed
       #Homeassistant Automations
       - type: entities
         title: Homeassistant
@@ -1168,6 +1223,12 @@ views:
       - sensor.speedtest_ping
       - sensor.speedtest_upload
     cards:
+      - type: entities
+        title: Battery Status
+        show_header_toggle: false
+        entities:
+          - entity: sensor.thermostat_battery_level
+            secondary_info: last-changed
       #Homeassistant Tatus
       - type: entities
         title: Home Assistant Status
@@ -1221,6 +1282,7 @@ views:
           - zwave.kitchen_range_extender
           - zwave.living_room_range_extender
           - zwave.sigma_designs_uzb_zwave_usb_adapter
+          - zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat
 #Settings View
   - title: Settings
     id: 14
@@ -1249,7 +1311,6 @@ views:
         trackers:
           - sensor.custom_card_tracker
           - sensor.custom_component_tracker
-    
   - title:  
     icon: mdi:thisfakereferencehidesthistab
     id: 15

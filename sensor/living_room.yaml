@@ -10,3 +10,29 @@
           {% else %}
             In Use
           {% endif %}
+      thermostat_battery_level:
+        friendly_name: "Thermostat Battery Level"
+        value_template: >-
+          {{ states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level }}
+        icon_template: >-
+          {% if states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level > 90 %}
+            mdi:battery
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 90 %}
+            mdi:battery-90
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 80 %}
+            mdi:battery-80
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 70 %}
+            mdi:battery-70
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 60 %}
+            mdi:battery-60
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 50 %}
+            mdi:battery-50
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 40 %}
+            mdi:battery-40
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 30 %}
+            mdi:battery-30
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 20 %}
+            mdi:battery-20
+          {% elif states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 10 %}
+            mdi:battery-10
+          {% endif %}

@@ -1,4 +1,3 @@
-    
 check_all:
   description: Check the status of all custom elements
 install:

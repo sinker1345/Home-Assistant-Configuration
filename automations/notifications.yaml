@@ -238,3 +238,29 @@
         message: "Home Assistant has Started"
         target:
           - 816032519
+
+  - alias: 'alert on thermostat low battery'
+    trigger:
+      - platform: template
+        value_template: >- 
+          {{ states.zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat.attributes.battery_level <= 50 }}
+    action:
+      - service: notify.telegram
+        data_template:
+          message: "Batteries are low on the Thermostat! Have husband replace the batteries!"
+      - service: media_player.turn_on
+        entity_id: media_player.common_area
+      - delay: '00:00:03'
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.common_area
+          volume_level: 0.50
+      - delay: '00:00:03'
+      - service: tts.google_say
+        entity_id: media_player.common_area
+        data:
+          message: "Batteries are low on the Thermostat! Have husband replace the batteries!"
+      - delay: '00:00:10'
+      - service: media_player.turn_off
+        data_template:
+          entity_id: media_player.common_area

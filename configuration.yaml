@@ -102,7 +102,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
-
+ssdp:
+zeroconf:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
@@ -214,10 +215,10 @@ recorder:
       - binary_sensor.dining_room_motion
       - sensor.dining_room_temperature
       - sensor.garage_door_template
-      - sensor.garage_humidity_2
+      - sensor.garage_humidity
       - sensor.garage_brightness
       - binary_sensor.garage_motion
-      - sensor.garage_temperature_2
+      - sensor.garage_temperature
       - sensor.htpc_idle
       - sensor.glances
       - sensor.google_travel_time_driving
@@ -262,6 +263,10 @@ recorder:
       - sensor.computer_room_brightness
       - sensor.average_temp
       - sensor.average_humidity
+      - sensor.front_room_brightness
+      - sensor.front_room_humidity
+      - binary_sensor.front_room_motion
+      - sensor.front_room_temperature
 
 #speedtest component
 speedtestdotnet:
