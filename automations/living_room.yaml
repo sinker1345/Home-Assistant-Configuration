@@ -2,7 +2,7 @@
   - alias: "Turn on Bob"
     trigger:
       - platform: time
-        at: '12:30:00'
+        at: '01:00:00'
     condition:
       condition: or
       conditions:
@@ -28,7 +28,7 @@
   - alias: "Send Bob Home"
     trigger:
       - platform: time
-        at: '05:00:00'
+        at: '03:00:00'
     condition:
       condition: and
       conditions:
@@ -137,10 +137,32 @@
           entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
           temperature: 75
 
-  - alias: "Set A/C During Day"
+  - alias: "Set A/C During Day Weekdays"
     trigger:
       - platform: time
         at: '06:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+    action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 80
+
+  - alias: "Set A/C During Day Weekend/Holiday"
+    trigger:
+      - platform: time
+        at: '07:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'off'
     action:
       - service: climate.set_temperature
         data:

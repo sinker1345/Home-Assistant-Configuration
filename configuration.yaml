@@ -21,7 +21,7 @@ homeassistant:
      api_password: !secret dns_pass
    - type: trusted_networks
      trusted_networks:
-       - 127.0.0.1
+#       - 127.0.0.1
        - 192.168.1.0/24
 
 # Enables the frontend
@@ -58,6 +58,8 @@ cloud:
 #system health check
 system_health:
 
+breaking_changes:
+
 tplink:
   discovery: true
   light:
@@ -88,7 +90,7 @@ http:
   # base_url: example.duckdns.org:8123
   use_x_forwarded_for: True
   trusted_proxies:
-    - 127.0.0.1
+#    - 127.0.0.1
     - 192.168.1.1
 
 # Checks for available updates
@@ -126,17 +128,9 @@ logger:
     homeassistant.components.http.ban: warning
     urllib3.connectionpool: error
 
-#custom_updater device for custom components
-custom_updater:
-  track:
-     - cards
-     - components
-     - python_scripts
-  card_urls:
-    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
-    - https://raw.githubusercontent.com/iammexx/home-assistant-config/master/ui/darksky/version.json
-    - https://raw.githubusercontent.com/atomic7777/atomic_calendar/master/tracker.json
-
+hacs:
+  token: !secret github_token
+  
 # Roomba tracker
 vacuum:
   - platform: roomba
@@ -361,14 +355,22 @@ panel_iframe:
     title: 'Node-Red'
     icon: 'mdi:shuffle-variant'
     url: 'http://192.168.1.22:1880/'
-  grafana:
-    title: 'Grafana'
-    icon: mdi:chart-bar-stacked
-    url: 'http://192.168.1.22:3000'
   roomba_clean:
     title: 'Roomba Clean Map'
     icon: mdi:robot-vacuum
     url: 'http://192.168.1.22:8123/local/roomba/map_notext.png'
+  tasmoadmin:
+    title: Tasmota Admin
+    icon: mdi:account-box
+    url: 'http://192.168.1.12:5555'
+  esphome:
+    title: ESPHome
+    icon: mdi:car-esp
+    url: 'http://192.168.1.12:6052'
+  zoneminder:
+    title: ZoneMinder
+    icon: mdi:cctv
+    url: 'http://192.168.1.12/zm'
     
 #Zones
 zone:

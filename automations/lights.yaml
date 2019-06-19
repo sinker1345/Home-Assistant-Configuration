@@ -161,3 +161,36 @@
     action:
       - service: switch.turn_off
         entity_id: switch.christmas_outside_lights
+  
+  - alias: 'Set Bar light for TV Playback'
+    trigger:
+      - platform: state
+        entity_id: sensor.glances
+        to: 'Idle'
+      - platform: state
+        entity_id: sensor.glances
+        to: 'In Use'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: 'below_horizon'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.circadian_lighting_circadian_lighting
+      - service: light.turn_on
+        data:
+          entity_id: light.bar_light
+          hs_color: [360, 25]
+          brightness: 50
+          transition: 30
+
+  - alias: 'Set Bar light for No TV Playback'
+    trigger:
+      - platform: state
+        entity_id: sensor.glances
+        to: 'Off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.circadian_lighting_circadian_lighting

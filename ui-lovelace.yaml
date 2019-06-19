@@ -1,24 +1,22 @@
 title: House
 resources:
-  - url: /customcards/custom_ui/mini-media-player-bundle.js
+  - url: /community_plugin/mini-media-player/mini-media-player.js
     type: module
-  - url: /customcards/custom_ui/tracker-card.js
-    type: js
-  - url: /customcards/custom_ui/dark-sky-weather-card.js
+  - url: /local/custom_ui/dark-sky-weather-card.js
     type: module
-  - url: /customcards/github/custom-cards/button-card.js?track=true
+  - url: /community_plugin/button-card/button-card.js
     type: module
-  - url: /customcards/custom_ui/slider-entity-row.js
+  - url: /community_plugin/lovelace-slider-entity-row/slider-entity-row.js
     type: js
-  - url: /customcards/custom_ui/entity-attributes-card.js
+  - url: /community_plugin/entity-attributes-card/entity-attributes-card.js
     type: js
-  - url: /customcards/custom_ui/atomic-calendar.js
+  - url: /local/custom_ui/atomic-calendar.js
     type: module
-  - url: /customcards/github/thomasloven/card-tools.js?track=true
+  - url: /community_plugin/lovelace-card-tools/card-tools.js
     type: js
-  - url: /customcards/custom_ui/auto-entities.js?track=true
+  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
     type: js
-  - url: /customcards/custom_ui/dual-thermostat.js?track=true
+  - url: /local/custom_ui/dual-thermostat.js
     type: js
 views:
 #Home View
@@ -851,7 +849,7 @@ views:
       - sensor.month
       - sensor.year
       - sun.sun
-      - sensor.nws_alerts
+      - sensor.noaa_alerts_flz203
       - binary_sensor.iss
     cards:
       #Dark Sky Weather Card
@@ -1021,7 +1019,13 @@ views:
             secondary_info: last-changed
           - entity: automation.set_a_c_at_night
             secondary_info: last-changed
-          - entity: automation.set_a_c_during_day
+          - entity: automation.set_a_c_during_day_weekdays
+            secondary_info: last-changed
+          - entity: automation.set_a_c_during_day_weekend_holiday
+            secondary_info: last-changed
+          - entity: automation.set_bar_light_for_tv_playback
+            secondary_info: last-changed
+          - entity: automation.set_bar_light_for_no_tv_playback
             secondary_info: last-changed
       #Kitchen Automations
       - type: entities
@@ -1222,6 +1226,7 @@ views:
       - sensor.speedtest_download
       - sensor.speedtest_ping
       - sensor.speedtest_upload
+      - sensor.potential_breaking_changes
     cards:
       - type: entities
         title: Battery Status
@@ -1305,12 +1310,6 @@ views:
           - input_select.is_coffee_pot_setup
           - input_select.wake_time
           - input_select.bed_time
-      #Custom Tracker Card
-      - type: custom:tracker-card
-        title: Custom Card Updates
-        trackers:
-          - sensor.custom_card_tracker
-          - sensor.custom_component_tracker
   - title:  
     icon: mdi:thisfakereferencehidesthistab
     id: 15
