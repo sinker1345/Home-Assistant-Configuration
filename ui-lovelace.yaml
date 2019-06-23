@@ -18,6 +18,18 @@ resources:
     type: js
   - url: /local/custom_ui/dual-thermostat.js
     type: js
+  - url: /community_plugin/lovelace-swipe-navigation/swipe-navigation.js
+    type: js 
+  - url: /community_plugin/love-lock-card/love-lock-card.js
+    type: js
+
+swipe_nav: 
+  wrap: false 
+  animate: swipe 
+# skip_tabs: 5,6,7,8 
+  prevent_default: true 
+  swipe_amount: 30 
+
 views:
 #Home View
   - title: Home
@@ -96,17 +108,20 @@ views:
               green: 0
               yellow: 51
               red: 80
-       #Climate Control       
-      - type: custom:dual-thermostat
-        name: House A/C
-        entities:
-          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
-            type: cool
-          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
-            type: heat
-        fan_control: true
-        min_slider: 40
-        max_slider: 90
+      #Climate Control    
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: custom:dual-thermostat
+            name: House A/C
+            entities:
+              - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+                type: cool
+              - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+                type: heat
+            fan_control: true
+            min_slider: 40
+            max_slider: 90
     #Last Room Motion
       - type: entities
         show_header_toggle: false
@@ -206,16 +221,20 @@ views:
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
-      - type: custom:dual-thermostat
-        name: House A/C
-        entities:
-          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
-            type: cool
-          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
-            type: heat
-        fan_control: true
-        min_slider: 40
-        max_slider: 90
+      #A/C Card
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: custom:dual-thermostat
+            name: House A/C
+            entities:
+              - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+                type: cool
+              - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+                type: heat
+            fan_control: true
+            min_slider: 40
+            max_slider: 90
       #Bar Light
       - type: entities
         title: Lights
@@ -594,16 +613,19 @@ views:
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
-      - type: custom:dual-thermostat
-        name: House A/C
-        entities:
-          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
-            type: cool
-          - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
-            type: heat
-        fan_control: true
-        min_slider: 40
-        max_slider: 90
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: custom:dual-thermostat
+            name: House A/C
+            entities:
+              - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+                type: cool
+              - entity: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_heating_1
+                type: heat
+            fan_control: true
+            min_slider: 40
+            max_slider: 90
       #TV Lights Power
       - type: entities
         title: TV Lights Power
@@ -1302,14 +1324,34 @@ views:
     cards:
       #Various Settings Input Select
       - type: entities
-        title: Homeassistant Settings
+        title: Kitchen
+        show_header_toggle: false
+        entities:
+          - input_select.is_coffee_pot_setup
+      - type: entities
+        title: Bedroom
+        show_header_toggle: false
+        entities:
+          - input_select.bedroom_fan_automation
+          - input_select.bedroom_fan_on_time
+          - input_select.bedroom_fan_off_time_weekday
+          - input_select.bedroom_fan_off_time_weekend
+          - input_select.bed_time
+          - input_select.wake_time
+      - type: entities
+        title: Living Room
+        show_header_toggle: false
+        entities:
+          - input_select.roomba_run
+          - input_select.roomba_stop
+          - input_select.a_c_set_weekday
+          - input_select.a_c_set_weekend
+          - input_select.a_c_on_at_night
+      - type: entities
+        title: Home Assistant
         show_header_toggle: false
         entities:
           - input_select.which_holiday
-          - input_select.bedroom_fan_automation
-          - input_select.is_coffee_pot_setup
-          - input_select.wake_time
-          - input_select.bed_time
   - title:  
     icon: mdi:thisfakereferencehidesthistab
     id: 15

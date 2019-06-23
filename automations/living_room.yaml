@@ -1,8 +1,11 @@
 # turn on Bob
   - alias: "Turn on Bob"
     trigger:
-      - platform: time
-        at: '01:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.roomba_run.state -%}
+            true
+          {%- endif -%}
     condition:
       condition: or
       conditions:
@@ -27,8 +30,11 @@
 
   - alias: "Send Bob Home"
     trigger:
-      - platform: time
-        at: '03:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.roomba_stop.state -%}
+            true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -129,8 +135,23 @@
 
   - alias: "Set A/C at Night"
     trigger:
-      - platform: time
-        at: '20:00:00'
+      - platform: template
+        value_template: >-
+            {%- if states.sensor.time.state == states.input_select.a_c_on_at_night.state -%}
+              true
+            {%- endif -%}
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.jessica_status
+          state: 'Home'
+        - condition: state
+          entity_id: sensor.tommy_status
+          state: 'Home'
+        - condition: numeric_state
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          above: 75
     action:
       - service: climate.set_temperature
         data:
@@ -139,8 +160,11 @@
 
   - alias: "Set A/C During Day Weekdays"
     trigger:
-      - platform: time
-        at: '06:00:00'
+      - platform: template
+        value_template: >-
+            {%- if states.sensor.time.state == states.input_select.a_c_set_weekday.state -%}
+              true
+            {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -155,8 +179,11 @@
 
   - alias: "Set A/C During Day Weekend/Holiday"
     trigger:
-      - platform: time
-        at: '07:00:00'
+      - platform: template
+        value_template: >-
+            {%- if states.sensor.time.state == states.input_select.a_c_set_weekend.state -%}
+              true
+            {%- endif -%}
     condition:
       condition: and
       conditions:

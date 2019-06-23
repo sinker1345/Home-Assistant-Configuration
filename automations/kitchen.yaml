@@ -2,6 +2,12 @@
     trigger:
       - platform: time
         at: '20:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: sensor.tommy_status
+          state: 'Home'
     action:
       - service: notify.telegram
         data_template:

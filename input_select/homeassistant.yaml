@@ -1,0 +1,7 @@
+  which_holiday:
+    name: Which Holiday Decorations are Put Up
+    options:
+      - None
+      - Christmas
+      - Halloween
+      - Thanksgiving

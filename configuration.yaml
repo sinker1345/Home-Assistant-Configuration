@@ -261,6 +261,7 @@ recorder:
       - sensor.front_room_humidity
       - binary_sensor.front_room_motion
       - sensor.front_room_temperature
+      - sensor.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_temperature
 
 #speedtest component
 speedtestdotnet:
@@ -542,133 +543,7 @@ calendar:
         due_date_days: 0
       - name: 'Due This Week'
         due_date_days: 7
-
-#input select
-input_select:
-  which_holiday:
-    name: Which Holiday Decorations are Put Up
-    options:
-      - None
-      - Christmas
-      - Halloween
-      - Thanksgiving
-
-  bedroom_fan_automation:
-    name: Should Bedroom Fan Automatically Turn On
-    options:
-      - 'Yes'
-      - 'No'
-
-  is_coffee_pot_setup:
-    name: Is the Coffee Pot Setup
-    options:
-      - 'Yes'
-      - 'No'
-
-  wake_time:
-    name: Wake Time
-    options:
-      - '01:00'
-      - '01:30'
-      - '02:00'
-      - '02:30'
-      - '03:00'
-      - '03:30'
-      - '04:00'
-      - '04:30'
-      - '05:00'
-      - '05:30'
-      - '06:00'
-      - '06:30'
-      - '07:00'
-      - '07:30'
-      - '08:00'
-      - '08:30'
-      - '09:00'
-      - '09:30'
-      - '10:00'
-      - '10:30'
-      - '11:00'
-      - '11:30'
-      - '12:00'
-      - '12:30'
-      - '13:00'
-      - '13:30'
-      - '14:00'
-      - '14:30'
-      - '15:00'
-      - '15:30'
-      - '16:00'
-      - '16:30'
-      - '17:00'
-      - '17:30'
-      - '18:00'
-      - '18:30'
-      - '19:00'
-      - '19:30'
-      - '20:00'
-      - '20:30'
-      - '21:00'
-      - '21:30'
-      - '22:00'
-      - '22:30'
-      - '23:00'
-      - '23:30'
-      - '00:00'
-      - '00:30'
-
-  bed_time:
-    name: Bed Time
-    options:
-      - '01:00'
-      - '01:30'
-      - '02:00'
-      - '02:30'
-      - '03:00'
-      - '03:30'
-      - '04:00'
-      - '04:30'
-      - '05:00'
-      - '05:30'
-      - '06:00'
-      - '06:30'
-      - '07:00'
-      - '07:30'
-      - '08:00'
-      - '08:30'
-      - '09:00'
-      - '09:30'
-      - '10:00'
-      - '10:30'
-      - '11:00'
-      - '11:30'
-      - '12:00'
-      - '12:30'
-      - '13:00'
-      - '13:30'
-      - '14:00'
-      - '14:30'
-      - '15:00'
-      - '15:30'
-      - '16:00'
-      - '16:30'
-      - '17:00'
-      - '17:30'
-      - '18:00'
-      - '18:30'
-      - '19:00'
-      - '19:30'
-      - '20:00'
-      - '20:30'
-      - '21:00'
-      - '21:30'
-      - '22:00'
-      - '22:30'
-      - '23:00'
-      - '23:30'
-      - '00:00'
-      - '00:30'
-
+      
 #Weather component
 weather:
   - platform: darksky
@@ -681,3 +556,4 @@ script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor/
 binary_sensor: !include_dir_merge_list binary_sensor/
 shell_command: !include shellcommand.yaml
+input_select: !include_dir_merge_named input_select/

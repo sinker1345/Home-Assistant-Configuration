@@ -1,0 +1,5 @@
+  is_coffee_pot_setup:
+    name: Is the Coffee Pot Setup
+    options:
+      - 'Yes'
+      - 'No'

@@ -25,7 +25,7 @@
   - alias: Lexi do Laps
     trigger:
       - platform: time
-        at: '18:00'
+        at: '18:00:00'
     condition:
       condition: and
       conditions:

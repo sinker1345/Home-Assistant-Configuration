@@ -10,8 +10,11 @@
     condition:
       condition: and
       conditions:
-        - condition: time
-          after: '20:00:00'
+        - condition: template
+          value_template: >-
+            {%- if states.sensor.time.state >= states.input_select.bedroom_fan_on_time.state -%}
+              true
+            {%- endif -%}
         - condition: state
           entity_id: switch.master_bedroom_fan
           state: 'off'
@@ -27,8 +30,11 @@
   - id: "12345600"
     alias: "Turn off Bedroom fan Weekday"
     trigger:
-      - platform: time
-        at: '06:30:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.bedroom_fan_off_time_weekday.state -%}
+            true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -50,8 +56,11 @@
   - id: "123456000"
     alias: "Turn off Bedroom fan Weekend"
     trigger:
-      - platform: time
-        at: '09:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.bedroom_fan_off_time_weekend.state -%}
+            true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
