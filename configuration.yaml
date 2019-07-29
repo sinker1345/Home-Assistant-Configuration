@@ -208,7 +208,6 @@ recorder:
       - sensor.dining_room_brightness
       - binary_sensor.dining_room_motion
       - sensor.dining_room_temperature
-      - sensor.garage_door_template
       - sensor.garage_humidity
       - sensor.garage_brightness
       - binary_sensor.garage_motion
@@ -253,8 +252,6 @@ recorder:
       - person.jessica
       - variable.last_motion
       - sensor.plex
-      - binary_sensor.computer_room_motion
-      - sensor.computer_room_brightness
       - sensor.average_temp
       - sensor.average_humidity
       - sensor.front_room_brightness
@@ -262,6 +259,7 @@ recorder:
       - binary_sensor.front_room_motion
       - sensor.front_room_temperature
       - sensor.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_temperature
+      - binary_sensor.garage_door
 
 #speedtest component
 speedtestdotnet:
@@ -308,11 +306,16 @@ media_player:
 
 #Octoprint Component
 octoprint:
-  host: 192.168.1.34
-  api_key: !secret octoprint_api
-  bed: true
-  number_of_tools: 1
-
+  - host: 192.168.1.34
+    api_key: !secret octoprint_api
+    name: MP Mini Delta
+    bed: true
+    number_of_tools: 1
+  - host: 192.168.1.45
+    api_key: !secret ender3_api_key
+    name: Ender 3 Pro
+    bed: true
+    number_of_tools: 1
 # Google Component
 google:
   client_id: !secret client_id
@@ -325,12 +328,17 @@ stream:
 # Camera Component
 camera:
   - platform: mjpeg
-    name: octo_print_camera
+    name: MP Mini Delta
     mjpeg_url: http://192.168.1.34/webcam/?action=stream
     
   - platform: mjpeg
     name: Back Porch
     mjpeg_url: http://192.168.1.42:8080/?action=stream
+
+  - platform: mjpeg
+    name: Ender 3 Pro
+    mjpeg_url: http://192.168.1.45:8080/?action=stream
+
 
 # Dominos Component
 dominos:
@@ -372,6 +380,10 @@ panel_iframe:
     title: ZoneMinder
     icon: mdi:cctv
     url: 'http://192.168.1.12/zm'
+  monica:
+    title: Monica
+    icon: mdi:panda
+    url: 'http://192.168.1.12:3000'
     
 #Zones
 zone:
@@ -436,9 +448,19 @@ switch:
 
   #3D Printer Power
   - platform: mqtt
-    name: "3D Printer Power"
+    name: "MP Mini Delta"
     command_topic: "cmnd/3dprinter/power"
     state_topic: "stat/3dprinter/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+    
+  #3D Ender 3 Pro
+  - platform: mqtt
+    name: "Ender 3 Pro"
+    command_topic: "cmnd/merkuryoutlet/power"
+    state_topic: "stat/merkuryoutlet/POWER"
     qos: 1
     payload_on: "ON"
     payload_off: "OFF"
@@ -519,20 +541,6 @@ variable:
       icon: mdi:map-marker
       name: "lexi status"
 
-#cover:
-   #Garage Door Cover
-#  - platform: mqtt
-#    name: "garage_door"
-#    state_topic: "sensor/garage/state1"
-#    command_topic: "sensor/garage/action1"
-#    payload_open: "OPEN"
-#    payload_close: "OPEN"
-#    payload_stop: "OPEN"
-#    state_open: "open"
-#    state_closed: "closed"
-#    optomistic: false
-#    retain: false
-
 #calendar Component
 calendar:
   #Todoist Calendar
@@ -557,3 +565,4 @@ sensor: !include_dir_merge_list sensor/
 binary_sensor: !include_dir_merge_list binary_sensor/
 shell_command: !include shellcommand.yaml
 input_select: !include_dir_merge_named input_select/
+scene: !include_dir_merge_list scene/

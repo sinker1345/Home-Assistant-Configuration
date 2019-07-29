@@ -26,51 +26,6 @@
 
   - platform: template
     sensors:
-      guestap:
-        friendly_name: 'Guest Access AP'
-        value_template: "{{ 'Online' if is_state('device_tracker.802aa83e3d97', 'home') else 'Offline' }}"
-      radarr:
-        friendly_name: 'Radarr'
-        value_template: "{{ 'Online' if is_state('device_tracker.couchpotatohome', 'home') else 'Offline' }}"
-      freenas:
-        friendly_name: 'NAS'
-        value_template: "{{ 'Online' if is_state('device_tracker.freenashome', 'home') else 'Offline' }}"
-      obitalk:
-        friendly_name: 'Phone Service'
-        value_template: "{{ 'Online' if is_state('device_tracker.obitalkhome', 'home') else 'Offline' }}"
-      ombi:
-        friendly_name: 'Ombi'
-        value_template: "{{ 'Online' if is_state('device_tracker.ombihome', 'home') else 'Offline' }}"
-      owncloud:
-        friendly_name: 'Cloud Storage'
-        value_template: "{{ 'Online' if is_state('device_tracker.owncloudhome', 'home') else 'Offline' }}"
-      pfsense:
-        friendly_name: 'Router'
-        value_template: "{{ 'Online' if is_state('device_tracker.pfsensehome', 'home') else 'Offline' }}"
-      plexserver:
-        friendly_name: 'Plex'
-        value_template: "{{ 'Online' if is_state('device_tracker.plexhome', 'home') else 'Offline' }}"
-      proxmox:
-        friendly_name: 'Virtualizarion Server'
-        value_template: "{{ 'Online' if is_state('device_tracker.proxmoxhome', 'home') else 'Offline' }}"
-      sabnzbd:
-        friendly_name: 'SABNZBD'
-        value_template: "{{ 'Online' if is_state('device_tracker.sabnzbdhome', 'home') else 'Offline' }}"
-      sonarr:
-        friendly_name: 'Sonarr'
-        value_template: "{{ 'Online' if is_state('device_tracker.sonarrhome', 'home') else 'Offline' }}"
-      tvheadend:
-        friendly_name: 'TV Head End'
-        value_template: "{{ 'Online' if is_state('device_tracker.tvheadendhome', 'home') else 'Offline' }}"
-      torrent:
-        friendly_name: 'Transmission'
-        value_template: "{{ 'Online' if is_state('device_tracker.torrenthome', 'home') else 'Offline' }}"
-      unifiap:
-        friendly_name: 'Main Unifi AP'
-        value_template: "{{ 'Online' if is_state('device_tracker.unifiaphome', 'home') else 'Offline' }}"
-      unificontroller:
-        friendly_name: 'Unifi Controller'
-        value_template: "{{ 'Online' if is_state('device_tracker.unifihome', 'home') else 'Offline' }}"
       xboxone:
         friendly_name: 'Xbox One'
         value_template: "{{ 'Online' if is_state('device_tracker.xboxonehome', 'home' ) else 'Offline' }}"

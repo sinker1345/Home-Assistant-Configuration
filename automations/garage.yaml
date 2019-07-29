@@ -14,12 +14,15 @@
         - condition: state
           entity_id: media_player.garage_chromecast
           state: 'off'
+        - condition: state
+          entity_id: media_player.garage_roku
+          state: 'idle'
         - condition: numeric_state
           entity_id: sensor.garage_brightness
           below: 50
         - condition: state
-          entity_id: sensor.garage_door
-          state: 'open'
+          entity_id: binary_sensor.garage_door
+          state: 'on'
     action:
       - service: notify.telegram
         data_template:
@@ -42,12 +45,15 @@
         - condition: state
           entity_id: media_player.garage_chromecast
           state: 'off'
+        - condition: state
+          entity_id: media_player.garage_roku
+          state: 'idle'
         - condition: numeric_state
           entity_id: sensor.garage_brightness
           below: 50
         - condition: state
-          entity_id: sensor.garage_door
-          state: 'open'
+          entity_id: binary_sensor.garage_door
+          state: 'on'
     action:
       - service: notify.telegram
         data_template:
@@ -55,22 +61,11 @@
           target: 
             - 816032519
 
-  - id: "123456"
-    alias: "Connect OctoPi to Printer"
-    trigger:
-      - platform: state
-        entity_id: switch.3d_printer_power
-        from: 'off'
-        to: 'on'
-    action:
-      - delay: '00:00:45'
-      - service: rest_command.octopi_connect
-
   - id: "0123789"
-    alias: '3D Printer is left on'
+    alias: 'MP Mini Delta is left on'
     trigger:
       - platform: state
-        entity_id: sensor.octoprint_current_state
+        entity_id: sensor.mp_mini_delta_current_state
         to: 'Operational'
         for:
           minutes: 45
@@ -82,14 +77,34 @@
           state: 'on'
     action:
       - service: switch.turn_off
-        entity_id: switch.3d_printer_power
+        entity_id: switch.mp_mini_delta
+    
+  - alias: 'Ender Pro is left on'
+    trigger:
+      - platform: state
+        entity_id: sensor.ender_3_pro_current_state
+        to: 'Operational'
+        for:
+          minutes: 45
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: switch.ender_3_pro
+          state: 'on'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.ender_3_pro
 
 # 3D Printer Job 50% Complete
   - id: "12345665216546851"
     alias: 3D Printer Job 50% Complete
     trigger:
       - platform: numeric_state
-        entity_id: sensor.octoprint_job_percentage
+        entity_id: sensor.mp_mini_delta_job_percentage
+        above: 50
+      - platform: numeric_state
+        entity_id: sensor.ender_3_pro_job_percentage
         above: 50
     action:
       - service: notify.telegram
@@ -103,11 +118,28 @@
     alias: 3D Printer Job Complete
     trigger:
       - platform: numeric_state
-        entity_id: sensor.octoprint_job_percentage
+        entity_id: sensor.mp_mini_delta_job_percentage
+        above: 99.9
+      - platform: numeric_state
+        entity_id: sensor.ender_3_pro_job_percentage
         above: 99.9
     action:
       - service: notify.telegram
         data_template:
           message: "3D Print Complete"
+          target: 
+            - 816032519
+            
+# Water leak on Water Heater
+  - alias: Water Heater Leak
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.samjin_water_0103aa2a_1_1280
+        from: 'off'
+        to: 'on'
+    action:
+      - service: notify.telegram
+        data_template:
+          message: "Water Leak Detected at Garage Water Heater!"
           target: 
             - 816032519

@@ -33,7 +33,7 @@
         entity_id: automation.start_coffee_pot
       - service: notify.telegram
         data_template:
-          message: 'Ok'
+          message: 'Ok, the coffee pot will turn on in the morning.'
           target: 
             - 816032519 #Tommy
       - service: telegram_bot.edit_replymarkup
@@ -55,7 +55,7 @@
           option: 'No'
       - service: notify.telegram
         data_template:
-          message: 'Ok'
+          message: 'Ok, the coffee pot wil not turn on in the morning.'
           target: 
             - 816032519 #Tommy
       - service: telegram_bot.edit_replymarkup

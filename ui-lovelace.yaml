@@ -10,13 +10,13 @@ resources:
     type: js
   - url: /community_plugin/entity-attributes-card/entity-attributes-card.js
     type: js
-  - url: /local/custom_ui/atomic-calendar.js
+  - url: /community_plugin/atomic_calendar/atomic_calendar.js
     type: module
   - url: /community_plugin/lovelace-card-tools/card-tools.js
     type: js
   - url: /community_plugin/lovelace-auto-entities/auto-entities.js
     type: js
-  - url: /local/custom_ui/dual-thermostat.js
+  - url: /community_plugin/dual-thermostat/dual-thermostat.js
     type: js
   - url: /community_plugin/lovelace-swipe-navigation/swipe-navigation.js
     type: js 
@@ -26,7 +26,7 @@ resources:
 swipe_nav: 
   wrap: false 
   animate: swipe 
-# skip_tabs: 5,6,7,8 
+  skip_tabs: 15
   prevent_default: true 
   swipe_amount: 30 
 
@@ -395,15 +395,6 @@ views:
         hide_volume: true
         show_progress: true
         power_color: true
-      - type: custom:mini-media-player
-        entity: media_player.office_tv
-        icon: mdi:television-box
-        artwork_border: true
-        show_source: true
-        artwork: cover
-        hide_volume: true
-        show_progress: true
-        power_color: true
 #Dining Room View
   - title: Dining Room
     id: 3
@@ -470,36 +461,67 @@ views:
             name: Garage Motion
             icon: mdi:walk
             secondary_info: last-changed
-          - entity: sensor.garage_door_template
+          - entity: binary_sensor.garage_door
             name: Garage Door Status
-      #3D Printer info
-      - type: entities
-        title: 3D Printer Status
-        show_header_toggle: false
-        entities:
-          - binary_sensor.octoprint_printing
-          - binary_sensor.octoprint_printing_error
-          - sensor.octoprint_actual_bed_temp
-          - sensor.octoprint_actual_tool0_temp
-          - sensor.octoprint_current_state
-          - sensor.octoprint_job_percentage
-          - sensor.octoprint_target_bed_temp
-          - sensor.octoprint_target_tool0_temp
-          - sensor.octoprint_time_elapsed
-          - sensor.octoprint_time_remaining
-          - camera.octo_print_camera
+            secondary_info: last-changed
+          - entity: binary_sensor.samjin_water_0103aa2a_1_1280
+            name: Water Heater Leak Detector
+            secondary_info: last-changed
       #3D Printer Switch
       - type: entities
         title: 3D Printer Power
         show_header_toggle: false
         entities:
-          - entity: switch.3d_printer_power
+          - entity: switch.mp_mini_delta
             icon: mdi:printer-3d
+          - entity: switch.ender_3_pro
+            icon: mdi:printer-3d
+      #3D Printer info
+      - type: entities
+        title: MP Mini Delta
+        show_header_toggle: false
+        entities:
+          - binary_sensor.mp_mini_delta_printing
+          - binary_sensor.mp_mini_delta_printing_error
+          - sensor.mp_mini_delta_actual_bed_temp
+          - sensor.mp_mini_delta_actual_tool0_temp
+          - sensor.mp_mini_delta_current_state
+          - sensor.mp_mini_delta_job_percentage
+          - sensor.mp_mini_delta_target_bed_temp
+          - sensor.mp_mini_delta_target_tool0_temp
+          - sensor.mp_mini_delta_time_elapsed
+          - sensor.mp_mini_delta_time_remaining
+          - camera.mp_mini_delta
+      #Ender 3 Pro
+      - type: entities
+        title: Ender 3 Pro
+        show_header_toggle: false
+        entities:
+          - binary_sensor.ender_3_pro_printing
+          - binary_sensor.ender_3_pro_printing_error
+          - sensor.ender_3_pro_actual_bed_temp
+          - sensor.ender_3_pro_actual_tool0_temp
+          - sensor.ender_3_pro_current_state
+          - sensor.ender_3_pro_job_percentage
+          - sensor.ender_3_pro_target_bed_temp
+          - sensor.ender_3_pro_target_tool0_temp
+          - sensor.ender_3_pro_time_elapsed
+          - sensor.ender_3_pro_time_remaining
+          - camera.ender_3_pro
       #Media Players
       - type: vertical-stack
         cards:
           - type: custom:mini-media-player
             entity: media_player.garage_chromecast
+            icon: mdi:television-box
+            artwork_border: true
+            show_source: true
+            artwork: cover
+            hide_volume: true
+            show_progress: true
+            power_color: true
+          - type: custom:mini-media-player
+            entity: media_player.garage_roku
             icon: mdi:television-box
             artwork_border: true
             show_source: true
@@ -778,15 +800,6 @@ views:
             name: Front Office Motion
             icon: mdi:walk
             secondary_info: last-changed
-      - type: custom:mini-media-player
-        entity: media_player.office_tv
-        icon: mdi:television-box
-        artwork_border: true
-        show_source: true
-        artwork: cover
-        hide_volume: true
-        show_progress: true
-        power_color: true
 #Back Porch View
   - title: Back Porch
     id: 9
@@ -1049,6 +1062,8 @@ views:
             secondary_info: last-changed
           - entity: automation.set_bar_light_for_no_tv_playback
             secondary_info: last-changed
+          - entity: automation.set_a_c_at_night_vacation
+            secondary_info: last-changed
       #Kitchen Automations
       - type: entities
         title: Kitchen
@@ -1078,9 +1093,9 @@ views:
         title: Garage
         show_header_toggle: false
         entities:
-          - entity: automation.connect_octopi_to_printer
+          - entity: automation.ender_pro_is_left_on
             secondary_info: last-changed
-          - entity: automation.3d_printer_is_left_on
+          - entity: automation.mp_mini_delta_is_left_on
             secondary_info: last-changed
           - entity: automation.3d_printer_job_50_complete
             secondary_info: last-changed
@@ -1181,6 +1196,8 @@ views:
             secondary_info: last-changed
           - entity: automation.alert_on_thermostat_low_battery
             secondary_info: last-changed
+          - entity: automation.water_heater_leak
+            secondary_info: last-changed
       #Homeassistant Automations
       - type: entities
         title: Homeassistant
@@ -1224,6 +1241,10 @@ views:
             secondary_info: last-changed
           - entity: automation.telegram_bot_to_notify_on_boot
             secondary_info: last-changed
+          - entity: automation.set_automations_on_extended_away
+            secondary_info: last-changed
+          - entity: automation.set_automations_on_return_from_extended_away
+            secondary_info: last-changed
       #Scripts
       - type: entities
         title: Scripts
@@ -1250,11 +1271,33 @@ views:
       - sensor.speedtest_upload
       - sensor.potential_breaking_changes
     cards:
+      - type: entity-filter
+        show_empty: false
+        entities:
+          - updater.updater
+          - sensor.hacs
+        state_filter:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
+          - 'available'
+        card: 
+          type: glance
+          title: Updates
       - type: entities
         title: Battery Status
         show_header_toggle: false
         entities:
           - entity: sensor.thermostat_battery_level
+            secondary_info: last-changed
+          - entity: sensor.samjin_water_0103aa2a_1_1
             secondary_info: last-changed
       #Homeassistant Tatus
       - type: entities
@@ -1322,36 +1365,48 @@ views:
       - sun.sun
       - binary_sensor.iss
     cards:
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
       #Various Settings Input Select
-      - type: entities
-        title: Kitchen
-        show_header_toggle: false
-        entities:
-          - input_select.is_coffee_pot_setup
-      - type: entities
-        title: Bedroom
-        show_header_toggle: false
-        entities:
-          - input_select.bedroom_fan_automation
-          - input_select.bedroom_fan_on_time
-          - input_select.bedroom_fan_off_time_weekday
-          - input_select.bedroom_fan_off_time_weekend
-          - input_select.bed_time
-          - input_select.wake_time
-      - type: entities
-        title: Living Room
-        show_header_toggle: false
-        entities:
-          - input_select.roomba_run
-          - input_select.roomba_stop
-          - input_select.a_c_set_weekday
-          - input_select.a_c_set_weekend
-          - input_select.a_c_on_at_night
-      - type: entities
-        title: Home Assistant
-        show_header_toggle: false
-        entities:
-          - input_select.which_holiday
+          - type: entities
+            title: Kitchen
+            show_header_toggle: false
+            entities:
+              - input_select.is_coffee_pot_setup
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: entities
+            title: Bedroom
+            show_header_toggle: false
+            entities:
+              - input_select.bedroom_fan_automation
+              - input_select.bedroom_fan_on_time
+              - input_select.bedroom_fan_off_time_weekday
+              - input_select.bedroom_fan_off_time_weekend
+              - input_select.bed_time
+              - input_select.wake_time
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: entities
+            title: Living Room
+            show_header_toggle: false
+            entities:
+              - input_select.roomba_run
+              - input_select.roomba_stop
+              - input_select.a_c_set_weekday
+              - input_select.a_c_set_weekend
+              - input_select.a_c_on_at_night
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: entities
+            title: Home Assistant
+            show_header_toggle: false
+            entities:
+              - input_select.which_holiday
   - title:  
     icon: mdi:thisfakereferencehidesthistab
     id: 15

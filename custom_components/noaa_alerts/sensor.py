@@ -17,7 +17,7 @@ from homeassistant.util import Throttle
 
 _LOGGER = logging.getLogger(__name__)
 
-__version_ = '0.0.7'
+__version_ = '0.0.8'
 
 REQUIREMENTS = ['noaa_sdk']
 
@@ -53,7 +53,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     event_urgency = str(config.get(CONF_URGENCY))
     event_severity = str(config.get(CONF_SEVERITY))
     update_interval = config.get(CONF_SCAN_INTERVAL, SCAN_INTERVAL)
-    add_entities([noaa_alertsSensor(zoneid, event_urgency, event_severity, latitude, longitude,update_interval)], True)
+    add_entities([noaa_alertsSensor(zoneid, event_urgency, event_severity, latitude, longitude, update_interval)], True)
 
 def sortedbyurgencyandseverity(prop):
     if (prop['urgency']).lower() == 'immediate':
@@ -91,45 +91,30 @@ class noaa_alertsSensor(Entity):
             params={'point': '{0},{1}'.format(self.latitude,self.longitude)}
         try:
             nws = noaa.NOAA().alerts(active=1, **params)
-            nwsalerts = nws['features']
-            if len(nwsalerts) > 1:
-                nwsalerts = sorted(nwsalerts, key=sortedbyurgencyandseverity)
-                self._state = nwsalerts[0]['properties']['urgency']
-                self._event_type = nwsalerts[0]['properties']['event']
-                self._event_severity = nwsalerts[0]['properties']['severity']
-                self._description = nwsalerts[0]['properties']['description']
-                self._headline = nwsalerts[0]['properties']['headline']
-                self._instruction = nwsalerts[0]['properties']['instruction']
-                #second set of events
-                self._state2 = nwsalerts[0]['properties']['urgency']
-                self._event_type2 = nwsalerts[0]['properties']['event']
-                self._event_severity2 = nwsalerts[0]['properties']['severity']
-                self._description2 = nwsalerts[0]['properties']['description']
-                self._headline2 = nwsalerts[0]['properties']['headline']
-                self._instruction2 = nwsalerts[0]['properties']['instruction']
-            elif len(nwsalerts) == 1:
-                self._state = nwsalerts[0]['properties']['urgency']
-                self._event_type = nwsalerts[0]['properties']['event']
-                self._event_severity = nwsalerts[0]['properties']['severity']
-                self._description = nwsalerts[0]['properties']['description']
-                self._headline = nwsalerts[0]['properties']['headline']
-                self._instruction = nwsalerts[0]['properties']['instruction']
-                self._state2 = 'none'
-            else:
-                self._state = 'none'
-                self._event_type = 'none'
-                self._event_severity = 'none'
-                self._headline = 'none'
-                self._instruction = 'none'
-                self._description = 'none'
-                self._state2 = 'none'
+            nwsalerts = []
+            for alert in nws['features'] :
+                nwsalerts.append(alert['properties'])
+            self._state = len(nwsalerts)
+            self._attributes = {}
+            self._attributes['alerts'] = sorted(nwsalerts, key=sortedbyurgencyandseverity)
+            self._attributes['urgency'] = self._attributes['alerts'][0]['urgency'] if self._state > 0 else None
+            self._attributes['event_type'] = self._attributes['alerts'][0]['event'] if self._state > 0 else None
+            self._attributes['event_severity'] = self._attributes['alerts'][0]['severity'] if self._state > 0 else None
+            self._attributes['description'] = self._attributes['alerts'][0]['description'] if self._state > 0 else None
+            self._attributes['headline'] = self._attributes['alerts'][0]['headline'] if self._state > 0 else None
+            self._attributes['instruction'] = self._attributes['alerts'][0]['instruction'] if self._state > 0 else None
+            self._attributes['alerts_string'] = json.dumps(self._attributes['alerts'])
         except Exception as err:
             self._state = 'Error'
-            self._event_type = 'none'
-            self._event_severity = 'none'
-            self._headline = 'none'
-            self._instruction = 'none'
-            self._description = err
+            self._attributes['alerts'] = None
+            self._attributes['urgency'] = None
+            self._attributes['event_type'] = None
+            self._attributes['event_severity'] = None
+            self._attributes['description'] = err
+            self._attributes['headline'] = None
+            self._attributes['instruction'] = None
+            self._attributes['alerts_string'] = None
+            _LOGGER.error(err)
 
     @property
     def name(self):
@@ -148,28 +133,8 @@ class noaa_alertsSensor(Entity):
 
     @property
     def device_state_attributes(self):
-        if self._state2 == 'none':
-            return {
-                ATTR_EVENT: self._event_type,
-                ATTR_SEVERITY: self._event_severity,
-                ATTR_HEADLINE: self._headline,
-                ATTR_INSTRUCTION: self._instruction,
-                ATTR_DESCRIPTION: self._description,
-            }
-        else:
-            return {
-                ATTR_EVENT: self._event_type,
-                ATTR_SEVERITY: self._event_severity,
-                ATTR_HEADLINE: self._headline,
-                ATTR_INSTRUCTION: self._instruction,
-                ATTR_DESCRIPTION: self._description,
-                'urgency2': self._state2,
-                'event2': self._event_type2,
-                'severity2': self._event_severity2,
-                'headline2': self._headline2,
-                'instruction2': self._instruction2,
-                'description2': self._description2,
-            }
+        """Return the attributes of the sensor."""
+        return self._attributes
 
     @property
     def unit_of_measurement(self):

@@ -1,7 +1,3 @@
-  - platform: mqtt
-    name: "Garage Door"
-    state_topic: "sensor/garage/state1"
-
   - platform: octoprint
     name: OctoPrint
     monitored_conditions:
@@ -23,19 +19,3 @@
       bed_target:
         friendly_name: "Bed Target Temp"
         value_template: '{{ ((states.sensor.octoprint_target_bed_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
-
-  - platform: template
-    sensors:
-      garage_door_template:
-        value_template: >-
-          {% if is_state('sensor.garage_door', 'open') %}
-            Open
-          {% else %}
-            Closed
-          {% endif %}
-        icon_template: >-
-          {% if is_state('sensor.garage_door', 'open') %}
-            mdi:garage-open
-          {% else %}
-            mdi:garage
-          {% endif %}

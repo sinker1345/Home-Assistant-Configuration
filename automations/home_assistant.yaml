@@ -197,7 +197,7 @@
           entity_id: input_select.bed_time
           option: "23:30"
 
-# Take Out Trash
+# Cofffee PT Day
   - alias: 'Coffee PT Day'
     trigger:
       - platform: template
@@ -207,3 +207,51 @@
         data:
           entity_id: input_select.wake_time
           option: "03:30"
+
+#Set Automations on Extended Away
+  - alias: 'Set Automations on Extended Away'
+    trigger:
+      - platform: state
+        entity_id: sensor.tommy
+        to: 'Extended Away'
+      - platform: state
+        entity_id: sensor.jessica
+        to: 'Extended Away'
+    action:
+      - service: automation.turn_off
+        entity_id: automation.turn_on_bob
+      - service: automation.turn_off
+        entity_id: automation.lexi_brush_teeth
+      - service: automation.turn_off
+        entity_id: automation.Lexi_do_laps
+      - service: automation.turn_off
+        entity_id: automation.coffee_pot_setup_reminder
+      - service: automation.turn_off
+        entity_id: automation.trash_day
+      - service: automation.turn_off
+        entity_id: automation.recycling_day
+
+#Set Automations on return from Extended Away
+  - alias: 'Set Automations on return from Extended Away'
+    trigger:
+      - platform: state
+        entity_id: sensor.tommy
+        from: 'Extended Away'
+        to: 'Just Arrived'
+      - platform: state
+        entity_id: sensor.jessica
+        from: 'Extended Away'
+        to: 'Just Arrived'
+    action:
+      - service: automation.turn_on
+        entity_id: automation.turn_on_bob
+      - service: automation.turn_on
+        entity_id: automation.lexi_brush_teeth
+      - service: automation.turn_on
+        entity_id: automation.Lexi_do_laps
+      - service: automation.turn_on
+        entity_id: automation.coffee_pot_setup_reminder
+      - service: automation.turn_on
+        entity_id: automation.trash_day
+      - service: automation.turn_on
+        entity_id: automation.recycling_day

@@ -2,12 +2,12 @@
     friendly_name: UniFi WiFi
     entity_picture: /local/tommy.jpg
 
-  device_tracker.galaxy_note9:
+  device_tracker.galaxy_note9_2:
     friendly_name: Jessica Bluetooth
     entity_picture: /local/jessica.jpg
     hidden: true
 
-  device_tracker.galaxynote9:
+  device_tracker.galaxy_note9:
     friendly_name: Jessica WiFi
     entity_picture: /local/jessica.jpg
     hidden: true

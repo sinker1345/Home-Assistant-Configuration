@@ -18,3 +18,8 @@ set_variable:
       description: template (optional) Attributes to set or update from a template ( should return a json object )
     replace_attributes:
       description: boolean ( optional ) Replace or merge current attributes (default false = merge)
+
+ 
+
+
+
