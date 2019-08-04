@@ -19,3 +19,11 @@
       bed_target:
         friendly_name: "Bed Target Temp"
         value_template: '{{ ((states.sensor.octoprint_target_bed_temp.state | float-32) | float*(5/9)) | round(2) }} °C'
+        
+  - platform: min_max
+    name: 'Garage Temperature Combo'
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.samjin_water_0103aa2a_1_1026
+      - sensor.garage_temperature

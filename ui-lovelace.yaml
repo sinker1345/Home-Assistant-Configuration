@@ -445,7 +445,7 @@ views:
         title: Garage Sensors
         show_header_toggle: false
         entities:
-          - entity: sensor.garage_temperature
+          - entity: sensor.garage_temperature_combo
             name: Garage Temperature
             icon: mdi:thermometer
             secondary_info: last-changed
@@ -1197,6 +1197,8 @@ views:
           - entity: automation.alert_on_thermostat_low_battery
             secondary_info: last-changed
           - entity: automation.water_heater_leak
+            secondary_info: last-changed
+          - entity: automation.alert_on_garage_leak_sensor_low_battery
             secondary_info: last-changed
       #Homeassistant Automations
       - type: entities

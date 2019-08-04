@@ -136,22 +136,20 @@
   - alias: "Set A/C at Night"
     trigger:
       - platform: template
-        value_template: >-
-            {%- if states.sensor.time.state == states.input_select.a_c_on_at_night.state -%}
-              true
-            {%- endif -%}
+        value_template: "{{ states.sensor.time.state == states.input_select.a_c_on_at_night.state }}"
     condition:
-      condition: or
+      condition: and
       conditions:
-        - condition: state
-          entity_id: sensor.jessica_status
-          state: 'Home'
-        - condition: state
-          entity_id: sensor.tommy_status
-          state: 'Home'
-        - condition: numeric_state
-          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
-          above: 75
+        - condition: template
+          value_template: "{{ (state_attr('climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1', 'temperature')|int) >= 75 }}"
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: sensor.jessica_status
+              state: 'Home'
+            - condition: state
+              entity_id: sensor.tommy_status
+              state: 'Home'
     action:
       - service: climate.set_temperature
         data:
@@ -161,12 +159,9 @@
   - alias: "Set A/C at Night Vacation"
     trigger:
       - platform: template
-        value_template: >-
-            {%- if states.sensor.time.state == states.input_select.a_c_on_at_night.state -%}
-              true
-            {%- endif -%}
+        value_template: "{{ states.sensor.time.state == states.input_select.a_c_on_at_night.state }}"
     condition:
-      condition: or
+      condition: and
       conditions:
         - condition: state
           entity_id: sensor.jessica_status
@@ -174,7 +169,14 @@
         - condition: state
           entity_id: sensor.tommy_status
           state: 'Extended Away'
+        - condition: template
+          value_template: "{{ (state_attr('climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1', 'temperature')|int) >= 78 }}"
     action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 78
+      - delay: "00:01:00"
       - service: climate.set_temperature
         data:
           entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
@@ -183,10 +185,7 @@
   - alias: "Set A/C During Day Weekdays"
     trigger:
       - platform: template
-        value_template: >-
-            {%- if states.sensor.time.state == states.input_select.a_c_set_weekday.state -%}
-              true
-            {%- endif -%}
+        value_template: "{{ states.sensor.time.state == states.input_select.a_c_set_weekday.state }}"
     condition:
       condition: and
       conditions:
@@ -198,14 +197,16 @@
         data:
           entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
           temperature: 80
+      - delay: "00:01:00"
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 80
 
   - alias: "Set A/C During Day Weekend/Holiday"
     trigger:
       - platform: template
-        value_template: >-
-            {%- if states.sensor.time.state == states.input_select.a_c_set_weekend.state -%}
-              true
-            {%- endif -%}
+        value_template: "{{ states.sensor.time.state == states.input_select.a_c_set_weekend.state }}"
     condition:
       condition: and
       conditions:
@@ -213,6 +214,11 @@
           entity_id: binary_sensor.workday_sensor
           state: 'off'
     action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 80
+      - delay: "00:01:00"
       - service: climate.set_temperature
         data:
           entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1

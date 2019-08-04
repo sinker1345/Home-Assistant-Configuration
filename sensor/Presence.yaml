@@ -59,6 +59,7 @@
       - sensor.front_room_humidity
       - sensor.common_area_humidity
       - sensor.master_bedroom_humidity
+      - sensor.dining_room_humidity
       
   - platform: min_max
     name: 'Average Temp'
@@ -68,6 +69,8 @@
       - sensor.front_room_temperature
       - sensor.common_area_temperature
       - sensor.master_bedroom_temperature
+      - sensor.dining_room_temperature
+      - sensor.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_temperature
 
 #sensor for detecting if HTPC is idle
   - platform: mqtt

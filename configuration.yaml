@@ -260,6 +260,10 @@ recorder:
       - sensor.front_room_temperature
       - sensor.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_temperature
       - binary_sensor.garage_door
+      - binary_sensor.samjin_water_0103aa2a_1_1280
+      - sensor.samjin_water_0103aa2a_1_1
+      - sensor.samjin_water_0103aa2a_1_1026
+      - sensor.garage_temperature_combo
 
 #speedtest component
 speedtestdotnet:
@@ -379,7 +383,7 @@ panel_iframe:
   zoneminder:
     title: ZoneMinder
     icon: mdi:cctv
-    url: 'http://192.168.1.12/zm'
+    url: 'http://192.168.1.12:32769/zm'
   monica:
     title: Monica
     icon: mdi:panda
@@ -388,11 +392,11 @@ panel_iframe:
 #Zones
 zone:
   # Jessica Work Zone
-#  - name: Jessica Work
-#    latitude: !secret jessica_work_lat
-#    longitude: !secret jessica_work_long
-#    radius: 200
-#    icon: mdi:worker
+  - name: Jessica Work
+    latitude: !secret jessica_work_lat
+    longitude: !secret jessica_work_long
+    radius: 100
+    icon: mdi:worker
 
   # Tommy Work Zone
   - name: Tommy Work
