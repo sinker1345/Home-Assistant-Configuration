@@ -146,7 +146,17 @@ views:
             - entity_id: switch.guest_mode
             - entity_id: switch.couch_sleeper
             - entity_id: switch.morning_alert    
-            - entity_id: switch.circadian_lighting_circadian_lighting
+            - entity_id: switch.circadian_lighting_circadian_lighting   
+    #Doors/Windows that are open
+      - type: "custom:auto-entities"
+        card:
+          type: entities
+          title: "Doors/Windows that are open"
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: sensor.back_door
+              state: 'Open'
     #Media Playersthat are on
       - type: "custom:auto-entities"
         card:
@@ -174,6 +184,16 @@ views:
             - entity_id: switch.couch_sleeper
             - entity_id: switch.morning_alert
             - entity_id: switch.circadian_lighting_circadian_lighting
+    #Doors/Windows that are closed
+      - type: "custom:auto-entities"
+        card:
+          type: entities
+          title: "Doors/Windows that are closed"
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: sensor.back_door
+              state: 'Closed'
     #Vaccum
       - type: entities
         title: Robot Vaccum Controls
@@ -489,8 +509,10 @@ views:
           - sensor.mp_mini_delta_job_percentage
           - sensor.mp_mini_delta_target_bed_temp
           - sensor.mp_mini_delta_target_tool0_temp
-          - sensor.mp_mini_delta_time_elapsed
-          - sensor.mp_mini_delta_time_remaining
+          - entity: sensor.mp_mini_delta_time_elapsed_format
+            icon: mdi:clock-start
+          - entity: sensor.mp_mini_delta_time_remaining_format
+            icon: mdi:clock-end
           - camera.mp_mini_delta
       #Ender 3 Pro
       - type: entities
@@ -505,8 +527,10 @@ views:
           - sensor.ender_3_pro_job_percentage
           - sensor.ender_3_pro_target_bed_temp
           - sensor.ender_3_pro_target_tool0_temp
-          - sensor.ender_3_pro_time_elapsed
-          - sensor.ender_3_pro_time_remaining
+          - entity: sensor.ender_3_pro_time_elapsed_format
+            icon: mdi:clock-start
+          - entity: sensor.ender_3_pro_time_remaining_format
+            icon: mdi:clock-end
           - camera.ender_3_pro
       #Media Players
       - type: vertical-stack
@@ -800,6 +824,16 @@ views:
             name: Front Office Motion
             icon: mdi:walk
             secondary_info: last-changed
+      #Media Players
+      - type: custom:mini-media-player
+        entity: media_player.front_office
+        icon: mdi:television-box
+        artwork_border: true
+        show_source: true
+        artwork: cover
+        hide_volume: true
+        show_progress: true
+        power_color: true
 #Back Porch View
   - title: Back Porch
     id: 9
@@ -1024,7 +1058,7 @@ views:
             secondary_info: last-changed
           - entity: automation.run_roomba_guest_mode
             secondary_info: last-changed
-          - entity: automation.turn_on_circadian_switch_with_morning_automation
+          - entity: automation.turn_on_circadian_switch_with_wake_time
             secondary_info: last-changed
           - entity: automation.yes_run_roomba
             secondary_info: last-changed
@@ -1064,6 +1098,10 @@ views:
             secondary_info: last-changed
           - entity: automation.set_a_c_at_night_vacation
             secondary_info: last-changed
+          - entity: automation.turn_off_auto_adjust_lights_late_at_night
+            secondary_info: last-changed
+          - entity: automation.turn_on_auto_adjust_lights_late_in_morning
+            secondary_info: last-changed
       #Kitchen Automations
       - type: entities
         title: Kitchen
@@ -1076,6 +1114,8 @@ views:
           - entity: automation.no_view_shopping_list
             secondary_info: last-changed
           - entity: automation.coffee_pt_day
+            secondary_info: last-changed
+          - entity: automation.coffee_non_pt_day
             secondary_info: last-changed
       #Bedroom Automations
       - type: entities
@@ -1301,6 +1341,8 @@ views:
             secondary_info: last-changed
           - entity: sensor.samjin_water_0103aa2a_1_1
             secondary_info: last-changed
+          - entity: sensor.samjin_multi_010782a0_1_1
+            secondary_info: last-changed
       #Homeassistant Tatus
       - type: entities
         title: Home Assistant Status
@@ -1376,6 +1418,7 @@ views:
             show_header_toggle: false
             entities:
               - input_select.is_coffee_pot_setup
+              - input_select.coffee_pot_on_time
       - type: 'custom:love-lock-card'
         popup: confirm
         cards:
@@ -1409,6 +1452,7 @@ views:
             show_header_toggle: false
             entities:
               - input_select.which_holiday
+#Fake Shopping Tab
   - title:  
     icon: mdi:thisfakereferencehidesthistab
     id: 15

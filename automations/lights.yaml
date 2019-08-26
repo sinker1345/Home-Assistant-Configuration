@@ -6,14 +6,17 @@
         to: 'on'
     action:
       - service: light.turn_on
-        entity_id: light.bar_light
+        data:
+          entity_id: light.bar_light
+          brightness_pct: 15
 
-  - alias: 'turn on circadian switch with morning automation'
+  - alias: 'turn on circadian switch with wake time'
     trigger:
-      - platform: state
-        entity_id: switch.morning_alert
-        from: 'off'
-        to: 'on'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.wake_time.state -%}
+              true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -30,13 +33,20 @@
         entity_id: sensor.common_area_motion
         to: 'Clear'
         for:
-          minutes: 30
+          minutes: 10
     condition:
       condition: and
       conditions:
-        - condition: time
-          after: '20:30:00'
-          before: '05:30:00'
+        - condition: template
+          value_template: >-
+            {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
+              {%- if states.sensor.time.state <= states.input_select.wake_time.state -%}
+                true
+              {%- endif -%}
+            {%- endif -%}
+        - condition: state
+          entity_id: switch.tv_lights_power
+          state: 'off'
         - condition: or
           conditions:
             - condition: state
@@ -176,7 +186,7 @@
         data:
           entity_id: light.bar_light
           hs_color: [360, 25]
-          brightness: 50
+          brightness_pct: 50
           transition: 30
 
   - alias: 'Set Bar light for No TV Playback'
@@ -184,6 +194,22 @@
       - platform: state
         entity_id: sensor.glances
         to: 'Off'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.circadian_lighting_circadian_lighting
+
+  - alias: 'Turn off Auto Adjust lights late at night'
+    trigger:
+      - platform: time
+        at: "02:00:00"
+    action:
+      - service: switch.turn_off
+        entity_id: switch.circadian_lighting_circadian_lighting
+
+  - alias: 'Turn on Auto Adjust lights late in Morning'
+    trigger:
+      - platform: time
+        at: "06:30:00"
     action:
       - service: switch.turn_on
         entity_id: switch.circadian_lighting_circadian_lighting

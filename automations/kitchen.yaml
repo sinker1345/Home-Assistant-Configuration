@@ -73,12 +73,17 @@
     condition:
       condition: and
       conditions:
+        - condition: template
+          value_template: >-
+            {%- if states.sensor.time.state >= states.input_select.coffee_pot_on_time.state -%}
+              true
+            {%- endif -%}
         - condition: state
           entity_id: input_select.is_coffee_pot_setup
           state: 'Yes'
-        - condition: state
-          entity_id: binary_sensor.workday_sensor
-          state: 'on'
+#        - condition: state
+#          entity_id: binary_sensor.workday_sensor
+#          state: 'on'
     action:
       - service: switch.turn_on
         entity_id: switch.coffee_pot

@@ -16,3 +16,24 @@
         unit_of_measurement: '%'
         value_template: >-
           {{ state_attr('zwave.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat','battery_level') }}
+
+  - platform: template
+    sensors:
+      back_door:
+        friendly_name: "Back Door"
+        value_template: >-
+          {%- if is_state('binary_sensor.samjin_multi_010782a0_1_1280', 'off') -%}
+            Closed
+          {%- elif is_state('binary_sensor.samjin_multi_010782a0_1_1280', 'on') -%}
+            Open
+          {%- else -%}
+            Unknown
+          {%- endif -%}
+        icon_template: >-
+          {%- if is_state('binary_sensor.samjin_multi_010782a0_1_1280', 'off') -%}
+            mdi:door
+          {%- elif is_state('binary_sensor.samjin_multi_010782a0_1_1280', 'on') -%}
+            mdi:door-open
+          {%- else -%}
+            mdi:help-circle
+          {%- endif -%}

@@ -90,7 +90,11 @@
           value_template: >-
             {%- if states.sensor.time.state >= states.input_select.wake_time.state -%}
               true
+            {%- elif states.sensor.time.state >= states.input_select.coffee_pot_on_time.state -%}
+              true
             {%- endif -%}
+#        - condition: time
+#          after: '03:00:00'
         - condition: state
           entity_id: switch.morning_alert
           state: 'off'

@@ -161,7 +161,7 @@ device_tracker:
   # Google Maps Tracker
   - platform: google_maps
     username: !secret google_maps_user
-    password: !secret google_maps_password
+    #password: !secret google_maps_password
 
   # NMAP Tracker
   - platform: nmap_tracker
@@ -264,6 +264,8 @@ recorder:
       - sensor.samjin_water_0103aa2a_1_1
       - sensor.samjin_water_0103aa2a_1_1026
       - sensor.garage_temperature_combo
+      - sensor.back_door
+      - sensor.samjin_multi_010782a0_1_1
 
 #speedtest component
 speedtestdotnet:
@@ -315,6 +317,7 @@ octoprint:
     name: MP Mini Delta
     bed: true
     number_of_tools: 1
+    
   - host: 192.168.1.45
     api_key: !secret ender3_api_key
     name: Ender 3 Pro
@@ -361,6 +364,11 @@ panel_custom:
     sidebar_title: Dominos
     sidebar_icon: mdi:pizza
     url_path: dominos
+    
+  - name: zwavegraph2
+    sidebar_title: ZWave Graph2
+    sidebar_icon: mdi:z-wave
+    url_path: zwave
 
 #  Panel IFrame
 panel_iframe:
@@ -380,14 +388,6 @@ panel_iframe:
     title: ESPHome
     icon: mdi:car-esp
     url: 'http://192.168.1.12:6052'
-  zoneminder:
-    title: ZoneMinder
-    icon: mdi:cctv
-    url: 'http://192.168.1.12:32769/zm'
-  monica:
-    title: Monica
-    icon: mdi:panda
-    url: 'http://192.168.1.12:3000'
     
 #Zones
 zone:
@@ -496,19 +496,6 @@ switch:
     payload_on: 'on'
     payload_off: 'off'
     retain: true
-
-  #Coffee Pot Switch
-  - platform: mqtt
-    name: "Coffee Pot"
-    state_topic: "coffeepot/switch"
-    command_topic: "coffeepot/switch"
-    payload_on: "ON"
-    payload_off: "OFF"
-    state_on: "ON"
-    state_off: "OFF"
-    optimistic: false
-    qos: 0
-    retain: false
 
 #Custom Variable Component
 variable:

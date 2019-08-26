@@ -177,6 +177,9 @@
         entity_id: binary_sensor.workday_sensor
         from: 'off'
         to: 'on'
+      - platform: state
+        entity_id: sensor.day
+        to: 'Sunday'
     action:
       - service: input_select.select_option
         data:
@@ -205,8 +208,19 @@
     action:
       - service: input_select.select_option
         data:
-          entity_id: input_select.wake_time
+          entity_id: input_select.coffee_pot_on_time
           option: "03:30"
+
+# Cofffee Non-PT Day
+  - alias: 'Coffee Non PT Day'
+    trigger:
+      - platform: template
+        value_template: "{% if not is_state_attr('calendar.main', 'message', 'Pt day') %}true{% endif %}"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.coffee_pot_on_time
+          option: "05:30"
 
 #Set Automations on Extended Away
   - alias: 'Set Automations on Extended Away'
