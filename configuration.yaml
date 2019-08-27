@@ -32,6 +32,12 @@ frontend:
 # Enables configuration UI
 config:
 
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+    
+# Telegram
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key
@@ -40,6 +46,9 @@ telegram_bot:
       - 846016601
 
 default_config:
+
+#system health check
+system_health:
 
 shopping_list:
 
@@ -54,9 +63,6 @@ cloud:
         - sensor
         - vacuum
         - script
-
-#system health check
-system_health:
 
 breaking_changes:
 
@@ -171,11 +177,6 @@ device_tracker:
     scan_options: " --privileged -sP "
     home_interval: 5
     interval_seconds: 120
-
-# Text to speech
-tts:
-  - platform: google_translate
-    service_name: google_say
 
 # Zwave Tracker
 zwave:
@@ -323,6 +324,7 @@ octoprint:
     name: Ender 3 Pro
     bed: true
     number_of_tools: 1
+    
 # Google Component
 google:
   client_id: !secret client_id
