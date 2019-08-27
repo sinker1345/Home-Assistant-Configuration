@@ -29,32 +29,41 @@
 
   - alias: 'turn off bar light at night'
     trigger:
-      - platform: state
-        entity_id: sensor.common_area_motion
-        to: 'Clear'
-        for:
-          minutes: 10
+      - platform: time_pattern
+        minutes: "/1"
+#      - platform: state
+#        entity_id: sensor.common_area_motion
+#        to: 'Clear'
+#        for:
+#          minutes: 10
     condition:
       condition: and
       conditions:
         - condition: template
           value_template: >-
             {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
-              {%- if states.sensor.time.state <= states.input_select.wake_time.state -%}
-                true
-              {%- endif -%}
+              true
+            {%- elif states.sensor.time.state <= states.input_select.wake_time.state -%}
+              true
+            {%- else -%}
+              false
             {%- endif -%}
+        - condition: state 
+          entity_id: sensor.common_area_motion
+          state: 'Clear'
+          for:
+            minutes: 10
         - condition: state
           entity_id: switch.tv_lights_power
           state: 'off'
         - condition: or
           conditions:
             - condition: state
-              entity_id: group.jessica
-              state: home
+              entity_id: sensor.jessica_status
+              state: 'Home'
             - condition: state
-              entity_id: group.tommy
-              state: home
+              entity_id: sensor.tommy_status
+              state: 'Home'
     action:
       - service: light.turn_off
         entity_id: light.bar_light
@@ -77,11 +86,11 @@
         - condition: or
           conditions:
             - condition: state
-              entity_id: group.jessica
-              state: home
+              entity_id: sensor.jessica_status
+              state: 'Home'
             - condition: state
-              entity_id: group.tommy
-              state: home
+              entity_id: sensor.tommy_status
+              state: 'Home'
     action:
       - service: light.turn_on
         entity_id: light.bar_light
