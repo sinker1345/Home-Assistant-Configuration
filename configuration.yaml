@@ -63,7 +63,7 @@ cloud:
         - sensor
         - vacuum
         - script
-GGGGGGGGGG
+
 breaking_changes:
 
 tplink:
