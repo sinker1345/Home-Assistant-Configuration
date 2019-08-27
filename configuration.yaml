@@ -175,7 +175,7 @@ device_tracker:
 # Text to speech
 tts:
   - platform: google_translate
-    service_name: google_say
+#    service_name: google_say
 
 # Zwave Tracker
 zwave:
