@@ -13,7 +13,7 @@ input_boolean:
 
 sensor:
   - platform: nws_alerts
-    zone_id: 'FLZ203, FLC113'
+    zone_id: 'FLZ203, FLZ204'
     name: NWS Alerts #(optional)
   - platform: template
     sensors:

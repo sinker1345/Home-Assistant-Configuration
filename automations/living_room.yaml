@@ -159,6 +159,11 @@
         data:
           entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
           temperature: 75
+      - delay: "00:01:00"
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
+          temperature: 75
 
   - alias: "Set A/C at Night Vacation"
     trigger:
@@ -227,3 +232,14 @@
         data:
           entity_id: climate.linear_nortek_security_control_llc_gc_tbz48_battery_powered_z_wave_thermostat_cooling_1
           temperature: 80
+
+  - alias: "Bobs bin is full"
+    trigger:
+      - platform: template
+        value_template: "{{ is_state_attr('vacuum.bob', 'bin_full', true) }}"
+    action:
+      - service: notify.telegram
+        data_template:
+         message: "Empty Bob's Butt. It is full."
+         target: 
+           - 816032519 #Tommy

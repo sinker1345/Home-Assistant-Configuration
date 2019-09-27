@@ -148,16 +148,18 @@ vacuum:
     map_dir: www/roomba
     icon_dir: www/roomba/res
 
+plex:
+  host: 192.168.1.18
 # Device Tracker Component
 device_tracker:
 
   # Unifi WAP Device Tracker
-  - platform: unifi_direct
-    host: 192.168.1.31
-    username: !secret unifi_user
-    password: !secret unifi
-    new_device_defaults:
-      track_new_devices: false
+#  - platform: unifi_direct
+#    host: 192.168.1.31
+#    username: !secret unifi_user
+#    password: !secret unifi
+#    new_device_defaults:
+#      track_new_devices: false
 
   #Bluetooth Tracker
   - platform: bluetooth_tracker
@@ -167,6 +169,7 @@ device_tracker:
   # Google Maps Tracker
   - platform: google_maps
     username: !secret google_maps_user
+    scan_interval: 60
     #password: !secret google_maps_password
 
   # NMAP Tracker
@@ -267,6 +270,8 @@ recorder:
       - sensor.garage_temperature_combo
       - sensor.back_door
       - sensor.samjin_multi_010782a0_1_1
+      - binary_sensor.bed_occupied
+      - light.front_porch_light
 
 #speedtest component
 speedtestdotnet:
@@ -413,7 +418,41 @@ zone:
     longitude: !secret win_dixie_long
     radius: 150
     icon: mdi:cart
-
+#Light
+light:
+  - platform: mqtt
+    name: "Front Porch Light"
+    command_topic: "cmnd/Merkurylight/POWER"
+    state_topic: "tele/Merkurylight/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/Merkurylight/LWT"
+    brightness_command_topic: "cmnd/Merkurylight/Dimmer"
+    brightness_state_topic: "tele/Merkurylight/STATE"
+    brightness_scale: 50
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    white_value_state_topic: "tele/Merkurylight/STATE"
+    white_value_command_topic: "cmnd/Merkurylight/white"
+    white_value_scale: 50
+    white_value_template: "{{ value_json.Channel[3] }}"
+    rgb_command_topic: "cmnd/Merkurylight/Color2"
+    rgb_state_topic: "tele/Merkurylight/STATE"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "cmnd/Merkurylight/Scheme"
+    effect_state_topic: "tele/Merkurylight/STATE"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
 #Switch
 switch:
   #circadian_lighting custom component

@@ -14,7 +14,7 @@
       - service: switch.turn_off
         entity_id: switch.morning_alert
 
-  - alias: update people on restart
+  - alias: 'update people on restart'
     trigger:
       - platform: homeassistant
         event: start
@@ -153,7 +153,7 @@
       - service: input_select.select_option
         data:
           entity_id: input_select.wake_time
-          option: "05:30"
+          option: "06:00"
 
 #Set Wake time depending on weekend
   - alias: 'set wake time weekend'

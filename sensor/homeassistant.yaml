@@ -103,7 +103,3 @@
         friendly_name: Year
         value_template: >-
           {{ now().year }}
-
-  - platform: ups
-    username: !secret ups_username
-    password: !secret ups_pass

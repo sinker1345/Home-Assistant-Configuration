@@ -157,6 +157,8 @@ views:
           include:
             - entity_id: sensor.back_door
               state: 'Open'
+            - entity_id: binary_sensor.garage_door
+              state: 'on'
     #Media Playersthat are on
       - type: "custom:auto-entities"
         card:
@@ -194,9 +196,11 @@ views:
           include:
             - entity_id: sensor.back_door
               state: 'Closed'
-    #Vaccum
+            - entity_id: binary_sensor.garage_door
+              state: 'off'
+    #Vacuum
       - type: entities
-        title: Robot Vaccum Controls
+        title: Robot Vacuum Controls
         show_header_toggle: false
         entities:
           - entity: vacuum.bob
@@ -212,7 +216,6 @@ views:
       - sun.sun
       - binary_sensor.iss
       - sensor.plex
-      - sensor.ups
       - person.tommy
       - person.jessica
     cards:
@@ -730,6 +733,7 @@ views:
       - sensor.year
       - sun.sun
       - binary_sensor.iss
+      - binary_sensor.bed_occupied
     cards:
       #Sensors
       - type: entities
@@ -918,7 +922,7 @@ views:
       - sensor.month
       - sensor.year
       - sun.sun
-      - sensor.noaa_alerts_flz203
+      - sensor.noaa_alerts_flz204
       - binary_sensor.iss
     cards:
       #Dark Sky Weather Card
@@ -1101,6 +1105,8 @@ views:
           - entity: automation.turn_off_auto_adjust_lights_late_at_night
             secondary_info: last-changed
           - entity: automation.turn_on_auto_adjust_lights_late_in_morning
+            secondary_info: last-changed
+          - entity: automation.bobs_bin_is_full
             secondary_info: last-changed
       #Kitchen Automations
       - type: entities
@@ -1316,7 +1322,7 @@ views:
       - type: entity-filter
         show_empty: false
         entities:
-          - updater.updater
+          - binary_sensor.updater
           - sensor.hacs
         state_filter:
           - '1'
@@ -1374,14 +1380,14 @@ views:
         entities:
           - calendar.due_this_week
           - calendar.due_today
-          - calendar.errands
+          #- calendar.errands
           - calendar.holidays_in_united_states
-          - calendar.inbox
+          #- calendar.inbox
           - calendar.main
-          - calendar.movies_to_watch
-          - calendar.personal
-          - calendar.shopping
-          - calendar.work
+          #- calendar.movies_to_watch
+          #- calendar.personal
+          #- calendar.shopping
+          #- calendar.work
           - calendar.contacts
           - calendar.family
           - calendar.todoist

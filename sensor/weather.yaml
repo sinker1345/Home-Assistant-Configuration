@@ -55,3 +55,4 @@
 
   - platform: noaa_alerts
     zoneid: FLZ203
+    zoneid: FLZ204

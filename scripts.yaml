@@ -7,9 +7,28 @@
         entity_id: media_player.common_area
         message: >-
           {% if now().strftime("%H")|int < 12 %}
-            Good Morning. 
+            {{ [ "Good Morning.", 
+                 "Ugh, is it morning? Not again! It’s almost as if the moon comes out to let us just wink instead of getting a full night’s sleep.", 
+                 "I am not sure what I’m doing up this early, but I don’t deserve to suffer through this alone. It’s pretty much torture. So… good morning!",
+                 "Let’s face it. The worst part of waking up is actually having to wake up. Here’s to you as you suffer through that struggle. Good morning!",
+                 "Good morning! Don’t let the exhausted look on my face deter you from waking up yourself. We can make it through this together.",
+                 "My idea of a perfect morning is opening my eyes, rolling over, and going back to bed. Here’s wishing you an equally joyous time. Good morning!",
+                 "Good morning! There’s nothing like the smell of bacon to wake a person up. So, go ahead and make some for us. Ha!",
+                 "Good morning, sunshine! Now, can we go back to sleep?",
+                 "I would like mornings better if they didn’t happen before noon. Good morning!",
+                 "Once upon a time… Nope, too tired. Good morning!",
+                 "Its just good morning because shut up is not socially accepted! Good Morning!",
+                 "there are two types of people on this earth, the early people and the people who want to shoot the early risers. Good Morning!",
+                 "Getting up early is the first step in the wrong direction, Good Morning!",
+                 "Of course I can start the day motivated. Just not in the morning! Good Morning!",
+                 "if laziness was an Olympic discipline, I would be fourth so I do not have to get on the podium. Good Morning!",
+                 "I wanted to write you the most beautiful phrases of good morning, but since I am not a poet or a writer, I hope that with this greeting you will be happy. Hurry and wake up!",
+                 "I am sorry to interrupt your long romance with the pillow, but a beautiful morning awaits you, i am sorry you have to take off those sheets that make you happy but a nice dawn is happening, I am sorry that was all a lie, hurry up it is raining and there is traffic. Good Morning!",
+                 "Good morning! come on, get up, the day does not mess up by itself.",
+                 "He who gets up early...is sleepy all day! Good Morning!",
+             ] |random }}
           {% elif now().strftime("%H")|int < 18 %}
-            Good Afternoon. 
+            Good Afternoon.
           {% else %}
             Good Evening. 
           {% endif %}
