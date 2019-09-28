@@ -122,6 +122,22 @@
     action:
       - service: light.turn_on
         entity_id: light.bar_light
+      - service: light.turn_on
+        entity_id: light.front_porch_light
+
+  - alias: 'Turn off Front Porch Light after people stay home'
+    trigger: 
+      - platform: state
+        entity_id: sensor.jessica_status
+        from: 'Just Arrived'
+        to: 'Home'
+      - platform: state
+        entity_id: sensor.tommy_status
+        from: 'Just Arrived'
+        to: 'Home'
+    action:
+      - service: light.turn_off
+        entity_id: light.front_porch_light
 
   - alias: 'turn off bar light When people leave'
     trigger:
@@ -162,8 +178,6 @@
         entity_id: switch.christmas_outside_lights
       - service: light.turn_on
         entity_id: light.bar_light
-      - service: light.turn_on
-        entity_id: light.front_porch_light
 
   - alias: "turn off Back Porch Lights"
     trigger: 
@@ -175,8 +189,6 @@
     action:
       - service: switch.turn_off
         entity_id: switch.christmas_outside_lights
-      - service: light.turn_off
-        entity_id: light.front_porch_light
   
   - alias: 'Set Bar light for TV Playback'
     trigger:

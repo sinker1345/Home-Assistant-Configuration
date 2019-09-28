@@ -177,9 +177,10 @@
   - alias: "Turn on Oustide Decorations Christmas"
 #    initial_state: false
     trigger:
-      - platform: sun
-        event: sunset
-        offset: '-02:00:00'
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        below: 1.5
     condition:
       condition: and
       conditions:
@@ -195,13 +196,18 @@
         entity_id: switch.seasonal_lights
       - service: switch.turn_on
         entity_id: switch.christmas_outside_lights
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          effect: 2
 
   - alias: "Turn on Oustide Decorations Thanksgiving"
 #    initial_state: false
     trigger:
-      - platform: sun
-        event: sunset
-        offset: '-02:00:00'
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        below: 1.5
     condition:
       condition: and
       conditions:
@@ -213,13 +219,18 @@
     action:
       - service: switch.turn_on
         entity_id: switch.inflatables
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          rgb_color: [124,30,0]
 
   - alias: "Turn on Oustide Decorations Halloween"
 #    initial_state: false
     trigger:
-      - platform: sun
-        event: sunset
-        offset: '-02:00:00'
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        below: 1.5
     condition:
       condition: and
       conditions:
@@ -231,12 +242,19 @@
     action:
       - service: switch.turn_on
         entity_id: switch.inflatables
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          rgb_color: [124,30,0]
 
   - alias: "Turn off Outside Decorations Christmas"
 #    initial_state: false
     trigger:
-      - platform: time
-        at: '21:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
+              true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -248,12 +266,23 @@
         entity_id: switch.inflatables
       - service: switch.turn_off
         entity_id: switch.seasonal_lights
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          white_value: 245
+          effect: 0
+      - delay: '00:00:10'
+      - service: light.turn_off
+        entity_id: light.front_porch_light
 
   - alias: "Turn off Outside Decorations Thanksgiving"
 #    initial_state: false
     trigger:
-      - platform: time
-        at: '21:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
+              true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -263,12 +292,23 @@
     action:
       - service: switch.turn_off
         entity_id: switch.inflatables
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          white_value: 245
+          effect: 0
+      - delay: '00:00:10'
+      - service: light.turn_off
+        entity_id: light.front_porch_light
 
   - alias: "Turn off Outside Decorations Halloween"
 #    initial_state: false
     trigger:
-      - platform: time
-        at: '21:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
+              true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -278,13 +318,22 @@
     action:
       - service: switch.turn_off
         entity_id: switch.inflatables
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          white_value: 245
+          effect: 0
+      - delay: '00:00:10'
+      - service: light.turn_off
+        entity_id: light.front_porch_light
 
   - alias: "Turn on Christmas Tree"
 #    initial_state: false
     trigger:
-      - platform: sun
-        event: sunset
-        offset: '-02:00:00'
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        below: 1.5
     condition:
       condition: and
       conditions:
@@ -298,8 +347,11 @@
   - alias: "Turn off Christmas Tree"
 #    initial_state: false
     trigger:
-      - platform: time
-        at: '22:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state >= states.input_select.bed_time.state -%}
+              true
+          {%- endif -%}
     condition:
       condition: and
       conditions:
@@ -326,6 +378,14 @@
         entity_id: automation.turn_off_outside_decorations
       - service: automation.turn_off
         entity_id: automation.turn_off_christmas_tree
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          white_value: 245
+          effect: 0
+      - delay: '00:00:10'
+      - service: light.turn_off
+        entity_id: light.front_porch_light
 
   - alias: 'After Christmas'
     trigger:
@@ -343,3 +403,11 @@
         entity_id: automation.turn_off_outside_decorations
       - service: automation.turn_on
         entity_id: automation.turn_off_christmas_tree
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          white_value: 245
+          effect: 0
+      - delay: '00:00:10'
+      - service: light.turn_off
+        entity_id: light.front_porch_light

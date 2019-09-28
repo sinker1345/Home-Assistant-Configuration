@@ -154,6 +154,9 @@
             - condition: state
               entity_id: sensor.tommy_status
               state: 'Home'
+            - condition: state
+              entity_id: switch.guest_mode
+              state: 'on'
     action:
       - service: climate.set_temperature
         data:
