@@ -79,6 +79,9 @@
               true
             {%- endif -%}
         - condition: state
+          entity_id: switch.coffee_pot
+          state: 'off'
+        - condition: state
           entity_id: input_select.is_coffee_pot_setup
           state: 'Yes'
 #        - condition: state

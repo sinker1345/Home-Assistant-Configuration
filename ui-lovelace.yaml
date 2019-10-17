@@ -1351,6 +1351,8 @@ views:
             secondary_info: last-changed
           - entity: sensor.samjin_multi_010782a0_1_1
             secondary_info: last-changed
+          - entity: sensor.samjin_button_01099431_1_1
+            secondary_info: last-changed
       #Homeassistant Tatus
       - type: entities
         title: Home Assistant Status

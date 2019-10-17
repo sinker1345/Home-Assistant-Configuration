@@ -20,4 +20,14 @@
               }
         data_template:
           value: "{{ trigger.to_state.attributes.friendly_name }}"
-
+          
+  - alias: bar light button
+    trigger:
+    - event_data:
+        command: button_single
+        device_ieee: 28:6d:97:00:01:09:94:31
+      event_type: zha_event
+      platform: event
+    action:
+      - service: light.toggle
+        entity_id: light.bar_light

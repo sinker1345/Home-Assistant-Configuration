@@ -1,14 +1,26 @@
   - alias: 'turn on bar light with morning automation'
     trigger:
-      - platform: state
-        entity_id: switch.morning_alert
-        from: 'off'
-        to: 'on'
+      - platform: time
+        at: '07:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: light.bar_light
+          state: 'off'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: sensor.jessica_status
+              state: 'Home'
+            - condition: state
+              entity_id: sensor.tommy_status
+              state: 'Home'
     action:
       - service: light.turn_on
         data:
           entity_id: light.bar_light
-          brightness_pct: 15
+          brightness_pct: 5
 
   - alias: 'turn on circadian switch with wake time'
     trigger:
@@ -116,9 +128,10 @@
     condition:
       condition: and
       conditions:
-        - condition: state
-          entity_id: light.bar_light
-          state: 'off'
+        - condition: numeric_state
+          entity_id: sun.sun
+          value_template: '{{ state.attributes.elevation }}'
+          below: 1.5
     action:
       - service: light.turn_on
         entity_id: light.bar_light

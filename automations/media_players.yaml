@@ -2,7 +2,7 @@
   - alias: Lexi Brush Teeth
     trigger:
       - platform: time
-        at: '20:45:00'
+        at: '19:30:00'
     action:
       - service: media_player.turn_on
         entity_id: media_player.common_area
@@ -21,7 +21,7 @@
         data_template:
           entity_id: media_player.common_area
 
-# Lexi Brush Teeth
+# Lexi Do Laps
   - alias: Lexi do Laps
     trigger:
       - platform: time
