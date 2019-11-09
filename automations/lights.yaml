@@ -206,10 +206,10 @@
   - alias: 'Set Bar light for TV Playback'
     trigger:
       - platform: state
-        entity_id: sensor.glances
+        entity_id: sensor.htpc
         to: 'Idle'
       - platform: state
-        entity_id: sensor.glances
+        entity_id: sensor.htpc
         to: 'In Use'
     condition:
       condition: and
@@ -230,7 +230,7 @@
   - alias: 'Set Bar light for No TV Playback'
     trigger:
       - platform: state
-        entity_id: sensor.glances
+        entity_id: sensor.htpc
         to: 'Off'
     action:
       - service: switch.turn_on

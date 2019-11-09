@@ -67,7 +67,7 @@
     alias: Match TV Lights to HTPC State
     trigger:
       - platform: state
-        entity_id: sensor.glances
+        entity_id: sensor.htpc
     action:
       - service_template: >-
           {% if trigger.to_state.state == "Idle" or trigger.to_state.state == "In Use"%}

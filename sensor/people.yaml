@@ -13,3 +13,13 @@
       lexi_status:
         value_template: '{{ states.variable.lexi_status.state }}'
         friendly_name: 'Lexi'
+
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'

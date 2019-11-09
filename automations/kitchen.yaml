@@ -66,18 +66,19 @@
 
   - alias: start coffee pot
     trigger:
-      - platform: state
-        entity_id: switch.morning_alert
-        from: 'off'
-        to: 'on'
+      - platform: template
+        value_template: >
+          {% set alarm_time = as_timestamp(states('input_datetime.tommy_phone_alarm_next_date_and_time')) %}
+          {% set time_now = as_timestamp(states('sensor.date_time').replace(',','')) %}
+          {{ time_now == alarm_time }}
     condition:
       condition: and
       conditions:
-        - condition: template
-          value_template: >-
-            {%- if states.sensor.time.state >= states.input_select.coffee_pot_on_time.state -%}
-              true
-            {%- endif -%}
+#        - condition: template
+#          value_template: >-
+#            {%- if states.sensor.time.state >= states.input_select.coffee_pot_on_time.state -%}
+#              true
+#            {%- endif -%}
         - condition: state
           entity_id: switch.coffee_pot
           state: 'off'

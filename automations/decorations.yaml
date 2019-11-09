@@ -1,8 +1,8 @@
 #
   - alias: "Holiday Select Automation Turn On"
     trigger: 
-      - platform: homeassistant
-        event: start
+      - platform: time_pattern
+        minutes: "/30"
     condition:
       condition: and
       conditions:
@@ -60,8 +60,8 @@
 
   - alias: "Holiday Select Automation Turn Off"
     trigger: 
-      - platform: homeassistant
-        event: start
+      - platform: time_pattern
+        minutes: "/30"
     condition:
       condition: and
       conditions:
@@ -384,7 +384,7 @@
           white_value: 245
           effect: 0
       - delay: '00:00:10'
-      - service: light.turn_off
+      - service: light.turn_on
         entity_id: light.front_porch_light
 
   - alias: 'After Christmas'

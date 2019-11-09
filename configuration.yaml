@@ -217,7 +217,7 @@ recorder:
       - binary_sensor.garage_motion
       - sensor.garage_temperature
       - sensor.htpc_idle
-      - sensor.glances
+      - sensor.htpc
       - sensor.google_travel_time_driving
       - sensor.jessica_status
       - sensor.kitchen_feels_like
@@ -453,6 +453,18 @@ light:
     payload_not_available: "Offline"
     qos: 1
     retain: false
+
+#Glances
+#  glances:
+#    friendly_name: "HTPC"
+#    value_template: >-
+#      {% if is_state('media_player.living_room_tv', 'off') %}
+#        Off
+#      {% elif is_state('sensor.htpc_idle', 'Idle') and is_state('media_player.living_room_tv', 'idle') %}
+#        Idle
+#      {% else %}
+#        In Use
+#      {% endif %}
 #Switch
 switch:
   #circadian_lighting custom component
@@ -537,6 +549,18 @@ switch:
     payload_on: 'on'
     payload_off: 'off'
     retain: true
+
+#input booleans
+input_boolean:
+  tommy_phone_alarm_set:
+    name: "Tommy's Phone Alarm"
+
+#input Datetime
+input_datetime:
+  tommy_phone_alarm_next_date_and_time:
+    name: "Tommy's next Alarm"
+    has_date: true
+    has_time: true
 
 #Custom Variable Component
 variable:

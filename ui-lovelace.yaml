@@ -240,7 +240,7 @@ views:
             name: Common Area Motion
             icon: mdi:walk
             secondary_info: last-changed
-          - entity: sensor.glances
+          - entity: sensor.htpc
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
@@ -658,7 +658,7 @@ views:
             name: Living Room Motion
             icon: mdi:walk
             secondary_info: last-changed
-          - entity: sensor.glances
+          - entity: sensor.htpc
             name: HTPC
             icon: mdi:monitor
             secondary_info: last-changed
@@ -912,6 +912,14 @@ views:
         card: 
           type: glance
           title: People Not At Home
+      - type: entities
+        title: Tommy's Alarm
+        show_header_toggle: false
+        entities:
+          - entity: input_boolean.tommy_phone_alarm_set
+            icon: mdi:alarm
+          - entity: input_datetime.tommy_phone_alarm_next_date_and_time
+            name: Tommy's Next Alarm
 #Weather View
   - title: Weather
     id: 11

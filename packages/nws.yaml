@@ -136,7 +136,7 @@ automation:
         - condition: template
           value_template: '{{ trigger.to_state.state|float > trigger.from_state.state|float }}'
         - condition: template
-          value_template: "{{ (('Severe' in states.sensor.nws_alerts.attributes.title) or ('Tornado' in states.sensor.nws_alerts.attributes.title) and ('Warning' in states.sensor.nws_alerts.attributes.title)) or 'Tornado Watch' in states.sensor.nws_alerts.attributes.title}}"
+          value_template: "{{ (('Severe' in states.sensor.nws_alerts.attributes.title) or ('Tornado Watch' in states.sensor.nws_alerts.attributes.title) or ('Tropical Storm Warning' in states.sensor.nws_alerts.attributes.title) or ('Tropical Storm Watch' in states.sensor.nws_alerts.attributes.title) or ('Hurricane Warning' in states.sensor.nws_alerts.attributes.title) or ('Hurricane Watch' in states.sensor.nws_alerts.attributes.title) or ('Tornado' in states.sensor.nws_alerts.attributes.title) and ('Warning' in states.sensor.nws_alerts.attributes.title))}}"
     action:
       - service: media_player.turn_on
         entity_id: media_player.common_area
