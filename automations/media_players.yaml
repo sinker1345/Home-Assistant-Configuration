@@ -1,8 +1,11 @@
 # Lexi Brush Teeth
   - alias: Lexi Brush Teeth
     trigger:
-      - platform: time
-        at: '19:30:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.lexi_brush_teeth_reminder.state -%}
+              true
+          {%- endif -%}
     action:
       - service: media_player.turn_on
         entity_id: media_player.common_area
@@ -24,8 +27,11 @@
 # Lexi Do Laps
   - alias: Lexi do Laps
     trigger:
-      - platform: time
-        at: '18:00:00'
+      - platform: template
+        value_template: >-
+          {%- if states.sensor.time.state == states.input_select.lexi_do_laps_reminder.state -%}
+              true
+          {%- endif -%}
     condition:
       condition: and
       conditions:

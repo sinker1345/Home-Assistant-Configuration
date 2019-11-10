@@ -363,6 +363,16 @@ dominos:
   phone: !secret phone_number
   address: !secret address
   show_menu: 1
+  orders:
+    - name: Medium Philly Cheese sauce and drink
+      codes:
+        - GARBUTTER
+        - P12IREPH
+        - 20BDRPEP
+    - name: family pizza order
+      codes:
+        - RANCH
+        - 14SCREEN
 
 #custom Panel
 panel_custom:

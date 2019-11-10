@@ -1256,6 +1256,14 @@ views:
             secondary_info: last-changed
           - entity: automation.alert_on_garage_leak_sensor_low_battery
             secondary_info: last-changed
+          - entity: automation.no_one_is_home_order_pizza
+            secondary_info: last-changed
+          - entity: automation.gimmie_pizza
+            secondary_info: last-changed
+          - entity: automation.family_pizza
+            secondary_info: last-changed
+          - entity: automation.no_pizza
+            secondary_info: last-changed
       #Homeassistant Automations
       - type: entities
         title: Homeassistant
@@ -1470,6 +1478,15 @@ views:
             show_header_toggle: false
             entities:
               - input_select.which_holiday
+      - type: 'custom:love-lock-card'
+        popup: confirm
+        cards:
+          - type: entities
+            title: Lexi Reminders
+            show_header_toggle: false
+            entities:
+              - input_select.lexi_do_laps_reminder
+              - input_select.lexi_brush_teeth_reminder
 #Fake Shopping Tab
   - title:  
     icon: mdi:thisfakereferencehidesthistab

@@ -65,6 +65,7 @@
           {% elif now().weekday() == 6 %}
             Sunday
           {% endif %}
+        entity_id: sensor.time
 
   - platform: template
     sensors:
@@ -96,6 +97,7 @@
           {% elif now().month == 12 %}
             December
           {% endif %}
+        entity_id: sensor.time
 
   - platform: template
     sensors:
@@ -103,3 +105,4 @@
         friendly_name: Year
         value_template: >-
           {{ now().year }}
+        entity_id: sensor.time

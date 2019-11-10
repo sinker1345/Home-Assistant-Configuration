@@ -1,63 +1,4 @@
 #
-  - alias: "Holiday Select Automation Turn On"
-    trigger: 
-      - platform: time_pattern
-        minutes: "/30"
-    condition:
-      condition: and
-      conditions:
-        - condition: template
-          value_template: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %} true
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %} true
-            {% elif states.input_select.which_holiday.state == 'Halloween' %} true
-            {% endif %}
-    action:
-      - service: automation.turn_on
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_on_oustide_decorations_christmas
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_off_outside_decorations_thanksgiving
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_on_oustide_decorations_halloween
-            {% endif %}
-      - service: automation.turn_on
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_off_outside_decorations_christmas
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_on_oustide_decorations_thanksgiving
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_off_outside_decorations_halloween
-            {% endif %}
-      - service: automation.turn_on
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_off_christmas_tree
-            {% endif %}
-      - service: automation.turn_on
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_on_christmas_tree
-            {% endif %}
-      - service: automation.turn_on
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.after_christmas
-            {% endif %}
-      - service: automation.turn_on
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.christmas_eve
-            {% endif %}
-
   - alias: "Holiday Select Automation Turn Off"
     trigger: 
       - platform: time_pattern
@@ -66,113 +7,89 @@
       condition: and
       conditions:
         - condition: template
-          value_template: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %} true
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %} true
-            {% elif states.input_select.which_holiday.state == 'Halloween' %} true
-            {% elif states.input_select.which_holiday.state == 'None' %} true
-            {% endif %}
+          value_template: "{{ states('input_select.which_holiday') in ['Christmas', 'Thanksgiving', 'Halloween', 'None'] }}"
     action:
       - service: automation.turn_off
         data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_on_oustide_decorations_halloween
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_on_oustide_decorations_christmas
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_on_oustide_decorations_christmas
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_on_oustide_decorations_christmas
-            {% endif %}
-      - service: automation.turn_off
+          entity_id: >
+            {% set automations = {
+                "Christmas": [
+                    "automation.turn_on_oustide_decorations_halloween",
+                    "automation.turn_off_outside_decorations_halloween",
+                    "automation.turn_on_oustide_decorations_thanksgiving",
+                    "automation.turn_off_outside_decorations_thanksgiving",
+                    "automation.turn_off_front_porch_light_after_people_stay_home"
+                ],
+                "Thanksgiving": [
+                    "automation.turn_on_oustide_decorations_halloween",
+                    "automation.turn_off_outside_decorations_halloween",
+                    "automation.turn_on_oustide_decorations_christmas",
+                    "automation.turn_off_outside_decorations_christmas",
+                    "automation.after_christmas",
+                    "automation.christmas_eve",
+                    "automation.turn_off_christmas_tree",
+                    "automation.turn_on_christmas_tree",
+                    "automation.turn_off_front_porch_light_after_people_stay_home"
+                ],
+                "Halloween": [
+                    "automation.turn_on_oustide_decorations_thanksgiving",
+                    "automation.turn_off_outside_decorations_thanksgiving",
+                    "automation.turn_on_oustide_decorations_christmas",
+                    "automation.turn_off_outside_decorations_christmas",
+                    "automation.after_christmas",
+                    "automation.christmas_eve",
+                    "automation.turn_off_christmas_tree",
+                    "automation.turn_on_christmas_tree",
+                    "automation.turn_off_front_porch_light_after_people_stay_home"
+                ],
+                "None": [
+                    "automation.turn_on_oustide_decorations_halloween",
+                    "automation.turn_off_outside_decorations_halloween",
+                    "automation.turn_on_oustide_decorations_thanksgiving",
+                    "automation.turn_off_outside_decorations_thanksgiving",
+                    "automation.turn_on_oustide_decorations_christmas",
+                    "automation.turn_off_outside_decorations_christmas",
+                    "automation.after_christmas",
+                    "automation.christmas_eve",
+                    "automation.turn_off_christmas_tree",
+                    "automation.turn_on_christmas_tree"
+                ]} %}
+            {{ automations.get(states('input_select.which_holiday'), []) | join(", ") }}
+
+  - alias: "Holiday Select Automation Turn On"
+    trigger: 
+      - platform: time_pattern
+        minutes: "/30"
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ states('input_select.which_holiday') in ['Christmas', 'Thanksgiving', 'Halloween', 'None'] }}"
+    action:
+      - service: automation.turn_on
         data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_off_outside_decorations_halloween
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_off_outside_decorations_christmas
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_off_outside_decorations_christmas
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_off_outside_decorations_christmas
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_off_outside_decorations_thanksgiving
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_on_oustide_decorations_halloween
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_off_outside_decorations_thanksgiving
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_off_outside_decorations_thanksgiving
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Christmas' %}
-              automation.turn_on_oustide_decorations_thanksgiving
-            {% elif states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_off_outside_decorations_halloween
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_on_oustide_decorations_thanksgiving
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_on_oustide_decorations_thanksgiving
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_on_christmas_tree
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_on_christmas_tree
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_on_oustide_decorations_halloween
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.turn_off_christmas_tree
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.turn_off_christmas_tree
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_off_outside_decorations_halloween
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.after_christmas
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.after_christmas
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_on_christmas_tree
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'Thanksgiving' %}
-              automation.christmas_eve
-            {% elif states.input_select.which_holiday.state == 'Halloween' %}
-              automation.christmas_eve
-            {% elif states.input_select.which_holiday.state == 'None' %}
-              automation.turn_off_christmas_tree
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'None' %}
-              automation.after_christmas
-            {% endif %}
-      - service: automation.turn_off
-        data_template:
-          entity_id: >-
-            {% if states.input_select.which_holiday.state == 'None' %}
-              automation.christmas_eve
-            {% endif %}
+          entity_id: >
+            {% set automations = {
+                "Christmas": [
+                    "automation.turn_on_oustide_decorations_christmas",
+                    "automation.turn_off_outside_decorations_christmas",
+                    "automation.after_christmas",
+                    "automation.christmas_eve",
+                    "automation.turn_off_christmas_tree",
+                    "automation.turn_on_christmas_tree"
+                ],
+                "Thanksgiving": [
+                    "automation.turn_on_oustide_decorations_thanksgiving",
+                    "automation.turn_off_outside_decorations_thanksgiving"
+                ],
+                "Halloween": [
+                    "automation.turn_on_oustide_decorations_halloween",
+                    "automation.turn_off_outside_decorations_halloween"
+                ],
+                "None": [
+                    "automation.turn_off_front_porch_light_after_people_stay_home"
+                ]} %}
+            {{ automations.get(states('input_select.which_holiday'), []) | join(", ") }}
 
   - alias: "Turn on Oustide Decorations Christmas"
 #    initial_state: false

@@ -89,9 +89,9 @@
     condition:
       condition: and
       conditions:
-        - condition: time
-          after: '20:30:00'
-          before: '05:30:00'
+#        - condition: time
+#          after: '20:30:00'
+#          before: '05:30:00'
         - condition: state
           entity_id: light.bar_light
           state: 'off'
