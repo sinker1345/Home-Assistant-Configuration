@@ -43,11 +43,6 @@
     trigger:
       - platform: time_pattern
         minutes: "/1"
-#      - platform: state
-#        entity_id: sensor.common_area_motion
-#        to: 'Clear'
-#        for:
-#          minutes: 10
     condition:
       condition: and
       conditions:
@@ -89,9 +84,8 @@
     condition:
       condition: and
       conditions:
-#        - condition: time
-#          after: '20:30:00'
-#          before: '05:30:00'
+        - condition: template
+          value_template: "{{ states.sensor.time.state >= states.input_select.wake_time.state }}"
         - condition: state
           entity_id: light.bar_light
           state: 'off'

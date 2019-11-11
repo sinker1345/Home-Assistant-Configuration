@@ -1487,6 +1487,13 @@ views:
             entities:
               - input_select.lexi_do_laps_reminder
               - input_select.lexi_brush_teeth_reminder
+      - type: "custom:button-card"
+        tap_action:
+          action: call-service
+          service: shell_command.restart_ha
+        name: Restart Homeassistant
+        icon: mdi:restart
+        color: rgb(255, 215, 0)
 #Fake Shopping Tab
   - title:  
     icon: mdi:thisfakereferencehidesthistab
